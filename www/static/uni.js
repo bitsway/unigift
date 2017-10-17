@@ -54,25 +54,34 @@ function login_user() {
 					localStorage.sync_code=0
 				}
 			
+			var result='SUCCESS9734D01-0077|Al Modina Store-2D01-0048|Anowara StoreD01-0087|Ava TradersD01-0023|Seven Eleven StoreD01-0060|SHAHIN-STOREClear Men Shampoo 350 Ml|1001|400Clear Men 400 ml|1002|500Dove Shampoo 750ml|1003|800Close Menthol 200gm|1004|150Dove Conditioner 500ml|1005|350Fair & Lovely MV Cream 250gm|1006|300Fair & Lovely MAx Fairness 450gm|1007|500Ponds Pure White Face Wash 350 gm|1008|250Pepsodent Germicheck 250gm|1009|250Ponds Age Miracle Day Cream 500mg|1010|800Ponds Age Miracle Night Cream 500 mg|1011|800Ponds WB Cream 500 mg|1012|1000Ponds WB Cream 25 g (Local)|1013|450 Pepsodent Expert Protection Sensitive 300 gm|1014|250Fair & Lovely Max Face Wash 500g|1015|450Close Up Red Hot 300 g|1016|250Clear Shampoo 500 ml|1017|500 Pepsodent Expert Protection Sensitive 500 gm|1018|250Fair & Lovely Max Face Wash 500|1019|300Dove Shampoo 500 ml|1020|750Anowara Begum|8801832677120 SHAHIN Alam|8801673882197 Ava Amin|8801927107342 abc|1231234214 xyz|1234 azxc|12346 azxc|657 aaa|12308 farzana|565757676 farzana|5345 farzana|786756756'
+			var resultArray = result.split('<SYNCDATA>');			
+			if (resultArray[0]=='FAILED'){
+				
+				
+			}
+			if (resultArray[0]=='SUCCESS'){
+				
+			
 	       // alert (apiPath+'check_user?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code)
 			
-			$.ajax({
-				 type: 'POST',
-				 url: apiPath+'check_user?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code,
-				 success: function(result) {	
-				 		alert (result)
-						if (result==''){
-							$("#loginButton").show();
-							$("#login_image").hide();
-							alert ('Sorry Network not available');
-						}
-						else{
-							var resultArray = result.split('<SYNCDATA>');			
-							if (resultArray[0]=='FAILED'){
-								
-								
-							}
-							if (resultArray[0]=='SUCCESS'){
+			//$.ajax({
+//				 type: 'POST',
+//				 url: apiPath+'check_user?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code,
+//				 success: function(result) {	
+//				 		alert (result)
+//						if (result==''){
+//							$("#loginButton").show();
+//							$("#login_image").hide();
+//							alert ('Sorry Network not available');
+//						}
+//						else{
+//							var resultArray = result.split('<SYNCDATA>');			
+//							if (resultArray[0]=='FAILED'){
+//								
+//								
+//							}
+//							if (resultArray[0]=='SUCCESS'){
 								localStorage.sync_code=resultArray[1];
 								localStorage.outletString=resultArray[2];
 								localStorage.prodctStr=resultArray[3];
@@ -144,12 +153,12 @@ function login_user() {
 							}		
 							
 							
-						}
-				      },
-				  error: function(result) {
-					
-				  }
-			  });//end ajax
+					//	}
+				    //  },
+//				  error: function(result) {
+//					
+//				  }
+//			  });//end ajax
 	
 		 }//alse
 		 
