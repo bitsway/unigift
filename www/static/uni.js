@@ -54,13 +54,13 @@ function login_user() {
 					localStorage.sync_code=0
 				}
 			
-	        alert (apiPath+'check_user?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code)
+	       // alert (apiPath+'check_user?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code)
 			
 			$.ajax({
 				 type: 'POST',
 				 url: apiPath+'check_user?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code,
 				 success: function(result) {	
-				 		
+				 		alert (result)
 						if (result==''){
 							$("#loginButton").show();
 							$("#login_image").hide();
