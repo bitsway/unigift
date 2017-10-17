@@ -56,7 +56,7 @@ function login_user() {
 			
 			var result='SUCCESS<SYNCDATA>9734<SYNCDATA>D01-0077|Al Modina Store-2<rdrd>D01-0048|Anowara Store<rdrd>D01-0087|Ava Traders<rdrd>D01-0023|Seven Eleven Store<rdrd>D01-0060|SHAHIN-STORE<rdrd><SYNCDATA>Clear Men Shampoo 350 Ml|1001|400<rdrd>Clear Men 400 ml|1002|500<rdrd>Dove Shampoo 750ml|1003|800<rdrd>Close Menthol 200gm|1004|150<rdrd>Dove Conditioner 500ml|1005|350<rdrd>Fair & Lovely MV Cream 250gm|1006|300<rdrd>Fair & Lovely MAx Fairness 450gm|1007|500<rdrd>Ponds Pure White Face Wash 350 gm|1008|250<rdrd>Pepsodent Germicheck 250gm|1009|250<rdrd>Ponds Age Miracle Day Cream 500mg|1010|800<rdrd>Ponds Age Miracle Night Cream 500 mg|1011|800<rdrd>Ponds WB Cream 500 mg|1012|1000<rdrd>Ponds WB Cream 25 g (Local)|1013|450<rdrd> Pepsodent Expert Protection Sensitive 300 gm|1014|250<rdrd>Fair & Lovely Max Face Wash 500g|1015|450<rdrd>Close Up Red Hot 300 g|1016|250<rdrd>Clear Shampoo 500 ml|1017|500<rdrd>    Pepsodent Expert Protection Sensitive 500 gm|1018|250<rdrd>Fair & Lovely Max Face Wash 500|1019|300<rdrd>Dove Shampoo 500 ml|1020|750<rdrd><SYNCDATA>Anowara Begum|8801832677120 SHAHIN Alam|8801673882197 Ava Amin|8801927107342 abc|1231234214 xyz|1234 azxc|12346 azxc|657 aaa|12308 farzana|565757676 farzana|5345 farzana|786756756'
 			var resultArray = result.split('<SYNCDATA>');		
-			alert (resultArray[0])
+			//alert (resultArray[0])
 			
 			
 				
@@ -265,26 +265,26 @@ function purchaseDataSave(){
 	 //alert(apiPath+'purchase_submit?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&memNa='+memNa+'&memMo='+memMo+'&outletId='+outletId+'&outletName='+outletName+'&submitPurchase='+localStorage.submitPurchase)
 	  
 	  
-	  $.ajax({
-		type:'POST',
-		url:apiPath+'purchase_submit?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&memNa='+memNa+'&memMo='+memMo+'&outletId='+outletId+'&outletName='+outletName+'&submitPurchase='+localStorage.submitPurchase,
-	
-        success: function(result2) {
-			//alert(result2)
-			//alert ('hi')	
-			if (result2!=''){
+	 // $.ajax({
+//		type:'POST',
+//		url:apiPath+'purchase_submit?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&memNa='+memNa+'&memMo='+memMo+'&outletId='+outletId+'&outletName='+outletName+'&submitPurchase='+localStorage.submitPurchase,
+//	
+//        success: function(result2) {
+//			//alert(result2)
+//			//alert ('hi')	
+//			if (result2!=''){
 			$(".errorChk").text("Submitted Successfully");
 			$("#orderBtn").show();		
-			}
-	
-
-
-	
-		}      
-
-			 
-			  
-	  });
+		//	}
+//	
+//
+//
+//	
+//		}      
+//
+//			 
+//			  
+//	  });
 	  
 }
 
@@ -313,20 +313,20 @@ function data_save(){
 	//  alert(apiPath+'dataSave?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&name='+name+'&genderComb='+genderComb+'&birthDayG='+birthDayG+'&birthMonthG='+birthMonthG+'&address='+address+'&mobile='+mobile+'&reg_date='+reg_date+'&reg_by_cm='+reg_by_cm+'&otltName='+otltName+'&ageRange='+ageRange+'&thana='+thana+'&district='+district)
 	  
 	  
-	  $.ajax({
-		type:'POST',
-		url:apiPath+'dataSave?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&name='+name+'&genderComb='+genderComb+'&birthDayG='+birthDayG+'&birthMonthG='+birthMonthG+'&address='+address+'&mobile='+mobile+'&reg_date='+reg_date+'&reg_by_cm='+reg_by_cm+'&otltName='+otltName+'&ageRange='+ageRange+'&thana='+thana+'&district='+district,
-		
-        success: function(result1) {
+	 // $.ajax({
+//		type:'POST',
+//		url:apiPath+'dataSave?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&name='+name+'&genderComb='+genderComb+'&birthDayG='+birthDayG+'&birthMonthG='+birthMonthG+'&address='+address+'&mobile='+mobile+'&reg_date='+reg_date+'&reg_by_cm='+reg_by_cm+'&otltName='+otltName+'&ageRange='+ageRange+'&thana='+thana+'&district='+district,
+//		
+//        success: function(result1) {
 			
-			if (result1!=''){
+			//if (result1!=''){
 			$(".errorChk").text("Submitted Successfully");
 			$("#memButton").show();		
-			}
-
-		}      
-
-	  });
+		//	}
+//
+//		}      
+//
+//	  });
 	  
 }
 
@@ -377,28 +377,28 @@ function memPurchase(){
 	$('#nam_mob').html(n_m);
 	//alert(apiPath+'search_memeber?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&n_m='+n_m)
 		  
-	  $.ajax({
-		type:'POST',
-		url:apiPath+'search_memeber?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&n_m='+n_m,
-	
-        success: function(result2) {
-			//alert(result2)
-			//alert ('hi')	
-			if (result2!=''){
-			$('#nam_mob').html(result2);
-			localStorage.my_nam_mob = 	result2;
+	 // $.ajax({
+//		type:'POST',
+//		url:apiPath+'search_memeber?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&n_m='+n_m,
+//	
+//        success: function(result2) {
+//			//alert(result2)
+//			//alert ('hi')	
+//			if (result2!=''){
+		//	$('#nam_mob').html(result2);
+		//	localStorage.my_nam_mob = 	result2;
 			//alert(localStorage.my_nam_mob )
-			}
+			//}
 //	
 
          url="#purchasePro";					
 	    $.mobile.navigate(url);	
 	
-		}      
+		//}      
       
 			 
 			  
-	  });
+	//  });
 	
 	
 	//$('#memberList').html();
