@@ -112,12 +112,20 @@ $(document).ready(function(){
 				$('#purchOutlet').html(localStorage.outlet);
 				  
 		        $('#nam_mob').html(localStorage.my_nam_mob);
-				$("#mMobileOrder").html(localStorage.my_nam_mob)
-				//var n_m = $('#memberList').val();
-//				$('#nam_mob').html(n_m);  
-//				$('#nam_mob').html(result2);
-//				localStorage.my_nam_mob = 	result2;
-		
+				$("#mMobileOrder").html(localStorage.my_nam_mob)  
+				
+
+				var rpt_rep_ob=$("#memberList");					
+				rpt_rep_ob.empty();							
+				rpt_rep_ob.append(localStorage.memList);
+				//$('#nam_mob').html(n_m);
+				//var rpt_rep_ob=$("#memberList");	
+				//alert (localStorage.memberList)
+//				var rpt_rep_ob=$("#memberList");					
+//				rpt_rep_ob.empty();							
+//				rpt_rep_ob.append(localStorage.memberList);
+				
+				
 	
 				
   				
@@ -142,7 +150,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
        
   </div><! /header -->
     <div role="main" data-role="ui-content" style="height:90%" class="ui-corner-all">
-   <!-- <h2 class="mc-text-centre">Welcome!</h2>-->
+    <!--<h2 class="mc-text-centre">Welcome!</h2>-->
     
    
     
@@ -181,16 +189,22 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
        
        
        
-       <a data-role="button"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left"   ><img src="menu.png"></a>
+       <a style="height:18px"  href="#routePanel" onClick="login_page()"><img src="unilogo13.png" ></a>
        
+       <!--<a style="height:18px" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-right " onClick="exit()" ><img src="exit.png"> </a>-->
        <a id="backjpj" style="height:18px" data-rel="back" data-iconpos="left" class="ui-btn-right"><img src="back1.png"></a>
              <h3>Home</h3>
 
              
   
   </div>
-
-<div>
+  <!--<div><ul>
+           <li><a href="/">Home</a></li>
+           <li><a href="/about/">About us</a></li>
+            <li><a href="/contact/">Contact</a></li>
+      </ul>
+  </div>
+-->  <div>
     <br><br>
     <div align="center">
     <font id="outletMenu" style="font-size:16px; color:#060">  </font>
@@ -205,12 +219,12 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
     <td width="100" height="100" bgcolor="#3E9EFF"  onClick="searchMember()" ><img src="search-icon.png" width="100" height="70"></td>
   </tr>
   <tr>
- <td width="100" height="100" bgcolor="#3E9EFF" onClick="outletListSearch()" ><img src="outlet.png" width="100" height="90"></td>
-      <td width="100" height="100" bgcolor="#3E9EFF"  onClick="giftList()" ><img src="giftlst.png" width="100" height="100"></td>
+   <td width="100" height="100" bgcolor="#3E9EFF" onClick="nextPage3()" ><img src="outlet.png" width="100" height="90"></td>
+      <td width="100" height="100" bgcolor="#3E9EFF"  onClick="nextPage4()" ><img src="giftlst.png" width="100" height="100"></td>
   </tr>
    <tr>
-    <td width="100" height="100" bgcolor="#3E9EFF" onClick="about_us()" ><img src="aboutus.png" width="100" height="100"></td>
-     <td width="100" height="100" bgcolor="#3E9EFF" onClick="noticeBoard()" ><img src="notice.png" width="100" height="100"></td>
+    <td width="100" height="100" bgcolor="#3E9EFF" onClick="nextPage6()" ><img src="aboutus.png" width="100" height="100"></td>
+     <td width="100" height="100" bgcolor="#3E9EFF" onClick="nextPage5()" ><img src="notice.png" width="100" height="100"></td>
     </tr>
   
 </table>
@@ -227,7 +241,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
                
        <div data-theme="c" data-role="header" data-position="fixed" style="background-color:#5EBBE8; color:#fff" data-add-back-btn="true" > 
        
-       <a data-role="button"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left"   ><img src="menu.png"></a>
+       <!--<a data-role="button"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left"   ><img src="menu.png"></a>-->
        <!--<a style="height:18px" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-right " onClick="exit()" ><img src="exit.png"> </a>-->
        <a id="backjpj" style="height:18px" data-rel="back" data-iconpos="left" class="ui-btn-right"><img src="back1.png"></a>
              <h3>Outlet</h3>
@@ -240,9 +254,6 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
      <div class="main">
      <br><br>
       <div id="outletShow">
-      <ul>
-      
-      </ul>
       
      </div>
      
@@ -257,9 +268,9 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
                      
        <div data-theme="c" data-role="header" data-position="fixed" style="background-color:#5EBBE8; color:#fff" data-add-back-btn="true" > 
        
- <a data-role="button"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left"  onClick="menuSearch()" ><img src="menu.png"></a>
-      
-  <a id="backjpj" style="height:18px" data-rel="back" data-iconpos="left" class="ui-btn-right"><img src="back1.png"></a>
+       <a data-role="button"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left" onClick="nextPage()"   ><img src="menu.png"></a>
+       <!--<a style="height:18px" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-right " onClick="exit()" ><img src="exit.png"> </a>-->
+       <a id="backjpj" style="height:18px" data-rel="back" data-iconpos="left" class="ui-btn-right"><img src="back1.png"></a>
              <h3>Registration</h3>
 
              
@@ -277,7 +288,8 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
         <td align="center" ><img  width="100" height="100" alt="" id="myImage" ;>
                         <input name="prPhoto" id="prPhoto" type="hidden" value="" > </td>
         </tr>
-        </table><br>
+        </table>
+      
       
       <font style="color:#005E8A">
      <label for="name" style="color:#0060BF" >Full Name<span class="required">*</span></label>
@@ -383,7 +395,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
            
            <div data-theme="c" data-role="header" data-position="fixed" style="background-color:#5EBBE8;  color: #fff" data-add-back-btn="true" > 
        
-       <a data-role="button"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left"   ><img src="menu.png"></a>
+       <a data-role="button"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left" onClick="nextPage()"   ><img src="menu.png"></a>
       
        <a id="backjpj" style="height:18px" data-rel="back" data-iconpos="left" class="ui-btn-right"><img src="back1.png"></a>
              <h3>Search Member</h3>
@@ -401,7 +413,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 <!--          
 <input type="search" name="searchValue" id="searchValue" value="" placeholder="Search By Mobile" data-mini="true" autocomplete="on" style="color:#000; background-color:#F7F7F7"  onKeyUp="searchMemberN()"/>-->
 
-        <table>
+        <table style=" width:100%">
            <tr>
               <td >
               
@@ -434,11 +446,10 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
           </div>
 
   </div>
-
-<!--------------------------------------------outlist--------------------------------------->  
   
   
-  <div data-theme="c" data-role="page" id="outleListP" style="background-color:#EBFCFA" class="ui-content" >
+  
+  <div data-theme="c" data-role="page" id="page4" style="background-color:#EBFCFA" class="ui-content" >
             <!--<div data-theme="c" data-role="header" data-position="fixed" style="background-color:#5EBBE8; color:#fff" > 
      
        <a data-role="button"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left"><img src="menu.png"></a>
@@ -448,7 +459,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
          
          <div data-theme="c" data-role="header" data-position="fixed" style="background-color:#5EBBE8; color:#fff" data-add-back-btn="true" > 
        
-       <a data-role="button"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left"   ><img src="menu.png"></a>
+       <a data-role="button"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left"  onClick="nextPage()" ><img src="menu.png"></a>
       
        <a id="backjpj" style="height:18px" data-rel="back" data-iconpos="left" class="ui-btn-right"><img src="back1.png"></a>
              <h3>OutLet List</h3>
@@ -459,34 +470,34 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
          <div>
          <br>
           <font style="color:#C0EEF5">
-          <label for="search-mini" style="color:#36C"> Search Input:</label>
+          
         <input type="search" name="search" id="search-mini" value="" data-mini="true"/> 
         <br>
         
-         <input type="radio" name="radio1" id="radio1" value="Anwara Store"/>
-                 <label for="radio1" style="color:#0060BF" >Anwara Store/Wari</label>
-          <input type="radio" name="radio1" id="radio2" value="Ava Traders"/>
-                 <label for="radio2" style="color:#0060BF">Ava Traders/Wari</label>    
-           <input type="radio" name="radio1" id="radio3" value="Seven Eleven Store"/>
-                 <label for="radio3" style="color:#0060BF">Seven Eleven Store/Dhanmondi</label> 
-                  <input type="radio" name="radio1" id="radio4" value="Ruma Dept"/>
-                 <label for="radio4" style="color:#0060BF">Ruma Dept/Elephant Road</label>  
-                  <input type="radio" name="radio1" id="radio5" value="Shahin Store"/>
-                 <label for="radio5" style="color:#0060BF">Shahin Store/Mirpur</label>              
+         
+                 <label  style="color:#0060BF" >Anwara Store/Wari</label>
+         
+                 <label  style="color:#0060BF">Ava Traders/Wari</label>    
+          
+                 <label  style="color:#0060BF">Seven Eleven Store/Dhanmondi</label> 
+                
+                 <label  style="color:#0060BF">Ruma Dept/Elephant Road</label>  
+                  
+                 <label  style="color:#0060BF">Shahin Store/Mirpur</label>              
          </font>
          
-         <a id="memButton" data-role="button"  onClick="" ><strong>Submit</strong></a>	
+         <!--<a id="memButton" data-role="button"  onClick="" ><strong>Submit</strong></a>	-->
           </div>
 
   </div>
   
   
-  <div data-theme="c" data-role="page" id="gift" style="background-color:#EBFCFA" class="ui-content" >
+  <div data-theme="c" data-role="page" id="page5" style="background-color:#EBFCFA" class="ui-content" >
      
      
      <div data-theme="c" data-role="header" data-position="fixed" style="background-color:#5EBBE8; color:#fff" data-add-back-btn="true" > 
        
-       <a data-role="button"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left"   ><img src="menu.png"></a>
+       <a data-role="button"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left" onClick="nextPage()"   ><img src="menu.png"></a>
        <!--<a style="height:18px" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-right " onClick="exit()" ><img src="exit.png"> </a>-->
        <a id="backjpj" style="height:18px" data-rel="back" data-iconpos="left" class="ui-btn-right"><img src="back1.png"></a>
              <h3>Gift List </h3>
@@ -525,10 +536,10 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 
 
   
-  <div data-theme="c" data-role="page" id="Notice" style="background-color:#EBFCFA"  >
+  <div data-theme="c" data-role="page" id="page6" style="background-color:#EBFCFA"  >
        <div data-theme="c" data-role="header" data-position="fixed" style="background-color:#5EBBE8; color:#fff" data-add-back-btn="true" > 
        
-       <a data-role="button"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left"   ><img src="menu.png"></a>
+       <a data-role="button"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left" onClick="nextPage()"  ><img src="menu.png"></a>
        <!--<a style="height:18px" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-right " onClick="exit()" ><img src="exit.png"> </a>-->
        <a id="backjpj" style="height:18px" data-rel="back" data-iconpos="left" class="ui-btn-right"><img src="back1.png"></a>
              <h3>Notice</h3>
@@ -538,12 +549,14 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
   </div>
   
   </div>
-  
-  
-    <div data-theme="c" data-role="page" id="aboutComp" style="background-color:#EBFCFA"  >
+    
+    
+    
+
+  <div data-theme="c" data-role="page" id="page7" style="background-color:#EBFCFA"  >
        <div data-theme="c" data-role="header" data-position="fixed" style="background-color:#5EBBE8; color:#fff" data-add-back-btn="true" > 
        
-       <a data-role="button"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left" onClick="menuSearch()"  ><img src="menu.png"></a>
+       <a data-role="button"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left" onClick="nextPage()"  ><img src="menu.png"></a>
        <!--<a style="height:18px" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-right " onClick="exit()" ><img src="exit.png"> </a>-->
        <a id="backjpj" style="height:18px" data-rel="back" data-iconpos="left" class="ui-btn-right"><img src="back1.png"></a>
              <h3>About Us</h3>
@@ -552,15 +565,14 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
   
   </div>
   
-  </div>
-  
+  </div>    
     
-<!-----------------------------------purchase------------------------>    
+<!-----------------------------------purchase----------->    
     
 <div data-theme="c" data-role="page" id="purchasePro" style="background-color:#EBFCFA"  >
        <div data-theme="c" data-role="header" data-position="fixed" style="background-color:#5EBBE8; color:#fff" data-add-back-btn="true" > 
        
-     <a data-rel="back"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left"   ><img src="back1.png"></a>
+     <a id="backjpj" style="height:18px" data-rel="back" data-iconpos="left" class="ui-btn-left"><img src="back1.png"></a>
        <!--<a style="height:18px" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-right " onClick="exit()" ><img src="exit.png"> </a>-->
        <a id="backjpj" style="height:18px" data-role="button" data-iconpos="left" onClick="getOrder()" class="ui-btn-right">Next</a>
             <h3>Product List</h3>
