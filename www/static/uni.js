@@ -147,6 +147,7 @@ function login_user() {
 						}
 				      },
 				  error: function(result) {
+					  alert ('1')
 					
 				  }
 			  });//end ajax
