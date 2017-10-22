@@ -61,7 +61,6 @@ function login_user() {
 				 type: 'POST',
 				 url: apiPath+'check_user?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code,
 				 success: function(result) {	
-				 		alert ('test')
 						if (result==''){
 							//$("#loginButton").show();
 //							$("#login_image").hide();
@@ -147,7 +146,7 @@ function login_user() {
 						}
 				      },
 				  error: function(result) {
-					  alert ('1')
+					  alert (result)
 					
 				  }
 			  });//end ajax
