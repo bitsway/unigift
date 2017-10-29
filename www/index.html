@@ -1,8 +1,7 @@
 <!DOCTYPE html>
-
 <html>
-    <head>
-         <meta charset="utf-8" />
+      <head>
+          <meta charset="utf-8" />
          <meta name="viewport" content="width=device-width, initial-scale=1" />
          <title>UNIGIFT</title>
          <link rel="stylesheet" href="static/my.css"  />
@@ -14,16 +13,16 @@
         <script src="static/jquery/1.10.2/jquery-1.10.2.min.js">   </script>
         <script src="static/jquery.mobile-1.4.0/jquery.mobile-1.4.0.min.js">   </script>
         <script src="static/uni.js">  </script>
-  
-   <style>
-     /*change header color*/
+        
+     <style>
+       /*change header color*/
 		h1 { background-color:#5EBBE8;
-		     color:#fff;
-		     
-		      }
-	    h2 { color:#0067CE
+			 color:#fff;
+			 
+			  }
+		h2 { color:#0067CE
 		}
-	    h2.mc-text-danger {
+		h2.mc-text-danger {
 			color:red;
 		}
 		/* centre-aligned text*/
@@ -31,13 +30,12 @@
 			text-align:center;
 			
 		}
-	/*.ui-input-search{display:none;}	
-		
-*/		
-	 #check { color:#409FFF;
-	 }
+		/*.ui-input-search{display:none;}*/	
+			
+       #check { color:#409FFF;
+	        }
 		/*.ui-content{ background-color:#484848}*/
-				.custom-size-flipswitch.ui-flipswitch .ui-btn.ui-flipswitch-on {
+       .custom-size-flipswitch.ui-flipswitch .ui-btn.ui-flipswitch-on {
 			text-indent: -5.9em;
 		}
 		.custom-size-flipswitch.ui-flipswitch .ui-flipswitch-off {
@@ -57,193 +55,150 @@
 			.ui-field-contain > label + .custom-size-flipswitch.ui-flipswitch {
 				width: 1.875em;
 			}
-		}
-		input[type=number],input[type=text]{
-	/* [disabled]background-color: #D3F1F8; */
-	border-radius: 0.3125em;
+		    }
+	   input[type=number],input[type=text]{
+	   /* [disabled]background-color: #D3F1F8; */
+	   border-radius: 0.3125em;
+       }
+		
+	  .full-width-slider input {
+		display: none;
+		
+	  }
+	  .full-width-slider .ui-slider-track {
+		margin-left: 15px;
+		
+	  }
+	  #loginButton {background-color:#5EBBE8;
+	  /* #loginButton {background-color:#008000;*/
+	
+		     color:#fff;
+	  }
+	  #memButton {background-color:#5EBBE8;
+		     color:#fff;
+	  }
+	
+	  #orderBtn {background-color:#5EBBE8;
+		     color:#fff;
+	  }
+	  #cm_id {
+		color:#000;
+		
+	  }
+	  #password {
+		color:#000;
+	  }
+	 #outletButton {
+		   background-color:#5EBBE8;
+		   color:#fff;
+	  }
+	  
+	  
+	  #rewardButton {
+		    background-color:#5EBBE8;
+		    color:#fff;
+	  }
+	  
+	  .footer {
+			position: fixed;
+			left: 0;
+			bottom: 0;
+			width: 100%;
+			height:50px;
+			background-color:#5EBBE8;
+			color: white;
+			text-align: center;
 }
-		
-		.full-width-slider input {
-			display: none;
-			
-		}
-		.full-width-slider .ui-slider-track {
-			margin-left: 15px;
-			
-		}
-	#loginButton {background-color:#5EBBE8;
-		     color:#fff;
-	}
-	#memButton {background-color:#5EBBE8;
-		     color:#fff;
-	}
-	
-	#orderBtn {background-color:#5EBBE8;
-		     color:#fff;
-	}
-	#cm_id {
-		color:#000;
-		
-	}
-	#password {
-		color:#000;
-	}
-	
-		</style> 
-      <script>
-<!--
-$(document).ready(function(){
-				//alert (localStorage.saved_req);
-				//buttonCheck();
-				$("#login_image").hide();
-				$('#outletMenu').html(localStorage.outlet)
-				$("#outletShow").html(localStorage.outletShow)
-				$('#outletSrch').html(localStorage.outlet)
-				$('#orderOutlet').html(localStorage.outlet);  
-				//$("#prdctShow").html(localStorage.prdctShow)
-				//alert (localStorage.prdctShow)
-				$("#item_combo_id").empty()
-			    $("#item_combo_id").append(localStorage.prdctShow);
-				//$("#memberList").rpt_rep_ob.empty();							
-//				$("#memberList").rpt_rep_ob.append(memList);
-				
-				$("#item_combo_id_Cart").empty()
-		        $("#item_combo_id_Cart").append(localStorage.prdctShowCart);
-				$('#purchOutlet').html(localStorage.outlet);
-				  
-		        $('#nam_mob').html(localStorage.my_nam_mob);
-				$("#mMobileOrder").html(localStorage.my_nam_mob)
-				//var n_m = $('#memberList').val();
-//				$('#nam_mob').html(n_m);  
-//				$('#nam_mob').html(result2);
-//				localStorage.my_nam_mob = 	result2;
-		
-	
-				
-  				
-		});
+	  
+	  
+	</style>
+        
+    <script>
 
+   $(document).ready(function(){    
+			$("#login_image").hide();
+			
+			$("#outletShow").html(localStorage.outletShow)
+			$("#giftShow").html(localStorage.giftShow)
+			
+			$("#prdctShow").html(localStorage.prdctShow)
+			$("#item_combo_id").empty()
+			$("#item_combo_id").append(localStorage.prdctShow); 
+			
+			var rpt_rep_ob1=$("#catgoryList");
+			rpt_rep_ob1.empty();	 
+			rpt_rep_ob1.append(localStorage.catList);
+			//alert (localStorage.prdctShow)
+			//var rpt_rep_ob1=$("#catgoryList");
+//			rpt_rep_ob1.empty();	 
+//			rpt_rep_ob1.append(catList);
+
+			     
+			 
+      	});
+		
+		
+   
 function MM_jumpMenu(targ,selObj,restore){ //v3.0
   eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
   if (restore) selObj.selectedIndex=0;
-}
-//-->
-</script>
+}		
+		
+    </script>
      </head>
-
-
 <body>
-  <div data-role="page" id="login" data-theme="c">
-       <div data-role="header" data-theme="c" data-position="fixed" style="background-color:#5EBBE8; color:#fff"> 
-       <a style="height:18px"  href="#routePanel" ><img src="unilogo13.png"></a>
-        <a style="height:18px" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-right " onClick="exit()" ><img src="exit.png"> </a>
+<!-------------------------------login------------------------------->
+
+ 
+<div data-role="page" id="login" data-theme="c">
+    
+  <div data-role="header" data-theme="c" data-position="fixed" style="background-color:#5EBBE8; color:#fff"> 
+     <a style="height:18px"  href="#routePanel" ><img src="unilogo13.png"></a>
+     <a style="height:18px" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-right " onClick="exit()" ><img src="exit.png"> </a>
     
        <h1 >LOGIN</h1>
        
   </div><! /header -->
-    <div role="main" data-role="ui-content" style="height:90%" class="ui-corner-all">
-   <!-- <h2 class="mc-text-centre">Welcome!</h2>-->
-    
-   
-    
-     <font face="Arial, Helvetica, sans-serif" size="-1"> 
+        <div role="main" data-role="ui-content" style="height:90%" class="ui-corner-all">
+        <div class="errorMsg"></div>
+          <font face="Arial, Helvetica, sans-serif" size="-1"> 
                 </br>
     
-     <input type="text" name="cm_id" id="cm_id" placeholder="CM ID" value=""  >
-     <input type="text" name="cm_pass" id="cm_pass" placeholder="PASSWORD" value="" >
-      <!--<fieldset  data-role="controlgroup">
-        <input type="checkbox" name="check" id="check" />
-         <font style="color:#C0EEF5">
-        <label for="check" style="color:#2D96FF"; >Keep me login</label>
-        </font>
-    </fieldset>-->
-    </font>                
+                  <input type="text" name="cm_id" id="cm_id" placeholder="CM ID" value=""  >
+                  <input type="text" name="cm_pass" id="cm_pass" placeholder="PASSWORD" value="" >
+      
+           </font>                
 				</br></br>
                  <div id="login_image" ><img height="40px" width="40px" src="loading.gif"></div>
-                  <input type="text" name="cm_idText" id="cm_idText" placeholder="CM ID" value=""  >
-                <a id="loginButton" data-role="button"  onClick="login_user()" >Login</a>	
-    </div>
+                 <a id="loginButton" data-role="button"  onClick="login_user()" >Login</a>
+                <!--<a id="loginButton" data-role="button"  onClick="login_user()" >Login</a>	-->
+        </div>
        
                 
  <!-- <div data-role="footer" ></div>    -->          
 
 </div>
-<!---------------------home---------->
- <div data-theme="c" data-role="page" id="menuPage" style="background-color:#EBFCFA"  >
-       <div data-theme="c" data-role="header" data-position="fixed" style="background-color:#5EBBE8; color:#fff" data-add-back-btn="true" > 
-       <!--<nav id="my-menu">
-   <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="/about/">About us</a></li>
-      <li><a href="/contact/">Contact</a></li>
-   </ul>
-</nav>-->
-       
-       
-       
-       
-       <a data-role="button"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left"   ><img src="menu.png"></a>
-       
-       <a id="backjpj" style="height:18px" data-rel="back" data-iconpos="left" class="ui-btn-right"><img src="back1.png"></a>
-             <h3>Home</h3>
 
-             
-  
-  </div>
+<!---------------------------------------Page Outlet------------------------------------->
 
-<div>
-    <br><br>
-    <div align="center">
-    <font id="outletMenu" style="font-size:16px; color:#060">  </font>
-    </div>
-    
-    
-    <font color="#D3F8F3" face="Arial, Helvetica, sans-serif" size="-1"> 
-   <!-- <a data-role="button"  style="width:100px;" onClick="nextPage1()" ><img src="Untitled.png" width="106" height="8"></a>-->
-    <table width="234" height="247" align="center" >
-  <tr>
-    <td width="100" height="100" bgcolor="#3E9EFF" onClick="addMember()" ><img src="member.png" width="100" height="80"></td>
-    <td width="100" height="100" bgcolor="#3E9EFF"  onClick="searchMember()" ><img src="search-icon.png" width="100" height="70"></td>
-  </tr>
-  <tr>
- <td width="100" height="100" bgcolor="#3E9EFF" onClick="outletListSearch()" ><img src="outlet.png" width="100" height="90"></td>
-      <td width="100" height="100" bgcolor="#3E9EFF"  onClick="giftList()" ><img src="giftlst.png" width="100" height="100"></td>
-  </tr>
-   <tr>
-    <td width="100" height="100" bgcolor="#3E9EFF" onClick="about_us()" ><img src="aboutus.png" width="100" height="100"></td>
-     <td width="100" height="100" bgcolor="#3E9EFF" onClick="noticeBoard()" ><img src="notice.png" width="100" height="100"></td>
-    </tr>
-  
-</table>
-
-          
-    </font>
-     
-  </div>
-  
-</div>
-     <!-----------outletShow---------->
 <div data-theme="c" data-role="page" id="pageOutlet" style="background-color:#EBFCFA" >
 
-               
        <div data-theme="c" data-role="header" data-position="fixed" style="background-color:#5EBBE8; color:#fff" data-add-back-btn="true" > 
        
-       <a data-role="button"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left"   ><img src="menu.png"></a>
+       <a data-role="button"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left" onClick="login_page()"  ><img src="unilogo13.png"></a>
        <!--<a style="height:18px" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-right " onClick="exit()" ><img src="exit.png"> </a>-->
        <a id="backjpj" style="height:18px" data-rel="back" data-iconpos="left" class="ui-btn-right"><img src="back1.png"></a>
              <h3>Outlet</h3>
 
              
   
-  </div>
+      </div>
   
  
      <div class="main">
      <br><br>
       <div id="outletShow">
-      <ul>
       
-      </ul>
       
      </div>
      
@@ -251,92 +206,111 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
      </div>
 </div>
 
-<!--==============================================================-->
-     <!------------member reg---------->
-<div data-theme="c" data-role="page" id="memberReg" style="background-color:#EBFCFA" class="ui-content" >
+<!---------------------------------Home page------------------------------------->
 
-                     
-       <div data-theme="c" data-role="header" data-position="fixed" style="background-color:#5EBBE8; color:#fff" data-add-back-btn="true" > 
+<div data-theme="c" data-role="page" id="menuPage" style="background-color:#EBFCFA"  >
+        <div data-theme="c" data-role="header" data-position="fixed" style="background-color:#5EBBE8; color:#fff" data-add-back-btn="true" > 
+
+      <!-- <a data-role="button"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left"  onClick=""  ><img src="menu.png"></a>-->
        
- <a data-role="button"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left"  onClick="menuSearch()" ><img src="menu.png"></a>
-      
-  <a id="backjpj" style="height:18px" data-rel="back" data-iconpos="left" class="ui-btn-right"><img src="back1.png"></a>
-             <h3>Registration</h3>
+       <a id="backjpj" style="height:18px" data-rel="back" data-iconpos="left" class="ui-btn-right"><img src="back1.png"></a>
+             <h3>Gift List</h3>
 
              
   
-  </div>
-     
-     <div class="main" id="mem">
+     </div>
+     <div>
+        <br><br>
+       
+          <label style="color:#0060BF"" >&nbsp;&nbsp;Reward Currently available</label>
+           
+          <br>
+          
+          <div id="giftShow"></div>
+          
+        
+    <table width="100%" border="0">
+  <tr>
+    <td width="50%" ><a  data-role="button"  onClick="shppingTrip()"  style="height:40px; font-size:14px">New Shopping<br> Trip</a></td>
+    <td><a data-role="button"  onClick="productQueRedeen()" style="height:40px; font-size:14px">Que</a></td>
+  </tr>
+</table>
+
     
-       <form class="form" method="post" action="#">
+    
+     </div>
+
+</div>
+<!-----------------------Shopping Trip--------------------->
+
+<div data-theme="c" data-role="page" id="member" style="background-color:#EBFCFA"  >
+        <div data-theme="c" data-role="header" data-position="fixed" style="background-color:#5EBBE8; color:#fff" data-add-back-btn="true" > 
+
+       <a data-role="button"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left"   ><img src="menu.png"></a>
+       
+       <a id="backjpj" style="height:18px" data-rel="back" data-iconpos="left" class="ui-btn-right"><img src="back1.png"></a>
+             <h3>Select Member</h3>
+
+             
+  
+     </div>
+     <div>
+        <br><br>
+       <!-- <label style="color:#0060BF"" >&nbsp;&nbsp;Enter Valid Mobile:</label>-->
+       
+        <label for="mobile"  >&nbsp;&nbsp;Member Mobile Number:</label>
+        <form action="" method="get">
+         <input type="text" name="mMobile" id="mMobile" list="mobile">
+         <datalist id="mobile">
+          <option value="01681456782">
+          <option value="01681456784">
+          <option value="01681456785">
+          <option value="01681456329">
+          <option value="01856456782">
+        </datalist><br>
+        
+    <a id="rewardButton" data-role="button"  onClick="memberSelect()" ><strong>Next</strong></a>
+      </form>
+     </div>
+
+</div>
+<!---------------------------------member reg------------->
+
+<div data-theme="c" data-role="page" id="registration" style="background-color:#EBFCFA"  >
+        <div data-theme="c" data-role="header" data-position="fixed" style="background-color:#5EBBE8; color:#fff" data-add-back-btn="true" > 
+
+       <a data-role="button"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left"   ><img src="menu.png"></a>
+       
+       <a id="backjpj" style="height:18px" data-rel="back" data-iconpos="left" class="ui-btn-right"><img src="back1.png"></a>
+             <h3>Member Registration</h3>
+
+             
+  
+     </div>
+     <div class="main" id="mem">
+        
+        <form class="form" method="post" action="#" id="formTest" >
       <h2 align="center" >New Member Registration </h2>
       
-      <table width="100%" border="0" cellspacing="0" cellpadding="0">
-      <tr>
-        <td >&nbsp;&nbsp;<img src="camera.png" width="40" height="40" alt="TakePic" onClick="takePicture()"></td>
-        <td align="center" ><img  width="100" height="100" alt="" id="myImage" ;>
-                        <input name="prPhoto" id="prPhoto" type="hidden" value="" > </td>
-        </tr>
-        </table><br>
       
       <font style="color:#005E8A">
      <label for="name" style="color:#0060BF" >Full Name<span class="required">*</span></label>
-         <input type="text"  name="name" id="name"  value=""  style="color:#000;"><br>
-         
-     <label for="genderComb" style="color:#0060BF" >Gender<span class="required">*</span></label>
-       <!--  <input type="text"  name="gender" id="gender"  value=""  style="color:#000;">
-         -->
-         
+         <input type="text"  name="name" id="name"  value=""  style="color:#000;">
+       
+     
+     <label for="mobile"  style="color:#0060BF">Mobile No<span class="required">*</span></label>       
+          <input type="number" name="mobile" id="mobile"  value=""  style="color:#000; ">
+     <label for="area"  style="color:#0060BF">Area</label>       
+          <input type="text" name="area" id="area"  value=""  style="color:#000; ">
+          
+               
+     <label for="genderComb" style="color:#0060BF" >Gender</label>
          <select id="genderComb" name="genderComb" >
             <option value=""  selected style="color:#000;">Select.....</option>
             <option value="Male" style="color:#000;">Male</option>
             <option value="Female" style="color:#000;">Female</option>
-         </select><br>
-     <table width="100%" border="0" cellpadding="0" cellspacing="0">
-  <tr>
-    <td width="39%"><label for="birthMonthG" style="color:#0060BF" >Date of Birth</label>  
-            <select id="birthMonthG" name="birthDateG" >
-            <option value=""  selected style="color:#000;">Month.....</option>
-            <option value="Jan" style="color:#000;">Jan</option>
-            <option value="Feb" style="color:#000;">Feb</option>
-            <option value="Mar" style="color:#000;">Mar</option>
-            <option value="Apr" style="color:#000;">Apr</option>
-            <option value="May" style="color:#000;">May</option>
-            <option value="Jun" style="color:#000;">Jun</option>
-            <option value="Jul" style="color:#000;">Jul</option>
-            <option value="Aug" style="color:#000;">Aug</option>
-            <option value="Sep" style="color:#000;">sep</option>
-            <option value="Oct" style="color:#000;">Oct</option>
-            <option value="Nov" style="color:#000;">Nov</option>
-             <option value="Dec" style="color:#000;">Dec</option>
-         </select></td>
-         <td width="9%">&nbsp;&nbsp;&nbsp;&nbsp;</td>
-    <td width="52%"><label for="birthDayG" style="color:#0060BF" > Date of Birth</label>  
-            <select id="birthDayG" name="birthDateG" >
-            <option value=""  selected style="color:#000;">Day.....</option>
-            <option value="01" selected style="color:#000;">01</option><option value="02" style="color:#000;">02</option>
-            <option value="03" style="color:#000;">03</option> <option value="04" style="color:#000;">04</option>
-            <option value="05" style="color:#000;">05</option><option value="06" style="color:#000;">06</option>
-            <option value="07" style="color:#000;">07</option><option value="08" style="color:#000;">08</option>
-            <option value="09" style="color:#000;">09</option> <option value="10" style="color:#000;">10</option>
-            <option value="11" style="color:#000;">11</option> <option value="12" style="color:#000;">12</option>
-            <option value="13" style="color:#000;">13</option> <option value="14" style="color:#000;">14</option>
-            <option value="15" style="color:#000;">15</option><option value="16" style="color:#000;">16</option>
-            <option value="17" style="color:#000;">17</option><option value="18" style="color:#000;">18</option>
-            <option value="19" style="color:#000;">19</option> <option value="20" style="color:#000;">20</option>
-            <option value="21" style="color:#000;">21</option> <option value="22" style="color:#000;">22</option>
-            <option value="23" style="color:#000;">23</option><option value="24" style="color:#000;">24</option>
-            <option value="25" style="color:#000;">25</option> <option value="26" style="color:#000;">26</option>
-            <option value="27" style="color:#000;">27</option><option value="28" style="color:#000;">28</option>
-            <option value="29" style="color:#000;">29</option><option value="30" style="color:#000;">30</option>
-            <option value="31" style="color:#000;">31</option>
-         </select></td>
-     </tr>
-    </table>
-
-           
-    <label for="ageRange" style="color:#0060BF" >Age Range<span class="required">*</span></label>
+         </select>  
+     <label for="ageRange" style="color:#0060BF" >Age Range<span class="required">*</span></label>
                 <select id="ageRange" name="ageRange" >
             <option value=""  selected style="color:#000;">Select.....</option>
             <option value="10-20" style="color:#000;">10-20</option>
@@ -348,273 +322,482 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
             <option value="70-80" style="color:#000;">70-80</option>
             <option value="80-90" style="color:#000;">80-90</option>
             <option value="90-100" style="color:#000;">90-100</option>
-         </select><br>
-     
-                          
-                                   
-      
-                          
-<!--         <input type="date"  name="birthDate" id="birthDate"  value=""  style="color:#000;">
--->         
-      <label for="address" style="color:#0060BF" >Address</label>
-        <textarea name="address" id="address"  style="width:900px; height:100px;  outline-color:#D9F5F9"></textarea><br>
-       <label for="mobile"  style="color:#0060BF">Mobile No</label>       
-          <input type="number" name="mobile" id="mobile"  value=""  style="color:#000; "><br>
-       <label for="reg_date" style="color:#0060BF">Registration Date</label>   
-          <input type="date" name="reg_date" id="reg_date"  value=""  style="color:#000; "> <br>
-       <label for="reg_by_cm" style="color:#0060BF">CM Name</label>     
-          <input type="text" name="reg_by_cm" id="reg_by_cm"  value=""  style="color:#000; "><br>
-        <label for="otltName" style="color:#0060BF">Outlet Name</label>   
-          <input type="text" name="otltName" id="otltName"   value=""  style="color:#000;" readonly><br>
-         <label for="thana" style="color:#0060BF">Thana</label>   
-          <input type="text" name="thana" id="thana"   value=""  style="color:#000;" ><br>
-         <label for="district" style="color:#0060BF">District</label>   
-          <input type="text" name="district" id="district"   value=""  style="color:#000;" ><br>
+         </select>
+
          </font> 
-         <div id="resultShow"></div>
-          <div class="errorChk"></div> 
-          <a id="memButton" data-role="button"  onClick="data_save()" ><strong>Submit</strong></a>	
+          <div class="errorChk"></div><br>
+       
+          <a id="memButton" data-role="button"  onClick="product()" ><strong>Submit</strong></a>	
          
-       </form>  
-            
+       </form>
+
+    
      </div>
-</div>
-<!--------------------------member search------->
- <div data-theme="c" data-role="page" id="searchMem" style="background-color:#EBFCFA" class="ui-content" >
-           
-           <div data-theme="c" data-role="header" data-position="fixed" style="background-color:#5EBBE8;  color: #fff" data-add-back-btn="true" > 
-       
-       <a data-role="button"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left"   ><img src="menu.png"></a>
-      
-       <a id="backjpj" style="height:18px" data-rel="back" data-iconpos="left" class="ui-btn-right"><img src="back1.png"></a>
-             <h3>Search Member</h3>
-           
-             
-  
-  </div>
-    <div ><br>
-     <label for="outletSrch" style="color:#36C"> Outlet Name:&nbsp;</label> <font id="outletSrch" style="font-size:16px; color:#060">  </font>
-    </div>
-  
-         <div >
-         <br>
-          <font style="color:#C0EEF5">
-<!--          
-<input type="search" name="searchValue" id="searchValue" value="" placeholder="Search By Mobile" data-mini="true" autocomplete="on" style="color:#000; background-color:#F7F7F7"  onKeyUp="searchMemberN()"/>-->
 
-        <table>
-           <tr>
-              <td >
-              
-              <label for="memberList" style="color:#36C" >Member Search:</label>
-              <font id="outletSrch" style="font-size:16px; color:#060">  
-            <select name="memberList" style="width:500px" id="memberList" >
-                
-                <option value="" >Name/Mobile</option>
-
-                </select>
-                </font>
-              </td>
-           </tr>
-       </table>
-        </font>
-        </div>
-        
-        <br><br>
-        <div>
-        <font style="color:#C0EEF5">
-         <input type="radio" name="radio1" id="radio1" value="Add Purchase"/>
-                 <label for="radio1" style="color:#0060BF" >Add Purchase</label>
-          <input type="radio" name="radio1" id="radio2" value="Add Gift"/>
-                 <label for="radio2" style="color:#0060BF">Add Gift</label>    
-           <input type="radio" name="radio1" id="radio3" value="Show Profile"/>
-                 <label for="radio3" style="color:#0060BF">Show Profile</label>             
-         </font>
-         
-         <a id="memButton" data-role="button"  onClick="memPurchase()" href="#" ><strong>Next</strong></a>	
-          </div>
-
-  </div>
-
-<!--------------------------------------------outlist--------------------------------------->  
-  
-  
-  <div data-theme="c" data-role="page" id="outleListP" style="background-color:#EBFCFA" class="ui-content" >
-            <!--<div data-theme="c" data-role="header" data-position="fixed" style="background-color:#5EBBE8; color:#fff" > 
-     
-       <a data-role="button"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left"><img src="menu.png"></a>
-       <a id="backjpj" style="height:18px" data-rel="back" data-iconpos="left" class="ui-btn-right"><img src="back1.png"></a>
-          
-         </div-->
-         
-         <div data-theme="c" data-role="header" data-position="fixed" style="background-color:#5EBBE8; color:#fff" data-add-back-btn="true" > 
-       
-       <a data-role="button"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left"   ><img src="menu.png"></a>
-      
-       <a id="backjpj" style="height:18px" data-rel="back" data-iconpos="left" class="ui-btn-right"><img src="back1.png"></a>
-             <h3>OutLet List</h3>
-
-             
-  
-  </div>
-         <div>
-         <br>
-          <font style="color:#C0EEF5">
-          <label for="search-mini" style="color:#36C"> Search Input:</label>
-        <input type="search" name="search" id="search-mini" value="" data-mini="true"/> 
-        <br>
-        
-         <input type="radio" name="radio1" id="radio1" value="Anwara Store"/>
-                 <label for="radio1" style="color:#0060BF" >Anwara Store/Wari</label>
-          <input type="radio" name="radio1" id="radio2" value="Ava Traders"/>
-                 <label for="radio2" style="color:#0060BF">Ava Traders/Wari</label>    
-           <input type="radio" name="radio1" id="radio3" value="Seven Eleven Store"/>
-                 <label for="radio3" style="color:#0060BF">Seven Eleven Store/Dhanmondi</label> 
-                  <input type="radio" name="radio1" id="radio4" value="Ruma Dept"/>
-                 <label for="radio4" style="color:#0060BF">Ruma Dept/Elephant Road</label>  
-                  <input type="radio" name="radio1" id="radio5" value="Shahin Store"/>
-                 <label for="radio5" style="color:#0060BF">Shahin Store/Mirpur</label>              
-         </font>
-         
-         <a id="memButton" data-role="button"  onClick="" ><strong>Submit</strong></a>	
-          </div>
-
-  </div>
-  
-  
-  <div data-theme="c" data-role="page" id="gift" style="background-color:#EBFCFA" class="ui-content" >
-     
-     
-     <div data-theme="c" data-role="header" data-position="fixed" style="background-color:#5EBBE8; color:#fff" data-add-back-btn="true" > 
-       
-       <a data-role="button"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left"   ><img src="menu.png"></a>
-       <!--<a style="height:18px" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-right " onClick="exit()" ><img src="exit.png"> </a>-->
-       <a id="backjpj" style="height:18px" data-rel="back" data-iconpos="left" class="ui-btn-right"><img src="back1.png"></a>
-             <h3>Gift List </h3>
-
-             
-  
-  </div>
-     
-     <div class="main">
-     
-      <h2 align="center" ></h2>
-      
-      
-        <form action="#" method="post">
-       <input type="search" name="search" id="search-mini" value="" data-mini="true"/> 
-        </form>
-        
-              <ul style="color:#0060BF">
-       <label style="color:#0060BF"" >Selected Items:</label>
-    <li> <label for="Clear Men Shampoo 350ml" style="color:#000" >Clear Men Shampoo350ml</label></li>
-      <li> <label for="Dove Conditioner 250ml" style="color:#000" >Dove Conditioner 250ml</label></li>
-       
-       <li> <label for="Fair & Lovely Cream 250ml"  style="color:#000">Fair & Lovely Cream 250ml</label>  </li>      
-         
-       <li> <label for="Ponds Face Wash 300ml" style="color:#000">Ponds Face Wash 300ml</label>  </li>  
-         
-        <li><label for="Pepsodent Germicheck 250gm" style="color:#000">Pepsodent Germicheck 250gm</label>  </li>    
-          
-          
-       </ul> 
-      
-            
-     </div>
 </div>
 
+<!----------------------------------product List----------->
+
+<div data-theme="c" data-role="page" id="ProductList" style="background-color:#EBFCFA">
+
+<div data-role="panel" id="routePanel" data-display="overlay" style="width:60%;">
+
+<table  >
+  <tr>
+    <td>16/10/2017  
+    Faire and lovely 250 mg 
+    Ponds white beauty  200 mg
+    Janata Store
+    </td>
+  </tr>
+  <tr>
+    <td>16/10/2017  
+    Faire and lovely 250 mg 
+    Ponds white beauty  200 mg
+    Janata Store</td>
+  </tr>
+  <tr>
+    <td>16/10/2017  
+    Faire and lovely 250 mg 
+    Ponds white beauty  200 mg
+    Janata Store</td>
+  </tr>
+</table>
 
 
-  
-  <div data-theme="c" data-role="page" id="Notice" style="background-color:#EBFCFA"  >
-       <div data-theme="c" data-role="header" data-position="fixed" style="background-color:#5EBBE8; color:#fff" data-add-back-btn="true" > 
-       
-       <a data-role="button"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left"   ><img src="menu.png"></a>
-       <!--<a style="height:18px" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-right " onClick="exit()" ><img src="exit.png"> </a>-->
-       <a id="backjpj" style="height:18px" data-rel="back" data-iconpos="left" class="ui-btn-right"><img src="back1.png"></a>
-             <h3>Notice</h3>
+			</div><!-- /panel -->
 
-             
-  
-  </div>
-  
-  </div>
-  
-  
-    <div data-theme="c" data-role="page" id="aboutComp" style="background-color:#EBFCFA"  >
-       <div data-theme="c" data-role="header" data-position="fixed" style="background-color:#5EBBE8; color:#fff" data-add-back-btn="true" > 
-       
-       <a data-role="button"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left" onClick="menuSearch()"  ><img src="menu.png"></a>
-       <!--<a style="height:18px" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-right " onClick="exit()" ><img src="exit.png"> </a>-->
-       <a id="backjpj" style="height:18px" data-rel="back" data-iconpos="left" class="ui-btn-right"><img src="back1.png"></a>
-             <h3>About Us</h3>
 
-             
-  
-  </div>
-  
-  </div>
-  
-    
-<!-----------------------------------purchase------------------------>    
-    
-<div data-theme="c" data-role="page" id="purchasePro" style="background-color:#EBFCFA"  >
+
+
+
+
        <div data-theme="c" data-role="header" data-position="fixed" style="background-color:#5EBBE8; color:#fff" data-add-back-btn="true" > 
        
      <a data-rel="back"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left"   ><img src="back1.png"></a>
-       <!--<a style="height:18px" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-right " onClick="exit()" ><img src="exit.png"> </a>-->
-       <a id="backjpj" style="height:18px" data-role="button" data-iconpos="left" onClick="getOrder()" class="ui-btn-right">Next</a>
+     
+       <a id="backjpj" style="height:18px" data-role="button" data-iconpos="left" onClick="productQue()" class="ui-btn-right">Next</a>
             <h3>Product List</h3>
 
            
   </div>
-        Outlet Name:&nbsp;<font id="purchOutlet" style="font-size:16px; color:#060">
+       <p><strong style="font-size:16px; color:#060"> Anwara Begum--</strong> &nbsp;&nbsp; Points: 2350<font id="purchOutlet" style="font-size:16px; color:#060">
          </font> <br> 
-     &nbsp;<label for="nam_mob" >Member Name/Mobile:</label><div id="nam_mob" style="font-size:16px; color:#060"><br><br>
-     
-    </div> 
-  
+         &nbsp;&nbsp;&nbsp;
+         <table width="400" border="0">
+          <tr>
+            <td><select name="catgoryList" style="width:200px" id="catgoryList" onChange="selcetCat()"  >
+                <option value=""  >Category</option>
+             </select></td>
+          </tr>
+        </table>
+
+            
+              
+          
+     <!--  </p>
+       <p>&nbsp; </p>-->
   <div id="prdctShow">
-          <font >
-       <ul class="list" id="item_combo_id">
-   
-        </ul>
-                    
+          <font id="item_combo_id">
          </font>
-        
-        <!-- <a id="btnPurchase" data-role="button"  onClick="" ><strong>Next</strong></a>-->
-  </div>
+       <!-- <a id="memButton" data-role="button"  onClick="historyShow()" ><strong>History</strong></a>-->
+
+    </div>   
+             
+      <div data-theme="c" data-role="footer" data-position="fixed" style="background-color:#5EBBE8; color:#fff"  > 
+		
+       <a data-role="button"   class="ui-btn ui-shadow ui-corner-all ui-btn-icon-right" onClick="#" ></a>
+        <a style="height:18px"  href="#routePanel"  class="ui-btn-right" >History</a>
+     </div>
  </div>
- <!-------------------------------------orderPage-------------------->
- <div data-theme="c" data-role="page" id="orderShow" style="background-color:#EBFCFA"  >
-               <div data-theme="c" data-role="header" data-position="fixed" style="background-color:#5EBBE8; color:#fff" data-add-back-btn="true" > 
-       <a data-rel="back" style="height:18px" data-role="button" data-iconpos="left" onClick="" class="ui-btn-right">edit</a>
-        <!--<a data-role="button"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-right" data-iconpos="right"   >Edit</a> -->
-     <!-- <a data-rel="back"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left"   ><img src="back1.png"></a>-->
-             <h3>Purchased</h3>
+ 
+ 
+
+<!----------------------------------------------Shopping Buscket------------------->
+
+     <div data-theme="c" data-role="page" id="ProductQueList" style="background-color:#EBFCFA"  >
+       <div data-theme="c" data-role="header" data-position="fixed" style="background-color:#5EBBE8; color:#fff" data-add-back-btn="true" > 
+       
+     <a data-rel="back"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left"   ><img src="back1.png"></a>
+     
+       <!--<a id="backjpj" style="height:18px" data-role="button" data-iconpos="left" onClick="getOrder()" class="ui-btn-right">Next</a>-->
+            <h3>Que List</h3>
+
+           
+  </div>
+       <p><strong style="font-size:16px; color:#060"> Anwara Begum--</strong> &nbsp;&nbsp; Points: 2350<font id="purchOutlet" style="font-size:16px; color:#060">
+         </font> <br> 
+         &nbsp;&nbsp;&nbsp;
+        
+       </p>
+       <p>&nbsp; </p>
+  <div id="prdctQueShow">
+          <font id="item_Que_combo_id">
+     
+  
+   
+          <table   >
+              <!-- <caption> Product Information</caption> -->
+              		<tr >
+
+                   
+                    <td>Product</td>
+                    <td style="width:10px"></td>
+                     <td>Qty</td>
+                    </tr>
+                    
+                    <tr >
+
+                    
+                    <td>Clear Men Shampoo 350m|1001|400</td>
+                   <td style="width:10px"></td>
+                    <td width="30px"> 2 </td> 
+                    
+                     </tr>
+                     
+                     
+          </table>
+          <a data-role="button"   class="ui-btn ui-shadow ui-corner-all ui-btn-icon-right" onClick="productQueRedeen()" >Proceed to Check Out</a>
+       
+          
+
+       
+         </font>
+       <!-- <a id="memButton" data-role="button"  onClick="historyShow()" ><strong>History</strong></a>-->
+
+    </div>   
+                
+      <div data-theme="c" data-role="footer" data-position="fixed" style="background-color:#5EBBE8; color:#fff"  > 
+
+      <!-- <a data-role="button"   class="ui-btn ui-shadow ui-corner-all ui-btn-icon-right" onClick="historyShow()" >History</a>
+       -->
+<a id="backjpj" style="height:18px" data-role="button" data-iconpos="left" onClick="getOrder()" class="ui-btn-right">Next</a>
+             
+  
+     </div>
+ </div>
+
+
+<!----------------------------------------------Shopping Que/ Redeem------------------->
+
+     <div data-theme="c" data-role="page" id="ProductQueRedList" style="background-color:#EBFCFA"  >
+       <div data-theme="c" data-role="header" data-position="fixed" style="background-color:#5EBBE8; color:#fff" data-add-back-btn="true" > 
+       
+     <a data-rel="back"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left"   ><img src="back1.png"></a>
+     
+       <a id="backjpj" style="height:18px" data-role="button" data-iconpos="left" onClick="getOrder()" class="ui-btn-right">Next</a>
+            <h3>Purchase / Redeem</h3>
+
+           
+  </div>
+      <br> 
+         &nbsp;&nbsp;&nbsp;
+        
+       </p>
+       <p>&nbsp; </p>
+  <div id="prdctQueShow">
+          <font id="item_Que_combo_id">
+     
+  			Please select from Que
+              
+            
+
+   
+          <table   >
+              <!-- <caption> Product Information</caption> -->
+              		<tr >
+                    <td style="width:50px"><input name="" type="radio" value=""></td>
+                    <td > Faisal Ahmed (01713454218)   </td>
+                    </tr>
+                    
+                    <tr >
+                    <td><input name="" type="radio" value=""></td>
+                   <td> Nurjahan Begum (01712566666)
+           			</td>
+                    
+                     </tr>
+                     
+                     <tr >
+                    <td><input name="" type="radio" value=""></td>
+                   <td >Kabir Miah (01912546589) 
+           			</td>
+                   
+                    
+                     </tr>
+                     
+                     
+          </table>
+       
+       		 <table   >
+              <!-- <caption> Product Information</caption> -->
+              		<tr >
+                    <td > <a data-role="button"    onClick="product()" >Purchase</a></td>
+                    <td >  <a data-role="button"   onClick="Redeem()" >Redeem</a>   </td>
+                    </tr>   
+          </table>
+       
+       
+       
+         </font>
+       <!-- <a id="memButton" data-role="button"  onClick="historyShow()" ><strong>History</strong></a>-->
+
+    </div>   
+                
+      <div data-theme="c" data-role="footer" data-position="fixed" style="background-color:#5EBBE8; color:#fff"  > 
+
+     </div>
+ </div>
+
+
+
+<!----------------------------------------------Redeem------------------->
+
+     <div data-theme="c" data-role="page" id="RedeemList" style="background-color:#EBFCFA"  >
+       <div data-theme="c" data-role="header" data-position="fixed" style="background-color:#5EBBE8; color:#fff" data-add-back-btn="true" > 
+       
+     <a data-rel="back"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left"   ><img src="back1.png"></a>
+     
+       <a id="backjpj" style="height:18px" data-role="button" data-iconpos="left" onClick="getOrder()" class="ui-btn-right">Next</a>
+            <h3>Redeem</h3>
+
+           
+  </div>
+       <p><strong style="font-size:16px; color:#060"> Anwara Begum--</strong> &nbsp;&nbsp; Points: 2350<font id="purchOutlet" style="font-size:16px; color:#060">
+         </font> <br> 
+         &nbsp;&nbsp;&nbsp;
+        
+       </p>
+       <p>&nbsp; </p>
+  <div id="prdctQueShow">
+          <font id="item_Que_combo_id">
+     
+  			
+              
+            
+
+   
+          <table   >
+              <!-- <caption> Product Information</caption> -->
+              		<tr >
+
+                   
+                    <td>Product</td>
+                    <td style="width:10px"></td>
+                     <td>Qty</td>
+                    </tr>
+                    
+                    <tr >
+
+                    
+                    <td>Clear Men Shampoo 350m|1001|400</td>
+                   <td style="width:10px"></td>
+                    <td width="30px"> <input name="" type="text" value=""> </td> 
+                    
+                     </tr>
+                     <tr >
+
+                    
+                    <td>Clear Men Shampoo 350m|1001|400</td>
+                   <td style="width:10px"></td>
+                    <td width="30px"> <input name="" type="text" value=""> </td> 
+                    
+                     </tr>
+                     <tr >
+
+                    
+                    <td>Clear Men Shampoo 350m|1001|400</td>
+                   <td style="width:10px"></td>
+                    <td width="30px"> <input name="" type="text" value=""> </td> 
+                    
+                     </tr><tr >
+
+                    
+                    <td>Clear Men Shampoo 350m|1001|400</td>
+                   <td style="width:10px"></td>
+                    <td width="30px"> <input name="" type="text" value=""> </td> 
+                    
+                     </tr>
+                     
+                     
+                     
+                     
+          </table>
+       
+       		 <table   >
+              <!-- <caption> Product Information</caption> -->
+              		<tr >
+                    <td > <img src="camera.png" style="height:50px; width:50px"></td>
+                    </tr>   
+          </table>
+       
+       <div>Image</div>
+       
+       
+       <a data-role="button"   onClick="ConfirmPage()" >Next</a>
+         </font>
+       <!-- <a id="memButton" data-role="button"  onClick="historyShow()" ><strong>History</strong></a>-->
+
+    </div>   
+                
+      <div data-theme="c" data-role="footer" data-position="fixed" style="background-color:#5EBBE8; color:#fff"  > 
+
+     </div>
+ </div>
+
+
+
+<!----------------------------------------------Confirm------------------->
+
+     <div data-theme="c" data-role="page" id="ConfirmPage" style="background-color:#EBFCFA"  >
+       <div data-theme="c" data-role="header" data-position="fixed" style="background-color:#5EBBE8; color:#fff" data-add-back-btn="true" > 
+       
+     <a data-rel="back"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left"   ><img src="back1.png"></a>
+     
+       <a id="backjpj" style="height:18px" data-role="button" data-iconpos="left" onClick="getOrder()" class="ui-btn-right">Next</a>
+            <h3>Submit</h3>
+
+           
+  </div>
+       <p><strong style="font-size:16px; color:#060"> Anwara Begum--</strong> &nbsp;&nbsp; Points: 2350<font id="purchOutlet" style="font-size:16px; color:#060">
+         </font> <br> 
+         &nbsp;&nbsp;&nbsp;
+        
+       </p>
+       <p>&nbsp; </p>
+  <div id="prdctQueShow">
+          <font id="item_Que_combo_id">
+     
+  			
+              
+            
+
+   
+          <table   >
+              <!-- <caption> Product Information</caption> -->
+              		<tr >
+					<td>Qty</td>
+                   <td style="width:10px"></td>
+                    <td>Product</td>
+                    
+                     
+                    </tr>
+                    
+                    <tr >
+
+                    
+                    <td width="30px"> <input name="" type="text" value=""> </td> 
+                    <td style="width:10px"></td>
+                    <td>Clear Men Shampoo 350m|1001|400</td>
+                   
+                    
+                     </tr>
+                     <tr >
+
+                    <td width="30px"> <input name="" type="text" value=""> </td> 
+                    <td style="width:10px"></td>
+                    <td>Clear Men Shampoo 350m|1001|400</td>
+                   
+                    
+                    
+                     </tr>
+                     <tr >
+
+                    <td width="30px"> <input name="" type="text" value=""> </td> 
+                     <td style="width:10px"></td>
+                    <td>Clear Men Shampoo 350m|1001|400</td>
+                  
+                    
+                    
+                     </tr><tr >
+
+                    
+                    <td width="30px"> <input name="" type="text" value=""> </td> 
+                    <td style="width:10px"></td>
+                    <td>Clear Men Shampoo 350m|1001|400</td>
+                   
+                    
+                     </tr>
+                     
+                     
+                     
+                     
+          </table>
+       
+       		 <table   >
+              <!-- <caption> Product Information</caption> -->
+              		<tr >
+                    <td width="30px" > <input name="" type="checkbox" value=""></td>
+                    <td > Confirm</td>
+                    <td >  <a data-role="button"   onClick="submitPage()" >Submit</a></td>
+                    </tr>   
+          </table>
+       
+       
+       
+       
+      
+         </font>
+       <!-- <a id="memButton" data-role="button"  onClick="historyShow()" ><strong>History</strong></a>-->
+
+    </div>   
+                
+      <div data-theme="c" data-role="footer" data-position="fixed" style="background-color:#5EBBE8; color:#fff"  > 
+
+       
+       
 
              
   
+     </div>
+ </div>
+
+
+<!----------------------------------------------Successfully------------------->
+
+     <div data-theme="c" data-role="page" id="submitPage" style="background-color:#EBFCFA"  >
+       <div data-theme="c" data-role="header" data-position="fixed" style="background-color:#5EBBE8; color:#fff" data-add-back-btn="true" > 
+       
+     <a data-rel="back"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left"   ><img src="back1.png"></a>
+     
+       <a id="backjpj" style="height:18px" data-role="button" data-iconpos="left" onClick="getOrder()" class="ui-btn-right">Next</a>
+            <h3>Submitted Successfully</h3>
+
+           
   </div>
-            Outlet Name:&nbsp;<font id="orderOutlet" style="font-size:16px; color:#060">  </font><br>
-             
-   &nbsp;<label for="mMobileOrder" >Member Name/Mobile:</label><div id="mMobileOrder" style="font-size:16px; color:#060">
+       
+         <br> 
+         &nbsp;&nbsp;&nbsp;
         
-        </div><br><br>
-             
-   <div id="orderP">
-          <font >
-       <ul class="list" id="item_combo_id_Cart"> 
+       </p>
+       <p>&nbsp; </p>
+  <div id="prdctQueShow">
+          <font id="item_Que_combo_id">
+     
+            
+
    
-        </ul>
-                    
+          			Submitted Successfully
+       
+       		
+       
+       
+       
+       
+      
          </font>
-       <div class="errorChk"></div> 
-     <!-- <input type="button" id="edit" name="edit" style="width:20px; height:30px">-->
-       <a id="orderBtn" data-role="button" onClick="purchaseDataSave()"  ><strong>Submit</strong></a>  
-   </div>
-  </div>
+       <!-- <a id="memButton" data-role="button"  onClick="historyShow()" ><strong>History</strong></a>-->
+
+    </div>   
+                
+      <div data-theme="c" data-role="footer" data-position="fixed" style="background-color:#5EBBE8; color:#fff"  > 
+
+       
+       
+
+             
   
- <script type="text/javascript" src="phonegap.js"></script>
+     </div>
+ </div>
+
 </body>
 </html>

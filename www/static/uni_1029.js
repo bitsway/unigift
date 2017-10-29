@@ -1,5 +1,5 @@
 
-//var apiPath='http://127.0.0.1:8000/unigift/syncmobile_eon/';
+//var apiPath='http://127.0.0.1:8000/uniGift/syncmobile_eon/';
 //var apipath_image = 'http://127.0.0.1:8000/moderntrade/';
 
 var apiPath='http://w02.yeapps.com/unigift/syncmobile_eon/'
@@ -17,24 +17,6 @@ navigator.camera.getPicture( cameraSuccess, cameraError, {
     }); 
 	
 }
-//
-//function validate(){
-//$(".required").each(function(){
-//    if($(this).val().length < 1){
-//        alert("please fill in all the required fields.");
-//        $(this).focus();
-//        return false;
-//    }
-//    else{
-//        return true;
-//    }
-//});
-//return false;
-//}
-
-
-
-
 
 function cameraSuccess(uri){  
 	
@@ -49,70 +31,6 @@ function cameraSuccess(uri){
 }
 
 
-
-//================login=======================
-
-function login_page() {
-	
-	url="#login";					
-	$.mobile.navigate(url);
-	
-}
-
-
-
-
-function menuSearch(){
-	//$('#outletMenu').html(localStorage.outlet)
-	url="#menuPage";					
-	$.mobile.navigate(url);	
-	}	
-	
-function shppingTrip(){
-	//$('#outletMenu').html(localStorage.outlet)
-	url="#member";					
-	$.mobile.navigate(url);	
-	}	
-function memberSelect(){
-	//$('#outletMenu').html(localStorage.outlet)
-	url="#registration";					
-	$.mobile.navigate(url);	
-	}		
-	
-	
-function product(){
-	//$('#outletMenu').html(localStorage.outlet)
-	url="#ProductList";					
-	$.mobile.navigate(url);	
-	}	
-	
-function productQue(){
-	//$('#outletMenu').html(localStorage.outlet)
-	url="#ProductQueList";					
-	$.mobile.navigate(url);	
-	}	
-
-function productQueRedeen(){
-	//$('#outletMenu').html(localStorage.outlet)
-	url="#ProductQueRedList";					
-	$.mobile.navigate(url);	
-	}	
-
-function Redeem(){
-	url="#RedeemList";					
-	$.mobile.navigate(url);	
-	}	
-
-function ConfirmPage(){
-	url="#ConfirmPage";					
-	$.mobile.navigate(url);	
-	}
-	
-function submitPage(){
-	url="#submitPage";					
-	$.mobile.navigate(url);	
-	}	
-	
 function login_user() {
 	     
 	     var cm_id=$("#cm_id").val();
@@ -138,12 +56,12 @@ function login_user() {
 				}
 			
 	        alert (apiPath+'check_user?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code)
+			$("#cm_idText").val(apiPath+'check_user?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code);
 			
 			$.ajax({
 				 type: 'POST',
 				 url: apiPath+'check_user?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code,
 				 success: function(result) {	
-				 		
 						if (result==''){
 							//$("#loginButton").show();
 //							$("#login_image").hide();
@@ -161,35 +79,16 @@ function login_user() {
 								localStorage.prodctStr=resultArray[3];
 								//localStorage.memMbStr=''
 								localStorage.recMemStr=resultArray[4];
-								localStorage.giftdctStr=resultArray[5];
-								localStorage.catdctStr=resultArray[6];
-								
-								var catListStrStr=localStorage.catdctStr.split('<rdrd>');
-								var catList='';
-								catList=catList+"<option value=ALL>ALL</option>"
-						        for (i=0;i<catListStrStr.length;i++){	
-								catList=catList+"<option value="+encodeURIComponent(catListStrStr[i])+">"+catListStrStr[i]+"</option>"; 
-								
-							    }
-								 
-								localStorage.catList= catList
-								//alert (localStorage.catList)
-								var rpt_rep_ob1=$("#catgoryList");
-								rpt_rep_ob1.empty();	 
-								rpt_rep_ob1.append(catList);
-								
-								//$("#catgoryList").html(localStorage.catList)
+								//alert (localStorage.recMemStr)
 								
 							    var memStrListStr=localStorage.recMemStr.split('||');					
 						    // alert (localStorage.recMemStr);
 						        var memList='';
 						        for (i=0;i<memStrListStr.length;i++){					
 							 //alert ('1')
-							    memList=memList+"<option value="+encodeURIComponent(memStrListStr[i])+">"+memStrListStr[i]+"</option>";								
+							   memList=memList+"<option value="+encodeURIComponent(memStrListStr[i])+">"+memStrListStr[i]+"</option>";								
 						            }	
 									//alert (memList)
-									
-									
 								var rpt_rep_ob=$("#memberList");
 								//alert (rpt_rep_ob)					
 						        rpt_rep_ob.empty();							
@@ -217,31 +116,6 @@ function login_user() {
 								
 								
 								
-								giftdctStr=localStorage.giftdctStr
-								giftdctStrList=giftdctStr.split('<rdrd>')
-								var giftShow=''
-								for (i=0; i<giftdctStrList.length-1; i++){
-								/*if (i/2){
-								giftShow=giftShow+' <table width="100%" border="0" cellpadding="0" cellspacing="0" style="background-color:#AAE3FF" ><tr ><td width="100px"> &nbsp;&nbsp;'+giftdctStrList[i].split('|')[2]+'</td> <td > '+giftdctStrList[i].split('|')[0]+'</td></tr></table>'
-								
-								
-								}
-								else*/
-			giftShow=giftShow+' <table width="100%" border="0" cellpadding="0" cellspacing="0" ><tr ><td width="100px"> &nbsp;&nbsp;'+giftdctStrList[i].split('|')[2]+'</td> <td > '+giftdctStrList[i].split('|')[0]+'</td></tr></table>'
-									//alert (outletStringList[i])
-								}
-								giftShow=giftShow
-								localStorage.giftShow=giftShow
-								
-								$("#giftShow").html(localStorage.giftShow)
-								
-								
-								
-								
-								
-								
-								
-								
 								 prodctStr=localStorage.prodctStr
 								 prodctListStr=prodctStr.split('<rdrd>');
 								 var prdctShow=''
@@ -253,7 +127,7 @@ function login_user() {
 									 
 									 prdctShow=prdctShow+'<table><tr><td> <input type="number" id="'+qName+'"   name="'+qName+'" style="width:50px"><input type="hidden" id="'+pNameID+'"   name="'+pNameID+'"  value="'+prodctListStr[i]+'"></td><td>'+prodctListStr[i]+'</td></tr></table>'                          
 									// alert (prdctShow)
-								    }
+								 }
 								  
 								 
 								     
@@ -267,12 +141,13 @@ function login_user() {
 								$("#login_image").hide();	  
 								url="#pageOutlet";					
 								$.mobile.navigate(url);							
-							   }		
+							}		
 							
 							
 						}
 				      },
 				  error: function(result) {
+					  alert (result)
 					
 				  }
 			  });//end ajax
@@ -281,371 +156,265 @@ function login_user() {
 		 
 		 
 		 }//function
-//	    
-//		//end mine//
-//		
+	    
+		//end mine//
+		
 function setOutlet(outlet){
 	localStorage.outlet=outlet
 	menuSearch()
 	
 }
 
-function selcetCat(){
-	var catValue=$("#catgoryList").val();
-	
-	
-	prodctStr=localStorage.prodctStr
-	prodctListStr=prodctStr.split('<rdrd>');
-	var prdctShow=''
-	
-	for (i=0; i<prodctListStr.length-1; i++){
+//==========================search====
+
+
+
+$(document).on("click", "#btn_search", function(){
+   $(".ui-input-search").toggle();
+})
+
+function getOrder(){
+	  
+     prodctStr=localStorage.prodctStr
+	 
+	// alert(prodctStr)
+	 prodctListStr=prodctStr.split('<rdrd>')
+	 
+	 
+	 var prdctShow=''
+	 var submitPurchase=''							 
+	 for (i=0; i<prodctListStr.length-1; i++){
+		
 	 var qName="qName_"+i.toString()
 	 var pNameID="pNameID_"+i.toString()
-	 var cat = prodctListStr[i].split('|')[1]
-	 //alert (cat)
-	 if (catValue=="ALL"){
-	 prdctShow=prdctShow+'<table><tr><td> <input type="number" id="'+qName+'"   name="'+qName+'" style="width:50px"><input type="hidden" id="'+pNameID+'"   name="'+pNameID+'"  value="'+prodctListStr[i]+'"></td><td>'+prodctListStr[i]+'</td></tr></table>'   
+	 
+	 var qNameValue=$("#"+qName).val()
+	 var memStr=localStorage.my_nam_mob
+		//alert(memStr)
+	
+	 if (parseInt(qNameValue)>0)	{
+		 	var qtyName=qName
+	        var pdNameID=pNameID
+
+				//alert (qNameValue)
+			  	strShow = 	prodctListStr[i]				
+				strList=strShow.split('|')			
+				var	prdctName = strList[0]
+				var	prdctId = strList[1]
+				var	rate = strList[2]
+		
+			
+		        submitPurchase=submitPurchase+prdctName+'<fdfd>'+prdctId+'<fdfd>'+rate+'<fdfd>'+qNameValue+'<rdrd>'
+		 
+				
+			 
+		
+		
+	    prdctShow=prdctShow+'<table><tr><td>'+qNameValue+'--'+prodctListStr[i]+'</td></tr></table>' 
+		//alert(prdctShow)
 	 }
-	 else{
-		 if (cat==catValue){
-		 prdctShow=prdctShow+'<table><tr><td> <input type="number" id="'+qName+'"   name="'+qName+'" style="width:50px"><input type="hidden" id="'+pNameID+'"   name="'+pNameID+'"  value="'+prodctListStr[i]+'"></td><td>'+prodctListStr[i]+'</td></tr></table>'   
-		 }
+	 
+	
+	 
 	 }
-	// alert (prdctShow)
+								  
+		 localStorage.submitPurchase=submitPurchase						 
+		 //alert (localStorage.submitPurchase)					     
+		 localStorage.prdctShowCart=prdctShow
+		//alert (localStorage.prdctShowCart)
+		 $("#item_combo_id_Cart").empty()
+		 $("#item_combo_id_Cart").append(localStorage.prdctShowCart);
+
+	
+	
+    $('#orderOutlet').html(localStorage.outlet); 
+	$("#mMobileOrder").html(localStorage.my_nam_mob)  
+	url="#orderShow";					
+	$.mobile.navigate(url);
+}
+
+
+
+
+function purchaseDataSave(){
+	
+	 //$('#nam_mob').html(n_m);
+	 var memStrListView=localStorage.my_nam_mob
+	 //alert (localStorage.my_nam_mob)
+	 var memNameId=memStrListView.split(',');
+	 var memMo = memNameId[0]
+	 var memNa = memNameId[1]
+	 
+	 var outletShow=localStorage.outlet
+	 var outletNameId=outletShow.split('|');
+	 var outletId=outletNameId[0];
+     var outletName=outletNameId[1];
+
+//	  
+	 alert(apiPath+'purchase_submit?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&memMo='+memMo+'&memNa='+memNa+'&outletId='+outletId+'&outletName='+outletName+'&submitPurchase='+localStorage.submitPurchase)
+	  
+	  
+	  $.ajax({
+		type:'POST',
+		url:apiPath+'purchase_submit?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&memMo='+memMo+'&memNa='+memNa+'&outletId='+outletId+'&outletName='+outletName+'&submitPurchase='+localStorage.submitPurchase,
+	
+        success: function(result2) {
+			//alert(result2)
+			//alert ('hi')	
+			if (result2!=''){
+			$(".errorChk").text("Submitted Successfully");
+			$("#orderBtn").show();		
+			}
+	
+
+
+	
+		}      
+
+			 
+			  
+	  });
+	  
+}
+
+
+
+
+function data_save(){
+	  var name=$("#name").val();
+	  var ageRange=$("#ageRange").val();
+	  var thana=$("#thana").val();
+	  var district=$("#district").val();
+	  var genderComb=$("#genderComb").val();
+	  var birthMonthG=$("#birthMonthG").val();
+	  var birthDayG=$("#birthDayG").val();
+	  var address=$("#address").val();
+      var mobile=$("#mobile").val();
+	  var reg_date=$("#reg_date").val();
+	  var reg_by_cm=$("#reg_by_cm").val();
+	  var otltName=localStorage.outlet
+	  var birthdate=$("#birthdate").val();
+	 // $("#birthdate").val(birthMonthG+'|'+birthDayG);
+	
+	  
+	//  alert (otltName)
+//	  
+	  alert(apiPath+'dataSave?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&name='+name+'&genderComb='+genderComb+'&birthDayG='+birthDayG+'&birthMonthG='+birthMonthG+'&address='+address+'&mobile='+mobile+'&reg_date='+reg_date+'&reg_by_cm='+reg_by_cm+'&otltName='+otltName+'&ageRange='+ageRange+'&thana='+thana+'&district='+district)
+	  
+	  
+	  $.ajax({
+		type:'POST',
+		url:apiPath+'dataSave?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&name='+name+'&genderComb='+genderComb+'&birthDayG='+birthDayG+'&birthMonthG='+birthMonthG+'&address='+address+'&mobile='+mobile+'&reg_date='+reg_date+'&reg_by_cm='+reg_by_cm+'&otltName='+otltName+'&ageRange='+ageRange+'&thana='+thana+'&district='+district,
+		
+        success: function(result1) {
+			
+			if (result1!=''){
+			$(".errorChk").text("Submitted Successfully");
+			$("#memButton").show();		
+			}
+
+		}      
+
+	  });
+	  
+}
+
+
+    var currentDate = new Date()
+	var day = currentDate.getDate();if(parseInt(day)<9)	{day="0" + day};
+	var month = currentDate.getMonth() + 1;if(parseInt(month)<9){month="0" +month};
+	var year = currentDate.getFullYear()
+	var today=  year + "-" + month + "-" + day
+
+
+function menuSearch(){
+	$('#outletMenu').html(localStorage.outlet)
+	url="#menuPage";					
+	$.mobile.navigate(url);	
+	}			
+function about_us(){
+	
+	url="#aboutComp";					
+	$.mobile.navigate(url);	
+	}
+
+function addMember(){
+	$('#otltName').val(localStorage.outlet);
+
+	url="#memberReg";					
+	$.mobile.navigate(url);	
+	}
+
+function searchMember(){
+	$('#outletSrch').html(localStorage.outlet);
+	
+	url="#searchMem";					
+	$.mobile.navigate(url);	
+	}
+	
+function outletListSearch(){
+	
+	url="#outleListP";					
+	$.mobile.navigate(url);	
+	}
+
+function memPurchase(){
+	
+	$('#purchOutlet').html(localStorage.outlet);
+	//$('#otltName').val(localStorage.outlet);
+	var n_m = $('#memberList').val();
+	//alert (n_m)
+	$('#nam_mob').html(n_m);
+	
+	
+	alert(apiPath+'search_memeber?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&n_m='+n_m)
+		  
+	  $.ajax({
+		type:'POST',
+		url:apiPath+'search_memeber?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&n_m='+n_m,
+	
+        success: function(result2) {
+			//alert(result2)
+			//alert ('hi')	
+			if (result2!=''){
+			$('#nam_mob').html(result2);
+			localStorage.my_nam_mob = 	result2;
+			//alert(localStorage.my_nam_mob )
+			}
+//	
+
+         url="#purchasePro";					
+	    $.mobile.navigate(url);	
+	
+		}      
+      
+			 
+			  
+	  });
+	
+	
+	//$('#memberList').html();
+	
+	//url="#purchasePro";					
+//	$.mobile.navigate(url);	
 	}
 	
 	
-	 
-	 localStorage.prdctShow=prdctShow
-	 $("#prdctShow").html(localStorage.prdctShow)
-	 $("#item_combo_id").empty()
-	 $("#item_combo_id").append(localStorage.prdctShow);
+
+
+
 	
-
-}
-//function getOrder(){
-//	  
-//     prodctStr=localStorage.prodctStr
-//	 
-//	// alert(prodctStr)
-//	 prodctListStr=prodctStr.split('<rdrd>')
-//	 
-//	 
-//	 var prdctShow=''
-//	 var submitPurchase=''							 
-//	 for (i=0; i<prodctListStr.length-1; i++){
-//		
-//	 var qName="qName_"+i.toString()
-//	 var pNameID="pNameID_"+i.toString()
-//	 
-//	 var qNameValue=$("#"+qName).val()
-//	 var memStr=localStorage.my_nam_mob
-//		//alert(memStr)
-//	
-//	 if (parseInt(qNameValue)>0)	{
-//		 	var qtyName=qName
-//	        var pdNameID=pNameID
-//
-//				//alert (qNameValue)
-//			  	strShow = 	prodctListStr[i]				
-//				strList=strShow.split('|')			
-//				var	prdctName = strList[0]
-//				var	prdctId = strList[1]
-//				var	rate = strList[2]
-//		
-//			
-//		        submitPurchase=submitPurchase+prdctName+'<fdfd>'+prdctId+'<fdfd>'+rate+'<fdfd>'+qNameValue+'<rdrd>'
-//		 
-//				
-//			 
-//		
-//		
-//	    prdctShow=prdctShow+'<table><tr><td>'+qNameValue+'--'+prodctListStr[i]+'</td></tr></table>' 
-//		//alert(prdctShow)
-//	 }
-//	 
-//	
-//	 
-//	 }
-//								  
-//		 localStorage.submitPurchase=submitPurchase						 
-//		 //alert (localStorage.submitPurchase)					     
-//		 localStorage.prdctShowCart=prdctShow
-//		//alert (localStorage.prdctShowCart)
-//		 $("#item_combo_id_Cart").empty()
-//		 $("#item_combo_id_Cart").append(localStorage.prdctShowCart);
-//
-//	
-//	
-//    $('#orderOutlet').html(localStorage.outlet); 
-//	$("#mMobileOrder").html(localStorage.my_nam_mob)  
-//	url="#orderShow";					
-//	$.mobile.navigate(url);
-//}
-//
-//
-//
-//
-//function purchaseDataSave(){
-//	
-//	 //$('#nam_mob').html(n_m);
-//	 var memStrListView=localStorage.my_nam_mob
-//	 //alert (localStorage.my_nam_mob)
-//	 var memNameId=memStrListView.split(',');
-//	 var memMo = memNameId[0]
-//	 var memNa = memNameId[1]
-//	 
-//	 var outletShow=localStorage.outlet
-//	 var outletNameId=outletShow.split('|');
-//	 var outletId=outletNameId[0];
-//     var outletName=outletNameId[1];
-//	 var submitStrPurchase=localStorage.submitPurchase
-//	//encode
-////	  
-//	 alert(apiPath+'purchase_submit?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&memMo='+memMo+'&memNa='+memNa+'&outletId='+outletId+'&outletName='+outletName+'&submitStrPurchase='+encodeURIComponent(submitStrPurchase))
-//	  
-//	  
-//	  $.ajax({
-//		type:'POST',
-//		url:apiPath+'purchase_submit?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&memMo='+memMo+'&memNa='+memNa+'&outletId='+outletId+'&outletName='+outletName+'&submitStrPurchase='+encodeURIComponent(submitStrPurchase),
-//	
-//        success: function(result2) {
-//			alert(result2)
-//			//alert ('hi')	
-//			if (result2!=''){
-//			$(".errorChk").text("Submitted Successfully");
-//			$("#orderBtn").show();		
-//			}
-//	
-//
-//
-//	
-//		}      
-//
-//			 
-//			  
-//	  });
-//	  
-//}
-//window.onload = init;
-//
-//function init() {
-//   // Bind "onsubmit" event handler to the "submit" button
-//   document.getElementById("formTest").onsubmit = validateForm;
-//   // Bind "onclick" event handler to "reset" button
-//   document.getElementById("btnReset").onclick = clearForm;
-//   // Set initial focus
-//   document.getElementById("name").focus();
-//}
-//
-//function validateForm(theForm) {
-//   with(theForm) {
-//      // return false would prevent default submission
-//      return (isNotEmpty(name, "Please enter your name!", elmNameError)
-//          // && isNumeric(txtZipcode, "Please enter a 5-digit zip code!", elmZipcodeError)
-//           //&& isLengthMinMax(txtZipcode, 5, 5, "Please enter a 5-digit zip code!", elmZipcodeError)
-//		   && isNumeric(mobile, "Please enter a valid phone number!", elmPhoneError)
-//          // && isSelected(mobile, 11, 11, "Please enter a 10-digit mobile number!", elmMobileError)
-//		   && isSelected(ageRange, "Please make a selection!", elmAgeError)
-//        
-//      );
-//   }
-//}
-
-//=======clear form=============
-
-function resetForms() {
-    for (i = 0; i < document.forms.length; i++) {
-        document.forms[i].reset();
-    }
-}
-
-
-//function data_save(){
-//	  var name=$("#name").val();
-//	  var ageRange=$("#ageRange").val();
-//	  var thana=$("#thana").val();
-//	  var district=$("#district").val();
-//	  var genderComb=$("#genderComb").val();
-//	  var birthMonthG=$("#birthMonthG").val();
-//	  var birthDayG=$("#birthDayG").val();
-//	  var address=$("#address").val();
-//      var mobile=$("#mobile").val();
-//	  var reg_date=$("#reg_date").val();
-//	  var reg_by_cm=$("#reg_by_cm").val();
-//	  var otltName=localStorage.outlet
-//	  var birthdate=$("#birthdate").val();
-//	  if (name==""){
-//			$(".errorChk").text("Please enter your name!");
-//			
-//	  }else if(mobile==""){
-//			$(".errorChk").text("Enter valid phone number");
-//			
-//	  }else if(ageRange==""){
-//			$(".errorChk").text("Please select an option");
-//	  }else{
-//	//  alert (otltName)
-////	  
-//	  alert(apiPath+'dataSave?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&name='+name+'&genderComb='+genderComb+'&birthDayG='+birthDayG+'&birthMonthG='+birthMonthG+'&address='+address+'&mobile='+mobile+'&reg_date='+reg_date+'&reg_by_cm='+reg_by_cm+'&otltName='+otltName+'&ageRange='+ageRange+'&thana='+thana+'&district='+district)
-//	  
-//	  
-//	  $.ajax({
-//		type:'POST',
-//		url:apiPath+'dataSave?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&name='+name+'&genderComb='+genderComb+'&birthDayG='+birthDayG+'&birthMonthG='+birthMonthG+'&address='+address+'&mobile='+mobile+'&reg_date='+reg_date+'&reg_by_cm='+reg_by_cm+'&otltName='+otltName+'&ageRange='+ageRange+'&thana='+thana+'&district='+district,
-//		
-//        success: function(result1) {
-//			
-//			if (result1!=''){
-//			$(".errorChk").text("Submitted Successfully");
-//			$("#memButton").show();		
-//			}
-//
-//		}      
-//	  
-//	  });
-//	  }
-//	  
-//}
-//
-//
-//    var currentDate = new Date()
-//	var day = currentDate.getDate();if(parseInt(day)<9)	{day="0" + day};
-//	var month = currentDate.getMonth() + 1;if(parseInt(month)<9){month="0" +month};
-//	var year = currentDate.getFullYear()
-//	var today=  year + "-" + month + "-" + day
-//
-//
-//function menuSearch(){
-//	$('#outletMenu').html(localStorage.outlet)
-//	url="#menuPage";					
-//	$.mobile.navigate(url);	
-//	}			
-//function about_us(){
-//	
-//	url="#aboutComp";					
-//	$.mobile.navigate(url);	
-//	}
-//
-//function addMember(){
-//	$('#otltName').html(localStorage.outlet);
-//
-//	url="#memberReg";					
-//	$.mobile.navigate(url);	
-//	}
-//
-//function searchMember(){
-//	$('#outletSrch').html(localStorage.outlet);
-//	
-//	url="#searchMem";					
-//	$.mobile.navigate(url);	
-//	}
-//	
-//function outletListSearch(){
-//	
-//	url="#outleListP";					
-//	$.mobile.navigate(url);	
-//	}
-//
-//function memPurchase(){
-//	
-//	$('#purchOutlet').html(localStorage.outlet);
-//	//$('#otltName').val(localStorage.outlet);
-//	var n_m = $('#memberList').val();
-//	//alert (n_m)
-//	$('#nam_mob').html(n_m);
-//	
-//	
-//	alert(apiPath+'search_memeber?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&n_m='+n_m)
-//		  
-//	  $.ajax({
-//		type:'POST',
-//		url:apiPath+'search_memeber?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&n_m='+n_m,
-//	
-//        success: function(result2) {
-//			//alert(result2)
-//			//alert ('hi')	
-//			if (result2!=''){
-//			$('#nam_mob').html(result2);
-//			localStorage.my_nam_mob = 	result2;
-//			//alert(localStorage.my_nam_mob )
-//			}
-////	
-//
-//         url="#purchasePro";					
-//	    $.mobile.navigate(url);	
-//	
-//		}      
-//      
-//			 
-//			  
-//	  });
-//	
-//	
-//	//$('#memberList').html();
-//	
-//	//url="#purchasePro";					
-////	$.mobile.navigate(url);	
-//	}
-//	
-//	
-//
-//
-//
-//	
-//function giftList(){
-//	
-//	url="#gift";					
-//	$.mobile.navigate(url);	
-//	}
-//	
-//function noticeBoard(){
-//	
-//	url="#Notice";					
-//	$.mobile.navigate(url);	
-//	}
-
-//==========================search====
-//function member_view() {
-//
-//	    $.ajax({ 
-//		      type: 'GET',
-//			  url:apiPath+'get_data?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code,			
-//			  success: function(memRegStr) {
-//			  //alert (memRegStr)
-//	          memberList=memRegStr.split('||');
-//			  strMemberShow="";			  
-//			  for (i=0;i<memberList.length;i++){
-//			  	memRec = 	memberList[i]				
-//				strMemList=memRec.split(',')				
-//				var	Mmobile = strMemList[0]
-//				var	Mname = strMemList[1]
-//				alert (Mmobile)	
-//
-//				
-//				//$("#memberTable").html(Mmobile);
-////                 <table width="100%"><tr onClick="setOutlet(\'' + outletStringList[i] + '\')"><td > '+outletStringList[i]+'</td></tr><tr style=" background-color:#000; height:1px"><td></td></tr></table>
-////
-//
-//
-//				
-//					
-//				}
-//				url="#searchMem";					
-//				$.mobile.navigate(url);	
-//				alert (strMemberShow)					
-////				$(".errorChk").html(strMemberShow);
-//			  }
-//	});	
-//	
-//}
-
-
-
-
-//$(document).on("click", "#btn_search", function(){
-//   $(".ui-input-search").toggle();
-//})
-//
+function giftList(){
+	
+	url="#gift";					
+	$.mobile.navigate(url);	
+	}
+	
+function noticeBoard(){
+	
+	url="#Notice";					
+	$.mobile.navigate(url);	
+	}
 
 //==================end====================================================================		
 	
