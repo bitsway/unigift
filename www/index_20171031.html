@@ -15,14 +15,12 @@
         <script src="static/uni.js">  </script>
         
      <style>
-		/*change header color*/
-		h1 { 
-		     background-color:#5EBBE8;
+       /*change header color*/
+		h1 { background-color:#5EBBE8;
 			 color:#fff;
 			 
 			  }
-		h2 { 
-		    color:#0067CE
+		h2 { color:#0067CE
 		}
 		h2.mc-text-danger {
 			color:red;
@@ -34,10 +32,10 @@
 		}
 		/*.ui-input-search{display:none;}*/	
 			
-		#check { color:#409FFF;
-			}
+       #check { color:#409FFF;
+	        }
 		/*.ui-content{ background-color:#484848}*/
-		.custom-size-flipswitch.ui-flipswitch .ui-btn.ui-flipswitch-on {
+       .custom-size-flipswitch.ui-flipswitch .ui-btn.ui-flipswitch-on {
 			text-indent: -5.9em;
 		}
 		.custom-size-flipswitch.ui-flipswitch .ui-flipswitch-off {
@@ -53,58 +51,55 @@
 			width: 1.875em;
 		}
 		@media (min-width: 28em) {
-	 // Repeated from rule .ui-flipswitch above
-	    .ui-field-contain > label + .custom-size-flipswitch.ui-flipswitch {
-			width: 1.875em;
+			// Repeated from rule .ui-flipswitch above
+			.ui-field-contain > label + .custom-size-flipswitch.ui-flipswitch {
+				width: 1.875em;
 			}
-			}
-		input[type=number],input[type=text]{
-		/* [disabled]background-color: #D3F1F8; */
-		    border-radius: 0.3125em;
-		}
+		    }
+	   input[type=number],input[type=text]{
+	   /* [disabled]background-color: #D3F1F8; */
+	   border-radius: 0.3125em;
+       }
 		
-		.full-width-slider input {
-		    display: none;
+	  .full-width-slider input {
+		display: none;
 		
-		}
-		.full-width-slider .ui-slider-track {
-		    margin-left: 15px;
+	  }
+	  .full-width-slider .ui-slider-track {
+		margin-left: 15px;
 		
-		}
-		#loginButton {
-			background-color:#5EBBE8;
-		/* #loginButton {background-color:#008000;*/
+	  }
+	  #loginButton {background-color:#5EBBE8;
+	  /* #loginButton {background-color:#008000;*/
+	
+		     color:#fff;
+	  }
+	  #memButton {background-color:#5EBBE8;
+		     color:#fff;
+	  }
+	
+	  #orderBtn {background-color:#5EBBE8;
+		     color:#fff;
+	  }
+	  #cm_id {
+		color:#000;
 		
-			color:#fff;
-		}
-		#memButton {
-			background-color:#5EBBE8;
-			color:#fff;
-		}
-		
-		#orderBtn {
-			background-color:#5EBBE8;
-			color:#fff;
-		}
-		#cm_id {
-		    color:#000;
-		
-		}
-		#password {
-		    color:#000;
-		}
-		#outletButton {
-			background-color:#5EBBE8;
-			color:#fff;
-		}
-		
-		
-		#rewardButton {
-			background-color:#5EBBE8;
-			color:#fff;
-		}
-		
-		.footer {
+	  }
+	  #password {
+		color:#000;
+	  }
+	 #outletButton {
+		   background-color:#5EBBE8;
+		   color:#fff;
+	  }
+	  
+	  
+	  #rewardButton {
+		    background-color:#5EBBE8;
+		    color:#fff;
+	  }
+	  
+	  .footer {
 			position: fixed;
 			left: 0;
 			bottom: 0;
@@ -113,32 +108,9 @@
 			background-color:#5EBBE8;
 			color: white;
 			text-align: center;
-		}
-		.required {  /* Marker for required fields */
-		    color: red;
-		}
-		
-		.errorMsg {  /* for error messages */
-		    color: red;
-		}
-		
-		.errorChk {  /* for error messages */
-		    color: red;
-		}
-		.mem {
-			width: 500px;
-			margin: 25px auto;
-		} 
-		
-		form {
-			padding: 20px;
-			/*background:#f4fdff;*/
-			color: #fff;
-			-moz-border-radius: 4px;
-			-webkit-border-radius: 4px;
-			border-radius: 4px;
-		} 
-		  
+}
+	  
+	  
 	</style>
         
     <script>
@@ -153,40 +125,16 @@
 			$("#item_combo_id").empty()
 			$("#item_combo_id").append(localStorage.prdctShow); 
 			
-			$("#item_Que_combo_id").empty()
-		    $("#item_Que_combo_id").append(localStorage.prdctShowCart);
-		    $('#otltName').html(localStorage.outlet);
-			$('#outletSrch').html(localStorage.outlet);
-			$('#purchOutlet').html(localStorage.outlet);
-			$('#prodctPage').html(localStorage.outlet)
-			$('#prodctQList').html(localStorage.outlet)
-			
-			
-			$("#prMem").html(localStorage.memInfo);
-			$("#prPoint").html(localStorage.memPoint);
-			$("#prMSave").html(localStorage.memInfo);
-	        $("#prSPoint").html(localStorage.memPoint);
-			
-			
-			//alert (localStorage.catList)
 			var rpt_rep_ob1=$("#catgoryList");
 			rpt_rep_ob1.empty();	 
 			rpt_rep_ob1.append(localStorage.catList);
-			
-			
-			
-			$("#queMem").html(localStorage.queMem);
-			$("#purchaseShow").html(localStorage.pFinal);
-			$("#purchaseFinalShow").html(localStorage.pStrFinal);
-			
-			//$("#catgoryList").val();
 			//alert (localStorage.prdctShow)
 			//var rpt_rep_ob1=$("#catgoryList");
 //			rpt_rep_ob1.empty();	 
 //			rpt_rep_ob1.append(catList);
 
-			
-			//resetForms(); 
+			     
+			 
       	});
 		
 		
@@ -272,9 +220,6 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
   
      </div>
      <div>
-     <div >
-  <label for="otltName" style="color:#36C"> </label>&nbsp;&nbsp; <font id="otltName" style="font-size:12px; color:#060">  </font>
-    </div>
         <br><br>
        
           <label style="color:#0060BF"" >&nbsp;&nbsp;Reward Currently available</label>
@@ -286,8 +231,8 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
         
     <table width="100%" border="0">
   <tr>
-    <td width="50%" ><a  data-role="button"  onClick="shppingTrip()"  style="height:25px; font-size:16px">New Shopping Trip</a></td>
-    <td><a data-role="button"  onClick="productQueRedeem()" style="height:25px; font-size:16px">Que</a></td>
+    <td width="50%" ><a  data-role="button"  onClick="shppingTrip()"  style="height:40px; font-size:14px">New Shopping<br> Trip</a></td>
+    <td><a data-role="button"  onClick="productQueRedeen()" style="height:40px; font-size:14px">Que</a></td>
   </tr>
 </table>
 
@@ -301,7 +246,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 <div data-theme="c" data-role="page" id="member" style="background-color:#EBFCFA"  >
         <div data-theme="c" data-role="header" data-position="fixed" style="background-color:#5EBBE8; color:#fff" data-add-back-btn="true" > 
 
-       <a data-role="button"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left" onClick="login()" ><img src="menu.png"></a>
+       <a data-role="button"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left"   ><img src="menu.png"></a>
        
        <a id="backjpj" style="height:18px" data-rel="back" data-iconpos="left" class="ui-btn-right"><img src="back1.png"></a>
              <h3>Select Member</h3>
@@ -309,26 +254,21 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
              
   
      </div>
-     <div >
-  <label for="outletSrch" style="color:#36C"> </label>&nbsp;&nbsp;&nbsp;&nbsp; <font id="outletSrch" style="font-size:12px; color:#060">  </font>
-    </div>
      <div>
-        <br>
+        <br><br>
        <!-- <label style="color:#0060BF"" >&nbsp;&nbsp;Enter Valid Mobile:</label>-->
        
-        <label for="mobile"  >&nbsp;&nbsp;&nbsp;&nbsp;Member Mobile Number:</label>
+        <label for="mobile"  >&nbsp;&nbsp;Member Mobile Number:</label>
         <form action="" method="get">
-         <input type="text" name="mMobile" id="mMobile" list="mobile" placeholder=" member moblist">
-        <!-- <datalist id="mobile">-->
-         <!-- <option value="01681456782">
+         <input type="text" name="mMobile" id="mMobile" list="mobile">
+         <datalist id="mobile">
+          <option value="01681456782">
           <option value="01681456784">
           <option value="01681456785">
           <option value="01681456329">
-          <option value="01856456782">-->
-        <!--</datalist><br>-->
-        <br>
+          <option value="01856456782">
+        </datalist><br>
         
-        <div id="mobError"></div>
     <a id="rewardButton" data-role="button"  onClick="memberSelect()" ><strong>Next</strong></a>
       </form>
      </div>
@@ -339,7 +279,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 <div data-theme="c" data-role="page" id="registration" style="background-color:#EBFCFA"  >
         <div data-theme="c" data-role="header" data-position="fixed" style="background-color:#5EBBE8; color:#fff" data-add-back-btn="true" > 
 
-       <a data-role="button"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left" onClick="login()"  ><img src="menu.png"></a>
+       <a data-role="button"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left"   ><img src="menu.png"></a>
        
        <a id="backjpj" style="height:18px" data-rel="back" data-iconpos="left" class="ui-btn-right"><img src="back1.png"></a>
              <h3>Member Registration</h3>
@@ -347,7 +287,6 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
              
   
      </div>
-      &nbsp;&nbsp;&nbsp;&nbsp;<font id="purchOutlet" style="font-size:12px; color:#060"></font>
      <div class="main" id="mem">
         
         <form class="form" method="post" action="#" id="formTest" >
@@ -360,7 +299,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
        
      
      <label for="mobile"  style="color:#0060BF">Mobile No<span class="required">*</span></label>       
-          <input type="number" name="mobile" id="mobile"  value=""  style="color:#000; " readonly>
+          <input type="number" name="mobile" id="mobile"  value=""  style="color:#000; ">
      <label for="area"  style="color:#0060BF">Area</label>       
           <input type="text" name="area" id="area"  value=""  style="color:#000; ">
           
@@ -388,7 +327,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
          </font> 
           <div class="errorChk"></div><br>
        
-          <a id="memButton" data-role="button"  onClick="member_save();product()" ><strong>Submit</strong></a>	
+          <a id="memButton" data-role="button"  onClick="product()" ><strong>Submit</strong></a>	
          
        </form>
 
@@ -442,20 +381,8 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 
            
   </div>
-         <font id="prodctPage" style="font-size:12px; color:#060">
-         </font> <br>
- <p>
- 
- 
- <table width="100%" border="0">
-  <tr>
-    <td><font style="font-size:14px; color:#007D7D" id="prMem"></font></td>
-    <td><font style="font-size:16px; color:#800040" id="prPoint"></font></td>
-  </tr>
-</table>
-
-
- 
+       <p><strong style="font-size:16px; color:#060"> Anwara Begum--</strong> &nbsp;&nbsp; Points: 2350<font id="purchOutlet" style="font-size:16px; color:#060">
+         </font> <br> 
          &nbsp;&nbsp;&nbsp;
          <table width="400" border="0">
           <tr>
@@ -498,28 +425,48 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 
            
   </div>
-        <font id="prodctQList" style="font-size:12px; color:#060">
-         </font>
-         
-          
- <table width="100%" border="0">
-  <tr>
-    <td><font style="font-size:14px; color:#007D7D" id="prMSave"></font></td>
-    <td><font style="font-size:16px; color:#800040" id="prSPoint"></font></td>
-  </tr>
-</table>
-<br>
+       <p><strong style="font-size:16px; color:#060"> Anwara Begum--</strong> &nbsp;&nbsp; Points: 2350<font id="purchOutlet" style="font-size:16px; color:#060">
+         </font> <br> 
+         &nbsp;&nbsp;&nbsp;
+        
+       </p>
+       <p>&nbsp; </p>
   <div id="prdctQueShow">
           <font id="item_Que_combo_id">
+     
+  
+   
+          <table   >
+              <!-- <caption> Product Information</caption> -->
+              		<tr >
 
-        
-          <div class="errorChk"></div> 
+                   
+                    <td>Product</td>
+                    <td style="width:10px"></td>
+                     <td>Qty</td>
+                    </tr>
+                    
+                    <tr >
 
+                    
+                    <td>Clear Men Shampoo 350m|1001|400</td>
+                   <td style="width:10px"></td>
+                    <td width="30px"> 2 </td> 
+                    
+                     </tr>
+                     
+                     
+          </table>
+          <a data-role="button"   class="ui-btn ui-shadow ui-corner-all ui-btn-icon-right" onClick="productQueRedeen()" >Proceed to Check Out</a>
+       
+          
+
+       
          </font>
        <!-- <a id="memButton" data-role="button"  onClick="historyShow()" ><strong>History</strong></a>-->
 
     </div>   
-         <a data-role="button" id="orderBtn"   class="ui-btn ui-shadow ui-corner-all ui-btn-icon-right" onClick="purchaseDataSave()" >Proceed to Check Out</a>        
+                
       <div data-theme="c" data-role="footer" data-position="fixed" style="background-color:#5EBBE8; color:#fff"  > 
 
       <!-- <a data-role="button"   class="ui-btn ui-shadow ui-corner-all ui-btn-icon-right" onClick="historyShow()" >History</a>
@@ -548,16 +495,16 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
         
        </p>
        <p>&nbsp; </p>
-  <div id="prdctQueRedShow">
-          <font id="item_Que_comboRed_id">
+  <div id="prdctQueShow">
+          <font id="item_Que_combo_id">
      
   			Please select from Que
               
-            <div id="queMem"></div>
+            
 
-   		 
-          <!--<table   >
-               <caption> Product Information</caption> 
+   
+          <table   >
+              <!-- <caption> Product Information</caption> -->
               		<tr >
                     <td style="width:50px"><input name="" type="radio" value=""></td>
                     <td > Faisal Ahmed (01713454218)   </td>
@@ -579,12 +526,12 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
                      </tr>
                      
                      
-          </table>-->
+          </table>
        
        		 <table   >
               <!-- <caption> Product Information</caption> -->
               		<tr >
-                    <td > <a data-role="button"    onClick="PurchaseDone()" >Purchase</a></td>
+                    <td > <a data-role="button"    onClick="product()" >Purchase</a></td>
                     <td >  <a data-role="button"   onClick="Redeem()" >Redeem</a>   </td>
                     </tr>   
           </table>
@@ -611,7 +558,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
      <a data-rel="back"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left"   ><img src="back1.png"></a>
      
        <a id="backjpj" style="height:18px" data-role="button" data-iconpos="left" onClick="getOrder()" class="ui-btn-right">Next</a>
-            <h3>Purchase</h3>
+            <h3>Redeem</h3>
 
            
   </div>
@@ -621,12 +568,61 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
         
        </p>
        <p>&nbsp; </p>
-  <div id="prdctQueRedListShow">
-          <font id="item_Que_comboList_id">
+  <div id="prdctQueShow">
+          <font id="item_Que_combo_id">
      
   			
               
-       <div id="purchaseShow"></div>
+            
+
+   
+          <table   >
+              <!-- <caption> Product Information</caption> -->
+              		<tr >
+
+                   
+                    <td>Product</td>
+                    <td style="width:10px"></td>
+                     <td>Qty</td>
+                    </tr>
+                    
+                    <tr >
+
+                    
+                    <td>Clear Men Shampoo 350m|1001|400</td>
+                   <td style="width:10px"></td>
+                    <td width="30px"> <input name="" type="text" value=""> </td> 
+                    
+                     </tr>
+                     <tr >
+
+                    
+                    <td>Clear Men Shampoo 350m|1001|400</td>
+                   <td style="width:10px"></td>
+                    <td width="30px"> <input name="" type="text" value=""> </td> 
+                    
+                     </tr>
+                     <tr >
+
+                    
+                    <td>Clear Men Shampoo 350m|1001|400</td>
+                   <td style="width:10px"></td>
+                    <td width="30px"> <input name="" type="text" value=""> </td> 
+                    
+                     </tr><tr >
+
+                    
+                    <td>Clear Men Shampoo 350m|1001|400</td>
+                   <td style="width:10px"></td>
+                    <td width="30px"> <input name="" type="text" value=""> </td> 
+                    
+                     </tr>
+                     
+                     
+                     
+                     
+          </table>
+       
        		 <table   >
               <!-- <caption> Product Information</caption> -->
               		<tr >
@@ -636,7 +632,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
        
        <div>Image</div>
        
-       <div id="pError"></div>
+       
        <a data-role="button"   onClick="ConfirmPage()" >Next</a>
          </font>
        <!-- <a id="memButton" data-role="button"  onClick="historyShow()" ><strong>History</strong></a>-->
@@ -668,14 +664,64 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
         
        </p>
        <p>&nbsp; </p>
-  <div id="prdctQueConShow">
-         
+  <div id="prdctQueShow">
+          <font id="item_Que_combo_id">
      
   			
-              <div id="purchaseFinalShow"></div>
+              
             
 
    
+          <table   >
+              <!-- <caption> Product Information</caption> -->
+              		<tr >
+					<td>Qty</td>
+                   <td style="width:10px"></td>
+                    <td>Product</td>
+                    
+                     
+                    </tr>
+                    
+                    <tr >
+
+                    
+                    <td width="30px"> <input name="" type="text" value=""> </td> 
+                    <td style="width:10px"></td>
+                    <td>Clear Men Shampoo 350m|1001|400</td>
+                   
+                    
+                     </tr>
+                     <tr >
+
+                    <td width="30px"> <input name="" type="text" value=""> </td> 
+                    <td style="width:10px"></td>
+                    <td>Clear Men Shampoo 350m|1001|400</td>
+                   
+                    
+                    
+                     </tr>
+                     <tr >
+
+                    <td width="30px"> <input name="" type="text" value=""> </td> 
+                     <td style="width:10px"></td>
+                    <td>Clear Men Shampoo 350m|1001|400</td>
+                  
+                    
+                    
+                     </tr><tr >
+
+                    
+                    <td width="30px"> <input name="" type="text" value=""> </td> 
+                    <td style="width:10px"></td>
+                    <td>Clear Men Shampoo 350m|1001|400</td>
+                   
+                    
+                     </tr>
+                     
+                     
+                     
+                     
+          </table>
        
        		 <table   >
               <!-- <caption> Product Information</caption> -->
@@ -690,7 +736,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
        
        
       
-        
+         </font>
        <!-- <a id="memButton" data-role="button"  onClick="historyShow()" ><strong>History</strong></a>-->
 
     </div>   
@@ -724,13 +770,14 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
         
        </p>
        <p>&nbsp; </p>
-  <div id="prdctQueSubShow">
-          <font id="item_Que_comboSub_id">
+  <div id="prdctQueShow">
+          <font id="item_Que_combo_id">
      
             
 
    
-          			
+          			Submitted Successfully
+       
        		
        
        
@@ -738,7 +785,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
        
       
          </font>
-            <div class="errorChk"></div> 
+       <!-- <a id="memButton" data-role="button"  onClick="historyShow()" ><strong>History</strong></a>-->
 
     </div>   
                 

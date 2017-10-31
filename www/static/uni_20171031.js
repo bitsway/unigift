@@ -1,6 +1,9 @@
 
-var apiPath='http://127.0.0.1:8000/unigift/syncmobile_eon/';
-var apipath_image = 'http://127.0.0.1:8000/moderntrade/';
+//var apiPath='http://127.0.0.1:8000/unigift/syncmobile_eon/';
+//var apipath_image = 'http://127.0.0.1:8000/moderntrade/';
+
+var apiPath='http://w02.yeapps.com/unigift/syncmobile_eon/'
+var apipath_image='http://w02.yeapps.com/unigift/'
 
 function takePicture(){
 
@@ -45,6 +48,8 @@ function cameraSuccess(uri){
         
 }
 
+
+
 //================login=======================
 
 function login_page() {
@@ -54,308 +59,51 @@ function login_page() {
 	
 }
 
-function login() {
-	
-	url="#login";					
-	$.mobile.navigate(url);
-	
-}
+
+
 
 function menuSearch(){
-	$('#otltName').html(localStorage.outlet);
+	//$('#outletMenu').html(localStorage.outlet)
 	url="#menuPage";					
 	$.mobile.navigate(url);	
 	}	
 	
 function shppingTrip(){
-	$('#outletSrch').html(localStorage.outlet);
+	//$('#outletMenu').html(localStorage.outlet)
 	url="#member";					
 	$.mobile.navigate(url);	
 	}	
-	
 function memberSelect(){
-	$('#purchOutlet').html(localStorage.outlet);
-	var mMobile=$("#mMobile").val();
-    //alert ('AAA')
-    if (mMobile==""){
-		$("#mobError").html("Please Enter MObile No");
-	}else{
-		//alert (apiPath+'search_mob?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&mMobile='+mMobile)
-		$.ajax({
-			type:'GET',
-		    url:apiPath+'search_mob?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&mMobile='+mMobile,
-			success: function(result){
-				resultStr=result.split('<SYNCDATA>');	
-			    if (resultStr[0]=='FAILED'){
-					$("#mobile").val(mMobile);
-					url="#registration";					
-					$.mobile.navigate(url);	
-				}
-				if (resultStr[0]=='SUCCESS'){
-				    
-					var Mobile=resultStr[1];
-					var mem_name=resultStr[2];
-					var mem_point=resultStr[3];
-	
-					localStorage.memInfo=Mobile+'-'+mem_name
-					localStorage.memPoint=mem_point
-					
-					$("#mMobile").val(Mobile);
-					$("#prMem").html(localStorage.memInfo);
-					$("#prPoint").html(localStorage.memPoint);
-					
-					
-					url="#ProductList";					
-    	            $.mobile.navigate(url);					
-				}
-
-			},
-			 error: function(result) {
-					
-			 }
-		});
-		
-	}
-	
+	//$('#outletMenu').html(localStorage.outlet)
+	url="#registration";					
+	$.mobile.navigate(url);	
 	}		
 	
 	
 function product(){
-	$('#prodctPage').html(localStorage.outlet)
+	//$('#outletMenu').html(localStorage.outlet)
 	url="#ProductList";					
 	$.mobile.navigate(url);	
 	}	
 	
 function productQue(){
-	$('#prodctQList').html(localStorage.outlet)
-	$("#prMSave").html(localStorage.memInfo);
-	$("#prSPoint").html(localStorage.memPoint);
-	//alert ('hi')
-	prodctStr=localStorage.prodctStr
-	prodctListStr=prodctStr.split('<rdrd>')
-	//alert (localStorage.prodctStr)
-	var prdctShow='<table>'
-	var submitPurchase=''				 
-	for (i=0; i<prodctListStr.length-1; i++){
-		 var qName="qName_"+i.toString()
-		 var pNameID="pNameID_"+i.toString()
-		 
-		 var qNameValue=$("#"+qName).val()
-		
-			if (parseInt(qNameValue)>0)	{
-				var qtyName=qName
-				var pdNameID=pNameID
-	
-				//alert (qNameValue)
-				strShow = 	prodctListStr[i]				
-				strList=strShow.split('|')			
-				var	prdctName = strList[0]
-				var	prdctID = strList[1]
-				var	category = strList[2]
-				var	rate = strList[3]
-			
-				var pShow=prdctName+'|'+rate+'|'+ category
-				submitPurchase=submitPurchase+prdctName+'<fdfd>'+prdctID+'<fdfd>'+category+'<fdfd>'+rate+'<fdfd>'+qNameValue+'<rdrd>'
-				//alert (submitPurchase)
-				prdctShow=prdctShow+'<tr> <td width="50px" style="background-color:#FFEAF4" align="center">'+qNameValue+'</td><td style="background-color:#CEF">'+pShow+'</td></tr>' 
-				//alert(prdctShow)
-				}
-	    }
-		prdctShow=prdctShow+'</table>'
-		
-		localStorage.submitPurchase=submitPurchase						 
-						 
-		localStorage.prdctShowCart=prdctShow
-		//alert (localStorage.prdctShowCart)
-		$("#item_Que_combo_id").empty()
-		$("#item_Que_combo_id").append(localStorage.prdctShowCart);
-		
-		//$('#outletMenu').html(localStorage.outlet)
-		url="#ProductQueList";					
-		$.mobile.navigate(url);	
+	//$('#outletMenu').html(localStorage.outlet)
+	url="#ProductQueList";					
+	$.mobile.navigate(url);	
 	}	
-	
-	
-function productQueRedeem(){
-	//alert (apiPath+'ready_que?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outlet='+localStorage.outlet)
-	$.ajax({
-			type:'GET',
-		    url:apiPath+'ready_que?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outlet='+localStorage.outlet,
-			success: function(result){
-				resultStr=result.split('<SYNCDATA>');	
-			    if (resultStr[0]=='FAILED'){
-					$("#mobile").val(mMobile);
-					url="#registration";					
-					$.mobile.navigate(url);	
-				}
-				if (resultStr[0]=='SUCCESS'){
-				    var memStr=resultStr[1]
-					memStrList=memStr.split('<rd>')
 
-					outletShow=''
-					for (i=0; i<memStrList.length-1; i++){	
-						memMob=memStrList[i].split('<fd>')[0]
-						memName=memStrList[i].split('<fd>')[1]
-						outletShow=outletShow+'<table width="100%"><tr><td width="20%"><input onClick="RedeemGet('+i+')"  id="radioMem_'+i+'" type="radio" value="'+memName+'|'+memMob+'" >'+memName+'|'+memMob+'</td></tr></table>'
-
-					}
-					localStorage.queMem=outletShow
-					//alert (outletShow)
-					$("#queMem").html(localStorage.queMem);
-			
-				}
-
-			},
-			 error: function(result) {
-					
-			 }
-		});
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+function productQueRedeen(){
+	//$('#outletMenu').html(localStorage.outlet)
 	url="#ProductQueRedList";					
 	$.mobile.navigate(url);	
-	
-	
-}
-function purchaseDataSave(){
-	 var memInfo=localStorage.memInfo;
-	 var memNameMob=memInfo.split('-');
-	 var memMobile=memNameMob[0];
-	 var memName=memNameMob[1];
-	 
-	 
-	 var memPoint=localStorage.memPoint;
-	 var outletShow=localStorage.outlet
-	 var outletNameId=outletShow.split('|');
-	 var outletId=outletNameId[0];
-     var outletName=outletNameId[1];
-	 var submitStrPurchase=localStorage.submitPurchase
-	  
-	 //alert(apiPath+'purchase_submit?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+outletId+'&outletName='+outletName+'&submitStrPurchase='+encodeURIComponent(submitStrPurchase)+'&memPoint='+localStorage.memPoint+'&memName='+memName+'&memMobile='+memMobile)
-
-	$.ajax({
-		type:'POST',
-		url:apiPath+'purchase_submit?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+outletId+'&outletName='+outletName+'&submitStrPurchase='+encodeURIComponent(submitStrPurchase)+'&memPoint='+localStorage.memPoint+'&memName='+memName+'&memMobile='+memMobile,
-	
-        success: function(result2) {
-			//alert(result2)
-			//alert ('hi')	
-			if (result2!=''){
-			$(".errorChk").text("Submitted Successfully");
-			$("#orderBtn").show();		
-			}
-		}      
- 
-	  });
-	  
-	url="#submitPage";					
-	$.mobile.navigate(url);	
 	}	
-	
-	
 
-function RedeemGet(i){	
-	var radioMemGet="#radioMem_"+i
-	var radioMem=$(radioMemGet).val();
-	localStorage.radioMem=radioMem	
-	}	
-function PurchaseDone(){	
-	var outletShow=localStorage.outlet
-	var outletIDN=outletShow.split('|');
-	var IdOutlet=outletIDN[0];
-	var memShow=localStorage.radioMem
-	var memMob=memShow.split('|')[1]
-	alert (apiPath+'search_purchase?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+IdOutlet+'&memMob='+memMob)
-	$.ajax({
-		type:'POST',
-		url:apiPath+'search_purchase?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+IdOutlet+'&memMob='+memMob,
-	
-        success: function(result) {
-			resultStr=result.split('<SYNCDATA>');	
-			if (resultStr[0]=='FAILED'){
-				$("#pError").html(resultStr[1]);
-				
-			}
-			if (resultStr[0]=='SUCCESS'){	
-				var prStr=resultStr[1]
-				prList=prStr.split('<rd>')
-				var prdctShow='<table>'
-				var pStr=''
-				 
-				for (i=0; i<prList.length-1; i++){
-					 prSingle=prList[i]
-					 var pID		=prSingle.split('<fd>')[0]
-					 var pName		=prSingle.split('<fd>')[1]
-					 var product_qty=prSingle.split('<fd>')[2]
-					 var product_point=prSingle.split('<fd>')[3]
-					 var product_rate =prSingle.split('<fd>')[4]
-					 var category	  =prSingle.split('<fd>')[5]
-					 var qQty="qQty_"+i
-					 var pShow=pName+'|'+product_rate+'|'+ category
-					 prdctShow=prdctShow+'<tr><td style="background-color:#CEF">'+pShow+'</td> <td width="50px" style="background-color:#FFEAF4" align="center"><input type="number" id="'+qQty+'"   name="'+qQty+'" style="width:50px" value="'+product_qty+'">'+'</td></tr>' 
-					
-					pStr=pStr+pID+'<fd>'+pName+'<fd>'+product_qty+'<fd>'+product_point+'<fd>'+product_rate+'<fd>'+category+'<rd>'
-					
-					
-					// pFinalStr=pFinalStr+'<tr><td style="background-color:#CEF">'+pShow+'</td> <td width="50px" style="background-color:#FFEAF4" align="center">'+product_qty+''+'</td></tr>' 	
-	   			}//for
-			prdctShow=prdctShow+'</table>'
-			
-			
-			
-			localStorage.pFinal=prdctShow
-			localStorage.pStr=pStr
-			$("#purchaseShow").html(localStorage.pFinal);
-			//$("#purchaseFinalShow").html(localStorage.pFinalStr);
-
-		}//if      
-		}//success
-	  });//ajax
+function Redeem(){
 	url="#RedeemList";					
 	$.mobile.navigate(url);	
 	}	
 
 function ConfirmPage(){
-	
-	var prStr=localStorage.pStr
-	prList=prStr.split('<rd>')
-	var prdctShow='<table>'
-	var pStr=''
-	 
-	for (i=0; i<prList.length-1; i++){
-		 prSingle=prList[i]
-		 var pID		=prSingle.split('<fd>')[0]
-		 var pName		=prSingle.split('<fd>')[1]
-		 var product_qty=prSingle.split('<fd>')[2]
-		 var product_point=prSingle.split('<fd>')[3]
-		 var product_rate =prSingle.split('<fd>')[4]
-		 var category	  =prSingle.split('<fd>')[5]
-		 var qQty="qQty_"+i
-		 var pShow=pName+'|'+product_rate+'|'+ category
-		 
-		 var qty=$("#"+qQty).val()
-		 if (parseInt(qty)>0){
-			 //alert (qty)
-			 prdctShow=prdctShow+'<tr><td style="background-color:#CEF">'+pShow+'</td> <td width="50px" style="background-color:#FFEAF4" align="center">'+qty+'</td></tr>' 
-			 pStr=pStr+pID+'<fd>'+pName+'<fd>'+qty+'<fd>'+product_point+'<fd>'+product_rate+'<fd>'+category+'<rd>'
-		 }
-		
-		// pFinalStr=pFinalStr+'<tr><td style="background-color:#CEF">'+pShow+'</td> <td width="50px" style="background-color:#FFEAF4" align="center">'+product_qty+''+'</td></tr>' 	
-	}//for
-	prdctShow=prdctShow+'</table>'
-	localStorage.pStrFinal=prdctShow
-	localStorage.pStr=pStr
-	
-	$("#purchaseFinalShow").html(localStorage.pStrFinal);
-	alert (localStorage.pStr)
 	url="#ConfirmPage";					
 	$.mobile.navigate(url);	
 	}
@@ -371,8 +119,10 @@ function login_user() {
 	     var cm_pass=$("#cm_pass").val();
 		// alert (cm_id)
 	     if (cm_id=="" || cm_id==undefined || cm_pass=="" || cm_pass==undefined){
-			 $(".errorMsg").html("Required ID  and password");	
-
+			 $(".errorMsg").html("Required ID no and password");	
+//		     var url = "#login";      
+//		     $.mobile.navigate(url);
+					 
 			 
 		 }else{
 			
@@ -427,7 +177,8 @@ function login_user() {
 								var rpt_rep_ob1=$("#catgoryList");
 								rpt_rep_ob1.empty();	 
 								rpt_rep_ob1.append(catList);
-						
+								
+								//$("#catgoryList").html(localStorage.catList)
 								
 							    var memStrListStr=localStorage.recMemStr.split('||');					
 						    // alert (localStorage.recMemStr);
@@ -437,10 +188,20 @@ function login_user() {
 							    memList=memList+"<option value="+encodeURIComponent(memStrListStr[i])+">"+memStrListStr[i]+"</option>";								
 						            }	
 									//alert (memList)
-								var rpt_rep_ob=$("#memberList");					
+									
+									
+								var rpt_rep_ob=$("#memberList");
+								//alert (rpt_rep_ob)					
 						        rpt_rep_ob.empty();							
 						        rpt_rep_ob.append(memList);
-							
+								//localStorage.rpt_rep_ob=rpt_rep_ob
+								//alert (localStorage.rpt_rep_ob)
+								//rpt_rep_ob.selectmenu("refresh");	
+								
+								
+						
+								
+								
          						outletString=localStorage.outletString
 								outletStringList=outletString.split('<rdrd>')
 								var outletShow=''
@@ -452,7 +213,10 @@ function login_user() {
 								localStorage.outletShow=outletShow
 								
 								$("#outletShow").html(localStorage.outletShow)
-							
+								
+								
+								
+								
 								giftdctStr=localStorage.giftdctStr
 								giftdctStrList=giftdctStr.split('<rdrd>')
 								var giftShow=''
@@ -472,6 +236,12 @@ function login_user() {
 								$("#giftShow").html(localStorage.giftShow)
 								
 								
+								
+								
+								
+								
+								
+								
 								 prodctStr=localStorage.prodctStr
 								 prodctListStr=prodctStr.split('<rdrd>');
 								 var prdctShow=''
@@ -480,9 +250,8 @@ function login_user() {
 									 var qName="qName_"+i.toString()
 									 var pNameID="pNameID_"+i.toString()
 									 
-									 pShowList=prodctListStr[i].split('|')
-									 var pShow=pShowList[0]+'|'+pShowList[3]+'|'+pShowList[2]
-									 prdctShow=prdctShow+'<table><tr><td> <input type="number" id="'+qName+'"   name="'+qName+'" style="width:50px"><input type="hidden" id="'+pNameID+'"   name="'+pNameID+'"  value="'+prodctListStr[i]+'"></td><td>'+pShow+'</td></tr></table>'                          
+									 
+									 prdctShow=prdctShow+'<table><tr><td> <input type="number" id="'+qName+'"   name="'+qName+'" style="width:50px"><input type="hidden" id="'+pNameID+'"   name="'+pNameID+'"  value="'+prodctListStr[i]+'"></td><td>'+prodctListStr[i]+'</td></tr></table>'                          
 									// alert (prdctShow)
 								    }
 								  
@@ -513,7 +282,7 @@ function login_user() {
 		 
 		 }//function
 //	    
-
+//		//end mine//
 //		
 function setOutlet(outlet){
 	localStorage.outlet=outlet
@@ -524,28 +293,28 @@ function setOutlet(outlet){
 function selcetCat(){
 	var catValue=$("#catgoryList").val();
 	
-	//alert (localStorage.prdctShow)
+	
 	prodctStr=localStorage.prodctStr
 	prodctListStr=prodctStr.split('<rdrd>');
 	var prdctShow=''
-	//alert (localStorage.prodctStr)
+	
 	for (i=0; i<prodctListStr.length-1; i++){
 	 var qName="qName_"+i.toString()
 	 var pNameID="pNameID_"+i.toString()
-	 var cat = prodctListStr[i].split('|')[2]
+	 var cat = prodctListStr[i].split('|')[1]
 	 //alert (cat)
 	 if (catValue=="ALL"){
-	 	prdctShow=prdctShow+'<table><tr><td> <input type="number" id="'+qName+'"   name="'+qName+'" style="width:50px"><input type="hidden" id="'+pNameID+'"   name="'+pNameID+'"  value="'+prodctListStr[i]+'"></td><td>'+prodctListStr[i]+'</td></tr></table>'   
+	 prdctShow=prdctShow+'<table><tr><td> <input type="number" id="'+qName+'"   name="'+qName+'" style="width:50px"><input type="hidden" id="'+pNameID+'"   name="'+pNameID+'"  value="'+prodctListStr[i]+'"></td><td>'+prodctListStr[i]+'</td></tr></table>'   
 	 }
 	 else{
 		 if (cat==catValue){
-		 	prdctShow=prdctShow+'<table><tr><td> <input type="number" id="'+qName+'"   name="'+qName+'" style="width:50px"><input type="hidden" id="'+pNameID+'"   name="'+pNameID+'"  value="'+prodctListStr[i]+'"></td><td>'+prodctListStr[i]+'</td></tr></table>'   
+		 prdctShow=prdctShow+'<table><tr><td> <input type="number" id="'+qName+'"   name="'+qName+'" style="width:50px"><input type="hidden" id="'+pNameID+'"   name="'+pNameID+'"  value="'+prodctListStr[i]+'"></td><td>'+prodctListStr[i]+'</td></tr></table>'   
 		 }
 	 }
 	// alert (prdctShow)
 	}
-	//alert (localStorage.prodctStr)
-	//alert (localStorage.prdctShow)
+	
+	
 	 
 	 localStorage.prdctShow=prdctShow
 	 $("#prdctShow").html(localStorage.prdctShow)
@@ -554,8 +323,6 @@ function selcetCat(){
 	
 
 }
-
-
 //function getOrder(){
 //	  
 //     prodctStr=localStorage.prodctStr
@@ -694,52 +461,51 @@ function resetForms() {
 }
 
 
-function member_save(){
-	  var name=$("#name").val();
-	  var ageRange=$("#ageRange").val();
-	  var thana=$("#thana").val();
-	  var district=$("#district").val();
-	  var genderComb=$("#genderComb").val();
-	  var birthMonthG=$("#birthMonthG").val();
-	  var birthDayG=$("#birthDayG").val();
-	  var address=$("#address").val();
-      var mobile=$("#mobile").val();
-	  var reg_date=$("#reg_date").val();
-	  var reg_by_cm=$("#reg_by_cm").val();
-	  var otltName=localStorage.outlet
-	  var birthdate=$("#birthdate").val();
-	  
-	  if (name==""){
-			$(".errorChk").text("Please enter your name!");
-			
-	  }else if(mobile==""){
-			$(".errorChk").text("Enter valid phone number");
-			
-	  }else if(ageRange==""){
-			$(".errorChk").text("Please select an option");
-	  }else{
-
-	  
-	  alert(apiPath+'dataSave?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&name='+name+'&genderComb='+genderComb+'&birthDayG='+birthDayG+'&birthMonthG='+birthMonthG+'&address='+address+'&mobile='+mobile+'&reg_date='+reg_date+'&reg_by_cm='+reg_by_cm+'&otltName='+otltName+'&ageRange='+ageRange+'&thana='+thana+'&district='+district)
-	  
-	  
-	  $.ajax({
-		type:'POST',
-		url:apiPath+'dataSave?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&name='+name+'&genderComb='+genderComb+'&birthDayG='+birthDayG+'&birthMonthG='+birthMonthG+'&address='+address+'&mobile='+mobile+'&reg_date='+reg_date+'&reg_by_cm='+reg_by_cm+'&otltName='+otltName+'&ageRange='+ageRange+'&thana='+thana+'&district='+district,
-		
-        success: function(result1) {
-			
-			if (result1!=''){
-			$(".errorChk").text("Submitted Successfully");
-			$("#memButton").show();		
-			}
-          
-		}      
-	  
-	  });
-	  }
-	  
-}
+//function data_save(){
+//	  var name=$("#name").val();
+//	  var ageRange=$("#ageRange").val();
+//	  var thana=$("#thana").val();
+//	  var district=$("#district").val();
+//	  var genderComb=$("#genderComb").val();
+//	  var birthMonthG=$("#birthMonthG").val();
+//	  var birthDayG=$("#birthDayG").val();
+//	  var address=$("#address").val();
+//      var mobile=$("#mobile").val();
+//	  var reg_date=$("#reg_date").val();
+//	  var reg_by_cm=$("#reg_by_cm").val();
+//	  var otltName=localStorage.outlet
+//	  var birthdate=$("#birthdate").val();
+//	  if (name==""){
+//			$(".errorChk").text("Please enter your name!");
+//			
+//	  }else if(mobile==""){
+//			$(".errorChk").text("Enter valid phone number");
+//			
+//	  }else if(ageRange==""){
+//			$(".errorChk").text("Please select an option");
+//	  }else{
+//	//  alert (otltName)
+////	  
+//	  alert(apiPath+'dataSave?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&name='+name+'&genderComb='+genderComb+'&birthDayG='+birthDayG+'&birthMonthG='+birthMonthG+'&address='+address+'&mobile='+mobile+'&reg_date='+reg_date+'&reg_by_cm='+reg_by_cm+'&otltName='+otltName+'&ageRange='+ageRange+'&thana='+thana+'&district='+district)
+//	  
+//	  
+//	  $.ajax({
+//		type:'POST',
+//		url:apiPath+'dataSave?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&name='+name+'&genderComb='+genderComb+'&birthDayG='+birthDayG+'&birthMonthG='+birthMonthG+'&address='+address+'&mobile='+mobile+'&reg_date='+reg_date+'&reg_by_cm='+reg_by_cm+'&otltName='+otltName+'&ageRange='+ageRange+'&thana='+thana+'&district='+district,
+//		
+//        success: function(result1) {
+//			
+//			if (result1!=''){
+//			$(".errorChk").text("Submitted Successfully");
+//			$("#memButton").show();		
+//			}
+//
+//		}      
+//	  
+//	  });
+//	  }
+//	  
+//}
 //
 //
 //    var currentDate = new Date()
