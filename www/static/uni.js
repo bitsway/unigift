@@ -18,7 +18,8 @@ navigator.camera.getPicture( cameraSuccess, cameraError, {
     }); 
 	
 }
-//
+
+
 //function validate(){
 //$(".required").each(function(){
 //    if($(this).val().length < 1){
@@ -235,15 +236,16 @@ function purchaseDataSave(){
 	 var memMobile=memNameMob[0];
 	 var memName=memNameMob[1];
 	 
-	 
+	 alert ('A')
 	 var memPoint=localStorage.memPoint;
 	 var outletShow=localStorage.outlet
 	 var outletNameId=outletShow.split('|');
+	 alert ('B')
 	 var outletId=outletNameId[0];
      var outletName=outletNameId[1];
 	 var submitStrPurchase=localStorage.submitPurchase
 	  
-	 //alert(apiPath+'purchase_submit?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+outletId+'&outletName='+outletName+'&submitStrPurchase='+encodeURIComponent(submitStrPurchase)+'&memPoint='+localStorage.memPoint+'&memName='+memName+'&memMobile='+memMobile)
+	 alert(apiPath+'purchase_submit?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+outletId+'&outletName='+outletName+'&submitStrPurchase='+encodeURIComponent(submitStrPurchase)+'&memPoint='+localStorage.memPoint+'&memName='+memName+'&memMobile='+memMobile)
 
 	$.ajax({
 		type:'POST',
@@ -397,7 +399,7 @@ function login_user() {
 				 type: 'POST',
 				 url: apiPath+'check_user?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code,
 				 success: function(result) {	
-				 		
+				 		alert ('A')
 						if (result==''){
 							//$("#loginButton").show();
 //							$("#login_image").hide();
@@ -432,7 +434,7 @@ function login_user() {
 								rpt_rep_ob1.empty();	 
 								rpt_rep_ob1.append(catList);
 						
-								
+								alert ('1')
 							    var memStrListStr=localStorage.recMemStr.split('||');					
 						    // alert (localStorage.recMemStr);
 						        var memList='';
@@ -508,7 +510,7 @@ function login_user() {
 						}
 				      },
 				  error: function(result) {
-					
+					alert (result)
 				  }
 			  });//end ajax
 	
