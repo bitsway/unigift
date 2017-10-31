@@ -5,7 +5,6 @@
 var apiPath='http://w02.yeapps.com/unigift/syncmobile_eon/'
 var apipath_image='http://w02.yeapps.com/unigift/'
 
-
 function takePicture(){
 
 navigator.camera.getPicture( cameraSuccess, cameraError, {
@@ -18,8 +17,7 @@ navigator.camera.getPicture( cameraSuccess, cameraError, {
     }); 
 	
 }
-
-
+//
 //function validate(){
 //$(".required").each(function(){
 //    if($(this).val().length < 1){
@@ -182,7 +180,7 @@ function productQue(){
 	
 	
 function productQueRedeem(){
-	//alert (apiPath+'ready_que?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outlet='+localStorage.outlet)
+	alert (apiPath+'ready_que?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outlet='+localStorage.outlet)
 	$.ajax({
 			type:'GET',
 		    url:apiPath+'ready_que?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outlet='+localStorage.outlet,
@@ -201,7 +199,7 @@ function productQueRedeem(){
 					for (i=0; i<memStrList.length-1; i++){	
 						memMob=memStrList[i].split('<fd>')[0]
 						memName=memStrList[i].split('<fd>')[1]
-						outletShow=outletShow+'<table width="100%"><tr><td width="20%"><input onClick="RedeemGet('+i+')"  id="radioMem_'+i+'" type="radio" value="'+memName+'|'+memMob+'" >'+memName+'|'+memMob+'</td></tr></table>'
+						outletShow=outletShow+'<table width="100%"><tr><td width="20%"><input onClick="RedeemGet('+i+')"  id="radioMem_'+i+'" type="radio" name="radio_mem"  value="'+memName+'|'+memMob+'" >'+memName+'|'+memMob+'</td></tr></table>'
 
 					}
 					localStorage.queMem=outletShow
@@ -216,15 +214,6 @@ function productQueRedeem(){
 			 }
 		});
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	url="#ProductQueRedList";					
 	$.mobile.navigate(url);	
 	
@@ -236,16 +225,15 @@ function purchaseDataSave(){
 	 var memMobile=memNameMob[0];
 	 var memName=memNameMob[1];
 	 
-	 alert ('A')
+	 
 	 var memPoint=localStorage.memPoint;
 	 var outletShow=localStorage.outlet
 	 var outletNameId=outletShow.split('|');
-	 alert ('B')
 	 var outletId=outletNameId[0];
      var outletName=outletNameId[1];
 	 var submitStrPurchase=localStorage.submitPurchase
 	  
-	 alert(apiPath+'purchase_submit?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+outletId+'&outletName='+outletName+'&submitStrPurchase='+encodeURIComponent(submitStrPurchase)+'&memPoint='+localStorage.memPoint+'&memName='+memName+'&memMobile='+memMobile)
+	 //alert(apiPath+'purchase_submit?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+outletId+'&outletName='+outletName+'&submitStrPurchase='+encodeURIComponent(submitStrPurchase)+'&memPoint='+localStorage.memPoint+'&memName='+memName+'&memMobile='+memMobile)
 
 	$.ajax({
 		type:'POST',
@@ -318,6 +306,7 @@ function PurchaseDone(){
 			
 			
 			localStorage.pFinal=prdctShow
+			
 			localStorage.pStr=pStr
 			$("#purchaseShow").html(localStorage.pFinal);
 			//$("#purchaseFinalShow").html(localStorage.pFinalStr);
@@ -361,12 +350,47 @@ function ConfirmPage(){
 	localStorage.pStr=pStr
 	
 	$("#purchaseFinalShow").html(localStorage.pStrFinal);
-	alert (localStorage.pStr)
-	url="#ConfirmPage";					
+	//alert (localStorage.pStr)
+	url="#ConfirmPageSave";					
 	$.mobile.navigate(url);	
 	}
+
+
+//function finalPurchaseSave(){
+//	 var memberAllInfo=localStorage.radioMem
+//     var memberName=memberAllInfo.split('|')[0]
+//	 var memmobileNo=memberAllInfo.split('|')[1]
+//
+//	 var outletShow=localStorage.outlet
+//	 var outletNameId=outletShow.split('|');
+//	 var outletId=outletNameId[0];
+//     var outletName=outletNameId[1];
+//	 var finalData=localStorage.pStr
+//////	  
+//	alert(apiPath+'purchaseComplete?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+outletId+'&outletName='+outletName+'&finalData='+encodeURIComponent(finalData)+'&memName='+memName+'&memmobileNo='+memmobileNo)
+//	
+//	$.ajax({
+//		type:'POST',
+//		url:apiPath+'purchaseComplete?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+outletId+'&outletName='+outletName+'&finalData='+encodeURIComponent(finalData)+'&memName='+memName+'&memmobileNo='+memmobileNo,
+//	
+//		success: function(result2) {
+//			//alert(result2)
+//			//alert ('hi')	
+//			if (result2!=''){
+//			$(".errorChk").text("Submitted Successfully");
+//			$("#saveButton").show();		
+//			}
+//		}      
+//	
+//	  });
+////	  
+////	url="#submitPage";					
+////	$.mobile.navigate(url);	
+//	}	
+
+
 	
-function submitPage(){
+function finalPurchaseSave(){
 	url="#submitPage";					
 	$.mobile.navigate(url);	
 	}	
@@ -399,7 +423,7 @@ function login_user() {
 				 type: 'POST',
 				 url: apiPath+'check_user?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code,
 				 success: function(result) {	
-				 		alert ('A')
+				 		
 						if (result==''){
 							//$("#loginButton").show();
 //							$("#login_image").hide();
@@ -434,7 +458,7 @@ function login_user() {
 								rpt_rep_ob1.empty();	 
 								rpt_rep_ob1.append(catList);
 						
-								alert ('1')
+								
 							    var memStrListStr=localStorage.recMemStr.split('||');					
 						    // alert (localStorage.recMemStr);
 						        var memList='';
@@ -510,7 +534,7 @@ function login_user() {
 						}
 				      },
 				  error: function(result) {
-					alert (result)
+					
 				  }
 			  });//end ajax
 	

@@ -90,6 +90,10 @@
 		    color:#000;
 		
 		}
+		#saveButton{
+			background-color:#5EBBE8;
+			color:#fff;
+		}
 		#password {
 		    color:#000;
 		}
@@ -652,7 +656,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 
 <!----------------------------------------------Confirm------------------->
 
-     <div data-theme="c" data-role="page" id="ConfirmPage" style="background-color:#EBFCFA"  >
+     <div data-theme="c" data-role="page" id="ConfirmPageSave" style="background-color:#EBFCFA"  >
        <div data-theme="c" data-role="header" data-position="fixed" style="background-color:#5EBBE8; color:#fff" data-add-back-btn="true" > 
        
      <a data-rel="back"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left"   ><img src="back1.png"></a>
@@ -677,12 +681,11 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 
    
        
-       		 <table   >
-              <!-- <caption> Product Information</caption> -->
+       		 <table >
               		<tr >
                     <td width="30px" > <input name="" type="checkbox" value=""></td>
                     <td > Confirm</td>
-                    <td >  <a data-role="button"   onClick="submitPage()" >Submit</a></td>
+                    <td >  <a data-role="button" id="saveButton"  onClick="finalPurchaseSave()" >Submit</a></td>
                     </tr>   
           </table>
        
