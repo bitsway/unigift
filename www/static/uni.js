@@ -1,6 +1,10 @@
 
-var apiPath='http://127.0.0.1:8000/unigift/syncmobile_eon/';
-var apipath_image = 'http://127.0.0.1:8000/moderntrade/';
+//var apiPath='http://127.0.0.1:8000/unigift/syncmobile_eon/';
+//var apipath_image = 'http://127.0.0.1:8000/moderntrade/';
+
+var apiPath='http://w02.yeapps.com/unigift/syncmobile_eon/'
+var apipath_image='http://w02.yeapps.com/unigift/'
+
 
 function takePicture(){
 
