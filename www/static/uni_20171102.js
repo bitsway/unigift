@@ -1,6 +1,7 @@
 
 //var apiPath='http://127.0.0.1:8000/unigift/syncmobile_eon/';
 //var apipath_image = 'http://127.0.0.1:8000/moderntrade/';
+
 var apiPath='http://w02.yeapps.com/unigift/syncmobile_eon/'
 var apipath_image='http://w02.yeapps.com/unigift/'
 
@@ -56,13 +57,6 @@ function login_page() {
 	
 }
 
-function submitBack() {
-	
-	url="#menuPage";					
-	$.mobile.navigate(url);
-	
-}
-
 function login() {
 	
 	url="#login";					
@@ -105,19 +99,16 @@ function Redeem(){
 					var giftdctStr=localStorage.giftdctStr
 					giftdctStrList=giftdctStr.split('<rdrd>')
 					var giftShow=''
-					
-					
-					for (i=0; i<giftdctStrList.length-1; i++){	
-					var qtyName="qtyName_"+i.toString()
-					
-						
+					for (i=0; i<giftdctStrList.length-1; i++){
+								/*if (i/2){
+								giftShow=giftShow+' <table width="100%" border="0" cellpadding="0" cellspacing="0" style="background-color:#AAE3FF" ><tr ><td width="100px"> &nbsp;&nbsp;'+giftdctStrList[i].split('|')[2]+'</td> <td > '+giftdctStrList[i].split('|')[0]+'</td></tr></table>'
 								
-			        giftShow=giftShow+' <table width="100%" border="0" cellpadding="0" cellspacing="0" ><tr ><td width="50px" > <input type="number" value="" id="'+qtyName+'" name="'+qtyName+'" style="width:50px;" ></td><td width="100px"> &nbsp;&nbsp;'+giftdctStrList[i].split('|')[2]+'</td> <td > '+giftdctStrList[i].split('|')[0]+'</td></tr></table>'
+								
+								}
+								else*/
+			       giftShow=giftShow+' <table width="100%" border="0" cellpadding="0" cellspacing="0" ><tr ><td width="30px"  height:05px"> <input type="text" value="" id="" name="" style="width:30px; height:05px" ></td><td width="100px"> &nbsp;&nbsp;'+giftdctStrList[i].split('|')[2]+'</td> <td > '+giftdctStrList[i].split('|')[0]+'</td></tr></table>'
 									//alert (outletStringList[i])
 								}
-								
-								
-								
 					var giftShowRed=giftShow
 					localStorage.giftShowRed=giftShowRed
 					
