@@ -64,6 +64,88 @@ function login() {
 	
 }
 
+function Redeem(){
+	//$('#purchOutlet').html(localStorage.outlet);
+	var redMobile=$("#redMobile").val();
+    //alert ('AAA')
+    if (redMobile==""){
+		$("#mobError").html("Please Enter Mobile No");
+	}else{
+		alert (apiPath+'search_mobRedeem?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&redMobile='+redMobile)
+		$.ajax({
+			type:'GET',
+		    url:apiPath+'search_mobRedeem?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&redMobile='+redMobile,
+			success: function(result){
+				resultStr=result.split('<SYNCDATA>');	
+			    if (resultStr[0]=='FAILED'){
+					$("#mobile").val(redMobile);
+					url="#registration";					
+					$.mobile.navigate(url);	
+				}
+	
+				if (resultStr[0]=='SUCCESS'){
+				    
+					var Mobile=resultStr[1];
+					var mem_name=resultStr[2];
+					var mem_point=resultStr[3];
+					var prStr=resultStr[1]
+					localStorage.memInfo=Mobile+'-'+mem_name
+					localStorage.memPoint=mem_point
+					var memInfoRed=localStorage.memInfo
+					var memRedMob=memInfoRed.split('-')[0];
+					var memRedName=memInfoRed.split('-')[1];
+					//alert (memRedName)
+					
+					var giftdctStr=localStorage.giftdctStr
+					giftdctStrList=giftdctStr.split('<rdrd>')
+					var giftShow=''
+					for (i=0; i<giftdctStrList.length-1; i++){
+								/*if (i/2){
+								giftShow=giftShow+' <table width="100%" border="0" cellpadding="0" cellspacing="0" style="background-color:#AAE3FF" ><tr ><td width="100px"> &nbsp;&nbsp;'+giftdctStrList[i].split('|')[2]+'</td> <td > '+giftdctStrList[i].split('|')[0]+'</td></tr></table>'
+								
+								
+								}
+								else*/
+			       giftShow=giftShow+' <table width="100%" border="0" cellpadding="0" cellspacing="0" ><tr ><td width="30px"  height:05px"> <input type="text" value="" id="" name="" style="width:30px; height:05px" ></td><td width="100px"> &nbsp;&nbsp;'+giftdctStrList[i].split('|')[2]+'</td> <td > '+giftdctStrList[i].split('|')[0]+'</td></tr></table>'
+									//alert (outletStringList[i])
+								}
+					var giftShowRed=giftShow
+					localStorage.giftShowRed=giftShowRed
+					
+					$("#giftRedShow").html(localStorage.giftShowRed)
+
+					
+					$("#redMobile").val(Mobile);
+					//$("#prMem").html(localStorage.memInfo);
+					$("#prRedMem").html(memRedMob);
+					$("#prRedMemName").html(memRedName);
+					$("#prRedPoint").html(localStorage.memPoint);
+					
+					
+					url="#redeemShow";					
+    	            $.mobile.navigate(url);					
+				}
+
+			},
+			 error: function(result) {
+					
+			 }
+		});
+		
+	}	
+	
+}
+
+function giftSave(){
+	
+	//$('#otltName').html(localStorage.outlet);
+//	url="#menuPage";					
+//	$.mobile.navigate(url);	
+
+	}	
+	
+	
+	
 function menuSearch(){
 	$('#otltName').html(localStorage.outlet);
 	url="#menuPage";					
@@ -180,7 +262,7 @@ function productQue(){
 	
 	
 function productQueRedeem(){
-	alert (apiPath+'ready_que?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outlet='+localStorage.outlet)
+	//alert (apiPath+'ready_que?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outlet='+localStorage.outlet)
 	$.ajax({
 			type:'GET',
 		    url:apiPath+'ready_que?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outlet='+localStorage.outlet,
@@ -267,7 +349,7 @@ function PurchaseDone(){
 	var IdOutlet=outletIDN[0];
 	var memShow=localStorage.radioMem
 	var memMob=memShow.split('|')[1]
-	alert (apiPath+'search_purchase?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+IdOutlet+'&memMob='+memMob)
+	//alert (apiPath+'search_purchase?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+IdOutlet+'&memMob='+memMob)
 	$.ajax({
 		type:'POST',
 		url:apiPath+'search_purchase?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+IdOutlet+'&memMob='+memMob,
@@ -356,44 +438,45 @@ function ConfirmPage(){
 	}
 
 
-//function finalPurchaseSave(){
-//	 var memberAllInfo=localStorage.radioMem
-//     var memberName=memberAllInfo.split('|')[0]
-//	 var memmobileNo=memberAllInfo.split('|')[1]
-//
-//	 var outletShow=localStorage.outlet
-//	 var outletNameId=outletShow.split('|');
-//	 var outletId=outletNameId[0];
-//     var outletName=outletNameId[1];
-//	 var finalData=localStorage.pStr
-//////	  
-//	alert(apiPath+'purchaseComplete?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+outletId+'&outletName='+outletName+'&finalData='+encodeURIComponent(finalData)+'&memName='+memName+'&memmobileNo='+memmobileNo)
-//	
-//	$.ajax({
-//		type:'POST',
-//		url:apiPath+'purchaseComplete?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+outletId+'&outletName='+outletName+'&finalData='+encodeURIComponent(finalData)+'&memName='+memName+'&memmobileNo='+memmobileNo,
-//	
-//		success: function(result2) {
-//			//alert(result2)
-//			//alert ('hi')	
-//			if (result2!=''){
-//			$(".errorChk").text("Submitted Successfully");
-//			$("#saveButton").show();		
-//			}
-//		}      
-//	
-//	  });
-////	  
-////	url="#submitPage";					
-////	$.mobile.navigate(url);	
-//	}	
-
-
-	
 function finalPurchaseSave(){
+	// alert ('hi')
+	 var memberAllInfo=localStorage.radioMem
+     var memberName=memberAllInfo.split('|')[0]
+	 var memmobileNo=memberAllInfo.split('|')[1]
+    // alert (memberName)
+	 var outletShow=localStorage.outlet
+	 var outletNameId=outletShow.split('|');
+	 var outletId=outletNameId[0];
+     var outletName=outletNameId[1];
+	 var finalData=localStorage.pStr
+////	  
+	//alert(apiPath+'purchaseComplete?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+outletId+'&outletName='+outletName+'&finalData='+encodeURIComponent(finalData)+'&memberName='+memberName+'&memmobileNo='+memmobileNo)
+	
+	$.ajax({
+		type:'POST',
+		url:apiPath+'purchaseComplete?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+outletId+'&outletName='+outletName+'&finalData='+encodeURIComponent(finalData)+'&memberName='+memberName+'&memmobileNo='+memmobileNo,
+	
+		success: function(result2) {
+			//alert(result2)
+			//alert ('hi')	
+			if (result2!=''){
+			$(".errorChk").text("Submitted Successfully");
+			$("#saveButton").show();		
+			}
+		}      
+	
+	  });
+	  
 	url="#submitPage";					
 	$.mobile.navigate(url);	
 	}	
+
+
+	
+//function finalPurchaseSave(){
+//	url="#submitPage";					
+//	$.mobile.navigate(url);	
+//	}	
 	
 function login_user() {
 	     
@@ -417,7 +500,7 @@ function login_user() {
 					localStorage.sync_code=0
 				}
 			
-	        alert (apiPath+'check_user?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code)
+	       // alert (apiPath+'check_user?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code)
 			
 			$.ajax({
 				 type: 'POST',

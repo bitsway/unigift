@@ -170,12 +170,7 @@
 			$("#prPoint").html(localStorage.memPoint);
 			$("#prMSave").html(localStorage.memInfo);
 	        $("#prSPoint").html(localStorage.memPoint);
-			$("#prRedPoint").html(localStorage.memPoint);
 			
-			
-			$("#giftRedShow").html(localStorage.giftShowRed)
-			$("#prRedMem").html(memRedMob);
-			$("#prRedMemName").html(memRedName);
 			
 			//alert (localStorage.catList)
 			var rpt_rep_ob1=$("#catgoryList");
@@ -255,7 +250,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
   
       </div>
   
-
+ 
      <div class="main">
      <br><br>
       <div id="outletShow">
@@ -337,10 +332,9 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
         <!--</datalist><br>-->
         <br>
         
-       
+        <div id="mobError"></div>
     <a id="rewardButton" data-role="button"  onClick="memberSelect()" ><strong>Next</strong></a>
       </form>
-       <div id="mobError"></div>
      </div>
 
 </div>
@@ -566,7 +560,30 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
             <div id="queMem"></div>
 
    		 
-          <input type="text" name="redMobile" id="redMobile" list="mobile" placeholder=" member mobile">
+          <!--<table   >
+               <caption> Product Information</caption> 
+              		<tr >
+                    <td style="width:50px"><input name="" type="radio" value=""></td>
+                    <td > Faisal Ahmed (01713454218)   </td>
+                    </tr>
+                    
+                    <tr >
+                    <td><input name="" type="radio" value=""></td>
+                   <td> Nurjahan Begum (01712566666)
+           			</td>
+                    
+                     </tr>
+                     
+                     <tr >
+                    <td><input name="" type="radio" value=""></td>
+                   <td >Kabir Miah (01912546589) 
+           			</td>
+                   
+                    
+                     </tr>
+                     
+                     
+          </table>-->
        
        		 <table   >
               <!-- <caption> Product Information</caption> -->
@@ -582,7 +599,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
        <!-- <a id="memButton" data-role="button"  onClick="historyShow()" ><strong>History</strong></a>-->
 
     </div>   
-        <div id="mobError"></div>        
+                
       <div data-theme="c" data-role="footer" data-position="fixed" style="background-color:#5EBBE8; color:#fff"  > 
 
      </div>
@@ -602,7 +619,11 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 
            
   </div>
-
+       <p><strong style="font-size:16px; color:#060"> Anwara Begum--</strong> &nbsp;&nbsp; Points: 2350<font id="purchOutlet" style="font-size:16px; color:#060">
+         </font> <br> 
+         &nbsp;&nbsp;&nbsp;
+        
+       </p>
        <p>&nbsp; </p>
   <div id="prdctQueRedListShow">
           <font id="item_Que_comboList_id">
@@ -733,50 +754,6 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
   
      </div>
  </div>
-<!------------------------------------------------redeem-------------------->
-<div data-theme="c" data-role="page" id="redeemShow" style="background-color:#EBFCFA"  >
-        <div data-theme="c" data-role="header" data-position="fixed" style="background-color:#5EBBE8; color:#fff" data-add-back-btn="true" > 
-
-      <!-- <a data-role="button"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left"  onClick=""  ><img src="menu.png"></a>-->
-       
-       <a id="backjpj" style="height:18px" data-rel="back" data-iconpos="left" class="ui-btn-right"><img src="back1.png"></a>
-             <h3>Member Information</h3>
-
-             
-  
-     </div>
-      <table width="100%" border="0">
-        <tr>
-
-         <td >  Member Mobile-&nbsp;&nbsp;<font style="font-size:14px; color:#009D00" id="prRedMem">  </font></td>
-          <td> Total Points-&nbsp;&nbsp;<font style="font-size:16px; color:#009D00" id="prRedPoint"></font></td>
-       </tr>
-       <tr>
-          <td>Member Name-&nbsp;&nbsp;<font style="font-size:14px; color:#009D00" id="prRedMemName">  </font> </td>
-           
-       </tr>
-     </table> 
-     
-     <div>
-           <br>
-          <label style="color:#0060BF"" >&nbsp;&nbsp;Reward Currently available</label>
-           
-          <br>
-           <div id="giftRedShow"></div>
-        
-     </div>
-    
-       		 <table   >
-            
-              		<tr >
-                     <td width="30px" > <input name="" id="checkId" type="checkbox" value=""></td>
-                    <td > Confirm</td>
-                    <td >  <a data-role="button" id="saveButton"  onClick="giftSave" >Submit</a></td>
-                    </tr>   
-          </table>
-</div>
-
-
 
 </body>
 </html>
