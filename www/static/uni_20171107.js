@@ -1,12 +1,8 @@
 
 //var apiPath='http://127.0.0.1:8000/unigift/syncmobile_eon/';
 //var apipath_image = 'http://127.0.0.1:8000/moderntrade/';
-
-
 var apiPath='http://w02.yeapps.com/unigift/syncmobile_eon/'
 var apipath_image='http://w02.yeapps.com/unigift/'
-
-
 
 function takePicture(){
 
@@ -20,6 +16,24 @@ navigator.camera.getPicture( cameraSuccess, cameraError, {
     }); 
 	
 }
+//
+//function validate(){
+//$(".required").each(function(){
+//    if($(this).val().length < 1){
+//        alert("please fill in all the required fields.");
+//        $(this).focus();
+//        return false;
+//    }
+//    else{
+//        return true;
+//    }
+//});
+//return false;
+//}
+
+
+
+
 
 function cameraSuccess(uri){  
 	
@@ -55,21 +69,15 @@ function login() {
 	$.mobile.navigate(url);
 	
 }
-function homePage() {
-	url="#pageOutlet";					
-	$.mobile.navigate(url);
-	
-}
+
 function Redeem(){
+	//$('#purchOutlet').html(localStorage.outlet);
 	var redMobile=$("#redMobile").val();
-	if (redMobile.length < 13){
-		redMobile='88'+redMobile
-	}
-	//alert (redMobile)
-	
-    if (redMobile.length==13){
-		
-		//alert (apiPath+'search_mobRedeem?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&redMobile='+redMobile)
+    //alert ('AAA')
+    if (redMobile==""){
+		$("#mobError").html("Please Enter Mobile No");
+	}else{
+		alert (apiPath+'search_mobRedeem?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&redMobile='+redMobile)
 		$.ajax({
 			type:'GET',
 		    url:apiPath+'search_mobRedeem?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&redMobile='+redMobile,
@@ -91,28 +99,24 @@ function Redeem(){
 					localStorage.memPoint=mem_point
 					var memInfoRed=localStorage.memInfo
 					var memRedMob=memInfoRed.split('-')[0];
-					localStorage.memRedMob=memRedMob
 					var memRedName=memInfoRed.split('-')[1];
-					localStorage.memRedName=memRedName
 					//alert (memRedName)
-	
+					
+					var giftdctStr=localStorage.giftdctStr
+					giftdctStrList=giftdctStr.split('<rdrd>')
+					var giftShow=''
 					
 					
-				    giftdctStr=localStorage.giftdctStr
-			        giftdctStrList=giftdctStr.split('<rdrd>')
-			        var giftShow=''
-			
-			        var submitRedeem=''
-			 			
 					for (i=0; i<giftdctStrList.length-1; i++){	
 					var qtyName="qtyName_"+i.toString()
-					var gNameID="gNameID_"+i.toString()
-
-				   
-				    giftShow=giftShow+' <table width="100%" border="0" cellpadding="0" cellspacing="0" ><tr ><td width="50px" > <input type="number" value="" id="'+qtyName+'" name="'+qtyName+'" style="width:50px;" ><input type="hidden" id="'+gNameID+'"   name="'+gNameID+'"  value="'+giftdctStrList[i]+'"></td><td width="100px"> &nbsp;&nbsp;'+giftdctStrList[i].split('|')[2]+'</td> <td > '+giftdctStrList[i].split('|')[0]+'</td></tr></table>'
-										 }
-					 
+					
 						
+								
+			        giftShow=giftShow+' <table width="100%" border="0" cellpadding="0" cellspacing="0" ><tr ><td width="50px" > <input type="number" value="" id="'+qtyName+'" name="'+qtyName+'" style="width:50px;" ></td><td width="100px"> &nbsp;&nbsp;'+giftdctStrList[i].split('|')[2]+'</td> <td > '+giftdctStrList[i].split('|')[0]+'</td></tr></table>'
+									//alert (outletStringList[i])
+								}
+								
+								
 								
 					var giftShowRed=giftShow
 					localStorage.giftShowRed=giftShowRed
@@ -122,11 +126,11 @@ function Redeem(){
 					
 					$("#redMobile").val(Mobile);
 					//$("#prMem").html(localStorage.memInfo);
-					$("#prRedMem").html(localStorage.outlet);
-					$("#prRedMemName").html(mem_name+'|'+Mobile);
-					$("#prRedPoint").html(mem_point);
+					$("#prRedMem").html(memRedMob);
+					$("#prRedMemName").html(memRedName);
+					$("#prRedPoint").html(localStorage.memPoint);
 					
-					$("#gSError").html('');
+					
 					url="#redeemShow";					
     	            $.mobile.navigate(url);					
 				}
@@ -137,130 +141,16 @@ function Redeem(){
 			 }
 		});
 		
-		
-	}else{
-		$("#mobError").html("Please Enter Mobile No");
 	}	
 	
 }
 
-//function giftString(){
-//	  
-//    giftdctStr=localStorage.giftdctStr
-//	giftdctStrList=giftdctStr.split('<rdrd>')
-//	 
-//	 
-//	var giftShow=''
-//    var submitRedeem=''						 
-//	for (i=0; i<giftdctStrList.length-1; i++){	
-//	
-//	var qtyName="qtyName_"+i.toString()
-//	var gNameID="gNameID_"+i.toString()
-//	
-//	var qtyNameValue=$("#"+qtyName).val()
-//	if (parseInt(qtyNameValue)>0)	{
-//	giftStrShow = 	giftdctStrList[i]				
-//					strList=giftStrShow.split('|')	
-//					var	giftId = strList[0]		
-//					var	giftName = strList[1]
-//					var	giftPoint = strList[2]
-//					
-//					submitRedeem=submitRedeem+giftId+'<fdfd>'+giftName+'<fdfd>'+giftPoint+'<fdfd>'+qtyNameValue+'<rdrd>'
-//			
-//		
-//	 }
-//	}
-//	
-//	//     
-////	 }
-//					localStorage.submitRedeem=submitRedeem					  
-//		            var giftShowRed=giftShow
-//					localStorage.giftShowRed=giftShowRed
-//					
-//					$("#giftRedShow").html(localStorage.giftShowRed)
-//
-//					
-//					$("#redMobile").val(Mobile);
-//					//$("#prMem").html(localStorage.memInfo);
-//					$("#prRedMem").html(localStorage.memRedMob);
-//					$("#prRedMemName").html(localStorage.memRedName)
-//}
-
-
-
-
 function giftSave(){
-			var memMb=localStorage.memRedMob;
-			var memNM=localStorage.memRedName
-			var memPoint=localStorage.memPoint;
-		
-			//var memPoint=localStorage.memPoint;
-			var outletShow=localStorage.outlet
-			var outletNameId=outletShow.split('|');
-			var outletId=outletNameId[0];
-			var outletName=outletNameId[1];
-			
-			var memPoint= $("#prRedPoint").html()
-			
-			 giftdctStr=localStorage.giftdctStr
-	         giftdctStrList=giftdctStr.split('<rdrd>')
-	 
-	 
-			var giftShow=''
-			var submitRedeem=''		
-			var giftPointC=0				 
-			for (i=0; i<giftdctStrList.length-1; i++){	
-			
-					var qtyName="qtyName_"+i.toString()
-					var gNameID="gNameID_"+i.toString()
-					
-					var qtyNameValue=$("#"+qtyName).val()
-					if (parseInt(qtyNameValue)>0)	{
-					giftStrShow = 	giftdctStrList[i]				
-									strList=giftStrShow.split('|')	
-									var	giftId = strList[0]		
-									var	giftName = strList[1]
-									var	giftPoint = strList[2]
-									giftPointC=giftPointC+parseInt(giftPoint)
-									submitRedeem=submitRedeem+giftId+'<fdfd>'+giftName+'<fdfd>'+giftPoint+'<fdfd>'+qtyNameValue+'<rdrd>'
-							
-						
-					 }//if
-			
-	       localStorage.submitRedeem=submitRedeem
-		   
-			}
-		   		
-	     //alert (localStorage.submitRedeem)
-		 //alert(apiPath+'redeemComplete?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+outletId+'&outletName='+outletName+'&submitRedeem='+encodeURIComponent(submitRedeem)+'&memPoint='+localStorage.memPoint+'&memNM='+memNM+'&memMb='+memMb)
-		if (giftPointC <= parseInt(memPoint) & parseInt(giftPointC)>0){
-			 $.ajax({
-				type:'POST',
-				url:apiPath+'redeemComplete?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+outletId+'&outletName='+outletName+'&submitRedeem='+encodeURIComponent(submitRedeem)+'&memPoint='+localStorage.memPoint+'&memNM='+memNM+'&memMb='+memMb,
-			
-				success: function(result) {
-					//alert(result)
-					//alert ('hi')	
-					if (result!=''){
-					$("#errorChk").text("Submitted Successfully");
-					$("#saveButton").show();	
-					
-					}
-				
-				}      
-			 
-			  });
-			  url="#submitPage";					
-			  $.mobile.navigate(url);	
-		}
-		else{
-			
-			$("#gSError").text("Point should be greater than Gift POint");
-			
-		}
 	
-	
-			
+	//$('#otltName').html(localStorage.outlet);
+//	url="#menuPage";					
+//	$.mobile.navigate(url);	
+
 	}	
 	
 	
@@ -280,14 +170,10 @@ function shppingTrip(){
 function memberSelect(){
 	$('#purchOutlet').html(localStorage.outlet);
 	var mMobile=$("#mMobile").val();
-	if (mMobile.length < 13){
-		mMobile='88'+mMobile
-	}
-	
-   // alert (mMobile)
-    if (mMobile.length==13){
-		
-	
+    //alert ('AAA')
+    if (mMobile==""){
+		$("#mobError").html("Please Enter MObile No");
+	}else{
 		//alert (apiPath+'search_mob?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&mMobile='+mMobile)
 		$.ajax({
 			type:'GET',
@@ -322,8 +208,7 @@ function memberSelect(){
 					
 			 }
 		});
-		}else{
-			$("#mobError").html("Please Enter Mobile No");
+		
 	}
 	
 	}		
@@ -419,34 +304,11 @@ function productQueRedeem(){
 					
 			 }
 		});
-	$("#redMobile").val('');
-	$( "#redMobile" ).prop( "disabled", false );
-	$( "#queMem" ).prop( "disabled", false );
 	
 	url="#ProductQueRedList";					
 	$.mobile.navigate(url);	
 	
 	
-}
-
-function clearText(){
-	$( "#redMobile" ).prop( "disabled", false );
-	$("#queMem").html(localStorage.queMem);
-	$("#redMobile").val('');
-}
-function checkRadio(){
-	var cText=$("#redMobile").val()
-	
-	if (cText.length > 0){
-		
-		$('#queMem').find('input, textarea, button, select').attr('disabled','disabled');
-
-	}
-	else{
-		$("#queMem").html(localStorage.queMem);
-		//$('#queMem').find('*').prop('disabled',false);
-		//$( "#queMem" ).prop( "disabled", true );
-	}
 }
 function purchaseDataSave(){
 	 var memInfo=localStorage.memInfo;
@@ -472,7 +334,7 @@ function purchaseDataSave(){
 			//alert(result2)
 			//alert ('hi')	
 			if (result2!=''){
-			$("#errorChk").text("Submitted Successfully");
+			$(".errorChk").text("Submitted Successfully");
 			$("#orderBtn").show();		
 			}
 		}      
@@ -489,11 +351,6 @@ function RedeemGet(i){
 	var radioMemGet="#radioMem_"+i
 	var radioMem=$(radioMemGet).val();
 	localStorage.radioMem=radioMem	
-	var radioMemMobile=radioMem.split('|')[1]
-	$("#redMobile").val(radioMemMobile);
-	$("#redMobile").attr("disabled", "disabled"); 
-	
-	
 	}	
 function PurchaseDone(){	
 	var outletShow=localStorage.outlet
@@ -502,7 +359,6 @@ function PurchaseDone(){
 	var memShow=localStorage.radioMem
 	var memMob=memShow.split('|')[1]
 	//alert (apiPath+'search_purchase?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+IdOutlet+'&memMob='+memMob)
-	
 	$.ajax({
 		type:'POST',
 		url:apiPath+'search_purchase?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+IdOutlet+'&memMob='+memMob,
@@ -515,10 +371,6 @@ function PurchaseDone(){
 			}
 			if (resultStr[0]=='SUCCESS'){	
 				var prStr=resultStr[1]
-				var Mobile=resultStr[2]
-				var name=resultStr[3]
-				var point_valueS=resultStr[4]
-				//alert (point_value)
 				prList=prStr.split('<rd>')
 				var prdctShow='<table>'
 				var pStr=''
@@ -547,25 +399,12 @@ function PurchaseDone(){
 			localStorage.pFinal=prdctShow
 			
 			localStorage.pStr=pStr
-			
 			$("#purchaseShow").html(localStorage.pFinal);
-			//alert (point_valueS)
-			
-			$("#prRedMemP").html(outletShow);
-			$("#prRedMemNameP").html(name+'|'+Mobile);
-			$("#prRedPointP").html(point_valueS);
-			$("#prRedMemPS").html(outletShow);
-			$("#prRedMemNamePS").html(name+'|'+Mobile);
-			$("#prRedPointPS").html(point_valueS);
+			//$("#purchaseFinalShow").html(localStorage.pFinalStr);
+
 		}//if      
 		}//success
 	  });//ajax
-	//alert (point_valueS)  
-	
-	//alert (point_valueS)
-	//$("#prRedMemNameP").html(name+'|'+Mobile);
-	//$("#prRedMemNameP").html(point_value);
-	  
 	url="#RedeemList";					
 	$.mobile.navigate(url);	
 	}	
@@ -602,8 +441,7 @@ function ConfirmPage(){
 	localStorage.pStr=pStr
 	
 	$("#purchaseFinalShow").html(localStorage.pStrFinal);
-	$("#errorChk").html('');
-	$("#savedGiftError").html('');
+	//alert (localStorage.pStr)
 	url="#ConfirmPageSave";					
 	$.mobile.navigate(url);	
 	}
@@ -631,7 +469,7 @@ function finalPurchaseSave(){
 			//alert(result2)
 			//alert ('hi')	
 			if (result2!=''){
-			$("#errorChk").text("Submitted Successfully");
+			$(".errorChk").text("Submitted Successfully");
 			$("#saveButton").show();		
 			}
 		}      
@@ -653,9 +491,11 @@ function login_user() {
 	     
 	     var cm_id=$("#cm_id").val();
 	     var cm_pass=$("#cm_pass").val();
+		// alert (cm_id)
 	     if (cm_id=="" || cm_id==undefined || cm_pass=="" || cm_pass==undefined){
 			 $(".errorMsg").html("Required ID  and password");	
-				
+
+			 
 		 }else{
 			
 			$("#login_image").show();
@@ -667,14 +507,8 @@ function login_user() {
 			
 			if(localStorage.sync_code==undefined || localStorage.sync_code==""){
 					localStorage.sync_code=0
-					
 				}
-				
-			//	 	
-//    	    if(localStorage.cm_pass!=cm_id || localStorage.cm_pass!=cm_pass){
-//					
-//		            $(".errorMsg").html("Wrong UserId/Name and password combination");	
-//				}
+			
 	       // alert (apiPath+'check_user?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code)
 			
 			$.ajax({
@@ -792,7 +626,6 @@ function login_user() {
 						}
 				      },
 				  error: function(result) {
-					 alert('Network error has occurred please try again!');
 					
 				  }
 			  });//end ajax
@@ -1026,7 +859,6 @@ function member_save(){
 		}      
 	  
 	  });
-	 product()
 	  }
 	  
 }
