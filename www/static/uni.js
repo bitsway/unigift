@@ -9,7 +9,7 @@ var apipath_image='http://w02.yeapps.com/unigift/'
 
 
 function takePicture(){
-
+alert ('1')
 navigator.camera.getPicture( cameraSuccess, cameraError, {
 		quality: 90,
 		targetWidth: 400,
