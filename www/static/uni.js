@@ -15,7 +15,7 @@ navigator.camera.getPicture( cameraSuccess, cameraError, {
 		quality: 90,
 		targetWidth: 400,
        // destinationType: Camera.DestinationType.FILE_URI,
-		destinationType: Camera.DestinationType.FILE_URI,correctOrientation: true ,
+		destinationType: Camera.DestinationType.FILE_URI , correctOrientation: true 
        
     }); 
 	
