@@ -6,32 +6,27 @@
 var apiPath='http://w02.yeapps.com/unigift/syncmobile_eon/'
 var apipath_image='http://w02.yeapps.com/unigift/'
 
-
-
-function takePicture(){
-alert ('1')
-navigator.camera.getPicture( cameraSuccess, cameraError, {
-		
-		quality: 90,
-		targetWidth: 400,
-       // destinationType: Camera.DestinationType.FILE_URI,
-		destinationType: Camera.DestinationType.FILE_URI , correctOrientation: true 
-       
-    }); 
-	
+function get_pic_HairCare(i) {
+	navigator.camera.getPicture(onSuccessHairCare, onFailHairCare, { quality: 70,
+		targetWidth: 450,
+		destinationType: Camera.DestinationType.FILE_URI , correctOrientation: true });
+}
+function onSuccessHairCare(imageURI) {
+	var temp_image_div="myImage"
+	var hidden_path="prPhoto"
+	var image = document.getElementById(temp_image_div);
+    image.src = imageURI;
+	$("#"+hidden_path).val(imageURI);
+}
+function onFailHairCare(message) {
+	imagePathA="";
+    alert('Failed because: ' + message);
 }
 
-function cameraSuccess(uri){  
-	
-	var imageDiv="myImage"
-	var imageText="prPhoto"
-	var image = document.getElementById(imageDiv);
-	image.src = uri;
-	imagePath = uri;
-    
-	$("#"+imageText).val(imagePath);
-        
-}
+
+
+
+
 
 //================login=======================
 
