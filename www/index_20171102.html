@@ -129,12 +129,6 @@
 		.errorChk {  /* for error messages */
 		    color: red;
 		}
-		#errorChk {  /* for error messages */
-		    color: red;
-		}
-		#mobError{
-			color: red;
-		}
 		.mem {
 			width: 500px;
 			margin: 25px auto;
@@ -176,13 +170,7 @@
 			$("#prPoint").html(localStorage.memPoint);
 			$("#prMSave").html(localStorage.memInfo);
 	        $("#prSPoint").html(localStorage.memPoint);
-			$("#prRedPoint").html(localStorage.memPoint);
 			
-			
-			$("#giftRedShow").html(localStorage.giftShowRed)
-	
-			$("#prRedMem").html(localStorage.memRedMob);
-		    $("#prRedMemName").html(localStorage.memRedName);
 			
 			//alert (localStorage.catList)
 			var rpt_rep_ob1=$("#catgoryList");
@@ -195,10 +183,6 @@
 			$("#purchaseShow").html(localStorage.pFinal);
 			$("#purchaseFinalShow").html(localStorage.pStrFinal);
 			
-			
-			if (localStorage.sync=='Yes'){
-				homePage();
-			}
 			//$("#catgoryList").val();
 			//alert (localStorage.prdctShow)
 			//var rpt_rep_ob1=$("#catgoryList");
@@ -235,18 +219,9 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
         <div class="errorMsg"></div>
           <font face="Arial, Helvetica, sans-serif" size="-1"> 
                 </br>
-      <div align="center" >         
-    <table width="500px" border="0">
-  <tr>
-    <td><input type="text" width="500px" name="cm_id" id="cm_id" placeholder="CM ID" value=""  ></td>
-  </tr>
-  <tr>
-    <td><input type="number" style="width:500px; height:30px"  name="cm_pass" id="cm_pass" placeholder="PASSWORD" value="" ></td>
-  </tr>
-</table>
-</div>
-                  
-                  
+    
+                  <input type="text" name="cm_id" id="cm_id" placeholder="CM ID" value=""  >
+                  <input type="text" name="cm_pass" id="cm_pass" placeholder="PASSWORD" value="" >
       
            </font>                
 				</br></br>
@@ -266,7 +241,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 
        <div data-theme="c" data-role="header" data-position="fixed" style="background-color:#5EBBE8; color:#fff" data-add-back-btn="true" > 
        
-       <a data-role="button" style="height:18px"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left" onClick="login_page()"  ><img src="unilogo13.png"></a>
+       <a data-role="button"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left" onClick="login_page()"  ><img src="unilogo13.png"></a>
        <!--<a style="height:18px" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-right " onClick="exit()" ><img src="exit.png"> </a>-->
        <a id="backjpj" style="height:18px" data-rel="back" data-iconpos="left" class="ui-btn-right"><img src="back1.png"></a>
              <h3>Outlet</h3>
@@ -275,10 +250,10 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
   
       </div>
   
-
+ 
      <div class="main">
      <br><br>
-      <div id="outletShow" align="left" style="width:90%">
+      <div id="outletShow">
       
       
      </div>
@@ -293,8 +268,8 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
         <div data-theme="c" data-role="header" data-position="fixed" style="background-color:#5EBBE8; color:#fff" data-add-back-btn="true" > 
 
       <!-- <a data-role="button"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left"  onClick=""  ><img src="menu.png"></a>-->
-       <a data-role="button"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left" onClick="pageOutlet()" ><img src="menu.png"></a>
-  <!--     <a id="backjpj" style="height:18px" data-rel="back" data-iconpos="right" class="ui-btn-right"><img src="back1.png"></a>-->
+       
+       <a id="backjpj" style="height:18px" data-rel="back" data-iconpos="left" class="ui-btn-right"><img src="back1.png"></a>
              <h3>Gift List</h3>
 
              
@@ -330,7 +305,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 <div data-theme="c" data-role="page" id="member" style="background-color:#EBFCFA"  >
         <div data-theme="c" data-role="header" data-position="fixed" style="background-color:#5EBBE8; color:#fff" data-add-back-btn="true" > 
 
-       <a data-role="button"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left" onClick="homePage()" ><img src="menu.png"></a>
+       <a data-role="button"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left" onClick="login()" ><img src="menu.png"></a>
        
        <a id="backjpj" style="height:18px" data-rel="back" data-iconpos="left" class="ui-btn-right"><img src="back1.png"></a>
              <h3>Select Member</h3>
@@ -347,7 +322,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
        
         <label for="mobile"  >&nbsp;&nbsp;&nbsp;&nbsp;Member Mobile Number:</label>
         <form action="" method="get">
-         <input type="number" name="mMobile" id="mMobile" list="mobile" placeholder="Mobile No">
+         <input type="text" name="mMobile" id="mMobile" list="mobile" placeholder=" member moblist">
         <!-- <datalist id="mobile">-->
          <!-- <option value="01681456782">
           <option value="01681456784">
@@ -357,10 +332,9 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
         <!--</datalist><br>-->
         <br>
         
-       
+        <div id="mobError"></div>
     <a id="rewardButton" data-role="button"  onClick="memberSelect()" ><strong>Next</strong></a>
       </form>
-       <div id="mobError"></div>
      </div>
 
 </div>
@@ -369,10 +343,10 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 <div data-theme="c" data-role="page" id="registration" style="background-color:#EBFCFA"  >
         <div data-theme="c" data-role="header" data-position="fixed" style="background-color:#5EBBE8; color:#fff" data-add-back-btn="true" > 
 
-       <a data-role="button"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left" onClick="homePage()"  ><img src="menu.png"></a>
+       <a data-role="button"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left" onClick="login()"  ><img src="menu.png"></a>
        
        <a id="backjpj" style="height:18px" data-rel="back" data-iconpos="left" class="ui-btn-right"><img src="back1.png"></a>
-             <h3>Add Member</h3>
+             <h3>Member Registration</h3>
 
              
   
@@ -381,33 +355,26 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
      <div class="main" id="mem">
         
         <form class="form" method="post" action="#" id="formTest" >
-   <!--   <h2 align="center" >New Member Registration </h2>
-      -->
+      <h2 align="center" >New Member Registration </h2>
+      
       
       <font style="color:#005E8A">
-      <div data-role="fieldcontain">
      <label for="name" style="color:#0060BF" >Full Name<span class="required">*</span></label>
-         <input type="text"   name="name" id="name"  value="" placeholder="Enter full name here."  style="color:#000;">
+         <input type="text"  name="name" id="name"  value=""  style="color:#000;">
        
-     </div>
-     <div data-role="fieldcontain">
+     
      <label for="mobile"  style="color:#0060BF">Mobile No<span class="required">*</span></label>       
-          <input type="text" name="mobile" id="mobile"  value=""  style="color:#000; " readonly>
-     </div>
-     <div data-role="fieldcontain">     
+          <input type="number" name="mobile" id="mobile"  value=""  style="color:#000; " readonly>
      <label for="area"  style="color:#0060BF">Area</label>       
-          <input type="text" name="area" id="area"  value="" placeholder="Enter location here."  style="color:#000; ">
+          <input type="text" name="area" id="area"  value=""  style="color:#000; ">
           
-      </div>
-      <div data-role="fieldcontain">         
+               
      <label for="genderComb" style="color:#0060BF" >Gender</label>
          <select id="genderComb" name="genderComb" >
             <option value=""  selected style="color:#000;">Select.....</option>
             <option value="Male" style="color:#000;">Male</option>
             <option value="Female" style="color:#000;">Female</option>
-         </select> 
-      </div>
-      <div data-role="fieldcontain">    
+         </select>  
      <label for="ageRange" style="color:#0060BF" >Age Range<span class="required">*</span></label>
                 <select id="ageRange" name="ageRange" >
             <option value=""  selected style="color:#000;">Select.....</option>
@@ -421,12 +388,12 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
             <option value="80-90" style="color:#000;">80-90</option>
             <option value="90-100" style="color:#000;">90-100</option>
          </select>
-       </div>
+
          </font> 
           <div class="errorChk"></div><br>
-       <div >
-          <a id="memButton" data-role="button"  onClick="member_save()" ><strong>Submit</strong></a>	
-        </div> 
+       
+          <a id="memButton" data-role="button"  onClick="member_save();product()" ><strong>Submit</strong></a>	
+         
        </form>
 
     
@@ -439,20 +406,40 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 <div data-theme="c" data-role="page" id="ProductList" style="background-color:#EBFCFA">
 
 <div data-role="panel" id="routePanel" data-display="overlay" style="width:60%;">
-<div id="memHis" style="overflow:scroll; height:500px"></div>
 
+<table  >
+  <tr>
+    <td>16/10/2017  
+    Faire and lovely 250 mg 
+    Ponds white beauty  200 mg
+    Janata Store
+    </td>
+  </tr>
+  <tr>
+    <td>16/10/2017  
+    Faire and lovely 250 mg 
+    Ponds white beauty  200 mg
+    Janata Store</td>
+  </tr>
+  <tr>
+    <td>16/10/2017  
+    Faire and lovely 250 mg 
+    Ponds white beauty  200 mg
+    Janata Store</td>
+  </tr>
+</table>
 
 
 			</div><!-- /panel -->
 
 
 
-       
+
 
 
        <div data-theme="c" data-role="header" data-position="fixed" style="background-color:#5EBBE8; color:#fff" data-add-back-btn="true" > 
        
-     <a data-rel="back" style="height:18px" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left"   ><img src="back1.png"></a>
+     <a data-rel="back"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left"   ><img src="back1.png"></a>
      
        <a id="backjpj" style="height:18px" data-role="button" data-iconpos="left" onClick="productQue()" class="ui-btn-right">Next</a>
             <h3>Product List</h3>
@@ -496,11 +483,9 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
              
       <div data-theme="c" data-role="footer" data-position="fixed" style="background-color:#5EBBE8; color:#fff"  > 
 		
-        <a onClick="#" ></a>
-        <a  href="#routePanel" onClick="memHistory()"  class="ui-btn-right" >History<br></a>
-        <br><br>
+       <a data-role="button"   class="ui-btn ui-shadow ui-corner-all ui-btn-icon-right" onClick="#" ></a>
+        <a style="height:18px"  href="#routePanel"  class="ui-btn-right" >History</a>
      </div>
-     <br>
  </div>
  
  
@@ -510,7 +495,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
      <div data-theme="c" data-role="page" id="ProductQueList" style="background-color:#EBFCFA"  >
        <div data-theme="c" data-role="header" data-position="fixed" style="background-color:#5EBBE8; color:#fff" data-add-back-btn="true" > 
        
-     <a data-rel="back" style="height:18px" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left"   ><img src="back1.png"></a>
+     <a data-rel="back"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left"   ><img src="back1.png"></a>
      
        <!--<a id="backjpj" style="height:18px" data-role="button" data-iconpos="left" onClick="getOrder()" class="ui-btn-right">Next</a>-->
             <h3>Que List</h3>
@@ -555,9 +540,9 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
      <div data-theme="c" data-role="page" id="ProductQueRedList" style="background-color:#EBFCFA"  >
        <div data-theme="c" data-role="header" data-position="fixed" style="background-color:#5EBBE8; color:#fff" data-add-back-btn="true" > 
        
-     <a data-rel="back" style="height:18px" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left"   ><img src="back1.png"></a>
+     <a data-rel="back"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left"   ><img src="back1.png"></a>
      
-       <!--<a id="backjpj" style="height:18px" data-role="button" data-iconpos="left" onClick="getOrder()" class="ui-btn-right">Next</a>-->
+       <a id="backjpj" style="height:18px" data-role="button" data-iconpos="left" onClick="getOrder()" class="ui-btn-right">Next</a>
             <h3>Purchase / Redeem</h3>
 
            
@@ -571,22 +556,39 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
           <font id="item_Que_comboRed_id">
      
   			Please select from Que
-               
+              
             <div id="queMem"></div>
 
-   		 <table width="50%" border="0">
-          <tr>
-            <td > <input type="number" name="redMobile" id="redMobile" list="mobile" placeholder=" member mobile" onKeyUp="checkRadio()"></td>
-            <td width="50px"><a data-role="button" style=" height:20px; width:20px; font-size:12px"   onClick="clearText()" >X</a> </td>
-          </tr>
-        </table>
-
-         
+   		 
+          <!--<table   >
+               <caption> Product Information</caption> 
+              		<tr >
+                    <td style="width:50px"><input name="" type="radio" value=""></td>
+                    <td > Faisal Ahmed (01713454218)   </td>
+                    </tr>
+                    
+                    <tr >
+                    <td><input name="" type="radio" value=""></td>
+                   <td> Nurjahan Begum (01712566666)
+           			</td>
+                    
+                     </tr>
+                     
+                     <tr >
+                    <td><input name="" type="radio" value=""></td>
+                   <td >Kabir Miah (01912546589) 
+           			</td>
+                   
+                    
+                     </tr>
+                     
+                     
+          </table>-->
        
        		 <table   >
               <!-- <caption> Product Information</caption> -->
               		<tr >
-                    <td > <a data-role="button"    onClick="PurchaseDone()" >Purchase & CheckOut</a></td>
+                    <td > <a data-role="button"    onClick="PurchaseDone()" >Purchase</a></td>
                     <td >  <a data-role="button"   onClick="Redeem()" >Redeem</a>   </td>
                     </tr>   
           </table>
@@ -597,7 +599,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
        <!-- <a id="memButton" data-role="button"  onClick="historyShow()" ><strong>History</strong></a>-->
 
     </div>   
-        <div id="mobError"></div>        
+                
       <div data-theme="c" data-role="footer" data-position="fixed" style="background-color:#5EBBE8; color:#fff"  > 
 
      </div>
@@ -610,44 +612,33 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
      <div data-theme="c" data-role="page" id="RedeemList" style="background-color:#EBFCFA"  >
        <div data-theme="c" data-role="header" data-position="fixed" style="background-color:#5EBBE8; color:#fff" data-add-back-btn="true" > 
        
-     <a data-rel="back" style="height:18px" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left"   ><img src="back1.png"></a>
+     <a data-rel="back"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left"   ><img src="back1.png"></a>
      
-       <a id="backjpj" style="height:18px" data-role="button" data-iconpos="left" onClick="product()" class="ui-btn-right">Add to Cart</a>
+       <a id="backjpj" style="height:18px" data-role="button" data-iconpos="left" onClick="getOrder()" class="ui-btn-right">Next</a>
             <h3>Purchase</h3>
 
            
   </div>
-
-       
-       <table width="100%" border="0">
- <table width="100%" border="0">
-        <tr>
-
-         <td style="color:#0060BF">  <font style="font-size:14px; color:#009D00" id="prRedMemP">  </font></td>
-          <td style="color:#0060BF"> </td>
-       </tr>
-       <tr>
-          <td style="color:#0060BF"><font style="font-size:16px; color:#009D00" id="prRedMemNameP">  </font> </td>
-          <td style="color:#0060BF"> <font style="font-size:16px; color:#A8224A" id="prRedPointP"></font></td>
-           
-       </tr>
-     </table> 
-     
+       <p><strong style="font-size:16px; color:#060"> Anwara Begum--</strong> &nbsp;&nbsp; Points: 2350<font id="purchOutlet" style="font-size:16px; color:#060">
+         </font> <br> 
+         &nbsp;&nbsp;&nbsp;
+        
+       </p>
+       <p>&nbsp; </p>
   <div id="prdctQueRedListShow">
           <font id="item_Que_comboList_id">
      
   			
               
        <div id="purchaseShow"></div>
-       		 <table width="100%" border="0" cellspacing="0" cellpadding="0">
-              <tr>
-                <td >&nbsp;&nbsp;<img src="camera.png" width="40" height="40" alt="TakePic" onClick="get_pic_HairCare()"></td>
-                <td align="center" ><img  width="100" height="100" alt="" id="myImage" ;>
-                                <input name="prPhoto" id="prPhoto" type="hidden" value="" > </td>
-                </tr>
-                </table><br>
+       		 <table   >
+              <!-- <caption> Product Information</caption> -->
+              		<tr >
+                    <td > <img src="camera.png" style="height:50px; width:50px"></td>
+                    </tr>   
+          </table>
        
-       
+       <div>Image</div>
        
        <div id="pError"></div>
        <a data-role="button"   onClick="ConfirmPage()" >Next</a>
@@ -668,47 +659,39 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
      <div data-theme="c" data-role="page" id="ConfirmPageSave" style="background-color:#EBFCFA"  >
        <div data-theme="c" data-role="header" data-position="fixed" style="background-color:#5EBBE8; color:#fff" data-add-back-btn="true" > 
        
-     <a data-rel="back" style="height:18px" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left"   ><img src="back1.png"></a>
+     <a data-rel="back"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left"   ><img src="back1.png"></a>
      
        <a id="backjpj" style="height:18px" data-role="button" data-iconpos="left" onClick="getOrder()" class="ui-btn-right">Next</a>
             <h3>Submit</h3>
 
            
   </div>
-       <p>
-       <table width="100%" border="0">
-         <table width="100%" border="0">
-                <tr>
+       <p><strong style="font-size:16px; color:#060"> Anwara Begum--</strong> &nbsp;&nbsp; Points: 2350<font id="purchOutlet" style="font-size:16px; color:#060">
+         </font> <br> 
+         &nbsp;&nbsp;&nbsp;
         
-                 <td style="color:#0060BF">  <font style="font-size:14px; color:#009D00" id="prRedMemPS">  </font></td>
-                  <td style="color:#0060BF"> </td>
-               </tr>
-               <tr>
-                  <td style="color:#0060BF"><font style="font-size:16px; color:#009D00" id="prRedMemNamePS">  </font> </td>
-                  <td style="color:#0060BF"> <font style="font-size:16px; color:#A8224A" id="prRedPointPS"></font></td>
-                   
-               </tr>
-             </table> 
+       </p>
+       <p>&nbsp; </p>
   <div id="prdctQueConShow">
          
      
   			
               <div id="purchaseFinalShow"></div>
-              <div id="TotalProductPoint" style="color:#960522; font-size:18px"></div>
+            
 
    
        
        		 <table >
               		<tr >
-                    <td width="30px" > <input name="" type="checkbox" value="" required></td>
+                    <td width="30px" > <input name="" type="checkbox" value=""></td>
                     <td > Confirm</td>
                     <td >  <a data-role="button" id="saveButton"  onClick="finalPurchaseSave()" >Submit</a></td>
                     </tr>   
           </table>
        
        
-       <div id="errorChk"></div> 
-       <div class="savedGiftError"></div>  
+       
+       
       
         
        <!-- <a id="memButton" data-role="button"  onClick="historyShow()" ><strong>History</strong></a>-->
@@ -730,17 +713,15 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 
      <div data-theme="c" data-role="page" id="submitPage" style="background-color:#EBFCFA"  >
        <div data-theme="c" data-role="header" data-position="fixed" style="background-color:#5EBBE8; color:#fff" data-add-back-btn="true" > 
-         
-  <!--   <a data-rel="back"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left"   ><img src="back1.png"></a> -->
-       <a data-rel="button" style="height:18px" onClick="submitBack()"   ><img src="back1.png"></a>
-  <!--  <a data-role="button"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left" onClick="login()" ><img src="menu.png"></a>
-     -->
-      <!-- <a id="backjpj" style="height:18px" data-role="button" data-iconpos="left" onClick="getOrder()" class="ui-btn-right">Next</a>-->
+       
+     <a data-rel="back"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left"   ><img src="back1.png"></a>
+     
+       <a id="backjpj" style="height:18px" data-role="button" data-iconpos="left" onClick="getOrder()" class="ui-btn-right">Next</a>
             <h3>Submitted Successfully</h3>
 
            
   </div>
-       <!--
+       
          <br> 
          &nbsp;&nbsp;&nbsp;
         
@@ -759,18 +740,10 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
        
        
       
-         </font>-->
-         </p>
-       <p>&nbsp; </p>
-            <table width="100%" border="0">
-  <tr>
-    <td align="center"><div id="visit_success" style="background-image:url(result_back.png); background-repeat:no-repea; width:300px; height:200px; color:#FFF; font-size:20px;"   align="center"></br></br></br>Submitted Successfully</div>
-    </div> </td>
-  </tr>
-</table>
+         </font>
+            <div class="errorChk"></div> 
 
-            
-              
+    </div>   
                 
       <div data-theme="c" data-role="footer" data-position="fixed" style="background-color:#5EBBE8; color:#fff"  > 
 
@@ -781,52 +754,6 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
   
      </div>
  </div>
-<!------------------------------------------------redeem-------------------->
-<div data-theme="c" data-role="page" id="redeemShow" style="background-color:#EBFCFA"  >
-        <div data-theme="c" data-role="header" data-position="fixed" style="background-color:#5EBBE8; color:#fff" data-add-back-btn="true" > 
 
-      <!-- <a data-role="button"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left"  onClick=""  ><img src="menu.png"></a>-->
-       
-       <a id="backjpj" style="height:18px" data-rel="back" data-iconpos="left" class="ui-btn-right"><img src="back1.png"></a>
-             <h3>Member Information</h3>
-
-             
-  
-     </div>
-      <table width="100%" border="0">
-        <tr>
-
-         <td style="color:#0060BF">  <font style="font-size:14px; color:#009D00" id="prRedMem">  </font></td>
-          <td style="color:#0060BF"></td>
-       </tr>
-       <tr>
-          <td style="color:#0060BF"><font style="font-size:16px; color:#009D00" id="prRedMemName">  </font> </td>
-           <td style="color:#0060BF"> <font style="font-size:16px; color:#A8224A" id="prRedPoint"></font></td>
-       </tr>
-     </table> 
-     
-     <div>
-           <br>
-          <label style="color:#0053A6" >&nbsp;&nbsp;Reward Currently available</label>
-           
-          <br>
-          <div id="gSError" style="color:#910000"></div>
-           <div id="giftRedShow"></div>
-        
-     </div>
-    
-       		 <table   >
-            
-              		<tr >
-                     <td width="30px" > <input name="" id="checkId" type="checkbox" value="" required></td>
-                    <td > Confirm</td>
-                    <td >  <a data-role="button" id="saveButton"  onClick="giftSave()" >Submit</a></td>
-                    </tr>   
-          </table>
-          
-</div>
-		
-
-<script type="text/javascript" src="cordova.js"></script>
 </body>
 </html>
