@@ -146,47 +146,6 @@ function Redeem(){
 	
 }
 
-//function giftString(){
-//	  
-//    giftdctStr=localStorage.giftdctStr
-//	giftdctStrList=giftdctStr.split('<rdrd>')
-//	 
-//	 
-//	var giftShow=''
-//    var submitRedeem=''						 
-//	for (i=0; i<giftdctStrList.length-1; i++){	
-//	
-//	var qtyName="qtyName_"+i.toString()
-//	var gNameID="gNameID_"+i.toString()
-//	
-//	var qtyNameValue=$("#"+qtyName).val()
-//	if (parseInt(qtyNameValue)>0)	{
-//	giftStrShow = 	giftdctStrList[i]				
-//					strList=giftStrShow.split('|')	
-//					var	giftId = strList[0]		
-//					var	giftName = strList[1]
-//					var	giftPoint = strList[2]
-//					
-//					submitRedeem=submitRedeem+giftId+'<fdfd>'+giftName+'<fdfd>'+giftPoint+'<fdfd>'+qtyNameValue+'<rdrd>'
-//			
-//		
-//	 }
-//	}
-//	
-//	//     
-////	 }
-//					localStorage.submitRedeem=submitRedeem					  
-//		            var giftShowRed=giftShow
-//					localStorage.giftShowRed=giftShowRed
-//					
-//					$("#giftRedShow").html(localStorage.giftShowRed)
-//
-//					
-//					$("#redMobile").val(Mobile);
-//					//$("#prMem").html(localStorage.memInfo);
-//					$("#prRedMem").html(localStorage.memRedMob);
-//					$("#prRedMemName").html(localStorage.memRedName)
-//}
 
 
 
@@ -467,8 +426,8 @@ function memHistory(){
 	var outletShow=localStorage.outlet
 	var outletIDN=outletShow.split('|');
 	var IdOutlet=outletIDN[0];
-	var memShow=localStorage.radioMem
-	var memMob=memShow.split('|')[1]
+	var memShow=localStorage.memInfo
+	var memMob=memShow.split('-')[0]
 	//alert (apiPath+'memHistory?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+IdOutlet+'&memMob='+memMob)
 	
 	$.ajax({
@@ -489,54 +448,7 @@ function memHistory(){
 		}//success
 	  });//ajax
 }
-//function productQue(){
-//	$('#prodctQList').html(localStorage.outlet)
-//	$("#prMSave").html(localStorage.memInfo);
-//	$("#prSPoint").html(localStorage.memPoint);
-//	//alert ('hi')
-//	prodctStr=localStorage.prodctStr
-//	prodctListStr=prodctStr.split('<rdrd>')
-//	//alert (localStorage.prodctStr)
-//	var prdctShow='<table>'
-//	var submitPurchase=''				 
-//	for (i=0; i<prodctListStr.length-1; i++){
-//		 var qName="qName_"+i.toString()
-//		 var pNameID="pNameID_"+i.toString()
-//		 
-//		 var qNameValue=$("#"+qName).val()
-//		
-//			if (parseInt(qNameValue)>0)	{
-//				var qtyName=qName
-//				var pdNameID=pNameID
-//	
-//				//alert (qNameValue)
-//				strShow = 	prodctListStr[i]				
-//				strList=strShow.split('|')			
-//				var	prdctName = strList[0]
-//				var	prdctID = strList[1]
-//				var	category = strList[2]
-//				var	rate = strList[3]
-//			
-//				var pShow=prdctName+'|'+rate+'|'+ category
-//				submitPurchase=submitPurchase+prdctName+'<fdfd>'+prdctID+'<fdfd>'+category+'<fdfd>'+rate+'<fdfd>'+qNameValue+'<rdrd>'
-//				//alert (submitPurchase)
-//				prdctShow=prdctShow+'<tr> <td width="50px" style="background-color:#FFEAF4" align="center">'+qNameValue+'</td><td style="background-color:#CEF">'+pShow+'</td></tr>' 
-//				//alert(prdctShow)
-//				}
-//	    }
-//		prdctShow=prdctShow+'</table>'
-//		
-//		localStorage.submitPurchase=submitPurchase						 
-//						 
-//		localStorage.prdctShowCart=prdctShow
-//		//alert (localStorage.prdctShowCart)
-//		$("#item_Que_combo_id").empty()
-//		$("#item_Que_combo_id").append(localStorage.prdctShowCart);
-//		
-//		//$('#outletMenu').html(localStorage.outlet)
-//		url="#ProductQueList";					
-//		$.mobile.navigate(url);	
-//	}	
+
 	
 	
 function productQueRedeem(){
@@ -827,7 +739,7 @@ function login_user() {
 			localStorage.cid='UNILEVER';
 			localStorage.cm_id=cm_id;
 			localStorage.cm_pass=cm_pass;
-			localStorage.synced='NO'
+			//localStorage.synced='NO'
 			
 			if(localStorage.sync_code==undefined || localStorage.sync_code==""){
 					localStorage.sync_code=0
@@ -859,7 +771,24 @@ function login_user() {
 							}
 							if (resultArray[0]=='SUCCESS'){
 								
+								
+								localStorage.memInfo=''
+								localStorage.memPoint=''
+								localStorage.memRedMob=''
+								localStorage.memRedName=''
+								localStorage.giftShowRed=''
+								localStorage.submitRedeem=''
+								localStorage.memInfo=''
+								localStorage.memPoint=''
 								localStorage.submitPurchase=''
+								localStorage.prdctShowCart=''
+								localStorage.queMem=''
+								localStorage.radioMem=''
+								localStorage.pFinal=''
+								localStorage.pStr=''
+								localStorage.TotalProductPoint=''
+								localStorage.pStrFinal=''
+								localStorage.pStr=''
 								
 								
 								localStorage.sync_code=resultArray[1];
@@ -902,12 +831,12 @@ function login_user() {
 							
          						outletString=localStorage.outletString
 								outletStringList=outletString.split('<rdrd>')
-								var outletShow=''
+								var outletShow='<ul>'
 								for (i=0; i<outletStringList.length-1; i++){
-			outletShow=outletShow+'<table width="100%"><tr onClick="setOutlet(\'' + outletStringList[i] + '\')"><td > '+outletStringList[i]+'</td></tr><tr style=" background-color:#000; height:1px"><td></td></tr></table>'
+			outletShow=outletShow+'<li class="ui-btn ui-shadow ui-corner-all " style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin"  onClick="setOutlet(\'' + outletStringList[i] + '\')"><td > '+outletStringList[i]+'</li>'
 									//alert (outletStringList[i])
 								}
-								outletShow=outletShow
+								outletShow=outletShow+'</ul>'
 								localStorage.outletShow=outletShow
 								
 								$("#outletShow").html(localStorage.outletShow)
@@ -977,6 +906,23 @@ function login_user() {
 //		
 function setOutlet(outlet){
 	localStorage.outlet=outlet
+	
+	
+	localStorage.memInfo=''
+	localStorage.memPoint=''
+	localStorage.memRedMob=''
+	localStorage.memRedName=''
+	localStorage.submitRedeem=''
+	localStorage.memInfo	=''
+	localStorage.memPoint	=''
+	localStorage.submitPurchase=''
+	localStorage.prdctShowCart=''
+	localStorage.queMem	=''
+	localStorage.radioMem =''
+	localStorage.pFinal=''
+	localStorage.pStr=''
+	localStorage.TotalProductPoint=''
+	localStorage.pStrFinal=''
 	menuSearch()
 	
 }
