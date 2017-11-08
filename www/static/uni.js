@@ -471,7 +471,7 @@ function productQueRedeem(){
 					for (i=0; i<memStrList.length-1; i++){	
 						memMob=memStrList[i].split('<fd>')[0]
 						memName=memStrList[i].split('<fd>')[1]
-						outletShow=outletShow+'<table width="100%"><tr><td width="20%"><input onClick="RedeemGet('+i+')"  id="radioMem_'+i+'" type="radio" name="radio_mem"  value="'+memName+'|'+memMob+'" >'+memName+'|'+memMob+'</td></tr></table>'
+						outletShow=outletShow+'<li class="ui-btn ui-shadow ui-corner-all " style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin; alignment-adjust:before-edge" onClick="checkRadioVal('+i+');RedeemGet('+i+')"><input onClick="RedeemGet('+i+')"  id="radioMem_'+i+'" type="radio" name="radio_mem"  value="'+memName+'|'+memMob+'" >'+memName+'|'+memMob+'</li>'
 
 					}
 					localStorage.queMem=outletShow
@@ -494,7 +494,12 @@ function productQueRedeem(){
 	
 	
 }
-
+function checkRadioVal(i){
+	var radioMemGet="#radioMem_"+i
+	$(radioMemGet).attr('checked', true) 
+	
+	//$( "#"+radioMemGet ).prop( "checked", true );
+}
 function clearText(){
 	$( "#redMobile" ).prop( "disabled", false );
 	$("#queMem").html(localStorage.queMem);
@@ -539,7 +544,7 @@ function purchaseDataSave(){
 			//alert(result2)
 			//alert ('hi')	
 			if (result2!='Failed'){
-			$("#errorChk").text("Submitted Successfully");
+			$("#visit_success").html("</br></br>Successfully added to cart");
 			localStorage.submitPurchase=''
 			localStorage.prdctShowCart=''
 			$("#orderBtn").show();	
@@ -924,7 +929,7 @@ function setOutlet(outlet){
 	localStorage.TotalProductPoint=''
 	localStorage.pStrFinal=''
 	menuSearch()
-	
+	location.reload();
 }
 
 function selcetCat(){
@@ -1007,7 +1012,17 @@ function member_save(){
         success: function(result1) {
 			
 			if (result1!=''){
+				
+			localStorage.memInfo=mobile+'-'+name
+			localStorage.memPoint=0
+			//alert ('11')
+			
+			$("#prMem").html(localStorage.memInfo);
+			$("#prPoint").html(localStorage.memPoint);	
+				
+				
 			$(".errorChk").text("Submitted Successfully");
+			
 			$("#memButton").show();		
 			}
           

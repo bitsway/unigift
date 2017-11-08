@@ -235,9 +235,18 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
         <div class="errorMsg"></div>
           <font face="Arial, Helvetica, sans-serif" size="-1"> 
                 </br>
-    
-                  <input type="text" name="cm_id" id="cm_id" placeholder="CM ID" value=""  >
-                  <input type="text" name="cm_pass" id="cm_pass" placeholder="PASSWORD" value="" >
+      <div align="center" >         
+    <table width="500px" border="0">
+  <tr>
+    <td><input type="text" width="500px" name="cm_id" id="cm_id" placeholder="CM ID" value=""  ></td>
+  </tr>
+  <tr>
+    <td><input type="number" style="width:500px; height:30px"  name="cm_pass" id="cm_pass" placeholder="PASSWORD" value="" ></td>
+  </tr>
+</table>
+</div>
+                  
+                  
       
            </font>                
 				</br></br>
@@ -338,7 +347,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
        
         <label for="mobile"  >&nbsp;&nbsp;&nbsp;&nbsp;Member Mobile Number:</label>
         <form action="" method="get">
-         <input type="text" name="mMobile" id="mMobile" list="mobile" placeholder="Mobile No">
+         <input type="number" name="mMobile" id="mMobile" list="mobile" placeholder="Mobile No">
         <!-- <datalist id="mobile">-->
          <!-- <option value="01681456782">
           <option value="01681456784">
@@ -562,13 +571,13 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
           <font id="item_Que_comboRed_id">
      
   			Please select from Que
-              
+               
             <div id="queMem"></div>
 
-   		 <table width="100%" border="0">
+   		 <table width="50%" border="0">
           <tr>
-            <td > <input type="text" name="redMobile" id="redMobile" list="mobile" placeholder=" member mobile" onKeyUp="checkRadio()"></td>
-            <td width="100px"><a data-role="button" style=" height:20px; width:100px; font-size:12px"   onClick="clearText()" >Clear</a> </td>
+            <td > <input type="number" name="redMobile" id="redMobile" list="mobile" placeholder=" member mobile" onKeyUp="checkRadio()"></td>
+            <td width="50px"><a data-role="button" style=" height:20px; width:20px; font-size:12px"   onClick="clearText()" >X</a> </td>
           </tr>
         </table>
 
@@ -817,7 +826,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
           
 </div>
 		
-<script type="text/javascript" src="phonegap.js"></script>
+
 <script type="text/javascript" src="cordova.js"></script>
 </body>
 </html>
