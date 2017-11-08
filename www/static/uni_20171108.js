@@ -51,16 +51,10 @@ function login() {
 	
 }
 function homePage() {
-	url="#menuPage";					
+	url="#pageOutlet";					
 	$.mobile.navigate(url);
 	
 }
-
-function pageOutlet(){
-	url="#pageOutlet";					
-	$.mobile.navigate(url);
-}
-
 function Redeem(){
 	var redMobile=$("#redMobile").val();
 	if (redMobile.length < 13){
@@ -84,7 +78,6 @@ function Redeem(){
 	
 				if (resultStr[0]=='SUCCESS'){
 				    
-
 					var Mobile=resultStr[1];
 					var mem_name=resultStr[2];
 					var mem_point=resultStr[3];
@@ -260,6 +253,8 @@ function giftSave(){
 			$("#gSError").text("Point should be greater than Gift POint");
 			
 		}
+	
+	
 			
 	}	
 	
@@ -322,7 +317,6 @@ function memberSelect(){
 					
 			 }
 		});
-		
 		}else{
 			$("#mobError").html("Please Enter Mobile No");
 	}
@@ -334,209 +328,56 @@ function product(){
 	$('#prodctPage').html(localStorage.outlet)
 	url="#ProductList";					
 	$.mobile.navigate(url);	
-	}
+	}	
 	
-		
-function productQueNew(i){
+function productQue(){
 	$('#prodctQList').html(localStorage.outlet)
 	$("#prMSave").html(localStorage.memInfo);
 	$("#prSPoint").html(localStorage.memPoint);
-	
-	var qName="qName_"+i.toString()
-	var pNameID="pNameID_"+i.toString()
-	var qNameValue=$("#"+qName).val()
-	var pNameIDValue=$("#"+pNameID).val()
-	//alert (pNameIDValue)
-	var submitPurchaseget=localStorage.submitPurchase
-	
-	
-	if (parseInt(qNameValue)>0)	{
-		var qtyName=qName
-		var pdNameID=pNameID
-
-		var strShow=pNameIDValue
-		//alert (strShow)			
-		strList=strShow.split('|')	
-				
-		var	prdctName = strList[0]
-		var	prdctID = strList[1]
-		var	category = strList[2]
-		var	rate = strList[3]
-		var	point = strList[4]
-	
+	//alert ('hi')
+	prodctStr=localStorage.prodctStr
+	prodctListStr=prodctStr.split('<rdrd>')
+	//alert (localStorage.prodctStr)
+	var prdctShow='<table>'
+	var submitPurchase=''				 
+	for (i=0; i<prodctListStr.length-1; i++){
+		 var qName="qName_"+i.toString()
+		 var pNameID="pNameID_"+i.toString()
+		 
+		 var qNameValue=$("#"+qName).val()
 		
-		var addProduct=prdctName+'<fdfd>'+prdctID+'<fdfd>'+category+'<fdfd>'+rate+'<fdfd>'+qNameValue+'<fdfd>'+point+'<rdrd>'
-		
-		if (submitPurchaseget.indexOf(prdctID+'<fdfd>') !=-1){
-			submitPurchaseList=submitPurchaseget.split('<rdrd>')
-			for (i=0; i<submitPurchaseList.length-1; i++){
-				strShow = 	submitPurchaseList[i]				
-				strList=strShow.split('<fdfd>')			
-				var	prdctIDS = strList[1]
-				if (prdctID==prdctIDS){
-					submitPurchase=submitPurchaseget.replace(strShow,addProduct)
-				}
-			}
-		}
-		
-		else{
-			submitPurchase=submitPurchaseget+addProduct
-		}
-		
-		//submitPurchase=submitPurchaseget+prdctName+'<fdfd>'+prdctID+'<fdfd>'+category+'<fdfd>'+rate+'<fdfd>'+qNameValue+'<fdfd>'+point+'<rdrd>'
-		
-		}
-		
-	else {
-		var qtyName=qName
-		var pdNameID=pNameID
-		var strShow=pNameIDValue		
-		qNameValue=0		
-		strList=strShow.split('|')			
-		var	prdctName = strList[0]
-		var	prdctID = strList[1]
-		var	category = strList[2]
-		var	rate = strList[3]
-		var	point = strList[4]
-		
-		var pShow=prdctName+'|'+rate+'|'+ category
-		var addProduct=prdctName+'<fdfd>'+prdctID+'<fdfd>'+category+'<fdfd>'+rate+'<fdfd>'+qNameValue+'<fdfd>'+point+'<rdrd>'
-		
-	
-		if (submitPurchaseget.indexOf(prdctID+'<fdfd>') !=-1){
-			submitPurchaseList=submitPurchaseget.split('<rdrd>')
-			for (i=0; i<submitPurchaseList.length-1; i++){
-				strShow = 	submitPurchaseList[i]				
-				strList=strShow.split('<fdfd>')			
-				var	prdctIDS = strList[1]
-				if (prdctID==prdctIDS){
-					submitPurchase=submitPurchaseget.replace(strShow)
-				}
-				
-			}
-			
-		}
-	}
-		
-		localStorage.submitPurchase=submitPurchase
-		
-	
-}
-function productQue(){
-	
-	var prdctShow=''
-	
-	var submitPurchaseG=localStorage.submitPurchase
-	var submitPurchase=submitPurchaseG.replace('undefined<rdrd>','')
-	
-	submitPurchaseList=submitPurchase.split('<rdrd>')
-	
-	for (i=0; i<submitPurchaseList.length-1; i++){
-		
-		strShow = 	submitPurchaseList[i]	
-		//alert (strShow)		
-		if 	(strShow.length > 0){
-			strList=strShow.split('<fdfd>')			
-			var	prdctName = strList[0]
-			var	prdctID = strList[1]
-			var	category = strList[2]
-			var	rate = strList[3]
-			var point= strList[5]
-			var qNameValue= strList[4]
-			var pShow=prdctName+'|'+rate+'|'+ category+'|'+ point
 			if (parseInt(qNameValue)>0)	{
+				var qtyName=qName
+				var pdNameID=pNameID
+	
+				//alert (qNameValue)
+				strShow = 	prodctListStr[i]				
+				strList=strShow.split('|')			
+				var	prdctName = strList[0]
+				var	prdctID = strList[1]
+				var	category = strList[2]
+				var	rate = strList[3]
 			
-			prdctShow=prdctShow+'<tr> <td width="50px" style="background-color:#FFEAF4" align="center">'+qNameValue+'</td><td style="background-color:#CEF">'+pShow+'</td></tr>'
-			}
-		}
+				var pShow=prdctName+'|'+rate+'|'+ category
+				submitPurchase=submitPurchase+prdctName+'<fdfd>'+prdctID+'<fdfd>'+category+'<fdfd>'+rate+'<fdfd>'+qNameValue+'<rdrd>'
+				//alert (submitPurchase)
+				prdctShow=prdctShow+'<tr> <td width="50px" style="background-color:#FFEAF4" align="center">'+qNameValue+'</td><td style="background-color:#CEF">'+pShow+'</td></tr>' 
+				//alert(prdctShow)
+				}
+	    }
+		prdctShow=prdctShow+'</table>'
+		
+		localStorage.submitPurchase=submitPurchase						 
+						 
 		localStorage.prdctShowCart=prdctShow
-
+		//alert (localStorage.prdctShowCart)
 		$("#item_Que_combo_id").empty()
 		$("#item_Que_combo_id").append(localStorage.prdctShowCart);
 		
-
-		
-		
-	}
-	if (localStorage.prdctShowCart!=''){
+		//$('#outletMenu').html(localStorage.outlet)
 		url="#ProductQueList";					
 		$.mobile.navigate(url);	
-	}
-}
-function memHistory(){
-	var outletShow=localStorage.outlet
-	var outletIDN=outletShow.split('|');
-	var IdOutlet=outletIDN[0];
-	var memShow=localStorage.radioMem
-	var memMob=memShow.split('|')[1]
-	//alert (apiPath+'memHistory?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+IdOutlet+'&memMob='+memMob)
-	
-	$.ajax({
-		type:'POST',
-		url:apiPath+'memHistory?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+IdOutlet+'&memMob='+memMob,
-	
-        success: function(result) {
-			resultStr=result.split('<SYNCDATA>');	
-			if (resultStr[0]=='FAILED'){
-				$("#memHis").html(resultStr[1]);
-				
-			}
-			if (resultStr[0]=='SUCCESS'){	
-				$("#memHis").html(resultStr[1]);
-				//alert (resultStr[1])
-				
-			}//if      
-		}//success
-	  });//ajax
-}
-//function productQue(){
-//	$('#prodctQList').html(localStorage.outlet)
-//	$("#prMSave").html(localStorage.memInfo);
-//	$("#prSPoint").html(localStorage.memPoint);
-//	//alert ('hi')
-//	prodctStr=localStorage.prodctStr
-//	prodctListStr=prodctStr.split('<rdrd>')
-//	//alert (localStorage.prodctStr)
-//	var prdctShow='<table>'
-//	var submitPurchase=''				 
-//	for (i=0; i<prodctListStr.length-1; i++){
-//		 var qName="qName_"+i.toString()
-//		 var pNameID="pNameID_"+i.toString()
-//		 
-//		 var qNameValue=$("#"+qName).val()
-//		
-//			if (parseInt(qNameValue)>0)	{
-//				var qtyName=qName
-//				var pdNameID=pNameID
-//	
-//				//alert (qNameValue)
-//				strShow = 	prodctListStr[i]				
-//				strList=strShow.split('|')			
-//				var	prdctName = strList[0]
-//				var	prdctID = strList[1]
-//				var	category = strList[2]
-//				var	rate = strList[3]
-//			
-//				var pShow=prdctName+'|'+rate+'|'+ category
-//				submitPurchase=submitPurchase+prdctName+'<fdfd>'+prdctID+'<fdfd>'+category+'<fdfd>'+rate+'<fdfd>'+qNameValue+'<rdrd>'
-//				//alert (submitPurchase)
-//				prdctShow=prdctShow+'<tr> <td width="50px" style="background-color:#FFEAF4" align="center">'+qNameValue+'</td><td style="background-color:#CEF">'+pShow+'</td></tr>' 
-//				//alert(prdctShow)
-//				}
-//	    }
-//		prdctShow=prdctShow+'</table>'
-//		
-//		localStorage.submitPurchase=submitPurchase						 
-//						 
-//		localStorage.prdctShowCart=prdctShow
-//		//alert (localStorage.prdctShowCart)
-//		$("#item_Que_combo_id").empty()
-//		$("#item_Que_combo_id").append(localStorage.prdctShowCart);
-//		
-//		//$('#outletMenu').html(localStorage.outlet)
-//		url="#ProductQueList";					
-//		$.mobile.navigate(url);	
-//	}	
+	}	
 	
 	
 function productQueRedeem(){
@@ -615,8 +456,7 @@ function purchaseDataSave(){
 	 var outletId=outletNameId[0];
      var outletName=outletNameId[1];
 	 var submitStrPurchase=localStorage.submitPurchase
-	 
-	 submitStrPurchase=submitStrPurchase.replace('undefined<rdrd>','') 
+	  
 	 //alert(apiPath+'purchase_submit?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+outletId+'&outletName='+outletName+'&submitStrPurchase='+encodeURIComponent(submitStrPurchase)+'&memPoint='+localStorage.memPoint+'&memName='+memName+'&memMobile='+memMobile)
 
 	$.ajax({
@@ -626,19 +466,16 @@ function purchaseDataSave(){
         success: function(result2) {
 			//alert(result2)
 			//alert ('hi')	
-			if (result2!='Failed'){
+			if (result2!=''){
 			$("#errorChk").text("Submitted Successfully");
-			localStorage.submitPurchase=''
-			localStorage.prdctShowCart=''
-			$("#orderBtn").show();	
-			url="#submitPage";					
-			$.mobile.navigate(url);		
+			$("#orderBtn").show();		
 			}
 		}      
  
 	  });
 	  
-	
+	url="#submitPage";					
+	$.mobile.navigate(url);	
 	}	
 	
 	
@@ -734,8 +571,7 @@ function ConfirmPage(){
 	prList=prStr.split('<rd>')
 	var prdctShow='<table>'
 	var pStr=''
-	var TotalProductPoint=0
-	
+	 
 	for (i=0; i<prList.length-1; i++){
 		 prSingle=prList[i]
 		 var pID		=prSingle.split('<fd>')[0]
@@ -746,25 +582,20 @@ function ConfirmPage(){
 		 var category	  =prSingle.split('<fd>')[5]
 		 var qQty="qQty_"+i
 		 var pShow=pName+'|'+product_rate+'|'+ category
-		
+		 
 		 var qty=$("#"+qQty).val()
-		 //alert (qty)
 		 if (parseInt(qty)>0){
 			 //alert (qty)
 			 prdctShow=prdctShow+'<tr><td style="background-color:#CEF">'+pShow+'</td> <td width="50px" style="background-color:#FFEAF4" align="center">'+qty+'</td></tr>' 
 			 pStr=pStr+pID+'<fd>'+pName+'<fd>'+qty+'<fd>'+product_point+'<fd>'+product_rate+'<fd>'+category+'<rd>'
-			 TotalProductPoint=TotalProductPoint+(parseInt(product_qty)*parseInt(product_point))
 		 }
 		
 		// pFinalStr=pFinalStr+'<tr><td style="background-color:#CEF">'+pShow+'</td> <td width="50px" style="background-color:#FFEAF4" align="center">'+product_qty+''+'</td></tr>' 	
 	}//for
 	prdctShow=prdctShow+'</table>'
-	//alert (TotalProductPoint)
-	localStorage.TotalProductPoint=TotalProductPoint
 	localStorage.pStrFinal=prdctShow
 	localStorage.pStr=pStr
 	
-	$("#TotalProductPoint").html('Purchase Point:   '+localStorage.TotalProductPoint);
 	$("#purchaseFinalShow").html(localStorage.pStrFinal);
 	$("#errorChk").html('');
 	$("#savedGiftError").html('');
@@ -858,10 +689,6 @@ function login_user() {
 								
 							}
 							if (resultArray[0]=='SUCCESS'){
-								
-								localStorage.submitPurchase=''
-								
-								
 								localStorage.sync_code=resultArray[1];
 								localStorage.outletString=resultArray[2];
 								localStorage.prodctStr=resultArray[3];
@@ -869,9 +696,6 @@ function login_user() {
 								localStorage.recMemStr=resultArray[4];
 								localStorage.giftdctStr=resultArray[5];
 								localStorage.catdctStr=resultArray[6];
-								
-								
-								localStorage.sync='Yes';
 								
 								var catListStrStr=localStorage.catdctStr.split('<rdrd>');
 								var catList='';
@@ -941,7 +765,7 @@ function login_user() {
 									 
 									 pShowList=prodctListStr[i].split('|')
 									 var pShow=pShowList[0]+'|'+pShowList[3]+'|'+pShowList[2]
-									 prdctShow=prdctShow+'<table><tr><td> <input  <input onKeyUp="productQueNew('+i+')" type="number" id="'+qName+'"   name="'+qName+'" style="width:50px"><input type="hidden" id="'+pNameID+'"   name="'+pNameID+'"  value="'+prodctListStr[i]+'"></td><td>'+pShow+'</td></tr></table>'                          
+									 prdctShow=prdctShow+'<table><tr><td> <input type="number" id="'+qName+'"   name="'+qName+'" style="width:50px"><input type="hidden" id="'+pNameID+'"   name="'+pNameID+'"  value="'+prodctListStr[i]+'"></td><td>'+pShow+'</td></tr></table>'                          
 									// alert (prdctShow)
 								    }
 								  
@@ -995,11 +819,11 @@ function selcetCat(){
 	 var cat = prodctListStr[i].split('|')[2]
 	 //alert (cat)
 	 if (catValue=="ALL"){
-	 	prdctShow=prdctShow+'<table><tr><td> <input onKeyUp="productQueNew('+i+')" type="number" id="'+qName+'"   name="'+qName+'" style="width:50px"><input type="hidden" id="'+pNameID+'"   name="'+pNameID+'"  value="'+prodctListStr[i]+'"></td><td>'+prodctListStr[i]+'</td></tr></table>'   
+	 	prdctShow=prdctShow+'<table><tr><td> <input type="number" id="'+qName+'"   name="'+qName+'" style="width:50px"><input type="hidden" id="'+pNameID+'"   name="'+pNameID+'"  value="'+prodctListStr[i]+'"></td><td>'+prodctListStr[i]+'</td></tr></table>'   
 	 }
 	 else{
 		 if (cat==catValue){
-		 	prdctShow=prdctShow+'<table><tr><td> <input onKeyUp="productQueNew('+i+')" type="number" id="'+qName+'"   name="'+qName+'" style="width:50px"><input type="hidden" id="'+pNameID+'"   name="'+pNameID+'"  value="'+prodctListStr[i]+'"></td><td>'+prodctListStr[i]+'</td></tr></table>'   
+		 	prdctShow=prdctShow+'<table><tr><td> <input type="number" id="'+qName+'"   name="'+qName+'" style="width:50px"><input type="hidden" id="'+pNameID+'"   name="'+pNameID+'"  value="'+prodctListStr[i]+'"></td><td>'+prodctListStr[i]+'</td></tr></table>'   
 		 }
 	 }
 	// alert (prdctShow)
@@ -1015,6 +839,135 @@ function selcetCat(){
 
 }
 
+
+//function getOrder(){
+//	  
+//     prodctStr=localStorage.prodctStr
+//	 
+//	// alert(prodctStr)
+//	 prodctListStr=prodctStr.split('<rdrd>')
+//	 
+//	 
+//	 var prdctShow=''
+//	 var submitPurchase=''							 
+//	 for (i=0; i<prodctListStr.length-1; i++){
+//		
+//	 var qName="qName_"+i.toString()
+//	 var pNameID="pNameID_"+i.toString()
+//	 
+//	 var qNameValue=$("#"+qName).val()
+//	 var memStr=localStorage.my_nam_mob
+//		//alert(memStr)
+//	
+//	 if (parseInt(qNameValue)>0)	{
+//		 	var qtyName=qName
+//	        var pdNameID=pNameID
+//
+//				//alert (qNameValue)
+//			  	strShow = 	prodctListStr[i]				
+//				strList=strShow.split('|')			
+//				var	prdctName = strList[0]
+//				var	prdctId = strList[1]
+//				var	rate = strList[2]
+//		
+//			
+//		        submitPurchase=submitPurchase+prdctName+'<fdfd>'+prdctId+'<fdfd>'+rate+'<fdfd>'+qNameValue+'<rdrd>'
+//		 
+//				
+//			 
+//		
+//		
+//	    prdctShow=prdctShow+'<table><tr><td>'+qNameValue+'--'+prodctListStr[i]+'</td></tr></table>' 
+//		//alert(prdctShow)
+//	 }
+//	 
+//	
+//	 
+//	 }
+//								  
+//		 localStorage.submitPurchase=submitPurchase						 
+//		 //alert (localStorage.submitPurchase)					     
+//		 localStorage.prdctShowCart=prdctShow
+//		//alert (localStorage.prdctShowCart)
+//		 $("#item_combo_id_Cart").empty()
+//		 $("#item_combo_id_Cart").append(localStorage.prdctShowCart);
+//
+//	
+//	
+//    $('#orderOutlet').html(localStorage.outlet); 
+//	$("#mMobileOrder").html(localStorage.my_nam_mob)  
+//	url="#orderShow";					
+//	$.mobile.navigate(url);
+//}
+//
+//
+//
+//
+//function purchaseDataSave(){
+//	
+//	 //$('#nam_mob').html(n_m);
+//	 var memStrListView=localStorage.my_nam_mob
+//	 //alert (localStorage.my_nam_mob)
+//	 var memNameId=memStrListView.split(',');
+//	 var memMo = memNameId[0]
+//	 var memNa = memNameId[1]
+//	 
+//	 var outletShow=localStorage.outlet
+//	 var outletNameId=outletShow.split('|');
+//	 var outletId=outletNameId[0];
+//     var outletName=outletNameId[1];
+//	 var submitStrPurchase=localStorage.submitPurchase
+//	//encode
+////	  
+//	 alert(apiPath+'purchase_submit?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&memMo='+memMo+'&memNa='+memNa+'&outletId='+outletId+'&outletName='+outletName+'&submitStrPurchase='+encodeURIComponent(submitStrPurchase))
+//	  
+//	  
+//	  $.ajax({
+//		type:'POST',
+//		url:apiPath+'purchase_submit?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&memMo='+memMo+'&memNa='+memNa+'&outletId='+outletId+'&outletName='+outletName+'&submitStrPurchase='+encodeURIComponent(submitStrPurchase),
+//	
+//        success: function(result2) {
+//			alert(result2)
+//			//alert ('hi')	
+//			if (result2!=''){
+//			$(".errorChk").text("Submitted Successfully");
+//			$("#orderBtn").show();		
+//			}
+//	
+//
+//
+//	
+//		}      
+//
+//			 
+//			  
+//	  });
+//	  
+//}
+//window.onload = init;
+//
+//function init() {
+//   // Bind "onsubmit" event handler to the "submit" button
+//   document.getElementById("formTest").onsubmit = validateForm;
+//   // Bind "onclick" event handler to "reset" button
+//   document.getElementById("btnReset").onclick = clearForm;
+//   // Set initial focus
+//   document.getElementById("name").focus();
+//}
+//
+//function validateForm(theForm) {
+//   with(theForm) {
+//      // return false would prevent default submission
+//      return (isNotEmpty(name, "Please enter your name!", elmNameError)
+//          // && isNumeric(txtZipcode, "Please enter a 5-digit zip code!", elmZipcodeError)
+//           //&& isLengthMinMax(txtZipcode, 5, 5, "Please enter a 5-digit zip code!", elmZipcodeError)
+//		   && isNumeric(mobile, "Please enter a valid phone number!", elmPhoneError)
+//          // && isSelected(mobile, 11, 11, "Please enter a 10-digit mobile number!", elmMobileError)
+//		   && isSelected(ageRange, "Please make a selection!", elmAgeError)
+//        
+//      );
+//   }
+//}
 
 //=======clear form=============
 
@@ -1051,7 +1004,7 @@ function member_save(){
 	  }else{
 
 	  
-	 // alert(apiPath+'dataSave?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&name='+name+'&genderComb='+genderComb+'&birthDayG='+birthDayG+'&birthMonthG='+birthMonthG+'&address='+address+'&mobile='+mobile+'&reg_date='+reg_date+'&reg_by_cm='+reg_by_cm+'&otltName='+otltName+'&ageRange='+ageRange+'&thana='+thana+'&district='+district)
+	  alert(apiPath+'dataSave?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&name='+name+'&genderComb='+genderComb+'&birthDayG='+birthDayG+'&birthMonthG='+birthMonthG+'&address='+address+'&mobile='+mobile+'&reg_date='+reg_date+'&reg_by_cm='+reg_by_cm+'&otltName='+otltName+'&ageRange='+ageRange+'&thana='+thana+'&district='+district)
 	  
 	  
 	  $.ajax({
