@@ -203,7 +203,7 @@ function giftSave(){
 					//alert(result)
 					//alert ('hi')	
 					if (result!=''){
-					$("#errorChk").text("Submitted Successfully");
+					$("#visit_success").html("Submitted Successfully");
 					$("#saveButton").show();	
 					
 					}
@@ -712,7 +712,7 @@ function finalPurchaseSave(){
 			//alert(result2)
 			//alert ('hi')	
 			if (result2!=''){
-			$("#errorChk").text("Submitted Successfully");
+			$("#visit_success").html("Submitted Successfully");
 			$("#saveButton").show();		
 			}
 		}      
