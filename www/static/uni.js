@@ -203,7 +203,7 @@ function giftSave(){
 					//alert(result)
 					//alert ('hi')	
 					if (result!=''){
-					$("#visit_success").html("Submitted Successfully");
+					//$("#visit_success").html("Submitted Successfully");
 					$("#saveButton").show();	
 					
 					}
@@ -546,7 +546,7 @@ function purchaseDataSave(){
 			if (result2!='Failed'){
 			//$("#visit_success").html("</br></br>Successfully added to cart");
 			
-			$("#visit_success").html("</br></br>Submitted Successfully");
+			//$("#visit_success").html("</br></br>Submitted Successfully");
 			
 			localStorage.submitPurchase=''
 			localStorage.prdctShowCart=''
@@ -722,7 +722,11 @@ function finalPurchaseSave(){
 	
 			if (result2=='Success'){
 				//$("#visit_success").html("</br></br>Successfully added to cart");
-				$("#visit_success").html("Submitted Successfully");
+				//$("#visit_success").html("Submitted Successfully");
+				
+				
+				
+				
 				$("#saveButton").show();		
 			}
 		}      
@@ -731,6 +735,7 @@ function finalPurchaseSave(){
 	  
 	url="#submitPage";					
 	$.mobile.navigate(url);	
+	location.reload();
 	}	
 
 
