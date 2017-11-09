@@ -688,10 +688,16 @@ function ConfirmPage(){
 	$("#purchaseFinalShow").html(localStorage.pStrFinal);
 	$("#errorChk").html('');
 	$("#savedGiftError").html('');
+	$("#payCombTextDiv").hide();
+	
 	url="#ConfirmPageSave";					
 	$.mobile.navigate(url);	
 	}
-
+function setTextPay(){
+	var payMode=$("#payComb").val();
+	if (payMode=='BKash'){$("#payCombTextDiv").show();}else{$("#payCombTextDiv").hide();}
+	
+}
 
 function finalPurchaseSave(){
 	// alert ('hi')
