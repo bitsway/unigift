@@ -216,7 +216,7 @@ function giftSave(){
 		}
 		else{
 			
-			$("#gSError").text("Point should be greater than Gift POint");
+			$("#gSError").text("Point should be greater than Gift Point");
 			
 		}
 			
