@@ -4,9 +4,13 @@
 
 
 var apiPath='http://w02.yeapps.com/unigift/syncmobile_eon/'
-var apipath_image='http://w02.yeapps.com/unigift/'
+var apipath_image='http://i001.yeapps.com/image_hub/unigift/upload_image/'
 
 function get_pic_HairCare(i) {
+	var tempTime = $.now();
+	var image_name=tempTime.toString()+localStorage.cm_id+".jpg";
+	$("#prPhotoName").val(image_name);
+	
 	navigator.camera.getPicture(onSuccessHairCare, onFailHairCare, { quality: 70,
 		targetWidth: 450,
 		destinationType: Camera.DestinationType.FILE_URI , correctOrientation: true });
@@ -711,12 +715,15 @@ function finalPurchaseSave(){
      var outletName=outletNameId[1];
 	 var finalData=localStorage.pStr
 	 var payComb=$("#payComb").val()
+	 var BKashNo=$("#BKashNo").val()
+	 var prPhotoName=$("#prPhotoName").val()
+	 var prPhotoPath=$("#prPhoto").val()
 ////	  
 	//alert(apiPath+'purchaseComplete?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+outletId+'&outletName='+outletName+'&finalData='+encodeURIComponent(finalData)+'&memberName='+memberName+'&memmobileNo='+memmobileNo)
 	
 	$.ajax({
 		type:'POST',
-		url:apiPath+'purchaseComplete?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+outletId+'&outletName='+outletName+'&finalData='+encodeURIComponent(finalData)+'&memberName='+memberName+'&memmobileNo='+memmobileNo+'&payComb='+payComb,
+		url:apiPath+'purchaseComplete?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+outletId+'&outletName='+outletName+'&finalData='+encodeURIComponent(finalData)+'&memberName='+memberName+'&memmobileNo='+memmobileNo+'&payComb='+payComb+'&BKashNo='+BKashNo+'&prPhotoName='+prPhotoName,
 	
 		success: function(result2) {
 	
@@ -725,6 +732,15 @@ function finalPurchaseSave(){
 				//$("#visit_success").html("Submitted Successfully");
 				
 				
+				 upload_image(prPhotoPath,prPhotoName);
+				
+				
+				  
+				 $("#BKashNo").val('')
+				 $("#prPhotoName").val('')
+				 $("#prPhoto").val('')
+				 $("#myImage").html('')
+				 
 				
 				
 				$("#saveButton").show();		
@@ -739,7 +755,31 @@ function finalPurchaseSave(){
 	}	
 
 
+function upload_image(imageURI, imageName) {
+   // alert (localStorage.photo_submit_url)
+	var options = new FileUploadOptions();
+    options.fileKey="upload";
+    options.fileName=imageName;
+    options.mimeType="image/jpeg";
 	
+    var params = {};
+    params.value1 = "test";
+    params.value2 = "param";
+	
+    options.params = params;
+	options.chunkedMode = false;
+	
+    var ft = new FileTransfer();
+     ft.upload(imageURI, encodeURI(apipath_image),winProfile,failProfile,options);
+	 
+}
+
+function winProfile(r) {
+}
+
+function failProfile(error) {
+	//$("#error_prescription_submit").text('Memory Error. Please take new picture and Submit');
+}	
 //function finalPurchaseSave(){
 //	url="#submitPage";					
 //	$.mobile.navigate(url);	
