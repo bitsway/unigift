@@ -4,7 +4,9 @@
 
 
 var apiPath='http://w02.yeapps.com/unigift/syncmobile_eon/'
-var apipath_image='http://i001.yeapps.com/image_hub/unigift/upload_image/'
+//var apipath_image='http://i001.yeapps.com/image_hub/unigift/upload_image/'
+var apipath_image='http://i001.yeapps.com/image_hub/planbd_image/planbd_image/'
+
 
 function get_pic_HairCare(i) {
 	var tempTime = $.now();
@@ -757,6 +759,7 @@ function finalPurchaseSave(){
 
 function upload_image(imageURI, imageName) {
    // alert (localStorage.photo_submit_url)
+   alert (imageURI+' |  '+imageName)
 	var options = new FileUploadOptions();
     options.fileKey="upload";
     options.fileName=imageName;
@@ -770,7 +773,7 @@ function upload_image(imageURI, imageName) {
 	options.chunkedMode = false;
 	
     var ft = new FileTransfer();
-     ft.upload(imageURI, encodeURI(apipath_image+"/"),winProfile,failProfile,options);
+     ft.upload(imageURI, encodeURI(apipath_image),winProfile,failProfile,options);
 	 
 }
 
