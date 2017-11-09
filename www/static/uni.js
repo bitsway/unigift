@@ -4,8 +4,8 @@
 
 
 var apiPath='http://w02.yeapps.com/unigift/syncmobile_eon/'
-//var apipath_image='http://i001.yeapps.com/image_hub/unigift/upload_image/'
-var apipath_image='http://i001.yeapps.com/image_hub/planbd_image/planbd_image/'
+var apipath_image='http://i001.yeapps.com/image_hub/unigift/upload_image/'
+//var apipath_image='http://i001.yeapps.com/image_hub/planbd_image/planbd_image/'
 
 
 function get_pic_HairCare(i) {
@@ -732,8 +732,8 @@ function finalPurchaseSave(){
 			if (result2=='Success'){
 				//$("#visit_success").html("</br></br>Successfully added to cart");
 				//$("#visit_success").html("Submitted Successfully");
-				
-				
+				 alert (result2)
+				 alert (prPhotoPath+' | '+prPhotoName)
 				 upload_image(prPhotoPath,prPhotoName);
 				
 				
@@ -753,7 +753,7 @@ function finalPurchaseSave(){
 	  
 	url="#submitPage";					
 	$.mobile.navigate(url);	
-	location.reload();
+	//location.reload();
 	}	
 
 
