@@ -770,7 +770,7 @@ function upload_image(imageURI, imageName) {
 	options.chunkedMode = false;
 	
     var ft = new FileTransfer();
-     ft.upload(imageURI, encodeURI(apipath_image),winProfile,failProfile,options);
+     ft.upload(imageURI, encodeURI(apipath_image+"/"),winProfile,failProfile,options);
 	 
 }
 
