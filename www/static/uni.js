@@ -732,8 +732,8 @@ function finalPurchaseSave(){
 			if (result2=='Success'){
 				//$("#visit_success").html("</br></br>Successfully added to cart");
 				//$("#visit_success").html("Submitted Successfully");
-				 alert (result2)
-				 alert (prPhotoPath+' | '+prPhotoName)
+				 //alert (result2)
+				 //alert (prPhotoPath+' | '+prPhotoName)
 				 upload_image(prPhotoPath,prPhotoName);
 				
 				
@@ -745,21 +745,22 @@ function finalPurchaseSave(){
 				 
 				
 				
-				$("#saveButton").show();		
+				$("#saveButton").show();
+				url="#submitPage";					
+				$.mobile.navigate(url);	
+				location.reload();		
 			}
 		}      
 	
 	  });
 	  
-	url="#submitPage";					
-	$.mobile.navigate(url);	
-	//location.reload();
+	
 	}	
 
 
 function upload_image(imageURI, imageName) {
    // alert (localStorage.photo_submit_url)
-   alert (imageURI+' |  '+imageName)
+   //alert (imageURI+' |  '+imageName)
 	var options = new FileUploadOptions();
     options.fileKey="upload";
     options.fileName=imageName;
