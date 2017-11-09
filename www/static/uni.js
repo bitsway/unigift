@@ -340,7 +340,7 @@ function productQueNew(i){
 		
 		else{
 			submitPurchase=submitPurchaseget+addProduct
-		}
+			}
 		
 		//submitPurchase=submitPurchaseget+prdctName+'<fdfd>'+prdctID+'<fdfd>'+category+'<fdfd>'+rate+'<fdfd>'+qNameValue+'<fdfd>'+point+'<rdrd>'
 		
@@ -544,7 +544,10 @@ function purchaseDataSave(){
 			//alert(result2)
 			//alert ('hi')	
 			if (result2!='Failed'){
-			$("#visit_success").html("</br></br>Successfully added to cart");
+			//$("#visit_success").html("</br></br>Successfully added to cart");
+			
+			$("#visit_success").html("</br></br>Submitted Successfully");
+			
 			localStorage.submitPurchase=''
 			localStorage.prdctShowCart=''
 			$("#orderBtn").show();	
@@ -712,6 +715,7 @@ function finalPurchaseSave(){
 		success: function(result2) {
 	
 			if (result2=='Success'){
+				//$("#visit_success").html("</br></br>Successfully added to cart");
 				$("#visit_success").html("Submitted Successfully");
 				$("#saveButton").show();		
 			}
