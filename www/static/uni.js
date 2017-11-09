@@ -810,7 +810,7 @@ function login_user() {
 								var catListStrStr=localStorage.catdctStr.split('<rdrd>');
 								var catList='';
 								catList=catList+"<option value=ALL>ALL</option>"
-						        for (i=0;i<catListStrStr.length;i++){	
+						        for (i=0;i<catListStrStr.length-1;i++){	
 								catList=catList+"<option value="+encodeURIComponent(catListStrStr[i])+">"+catListStrStr[i]+"</option>"; 
 								
 							    }
