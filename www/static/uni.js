@@ -701,19 +701,19 @@ function finalPurchaseSave(){
 	 var outletId=outletNameId[0];
      var outletName=outletNameId[1];
 	 var finalData=localStorage.pStr
+	 var payComb=$("#payComb").val()
 ////	  
 	//alert(apiPath+'purchaseComplete?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+outletId+'&outletName='+outletName+'&finalData='+encodeURIComponent(finalData)+'&memberName='+memberName+'&memmobileNo='+memmobileNo)
 	
 	$.ajax({
 		type:'POST',
-		url:apiPath+'purchaseComplete?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+outletId+'&outletName='+outletName+'&finalData='+encodeURIComponent(finalData)+'&memberName='+memberName+'&memmobileNo='+memmobileNo,
+		url:apiPath+'purchaseComplete?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+outletId+'&outletName='+outletName+'&finalData='+encodeURIComponent(finalData)+'&memberName='+memberName+'&memmobileNo='+memmobileNo+'&payComb='+payComb,
 	
 		success: function(result2) {
-			//alert(result2)
-			//alert ('hi')	
-			if (result2!=''){
-			$("#visit_success").html("Submitted Successfully");
-			$("#saveButton").show();		
+	
+			if (result2=='Success'){
+				$("#visit_success").html("Submitted Successfully");
+				$("#saveButton").show();		
 			}
 		}      
 	

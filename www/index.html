@@ -695,7 +695,19 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
   			
               <div id="purchaseFinalShow"></div>
               <div id="TotalProductPoint" style="color:#960522; font-size:18px"></div>
-
+			  
+              
+              
+              <label for="payComb" style="color:#0060BF" >Payment Mode</label>
+             <select id="payComb" name="payComb" >
+                <option value="Cash" style="color:#000;">Cash</option>
+                <option value="BKash" style="color:#000;">BKash</option>
+                <option value="CreditCard" style="color:#000;">CreditCard</option>
+             </select> 
+              
+              
+              
+              
    
        
        		 <table >
@@ -704,7 +716,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
                     <td > Confirm</td>
                     <td >  <a data-role="button" id="saveButton"  onClick="finalPurchaseSave()" >Submit</a></td>
                     </tr>   
-          </table>
+          	</table>
        
        
        <div id="errorChk"></div> 
