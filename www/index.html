@@ -159,9 +159,20 @@
 			$("#outletShow").html(localStorage.outletShow)
 			$("#giftShow").html(localStorage.giftShow)
 			
-			$("#prdctShow").html(localStorage.prdctShow)
-			$("#item_combo_id").empty()
-			$("#item_combo_id").append(localStorage.prdctShow); 
+			//$("#prdctShow").html(localStorage.prdctShow)
+			//$("#item_combo_id").empty()
+			//$("#item_combo_id").append(localStorage.prdctShow); 
+			
+			
+			var item_combo_id_ob=$('#item_combo_id');				
+			item_combo_id_ob.empty()
+			item_combo_id_ob.append(localStorage.prdctShow);
+			
+			var item_combo_id_ob_S=$('#item_combo_id_S');
+			item_combo_id_ob_S.empty()
+			item_combo_id_ob_S.append(localStorage.prdctShowList);
+	
+	
 			
 			$("#item_Que_combo_id").empty()
 		    $("#item_Que_combo_id").append(localStorage.prdctShowCart);
@@ -186,6 +197,10 @@
 			
 			//alert (localStorage.catList)
 			var rpt_rep_ob1=$("#catgoryList");
+			rpt_rep_ob1.empty();	 
+			rpt_rep_ob1.append(localStorage.catList);
+			
+			var rpt_rep_ob1=$("#catgoryListShow_S");
 			rpt_rep_ob1.empty();	 
 			rpt_rep_ob1.append(localStorage.catList);
 			
@@ -248,7 +263,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 </table>
 </div>
                   
-                  
+                 
       
            </font>                
 				</br></br>
@@ -321,8 +336,8 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
     <td><a data-role="button"  onClick="productQueRedeem()" style="height:25px; font-size:16px">Que</a></td>
   </tr>
 </table>
-
-    
+<br><br><br>
+    <a data-role="button"  onClick="productShowPage()" style="height:25px; font-size:16px">Produc List</a>
     
      </div>
 
@@ -475,24 +490,28 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 
 
  
-         &nbsp;&nbsp;&nbsp;
-         <table width="400" border="0">
+        
+         <table width="600px" border="0">
           <tr>
-            <td><select name="catgoryList" style="width:200px" id="catgoryList" onChange="selcetCat()"  >
+          	<td width="30px">&nbsp; 
+            </td>
+            <td> 
+            <select name="catgoryList"  id="catgoryList" onChange="selcetCat()"  >
                 <option value=""  >Category</option>
              </select></td>
           </tr>
         </table>
 
-            
+          
               
           
      <!--  </p>
        <p>&nbsp; </p>-->
-  <div id="prdctShow"  style="overflow:scroll; height:600px">
-          <font id="item_combo_id">
-         </font>
-       <!-- <a id="memButton" data-role="button"  onClick="historyShow()" ><strong>History</strong></a>-->
+  <div id="prdctShow"  style="overflow:scroll; height:400px; "  align="left"  >
+  		<ul class="list" id="item_combo_id" style="background-color:#EDFEED">
+        </ul>
+         
+      <br><br><br><br>
 
     </div>   
            <br><br><br><br><br><br><br><br>  
@@ -505,6 +524,62 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
      <br>
  </div>
  
+ 
+
+<!----------------------------------product List Show----------->
+
+<div data-theme="c" data-role="page" id="ProductListShow" style="background-color:#EBFCFA">
+
+<div data-theme="c" data-role="header" data-position="fixed" style="background-color:#5EBBE8; color:#fff" data-add-back-btn="true" > 
+       
+     <a data-rel="back" style="height:18px" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left"   ><img src="back1.png"></a>
+     
+      
+            <h3>Product List</h3>
+
+           
+  </div>
+         <font id="prodctPage_S" style="font-size:12px; color:#060">
+         </font> <br>
+ <p>
+ 
+ 
+ 
+
+ 
+        
+         <table width="600px" border="0">
+          <tr>
+          	<td width="30px">&nbsp; 
+            </td>
+            <td> 
+            <select name="catgoryListShow_S"  id="catgoryListShow_S" onChange="selcetCat_S()"  >
+                <option value=""  >Category</option>
+             </select></td>
+          </tr>
+        </table>
+         
+
+            
+              
+          
+     <!--  </p>
+       <p>&nbsp; </p>-->
+  <div id="prdctShow_S"  style="overflow:scroll; height:400px; "  align="left" >
+         <ul class="list" id="item_combo_id_S" style="background-color:#EDFEED">
+        </ul>
+       <!-- <a id="memButton" data-role="button"  onClick="historyShow()" ><strong>History</strong></a>-->
+		<br><br><br><br>
+    </div>   
+           <br><br><br><br><br><br><br><br>  
+      <div data-theme="c" data-role="footer" data-position="fixed" style="background-color:#5EBBE8; color:#fff"  > 
+		
+       
+        
+        <br><br>
+     </div>
+     <br>
+ </div>
  
 
 <!----------------------------------------------Shopping Buscket------------------->
@@ -771,9 +846,9 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
   <div id="prdctQueSubShow">
           <font id="item_Que_comboSub_id">
      
-            
-
-   
+            </font>-->
+		
+   		 
           			
        		
        
@@ -781,7 +856,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
        
        
       
-         </font>-->
+         
          </p>
        <p>&nbsp; </p>
             <table width="100%" border="0">
@@ -791,6 +866,11 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
   </tr>
 </table>
 
+
+<br><br><br><br>
+         
+         <div id="button_show">
+    	 </div> 
             
               
                 

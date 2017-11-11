@@ -2,51 +2,37 @@
 //var apiPath='http://127.0.0.1:8000/unigift/syncmobile_eon/';
 //var apipath_image = 'http://127.0.0.1:8000/moderntrade/';
 
+
 var apiPath='http://w02.yeapps.com/unigift/syncmobile_eon/'
-var apipath_image='http://w02.yeapps.com/unigift/'
+var apipath_image='http://i001.yeapps.com/image_hub/unigift/upload_image/'
+//var apipath_image='http://i001.yeapps.com/image_hub/planbd_image/planbd_image/'
 
-function takePicture(){
 
-navigator.camera.getPicture( cameraSuccess, cameraError, {
-		quality: 90,
-		targetWidth: 400,
-       // destinationType: Camera.DestinationType.FILE_URI,
-		destinationType: Camera.DestinationType.FILE_URI,correctOrientation: true ,
-        correctOrientation: true,
-        saveToPhotoAlbum: true
-    }); 
+function get_pic_HairCare(i) {
+	var tempTime = $.now();
+	var image_name=tempTime.toString()+localStorage.cm_id+".jpg";
+	$("#prPhotoName").val(image_name);
 	
+	navigator.camera.getPicture(onSuccessHairCare, onFailHairCare, { quality: 70,
+		targetWidth: 450,
+		destinationType: Camera.DestinationType.FILE_URI , correctOrientation: true });
 }
-//
-//function validate(){
-//$(".required").each(function(){
-//    if($(this).val().length < 1){
-//        alert("please fill in all the required fields.");
-//        $(this).focus();
-//        return false;
-//    }
-//    else{
-//        return true;
-//    }
-//});
-//return false;
-//}
-
-
-
-
-
-function cameraSuccess(uri){  
-	
-	var imageDiv="myImage"
-	var imageText="prPhoto"
-	var image = document.getElementById(imageDiv);
-	image.src = uri;
-	imagePath = uri;
-    
-	$("#"+imageText).val(imagePath);
-        
+function onSuccessHairCare(imageURI) {
+	var temp_image_div="myImage"
+	var hidden_path="prPhoto"
+	var image = document.getElementById(temp_image_div);
+    image.src = imageURI;
+	$("#"+hidden_path).val(imageURI);
 }
+function onFailHairCare(message) {
+	imagePathA="";
+    alert('Failed because: ' + message);
+}
+
+
+
+
+
 
 //================login=======================
 
@@ -57,21 +43,40 @@ function login_page() {
 	
 }
 
+function submitBack() {
+	
+	url="#menuPage";					
+	$.mobile.navigate(url);
+	
+}
+
 function login() {
 	
 	url="#login";					
 	$.mobile.navigate(url);
 	
 }
+function homePage() {
+	url="#menuPage";					
+	$.mobile.navigate(url);
+	
+}
+
+function pageOutlet(){
+	url="#pageOutlet";					
+	$.mobile.navigate(url);
+}
 
 function Redeem(){
-	//$('#purchOutlet').html(localStorage.outlet);
 	var redMobile=$("#redMobile").val();
-    //alert ('AAA')
-    if (redMobile==""){
-		$("#mobError").html("Please Enter Mobile No");
-	}else{
-		alert (apiPath+'search_mobRedeem?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&redMobile='+redMobile)
+	if (redMobile.length < 13){
+		redMobile='88'+redMobile
+	}
+	//alert (redMobile)
+	
+    if (redMobile.length==13){
+		
+		//alert (apiPath+'search_mobRedeem?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&redMobile='+redMobile)
 		$.ajax({
 			type:'GET',
 		    url:apiPath+'search_mobRedeem?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&redMobile='+redMobile,
@@ -85,6 +90,7 @@ function Redeem(){
 	
 				if (resultStr[0]=='SUCCESS'){
 				    
+
 					var Mobile=resultStr[1];
 					var mem_name=resultStr[2];
 					var mem_point=resultStr[3];
@@ -93,22 +99,29 @@ function Redeem(){
 					localStorage.memPoint=mem_point
 					var memInfoRed=localStorage.memInfo
 					var memRedMob=memInfoRed.split('-')[0];
+					localStorage.memRedMob=memRedMob
 					var memRedName=memInfoRed.split('-')[1];
+					localStorage.memRedName=memRedName
 					//alert (memRedName)
+	
 					
-					var giftdctStr=localStorage.giftdctStr
-					giftdctStrList=giftdctStr.split('<rdrd>')
-					var giftShow=''
-					for (i=0; i<giftdctStrList.length-1; i++){
-								/*if (i/2){
-								giftShow=giftShow+' <table width="100%" border="0" cellpadding="0" cellspacing="0" style="background-color:#AAE3FF" ><tr ><td width="100px"> &nbsp;&nbsp;'+giftdctStrList[i].split('|')[2]+'</td> <td > '+giftdctStrList[i].split('|')[0]+'</td></tr></table>'
+					
+				    giftdctStr=localStorage.giftdctStr
+			        giftdctStrList=giftdctStr.split('<rdrd>')
+			        var giftShow=''
+			
+			        var submitRedeem=''
+			 			
+					for (i=0; i<giftdctStrList.length-1; i++){	
+					var qtyName="qtyName_"+i.toString()
+					var gNameID="gNameID_"+i.toString()
+
+				   
+				    giftShow=giftShow+' <table width="100%" border="0" cellpadding="0" cellspacing="0" ><tr ><td width="50px" > <input type="number" value="" id="'+qtyName+'" name="'+qtyName+'" style="width:50px;" ><input type="hidden" id="'+gNameID+'"   name="'+gNameID+'"  value="'+giftdctStrList[i]+'"></td><td width="100px"> &nbsp;&nbsp;'+giftdctStrList[i].split('|')[2]+'</td> <td > '+giftdctStrList[i].split('|')[0]+'</td></tr></table>'
+										 }
+					 
+						
 								
-								
-								}
-								else*/
-			       giftShow=giftShow+' <table width="100%" border="0" cellpadding="0" cellspacing="0" ><tr ><td width="30px"  height:05px"> <input type="text" value="" id="" name="" style="width:30px; height:05px" ></td><td width="100px"> &nbsp;&nbsp;'+giftdctStrList[i].split('|')[2]+'</td> <td > '+giftdctStrList[i].split('|')[0]+'</td></tr></table>'
-									//alert (outletStringList[i])
-								}
 					var giftShowRed=giftShow
 					localStorage.giftShowRed=giftShowRed
 					
@@ -117,11 +130,11 @@ function Redeem(){
 					
 					$("#redMobile").val(Mobile);
 					//$("#prMem").html(localStorage.memInfo);
-					$("#prRedMem").html(memRedMob);
-					$("#prRedMemName").html(memRedName);
-					$("#prRedPoint").html(localStorage.memPoint);
+					$("#prRedMem").html(localStorage.outlet);
+					$("#prRedMemName").html(mem_name+'|'+Mobile);
+					$("#prRedPoint").html(mem_point);
 					
-					
+					$("#gSError").html('');
 					url="#redeemShow";					
     	            $.mobile.navigate(url);					
 				}
@@ -132,16 +145,87 @@ function Redeem(){
 			 }
 		});
 		
+		
+	}else{
+		$("#mobError").html("Please Enter Mobile No");
 	}	
 	
 }
 
-function giftSave(){
-	
-	//$('#otltName').html(localStorage.outlet);
-//	url="#menuPage";					
-//	$.mobile.navigate(url);	
 
+
+
+
+function giftSave(){
+			var memMb=localStorage.memRedMob;
+			var memNM=localStorage.memRedName
+			var memPoint=localStorage.memPoint;
+		
+			//var memPoint=localStorage.memPoint;
+			var outletShow=localStorage.outlet
+			var outletNameId=outletShow.split('|');
+			var outletId=outletNameId[0];
+			var outletName=outletNameId[1];
+			
+			var memPoint= $("#prRedPoint").html()
+			
+			 giftdctStr=localStorage.giftdctStr
+	         giftdctStrList=giftdctStr.split('<rdrd>')
+	 
+	 
+			var giftShow=''
+			var submitRedeem=''		
+			var giftPointC=0				 
+			for (i=0; i<giftdctStrList.length-1; i++){	
+			
+					var qtyName="qtyName_"+i.toString()
+					var gNameID="gNameID_"+i.toString()
+					
+					var qtyNameValue=$("#"+qtyName).val()
+					if (parseInt(qtyNameValue)>0)	{
+					giftStrShow = 	giftdctStrList[i]				
+									strList=giftStrShow.split('|')	
+									var	giftId = strList[0]		
+									var	giftName = strList[1]
+									var	giftPoint = strList[2]
+									giftPointC=giftPointC+parseInt(giftPoint)
+									submitRedeem=submitRedeem+giftId+'<fdfd>'+giftName+'<fdfd>'+giftPoint+'<fdfd>'+qtyNameValue+'<rdrd>'
+							
+						
+					 }//if
+			
+	       localStorage.submitRedeem=submitRedeem
+		   
+			}
+		   		
+	     //alert (localStorage.submitRedeem)
+		 //alert(apiPath+'redeemComplete?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+outletId+'&outletName='+outletName+'&submitRedeem='+encodeURIComponent(submitRedeem)+'&memPoint='+localStorage.memPoint+'&memNM='+memNM+'&memMb='+memMb)
+		if (giftPointC <= parseInt(memPoint) & parseInt(giftPointC)>0){
+			 $.ajax({
+				type:'POST',
+				url:apiPath+'redeemComplete?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+outletId+'&outletName='+outletName+'&submitRedeem='+encodeURIComponent(submitRedeem)+'&memPoint='+localStorage.memPoint+'&memNM='+memNM+'&memMb='+memMb,
+			
+				success: function(result) {
+					//alert(result)
+					//alert ('hi')	
+					if (result!=''){
+					//$("#visit_success").html("Submitted Successfully");
+					$("#saveButton").show();	
+					
+					}
+				
+				}      
+			 
+			  });
+			  url="#submitPage";					
+			  $.mobile.navigate(url);	
+		}
+		else{
+			
+			$("#gSError").text("Point should be greater than Gift Point");
+			
+		}
+			
 	}	
 	
 	
@@ -161,10 +245,14 @@ function shppingTrip(){
 function memberSelect(){
 	$('#purchOutlet').html(localStorage.outlet);
 	var mMobile=$("#mMobile").val();
-    //alert ('AAA')
-    if (mMobile==""){
-		$("#mobError").html("Please Enter MObile No");
-	}else{
+	if (mMobile.length < 13){
+		mMobile='88'+mMobile
+	}
+	
+   // alert (mMobile)
+    if (mMobile.length==13){
+		
+	
 		//alert (apiPath+'search_mob?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&mMobile='+mMobile)
 		$.ajax({
 			type:'GET',
@@ -200,6 +288,8 @@ function memberSelect(){
 			 }
 		});
 		
+		}else{
+			$("#mobError").html("Please Enter Mobile No");
 	}
 	
 	}		
@@ -209,56 +299,162 @@ function product(){
 	$('#prodctPage').html(localStorage.outlet)
 	url="#ProductList";					
 	$.mobile.navigate(url);	
-	}	
+	}
 	
-function productQue(){
+		
+function productQueNew(i){
 	$('#prodctQList').html(localStorage.outlet)
 	$("#prMSave").html(localStorage.memInfo);
 	$("#prSPoint").html(localStorage.memPoint);
-	//alert ('hi')
-	prodctStr=localStorage.prodctStr
-	prodctListStr=prodctStr.split('<rdrd>')
-	//alert (localStorage.prodctStr)
-	var prdctShow='<table>'
-	var submitPurchase=''				 
-	for (i=0; i<prodctListStr.length-1; i++){
-		 var qName="qName_"+i.toString()
-		 var pNameID="pNameID_"+i.toString()
-		 
-		 var qNameValue=$("#"+qName).val()
-		
-			if (parseInt(qNameValue)>0)	{
-				var qtyName=qName
-				var pdNameID=pNameID
 	
-				//alert (qNameValue)
-				strShow = 	prodctListStr[i]				
-				strList=strShow.split('|')			
-				var	prdctName = strList[0]
-				var	prdctID = strList[1]
-				var	category = strList[2]
-				var	rate = strList[3]
-			
-				var pShow=prdctName+'|'+rate+'|'+ category
-				submitPurchase=submitPurchase+prdctName+'<fdfd>'+prdctID+'<fdfd>'+category+'<fdfd>'+rate+'<fdfd>'+qNameValue+'<rdrd>'
-				//alert (submitPurchase)
-				prdctShow=prdctShow+'<tr> <td width="50px" style="background-color:#FFEAF4" align="center">'+qNameValue+'</td><td style="background-color:#CEF">'+pShow+'</td></tr>' 
-				//alert(prdctShow)
-				}
-	    }
-		prdctShow=prdctShow+'</table>'
+	var qName="qName_"+i.toString()
+	var pNameID="pNameID_"+i.toString()
+	var qNameValue=$("#"+qName).val()
+	var pNameIDValue=$("#"+pNameID).val()
+	//alert (pNameIDValue)
+	var submitPurchaseget=localStorage.submitPurchase
+	
+	
+	if (parseInt(qNameValue)>0)	{
+		var qtyName=qName
+		var pdNameID=pNameID
+
+		var strShow=pNameIDValue
+		//alert (strShow)			
+		strList=strShow.split('|')	
+				
+		var	prdctName = strList[0]
+		var	prdctID = strList[1]
+		var	category = strList[2]
+		var	rate = strList[3]
+		var	point = strList[4]
+	
 		
-		localStorage.submitPurchase=submitPurchase						 
-						 
+		var addProduct=prdctName+'<fdfd>'+prdctID+'<fdfd>'+category+'<fdfd>'+rate+'<fdfd>'+qNameValue+'<fdfd>'+point+'<rdrd>'
+		
+		if (submitPurchaseget.indexOf(prdctID+'<fdfd>') !=-1){
+			submitPurchaseList=submitPurchaseget.split('<rdrd>')
+			for (i=0; i<submitPurchaseList.length-1; i++){
+				strShow = 	submitPurchaseList[i]				
+				strList=strShow.split('<fdfd>')			
+				var	prdctIDS = strList[1]
+				if (prdctID==prdctIDS){
+					submitPurchase=submitPurchaseget.replace(strShow,addProduct)
+				}
+			}
+		}
+		
+		else{
+			submitPurchase=submitPurchaseget+addProduct
+			}
+		
+		//submitPurchase=submitPurchaseget+prdctName+'<fdfd>'+prdctID+'<fdfd>'+category+'<fdfd>'+rate+'<fdfd>'+qNameValue+'<fdfd>'+point+'<rdrd>'
+		
+		}
+		
+	else {
+		var qtyName=qName
+		var pdNameID=pNameID
+		var strShow=pNameIDValue		
+		qNameValue=0		
+		strList=strShow.split('|')			
+		var	prdctName = strList[0]
+		var	prdctID = strList[1]
+		var	category = strList[2]
+		var	rate = strList[3]
+		var	point = strList[4]
+		
+		var pShow=prdctName+'|'+rate+'|'+ category
+		var addProduct=prdctName+'<fdfd>'+prdctID+'<fdfd>'+category+'<fdfd>'+rate+'<fdfd>'+qNameValue+'<fdfd>'+point+'<rdrd>'
+		
+	
+		if (submitPurchaseget.indexOf(prdctID+'<fdfd>') !=-1){
+			submitPurchaseList=submitPurchaseget.split('<rdrd>')
+			for (i=0; i<submitPurchaseList.length-1; i++){
+				strShow = 	submitPurchaseList[i]				
+				strList=strShow.split('<fdfd>')			
+				var	prdctIDS = strList[1]
+				if (prdctID==prdctIDS){
+					submitPurchase=submitPurchaseget.replace(strShow)
+				}
+				
+			}
+			
+		}
+	}
+		
+		localStorage.submitPurchase=submitPurchase
+		
+	
+}
+function productQue(){
+	
+	var prdctShow=''
+	
+	var submitPurchaseG=localStorage.submitPurchase
+	var submitPurchase=submitPurchaseG.replace('undefined<rdrd>','')
+	
+	submitPurchaseList=submitPurchase.split('<rdrd>')
+	
+	for (i=0; i<submitPurchaseList.length-1; i++){
+		
+		strShow = 	submitPurchaseList[i]	
+		//alert (strShow)		
+		if 	(strShow.length > 0){
+			strList=strShow.split('<fdfd>')			
+			var	prdctName = strList[0]
+			var	prdctID = strList[1]
+			var	category = strList[2]
+			var	rate = strList[3]
+			var point= strList[5]
+			var qNameValue= strList[4]
+			var pShow=prdctName+'|'+rate+'|'+ category+'|'+ point
+			if (parseInt(qNameValue)>0)	{
+			
+			prdctShow=prdctShow+'<tr> <td width="50px" style="background-color:#FFEAF4" align="center">'+qNameValue+'</td><td style="background-color:#CEF">'+pShow+'</td></tr>'
+			}
+		}
 		localStorage.prdctShowCart=prdctShow
-		//alert (localStorage.prdctShowCart)
+
 		$("#item_Que_combo_id").empty()
 		$("#item_Que_combo_id").append(localStorage.prdctShowCart);
 		
-		//$('#outletMenu').html(localStorage.outlet)
+
+		
+		
+	}
+	if (localStorage.prdctShowCart!=''){
 		url="#ProductQueList";					
 		$.mobile.navigate(url);	
-	}	
+	}
+}
+function memHistory(){
+	var outletShow=localStorage.outlet
+	var outletIDN=outletShow.split('|');
+	var IdOutlet=outletIDN[0];
+	var memShow=localStorage.memInfo
+	var memMob=memShow.split('-')[0]
+	//alert (apiPath+'memHistory?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+IdOutlet+'&memMob='+memMob)
+	
+	$.ajax({
+		type:'POST',
+		url:apiPath+'memHistory?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+IdOutlet+'&memMob='+memMob,
+	
+        success: function(result) {
+			resultStr=result.split('<SYNCDATA>');	
+			if (resultStr[0]=='FAILED'){
+				$("#memHis").html(resultStr[1]);
+				
+			}
+			if (resultStr[0]=='SUCCESS'){	
+				$("#memHis").html(resultStr[1]);
+				//alert (resultStr[1])
+				
+			}//if      
+		}//success
+	  });//ajax
+}
+
 	
 	
 function productQueRedeem(){
@@ -281,7 +477,7 @@ function productQueRedeem(){
 					for (i=0; i<memStrList.length-1; i++){	
 						memMob=memStrList[i].split('<fd>')[0]
 						memName=memStrList[i].split('<fd>')[1]
-						outletShow=outletShow+'<table width="100%"><tr><td width="20%"><input onClick="RedeemGet('+i+')"  id="radioMem_'+i+'" type="radio" name="radio_mem"  value="'+memName+'|'+memMob+'" >'+memName+'|'+memMob+'</td></tr></table>'
+						outletShow=outletShow+'<li class="ui-btn ui-shadow ui-corner-all " style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin; alignment-adjust:before-edge" onClick="checkRadioVal('+i+');RedeemGet('+i+')"><input onClick="RedeemGet('+i+')"  id="radioMem_'+i+'" type="radio" name="radio_mem"  value="'+memName+'|'+memMob+'" >'+memName+'|'+memMob+'</li>'
 
 					}
 					localStorage.queMem=outletShow
@@ -295,11 +491,39 @@ function productQueRedeem(){
 					
 			 }
 		});
+	$("#redMobile").val('');
+	$( "#redMobile" ).prop( "disabled", false );
+	$( "#queMem" ).prop( "disabled", false );
 	
 	url="#ProductQueRedList";					
 	$.mobile.navigate(url);	
 	
 	
+}
+function checkRadioVal(i){
+	var radioMemGet="#radioMem_"+i
+	$(radioMemGet).attr('checked', true) 
+	
+	//$( "#"+radioMemGet ).prop( "checked", true );
+}
+function clearText(){
+	$( "#redMobile" ).prop( "disabled", false );
+	$("#queMem").html(localStorage.queMem);
+	$("#redMobile").val('');
+}
+function checkRadio(){
+	var cText=$("#redMobile").val()
+	
+	if (cText.length > 0){
+		
+		$('#queMem').find('input, textarea, button, select').attr('disabled','disabled');
+
+	}
+	else{
+		$("#queMem").html(localStorage.queMem);
+		//$('#queMem').find('*').prop('disabled',false);
+		//$( "#queMem" ).prop( "disabled", true );
+	}
 }
 function purchaseDataSave(){
 	 var memInfo=localStorage.memInfo;
@@ -314,7 +538,8 @@ function purchaseDataSave(){
 	 var outletId=outletNameId[0];
      var outletName=outletNameId[1];
 	 var submitStrPurchase=localStorage.submitPurchase
-	  
+	 
+	 submitStrPurchase=submitStrPurchase.replace('undefined<rdrd>','') 
 	 //alert(apiPath+'purchase_submit?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+outletId+'&outletName='+outletName+'&submitStrPurchase='+encodeURIComponent(submitStrPurchase)+'&memPoint='+localStorage.memPoint+'&memName='+memName+'&memMobile='+memMobile)
 
 	$.ajax({
@@ -324,16 +549,22 @@ function purchaseDataSave(){
         success: function(result2) {
 			//alert(result2)
 			//alert ('hi')	
-			if (result2!=''){
-			$(".errorChk").text("Submitted Successfully");
-			$("#orderBtn").show();		
+			if (result2!='Failed'){
+			//$("#visit_success").html("</br></br>Successfully added to cart");
+			
+			//$("#visit_success").html("</br></br>Submitted Successfully");
+			
+			localStorage.submitPurchase=''
+			localStorage.prdctShowCart=''
+			$("#orderBtn").show();	
+			url="#submitPage";					
+			$.mobile.navigate(url);		
 			}
 		}      
  
 	  });
 	  
-	url="#submitPage";					
-	$.mobile.navigate(url);	
+	
 	}	
 	
 	
@@ -342,6 +573,11 @@ function RedeemGet(i){
 	var radioMemGet="#radioMem_"+i
 	var radioMem=$(radioMemGet).val();
 	localStorage.radioMem=radioMem	
+	var radioMemMobile=radioMem.split('|')[1]
+	$("#redMobile").val(radioMemMobile);
+	$("#redMobile").attr("disabled", "disabled"); 
+	
+	
 	}	
 function PurchaseDone(){	
 	var outletShow=localStorage.outlet
@@ -350,6 +586,7 @@ function PurchaseDone(){
 	var memShow=localStorage.radioMem
 	var memMob=memShow.split('|')[1]
 	//alert (apiPath+'search_purchase?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+IdOutlet+'&memMob='+memMob)
+	
 	$.ajax({
 		type:'POST',
 		url:apiPath+'search_purchase?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+IdOutlet+'&memMob='+memMob,
@@ -362,6 +599,10 @@ function PurchaseDone(){
 			}
 			if (resultStr[0]=='SUCCESS'){	
 				var prStr=resultStr[1]
+				var Mobile=resultStr[2]
+				var name=resultStr[3]
+				var point_valueS=resultStr[4]
+				//alert (point_value)
 				prList=prStr.split('<rd>')
 				var prdctShow='<table>'
 				var pStr=''
@@ -390,12 +631,25 @@ function PurchaseDone(){
 			localStorage.pFinal=prdctShow
 			
 			localStorage.pStr=pStr
+			
 			$("#purchaseShow").html(localStorage.pFinal);
-			//$("#purchaseFinalShow").html(localStorage.pFinalStr);
-
+			//alert (point_valueS)
+			
+			$("#prRedMemP").html(outletShow);
+			$("#prRedMemNameP").html(name+'|'+Mobile);
+			$("#prRedPointP").html(point_valueS);
+			$("#prRedMemPS").html(outletShow);
+			$("#prRedMemNamePS").html(name+'|'+Mobile);
+			$("#prRedPointPS").html(point_valueS);
 		}//if      
 		}//success
 	  });//ajax
+	//alert (point_valueS)  
+	
+	//alert (point_valueS)
+	//$("#prRedMemNameP").html(name+'|'+Mobile);
+	//$("#prRedMemNameP").html(point_value);
+	  
 	url="#RedeemList";					
 	$.mobile.navigate(url);	
 	}	
@@ -406,7 +660,8 @@ function ConfirmPage(){
 	prList=prStr.split('<rd>')
 	var prdctShow='<table>'
 	var pStr=''
-	 
+	var TotalProductPoint=0
+	
 	for (i=0; i<prList.length-1; i++){
 		 prSingle=prList[i]
 		 var pID		=prSingle.split('<fd>')[0]
@@ -417,26 +672,38 @@ function ConfirmPage(){
 		 var category	  =prSingle.split('<fd>')[5]
 		 var qQty="qQty_"+i
 		 var pShow=pName+'|'+product_rate+'|'+ category
-		 
+		
 		 var qty=$("#"+qQty).val()
+		 //alert (qty)
 		 if (parseInt(qty)>0){
 			 //alert (qty)
 			 prdctShow=prdctShow+'<tr><td style="background-color:#CEF">'+pShow+'</td> <td width="50px" style="background-color:#FFEAF4" align="center">'+qty+'</td></tr>' 
 			 pStr=pStr+pID+'<fd>'+pName+'<fd>'+qty+'<fd>'+product_point+'<fd>'+product_rate+'<fd>'+category+'<rd>'
+			 TotalProductPoint=TotalProductPoint+(parseInt(product_qty)*parseInt(product_point))
 		 }
 		
 		// pFinalStr=pFinalStr+'<tr><td style="background-color:#CEF">'+pShow+'</td> <td width="50px" style="background-color:#FFEAF4" align="center">'+product_qty+''+'</td></tr>' 	
 	}//for
 	prdctShow=prdctShow+'</table>'
+	//alert (TotalProductPoint)
+	localStorage.TotalProductPoint=TotalProductPoint
 	localStorage.pStrFinal=prdctShow
 	localStorage.pStr=pStr
 	
+	$("#TotalProductPoint").html('Purchase Point:   '+localStorage.TotalProductPoint);
 	$("#purchaseFinalShow").html(localStorage.pStrFinal);
-	//alert (localStorage.pStr)
+	$("#errorChk").html('');
+	$("#savedGiftError").html('');
+	$("#payCombTextDiv").hide();
+	
 	url="#ConfirmPageSave";					
 	$.mobile.navigate(url);	
 	}
-
+function setTextPay(){
+	var payMode=$("#payComb").val();
+	if (payMode=='BKash'){$("#payCombTextDiv").show();}else{$("#payCombTextDiv").hide();}
+	
+}
 
 function finalPurchaseSave(){
 	// alert ('hi')
@@ -449,30 +716,74 @@ function finalPurchaseSave(){
 	 var outletId=outletNameId[0];
      var outletName=outletNameId[1];
 	 var finalData=localStorage.pStr
+	 var payComb=$("#payComb").val()
+	 var BKashNo=$("#BKashNo").val()
+	 var prPhotoName=$("#prPhotoName").val()
+	 var prPhotoPath=$("#prPhoto").val()
 ////	  
 	//alert(apiPath+'purchaseComplete?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+outletId+'&outletName='+outletName+'&finalData='+encodeURIComponent(finalData)+'&memberName='+memberName+'&memmobileNo='+memmobileNo)
 	
 	$.ajax({
 		type:'POST',
-		url:apiPath+'purchaseComplete?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+outletId+'&outletName='+outletName+'&finalData='+encodeURIComponent(finalData)+'&memberName='+memberName+'&memmobileNo='+memmobileNo,
+		url:apiPath+'purchaseComplete?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+outletId+'&outletName='+outletName+'&finalData='+encodeURIComponent(finalData)+'&memberName='+memberName+'&memmobileNo='+memmobileNo+'&payComb='+payComb+'&BKashNo='+BKashNo+'&prPhotoName='+prPhotoName,
 	
 		success: function(result2) {
-			//alert(result2)
-			//alert ('hi')	
-			if (result2!=''){
-			$(".errorChk").text("Submitted Successfully");
-			$("#saveButton").show();		
+	
+			if (result2=='Success'){
+				//$("#visit_success").html("</br></br>Successfully added to cart");
+				//$("#visit_success").html("Submitted Successfully");
+				 //alert (result2)
+				 //alert (prPhotoPath+' | '+prPhotoName)
+				 upload_image(prPhotoPath,prPhotoName);
+				
+				
+				  
+				 $("#BKashNo").val('')
+				 $("#prPhotoName").val('')
+				 $("#prPhoto").val('')
+				 $("#myImage").html('')
+				 
+				
+				
+				$("#saveButton").show();
+				url="#submitPage";					
+				$.mobile.navigate(url);	
+				location.reload();		
 			}
 		}      
 	
 	  });
 	  
-	url="#submitPage";					
-	$.mobile.navigate(url);	
+	
 	}	
 
 
+function upload_image(imageURI, imageName) {
+   // alert (localStorage.photo_submit_url)
+   //alert (imageURI+' |  '+imageName)
+	var options = new FileUploadOptions();
+    options.fileKey="upload";
+    options.fileName=imageName;
+    options.mimeType="image/jpeg";
 	
+    var params = {};
+    params.value1 = "test";
+    params.value2 = "param";
+	
+    options.params = params;
+	options.chunkedMode = false;
+	
+    var ft = new FileTransfer();
+     ft.upload(imageURI, encodeURI(apipath_image),winProfile,failProfile,options);
+	 
+}
+
+function winProfile(r) {
+}
+
+function failProfile(error) {
+	//$("#error_prescription_submit").text('Memory Error. Please take new picture and Submit');
+}	
 //function finalPurchaseSave(){
 //	url="#submitPage";					
 //	$.mobile.navigate(url);	
@@ -482,11 +793,9 @@ function login_user() {
 	     
 	     var cm_id=$("#cm_id").val();
 	     var cm_pass=$("#cm_pass").val();
-		// alert (cm_id)
 	     if (cm_id=="" || cm_id==undefined || cm_pass=="" || cm_pass==undefined){
 			 $(".errorMsg").html("Required ID  and password");	
-
-			 
+				
 		 }else{
 			
 			$("#login_image").show();
@@ -494,12 +803,18 @@ function login_user() {
 			localStorage.cid='UNILEVER';
 			localStorage.cm_id=cm_id;
 			localStorage.cm_pass=cm_pass;
-			localStorage.synced='NO'
+			//localStorage.synced='NO'
 			
 			if(localStorage.sync_code==undefined || localStorage.sync_code==""){
 					localStorage.sync_code=0
+					
 				}
-			
+				
+			//	 	
+//    	    if(localStorage.cm_pass!=cm_id || localStorage.cm_pass!=cm_pass){
+//					
+//		            $(".errorMsg").html("Wrong UserId/Name and password combination");	
+//				}
 	       // alert (apiPath+'check_user?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code)
 			
 			$.ajax({
@@ -519,6 +834,27 @@ function login_user() {
 								
 							}
 							if (resultArray[0]=='SUCCESS'){
+								
+								
+								localStorage.memInfo=''
+								localStorage.memPoint=''
+								localStorage.memRedMob=''
+								localStorage.memRedName=''
+								localStorage.giftShowRed=''
+								localStorage.submitRedeem=''
+								localStorage.memInfo=''
+								localStorage.memPoint=''
+								localStorage.submitPurchase=''
+								localStorage.prdctShowCart=''
+								localStorage.queMem=''
+								localStorage.radioMem=''
+								localStorage.pFinal=''
+								localStorage.pStr=''
+								localStorage.TotalProductPoint=''
+								localStorage.pStrFinal=''
+								localStorage.pStr=''
+								
+								
 								localStorage.sync_code=resultArray[1];
 								localStorage.outletString=resultArray[2];
 								localStorage.prodctStr=resultArray[3];
@@ -527,10 +863,13 @@ function login_user() {
 								localStorage.giftdctStr=resultArray[5];
 								localStorage.catdctStr=resultArray[6];
 								
+								
+								localStorage.sync='Yes';
+								
 								var catListStrStr=localStorage.catdctStr.split('<rdrd>');
 								var catList='';
 								catList=catList+"<option value=ALL>ALL</option>"
-						        for (i=0;i<catListStrStr.length;i++){	
+						        for (i=0;i<catListStrStr.length-1;i++){	
 								catList=catList+"<option value="+encodeURIComponent(catListStrStr[i])+">"+catListStrStr[i]+"</option>"; 
 								
 							    }
@@ -556,12 +895,12 @@ function login_user() {
 							
          						outletString=localStorage.outletString
 								outletStringList=outletString.split('<rdrd>')
-								var outletShow=''
+								var outletShow='<ul>'
 								for (i=0; i<outletStringList.length-1; i++){
-			outletShow=outletShow+'<table width="100%"><tr onClick="setOutlet(\'' + outletStringList[i] + '\')"><td > '+outletStringList[i]+'</td></tr><tr style=" background-color:#000; height:1px"><td></td></tr></table>'
+			outletShow=outletShow+'<li class="ui-btn ui-shadow ui-corner-all " style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin"  onClick="setOutlet(\'' + outletStringList[i] + '\')"><td > '+outletStringList[i]+'</li>'
 									//alert (outletStringList[i])
 								}
-								outletShow=outletShow
+								outletShow=outletShow+'</ul>'
 								localStorage.outletShow=outletShow
 								
 								$("#outletShow").html(localStorage.outletShow)
@@ -595,7 +934,7 @@ function login_user() {
 									 
 									 pShowList=prodctListStr[i].split('|')
 									 var pShow=pShowList[0]+'|'+pShowList[3]+'|'+pShowList[2]
-									 prdctShow=prdctShow+'<table><tr><td> <input type="number" id="'+qName+'"   name="'+qName+'" style="width:50px"><input type="hidden" id="'+pNameID+'"   name="'+pNameID+'"  value="'+prodctListStr[i]+'"></td><td>'+pShow+'</td></tr></table>'                          
+									 prdctShow=prdctShow+'<table><tr><td> <input  <input onKeyUp="productQueNew('+i+')" type="number" id="'+qName+'"   name="'+qName+'" style="width:50px"><input type="hidden" id="'+pNameID+'"   name="'+pNameID+'"  value="'+prodctListStr[i]+'"></td><td>'+pShow+'</td></tr></table>'                          
 									// alert (prdctShow)
 								    }
 								  
@@ -617,6 +956,7 @@ function login_user() {
 						}
 				      },
 				  error: function(result) {
+					 alert('Network error has occurred please try again!');
 					
 				  }
 			  });//end ajax
@@ -630,8 +970,25 @@ function login_user() {
 //		
 function setOutlet(outlet){
 	localStorage.outlet=outlet
-	menuSearch()
 	
+	
+	localStorage.memInfo=''
+	localStorage.memPoint=''
+	localStorage.memRedMob=''
+	localStorage.memRedName=''
+	localStorage.submitRedeem=''
+	localStorage.memInfo	=''
+	localStorage.memPoint	=''
+	localStorage.submitPurchase=''
+	localStorage.prdctShowCart=''
+	localStorage.queMem	=''
+	localStorage.radioMem =''
+	localStorage.pFinal=''
+	localStorage.pStr=''
+	localStorage.TotalProductPoint=''
+	localStorage.pStrFinal=''
+	menuSearch()
+	location.reload();
 }
 
 function selcetCat(){
@@ -648,11 +1005,11 @@ function selcetCat(){
 	 var cat = prodctListStr[i].split('|')[2]
 	 //alert (cat)
 	 if (catValue=="ALL"){
-	 	prdctShow=prdctShow+'<table><tr><td> <input type="number" id="'+qName+'"   name="'+qName+'" style="width:50px"><input type="hidden" id="'+pNameID+'"   name="'+pNameID+'"  value="'+prodctListStr[i]+'"></td><td>'+prodctListStr[i]+'</td></tr></table>'   
+	 	prdctShow=prdctShow+'<table><tr><td> <input onKeyUp="productQueNew('+i+')" type="number" id="'+qName+'"   name="'+qName+'" style="width:50px"><input type="hidden" id="'+pNameID+'"   name="'+pNameID+'"  value="'+prodctListStr[i]+'"></td><td>'+prodctListStr[i]+'</td></tr></table>'   
 	 }
 	 else{
 		 if (cat==catValue){
-		 	prdctShow=prdctShow+'<table><tr><td> <input type="number" id="'+qName+'"   name="'+qName+'" style="width:50px"><input type="hidden" id="'+pNameID+'"   name="'+pNameID+'"  value="'+prodctListStr[i]+'"></td><td>'+prodctListStr[i]+'</td></tr></table>'   
+		 	prdctShow=prdctShow+'<table><tr><td> <input onKeyUp="productQueNew('+i+')" type="number" id="'+qName+'"   name="'+qName+'" style="width:50px"><input type="hidden" id="'+pNameID+'"   name="'+pNameID+'"  value="'+prodctListStr[i]+'"></td><td>'+prodctListStr[i]+'</td></tr></table>'   
 		 }
 	 }
 	// alert (prdctShow)
@@ -668,135 +1025,6 @@ function selcetCat(){
 
 }
 
-
-//function getOrder(){
-//	  
-//     prodctStr=localStorage.prodctStr
-//	 
-//	// alert(prodctStr)
-//	 prodctListStr=prodctStr.split('<rdrd>')
-//	 
-//	 
-//	 var prdctShow=''
-//	 var submitPurchase=''							 
-//	 for (i=0; i<prodctListStr.length-1; i++){
-//		
-//	 var qName="qName_"+i.toString()
-//	 var pNameID="pNameID_"+i.toString()
-//	 
-//	 var qNameValue=$("#"+qName).val()
-//	 var memStr=localStorage.my_nam_mob
-//		//alert(memStr)
-//	
-//	 if (parseInt(qNameValue)>0)	{
-//		 	var qtyName=qName
-//	        var pdNameID=pNameID
-//
-//				//alert (qNameValue)
-//			  	strShow = 	prodctListStr[i]				
-//				strList=strShow.split('|')			
-//				var	prdctName = strList[0]
-//				var	prdctId = strList[1]
-//				var	rate = strList[2]
-//		
-//			
-//		        submitPurchase=submitPurchase+prdctName+'<fdfd>'+prdctId+'<fdfd>'+rate+'<fdfd>'+qNameValue+'<rdrd>'
-//		 
-//				
-//			 
-//		
-//		
-//	    prdctShow=prdctShow+'<table><tr><td>'+qNameValue+'--'+prodctListStr[i]+'</td></tr></table>' 
-//		//alert(prdctShow)
-//	 }
-//	 
-//	
-//	 
-//	 }
-//								  
-//		 localStorage.submitPurchase=submitPurchase						 
-//		 //alert (localStorage.submitPurchase)					     
-//		 localStorage.prdctShowCart=prdctShow
-//		//alert (localStorage.prdctShowCart)
-//		 $("#item_combo_id_Cart").empty()
-//		 $("#item_combo_id_Cart").append(localStorage.prdctShowCart);
-//
-//	
-//	
-//    $('#orderOutlet').html(localStorage.outlet); 
-//	$("#mMobileOrder").html(localStorage.my_nam_mob)  
-//	url="#orderShow";					
-//	$.mobile.navigate(url);
-//}
-//
-//
-//
-//
-//function purchaseDataSave(){
-//	
-//	 //$('#nam_mob').html(n_m);
-//	 var memStrListView=localStorage.my_nam_mob
-//	 //alert (localStorage.my_nam_mob)
-//	 var memNameId=memStrListView.split(',');
-//	 var memMo = memNameId[0]
-//	 var memNa = memNameId[1]
-//	 
-//	 var outletShow=localStorage.outlet
-//	 var outletNameId=outletShow.split('|');
-//	 var outletId=outletNameId[0];
-//     var outletName=outletNameId[1];
-//	 var submitStrPurchase=localStorage.submitPurchase
-//	//encode
-////	  
-//	 alert(apiPath+'purchase_submit?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&memMo='+memMo+'&memNa='+memNa+'&outletId='+outletId+'&outletName='+outletName+'&submitStrPurchase='+encodeURIComponent(submitStrPurchase))
-//	  
-//	  
-//	  $.ajax({
-//		type:'POST',
-//		url:apiPath+'purchase_submit?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&memMo='+memMo+'&memNa='+memNa+'&outletId='+outletId+'&outletName='+outletName+'&submitStrPurchase='+encodeURIComponent(submitStrPurchase),
-//	
-//        success: function(result2) {
-//			alert(result2)
-//			//alert ('hi')	
-//			if (result2!=''){
-//			$(".errorChk").text("Submitted Successfully");
-//			$("#orderBtn").show();		
-//			}
-//	
-//
-//
-//	
-//		}      
-//
-//			 
-//			  
-//	  });
-//	  
-//}
-//window.onload = init;
-//
-//function init() {
-//   // Bind "onsubmit" event handler to the "submit" button
-//   document.getElementById("formTest").onsubmit = validateForm;
-//   // Bind "onclick" event handler to "reset" button
-//   document.getElementById("btnReset").onclick = clearForm;
-//   // Set initial focus
-//   document.getElementById("name").focus();
-//}
-//
-//function validateForm(theForm) {
-//   with(theForm) {
-//      // return false would prevent default submission
-//      return (isNotEmpty(name, "Please enter your name!", elmNameError)
-//          // && isNumeric(txtZipcode, "Please enter a 5-digit zip code!", elmZipcodeError)
-//           //&& isLengthMinMax(txtZipcode, 5, 5, "Please enter a 5-digit zip code!", elmZipcodeError)
-//		   && isNumeric(mobile, "Please enter a valid phone number!", elmPhoneError)
-//          // && isSelected(mobile, 11, 11, "Please enter a 10-digit mobile number!", elmMobileError)
-//		   && isSelected(ageRange, "Please make a selection!", elmAgeError)
-//        
-//      );
-//   }
-//}
 
 //=======clear form=============
 
@@ -833,7 +1061,7 @@ function member_save(){
 	  }else{
 
 	  
-	  alert(apiPath+'dataSave?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&name='+name+'&genderComb='+genderComb+'&birthDayG='+birthDayG+'&birthMonthG='+birthMonthG+'&address='+address+'&mobile='+mobile+'&reg_date='+reg_date+'&reg_by_cm='+reg_by_cm+'&otltName='+otltName+'&ageRange='+ageRange+'&thana='+thana+'&district='+district)
+	 // alert(apiPath+'dataSave?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&name='+name+'&genderComb='+genderComb+'&birthDayG='+birthDayG+'&birthMonthG='+birthMonthG+'&address='+address+'&mobile='+mobile+'&reg_date='+reg_date+'&reg_by_cm='+reg_by_cm+'&otltName='+otltName+'&ageRange='+ageRange+'&thana='+thana+'&district='+district)
 	  
 	  
 	  $.ajax({
@@ -843,13 +1071,24 @@ function member_save(){
         success: function(result1) {
 			
 			if (result1!=''){
+				
+			localStorage.memInfo=mobile+'-'+name
+			localStorage.memPoint=0
+			//alert ('11')
+			
+			$("#prMem").html(localStorage.memInfo);
+			$("#prPoint").html(localStorage.memPoint);	
+				
+				
 			$(".errorChk").text("Submitted Successfully");
+			
 			$("#memButton").show();		
 			}
           
 		}      
 	  
 	  });
+	 product()
 	  }
 	  
 }
@@ -3535,196 +3774,6 @@ function submit_data() {
 //====================================Camera==========
 
 
-
-//=============Category Self Pic=====================
-//function get_pic_HairCare(id) {
-//	var div_id="HairCare_image_div"+id;
-//	temp_image_div=div_id;
-//	//var image = document.getElementById(temp_image_div);
-//	var hidden_name="HairCare_image_name_hidden" + id ;
-//	var tempTime = $.now();
-//	HairCare_image_name=tempTime.toString()+localStorage.selectedOutlet+id.toString()+"_HairCare.jpg";
-//	$("#"+hidden_name).val(HairCare_image_name);
-//	navigator.camera.getPicture(onSuccessHairCare, onFailHairCare, { quality: 50,
-//		targetWidth: 300,
-//		destinationType: Camera.DestinationType.FILE_URI,correctOrientation: true });
-//		
-//}
-//
-//function onSuccessHairCare(imageURI) {
-//	alert ('test')
-//	var image = document.getElementById(temp_image_div);
-//    image.src = imageURI;
-//    var hidden_path=temp_image_div.replace("HairCare_image_div","HairCare_image_div_hidden");
-//	$("#"+hidden_path).val(imageURI);
-//	
-//	
-//}
-//
-//function onFailHairCare(message) {
-//	imagePathA="";
-//    alert('Failed because: ' + message);
-//}
-////=====================
-//function get_pic_SkinCare(id) {
-//	var div_id="SkinCare_image_div"+id;
-//	temp_image_div=div_id;
-//	//var image = document.getElementById(temp_image_div);
-//	var hidden_name="SkinCare_image_name_hidden" + id ;
-//	var tempTime = $.now();
-//	SkinCare_image_name=tempTime.toString()+localStorage.selectedOutlet+id.toString()+"_SkinCare.jpg";
-//	$("#"+hidden_name).val(SkinCare_image_name);
-//	navigator.camera.getPicture(onSuccessSkinCare, onFailSkinCare, { quality: 50,
-//		targetWidth: 300,
-//		destinationType: Camera.DestinationType.FILE_URI,correctOrientation: true });
-//	     //   targetHeight: 512,
-//}
-//
-//function onSuccessSkinCare(imageURI) {
-//	var image = document.getElementById(temp_image_div);
-//    image.src = imageURI;
-//    var hidden_path=temp_image_div.replace("SkinCare_image_div"+ id,"SkinCare_image_div_hidden"+ id);
-//	$("#"+hidden_path).val(imageURI);
-//}
-//
-//function onFailSkinCare(message) {
-//	imagePathA="";
-//    alert('Failed because: ' + message);
-//}
-////=====================
-//function get_pic_Oral(id) {
-//	var div_id="Oral_image_div"+id;
-//	temp_image_div=div_id;
-//	//var image = document.getElementById(temp_image_div);
-//	var hidden_name="Oral_image_name_hidden" + id ;
-//	var tempTime = $.now();
-//	Oral_image_name=tempTime.toString()+localStorage.selectedOutlet+id.toString()+"_Oral.jpg";
-//	$("#"+hidden_name).val(Oral_image_name);
-//	navigator.camera.getPicture(onSuccessOral, onFailOral, { quality: 50,
-//		targetWidth: 300,
-//		destinationType: Camera.DestinationType.FILE_URI,correctOrientation: true });
-//	     //   targetHeight: 512,
-//}
-//
-//function onSuccessOral(imageURI) {
-//	var image = document.getElementById(temp_image_div);
-//    image.src = imageURI;
-//    var hidden_path=temp_image_div.replace("Oral_image_div"+ id,"Oral_image_div_hidden"+ id);
-//	$("#"+hidden_path).val(imageURI);
-//}
-//
-//function onFailOral(message) {
-//	imagePathA="";
-//    alert('Failed because: ' + message);
-//}
-//=====================
-
-//function pic_SkinCleansing(id) {
-//	alert (id)
-//	var div_id="SkinCleansing_image_div"+id;
-//	temp_image_div=div_id;
-//	//var image = document.getElementById(temp_image_div);
-//	var hidden_name="SkinCleansing_image_name_hidden" + id ;
-//	alert (hidden_name)
-//	var tempTime = $.now();
-//	SkinCleansing_image_name=tempTime.toString()+localStorage.selectedOutlet+id.toString()+"_SkinCleansing.jpg";
-//	$("#"+hidden_name).val(SkinCleansing_image_name);
-//	navigator.camera.getPicture(onSuccessSkinCleansing, onFailSkinCleansing, { quality: 50,
-//		targetWidth: 300,
-//		destinationType: Camera.DestinationType.FILE_URI,correctOrientation: true });
-//		
-//	     //   targetHeight: 512,
-//}
-//
-//function onSuccessSkinCleansing(imageURI) {
-//	var image = document.getElementById(temp_image_div);
-//    image.src = imageURI;
-//    var hidden_path=temp_image_div.replace("SkinCleansing_image_div"+ id,"SkinCleansing_image_div_hidden"+ id);
-//	$("#"+hidden_path).val(imageURI);
-//}
-//
-//function onFailSkinCleansing(message) {
-//	imagePathA="";
-//    alert('Failed because: ' + message);
-//}
-////=====================
-//function get_pic_Laundry(id) {
-//	var div_id="Laundry_image_div"+id;
-//	temp_image_div=div_id;
-//	//var image = document.getElementById(temp_image_div);
-//	var hidden_name="Laundry_image_name_hidden" + id ;
-//	var tempTime = $.now();
-//	Laundry_image_name=tempTime.toString()+localStorage.selectedOutlet+id.toString()+"_Laundry.jpg";
-//	$("#"+hidden_name).val(Laundry_image_name);
-//	navigator.camera.getPicture(onSuccessLaundry, onFailLaundry, { quality: 50,
-//		targetWidth: 300,
-//		destinationType: Camera.DestinationType.FILE_URI,correctOrientation: true });
-//	     //   targetHeight: 512,
-//}
-//
-//function onSuccessLaundry(imageURI) {
-//	var image = document.getElementById(temp_image_div);
-//    image.src = imageURI;
-//    var hidden_path=temp_image_div.replace("Laundry_image_div"+ id,"Laundry_image_div_hidden"+ id);
-//	$("#"+hidden_path).val(imageURI);
-//}
-//
-//function onFailLaundry(message) {
-//	imagePathA="";
-//    alert('Failed because: ' + message);
-//}
-////=====================
-//function get_pic_HHcleansing(id) {
-//	var div_id="HHcleansing_image_div"+id;
-//	temp_image_div=div_id;
-//	//var image = document.getElementById(temp_image_div);
-//	var hidden_name="HHcleansing_image_name_hidden" + id ;
-//	var tempTime = $.now();
-//	HHcleansing_image_name=tempTime.toString()+localStorage.selectedOutlet+id.toString()+"_HHcleansing.jpg";
-//	$("#"+hidden_name).val(HHcleansing_image_name);
-//	navigator.camera.getPicture(onSuccessHHcleansing, onFailHHcleansing, { quality: 50,
-//		targetWidth: 300,
-//		destinationType: Camera.DestinationType.FILE_URI,correctOrientation: true });
-//	     //   targetHeight: 512,
-//}
-//
-//function onSuccessHHcleansing(imageURI) {
-//	var image = document.getElementById(temp_image_div);
-//    image.src = imageURI;
-//    var hidden_path=temp_image_div.replace("HHcleansing_image_div"+ id,"HHcleansing_image_div_hidden"+ id);
-//	$("#"+hidden_path).val(imageURI);
-//}
-//
-//function onFailHHcleansing(message) {
-//	imagePathA="";
-//    alert('Failed because: ' + message);
-//}
-////=====================
-//function get_pic_Foods(id) {
-//	var div_id="Foods_image_div"+id;
-//	temp_image_div=div_id;
-//	//var image = document.getElementById(temp_image_div);
-//	var hidden_name="Foods_image_name_hidden" + id ;
-//	var tempTime = $.now();
-//	Foods_image_name=tempTime.toString()+localStorage.selectedOutlet+id.toString()+"_Foods.jpg";
-//	$("#"+hidden_name).val(HHcleansing_image_name);
-//	navigator.camera.getPicture(onSuccessFoods, onFailFoods, { quality: 50,
-//		targetWidth: 300,
-//		destinationType: Camera.DestinationType.FILE_URI,correctOrientation: true });
-//	     //   targetHeight: 512,
-//}
-//
-//function onSuccessFoods(imageURI) {
-//	var image = document.getElementById(temp_image_div);
-//    image.src = imageURI;
-//    var hidden_path=temp_image_div.replace("Foods_image_div"+ id,"Foods_image_div_hidden"+ id);
-//	$("#"+hidden_path).val(imageURI);
-//}
-//
-//function onFailFoods(message) {
-//	imagePathA="";
-//    alert('Failed because: ' + message);
-//}
 //=================NPD Picture
 //fixed display Before
 
@@ -3914,159 +3963,7 @@ function onFailShop(message) {
 }
 
 //===================Catagory all Start====================
-function get_pic_HairCare(i) {
-	var div_id="HairCare_image_div"+i;
-	temp_image_div=div_id;
-	var tempTime = $.now();
-	HairCare_image_name=tempTime.toString()+"_"+localStorage.selectedOutlet+""+i.toString()+"_HairCare.jpg";
-	$("#HairCare_image_name_hidden"+i.toString()).val(HairCare_image_name);
-	navigator.camera.getPicture(onSuccessHairCare, onFailHairCare, { quality: 70,
-		targetWidth: 450,
-		destinationType: Camera.DestinationType.FILE_URI , correctOrientation: true });
-}
-function onSuccessHairCare(imageURI) {
-	var image = document.getElementById(temp_image_div);
-    image.src = imageURI;
-    var hidden_path=temp_image_div.replace("HairCare_image_div","HairCare_image_div_hidden");
-	//alert (imageURI)
-	//alert (hidden_path)
-	$("#"+hidden_path).val(imageURI);
-}
-function onFailHairCare(message) {
-	imagePathA="";
-    alert('Failed because: ' + message);
-}
-//=========================================
-function get_pic_SkinCare(i) {
-	var div_id="SkinCare_image_div"+i;
-	temp_image_div=div_id;
-	var tempTime = $.now();
-	SkinCare_image_name=tempTime.toString()+"_"+localStorage.selectedOutlet+""+i.toString()+"_SkinCare.jpg";
-	$("#SkinCare_image_name_hidden"+i.toString()).val(SkinCare_image_name);
-	navigator.camera.getPicture(onSuccessSkinCare, onFailSkinCare, { quality: 70,
-		targetWidth: 450,
-		destinationType: Camera.DestinationType.FILE_URI , correctOrientation: true });
-}
-function onSuccessSkinCare(imageURI) {
-	var image = document.getElementById(temp_image_div);
-    image.src = imageURI;
-    var hidden_path=temp_image_div.replace("SkinCare_image_div","SkinCare_image_div_hidden");
-	$("#"+hidden_path).val(imageURI);
-}
-function onFailSkinCare(message) {
-	imagePathA="";
-    alert('Failed because: ' + message);
-}
-//===========================================
-function get_pic_Oral(i) {
-	var div_id="Oral_image_div"+i;
-	temp_image_div=div_id;
-	var tempTime = $.now();
-	Oral_image_name=tempTime.toString()+"_"+localStorage.selectedOutlet+""+i.toString()+"_Oral.jpg";
-	$("#Oral_image_name_hidden"+i).val(Oral_image_name);
-	navigator.camera.getPicture(onSuccessOral, onFailOral, { quality: 70,
-		targetWidth: 450,
-		destinationType: Camera.DestinationType.FILE_URI , correctOrientation: true });
-}
-function onSuccessOral(imageURI) {
-	var image = document.getElementById(temp_image_div);
-    image.src = imageURI;
-    var hidden_path=temp_image_div.replace("Oral_image_div","Oral_image_div_hidden");
-	$("#"+hidden_path).val(imageURI);
-}
-function onFailOral(message) {
-	imagePathA="";
-    alert('Failed because: ' + message);
-}
 
-//===========================================
-
-
-
-
-function get_pic_SkinCleansing(i) {
-	var div_id="SkinCleansing_image_div"+i;
-	temp_image_div=div_id;
-	var tempTime = $.now();
-	SkinCleansing_image_name=tempTime.toString()+"_"+localStorage.selectedOutlet+""+i.toString()+"_SkinCleansing.jpg";
-	$("#SkinCleansing_image_name_hidden"+i.toString()).val(SkinCleansing_image_name);
-	navigator.camera.getPicture(onSuccessSkinCleansing, onFailSkinCleansing, { quality: 70,
-		targetWidth: 450,
-		destinationType: Camera.DestinationType.FILE_URI , correctOrientation: true });
-}
-function onSuccessSkinCleansing(imageURI) {
-	var image = document.getElementById(temp_image_div);
-    image.src = imageURI;
-    var hidden_path=temp_image_div.replace("SkinCleansing_image_div","SkinCleansing_image_div_hidden");
-	$("#"+hidden_path).val(imageURI);
-}
-function onFailSkinCleansing(message) {
-	imagePathA="";
-    alert('Failed because: ' + message);
-}
-//===========================================
-function get_pic_Laundry(i) {
-	var div_id="Laundry_image_div"+i;
-	temp_image_div=div_id;
-	var tempTime = $.now();
-	Laundry_image_name=tempTime.toString()+"_"+localStorage.selectedOutlet+""+i.toString()+"_Laundry.jpg";
-	$("#Laundry_image_name_hidden"+i.toString()).val(Laundry_image_name);
-	navigator.camera.getPicture(onSuccessLaundry, onFailLaundry, { quality: 70,
-		targetWidth: 450,
-		destinationType: Camera.DestinationType.FILE_URI , correctOrientation: true });
-}
-function onSuccessLaundry(imageURI) {
-	var image = document.getElementById(temp_image_div);
-    image.src = imageURI;
-    var hidden_path=temp_image_div.replace("Laundry_image_div","Laundry_image_div_hidden");
-	$("#"+hidden_path).val(imageURI);
-}
-function onFailLaundry(message) {
-	imagePathA="";
-    alert('Failed because: ' + message);
-}
-//===========================================
-function get_pic_HHcleansing(i) {
-	var div_id="HHcleansing_image_div"+i;
-	temp_image_div=div_id;
-	var tempTime = $.now();
-	HHcleansing_image_name=tempTime.toString()+"_"+localStorage.selectedOutlet+""+i.toString()+"_HHcleansing.jpg";
-	$("#HHcleansing_image_name_hidden"+i.toString()).val(HHcleansing_image_name);
-	navigator.camera.getPicture(onSuccessHHcleansing, onFailHHcleansing, { quality: 70,
-		targetWidth: 450,
-		destinationType: Camera.DestinationType.FILE_URI , correctOrientation: true });
-}
-function onSuccessHHcleansing(imageURI) {
-	var image = document.getElementById(temp_image_div);
-    image.src = imageURI;
-    var hidden_path=temp_image_div.replace("HHcleansing_image_div","HHcleansing_image_div_hidden");
-	$("#"+hidden_path).val(imageURI);
-}
-function onFailHHcleansing(message) {
-	imagePathA="";
-    alert('Failed because: ' + message);
-}
-//===========================================
-function get_pic_Foods(i) {
-	var div_id="Foods_image_div"+i;
-	temp_image_div=div_id;
-	var tempTime = $.now();
-	Foods_image_name=tempTime.toString()+"_"+localStorage.selectedOutlet+""+i.toString()+"_Foods.jpg";
-	$("#Foods_image_name_hidden"+i).val(Foods_image_name);
-	navigator.camera.getPicture(onSuccessFoods, onFailFoods, { quality: 70,
-		targetWidth: 450,
-		destinationType: Camera.DestinationType.FILE_URI , correctOrientation: true });
-}
-function onSuccessFoods(imageURI) {
-	var image = document.getElementById(temp_image_div);
-    image.src = imageURI;
-    var hidden_path=temp_image_div.replace("Foods_image_div","Foods_image_div_hidden");
-	$("#"+hidden_path).val(imageURI);
-}
-function onFailFoods(message) {
-	imagePathA="";
-    alert('Failed because: ' + message);
-}
 //===================Catagory End====================
 
 //==================upload image===============
