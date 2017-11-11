@@ -1,38 +1,52 @@
 
-var apiPath='http://127.0.0.1:8000/unigift/syncmobile_eon/';
-var apipath_image = 'http://127.0.0.1:8000/moderntrade/';
+//var apiPath='http://127.0.0.1:8000/unigift/syncmobile_eon/';
+//var apipath_image = 'http://127.0.0.1:8000/moderntrade/';
 
+var apiPath='http://w02.yeapps.com/unigift/syncmobile_eon/'
+var apipath_image='http://w02.yeapps.com/unigift/'
 
-//var apiPath='http://w02.yeapps.com/unigift/syncmobile_eon/'
-//var apipath_image='http://i001.yeapps.com/image_hub/unigift/upload_image/'
-//var apipath_image='http://i001.yeapps.com/image_hub/planbd_image/planbd_image/'
+function takePicture(){
 
-
-function get_pic_HairCare(i) {
-	var tempTime = $.now();
-	var image_name=tempTime.toString()+localStorage.cm_id+".jpg";
-	$("#prPhotoName").val(image_name);
+navigator.camera.getPicture( cameraSuccess, cameraError, {
+		quality: 90,
+		targetWidth: 400,
+       // destinationType: Camera.DestinationType.FILE_URI,
+		destinationType: Camera.DestinationType.FILE_URI,correctOrientation: true ,
+        correctOrientation: true,
+        saveToPhotoAlbum: true
+    }); 
 	
-	navigator.camera.getPicture(onSuccessHairCare, onFailHairCare, { quality: 70,
-		targetWidth: 450,
-		destinationType: Camera.DestinationType.FILE_URI , correctOrientation: true });
 }
-function onSuccessHairCare(imageURI) {
-	var temp_image_div="myImage"
-	var hidden_path="prPhoto"
-	var image = document.getElementById(temp_image_div);
-    image.src = imageURI;
-	$("#"+hidden_path).val(imageURI);
+//
+//function validate(){
+//$(".required").each(function(){
+//    if($(this).val().length < 1){
+//        alert("please fill in all the required fields.");
+//        $(this).focus();
+//        return false;
+//    }
+//    else{
+//        return true;
+//    }
+//});
+//return false;
+//}
+
+
+
+
+
+function cameraSuccess(uri){  
+	
+	var imageDiv="myImage"
+	var imageText="prPhoto"
+	var image = document.getElementById(imageDiv);
+	image.src = uri;
+	imagePath = uri;
+    
+	$("#"+imageText).val(imagePath);
+        
 }
-function onFailHairCare(message) {
-	imagePathA="";
-    alert('Failed because: ' + message);
-}
-
-
-
-
-
 
 //================login=======================
 
@@ -43,40 +57,21 @@ function login_page() {
 	
 }
 
-function submitBack() {
-	
-	url="#menuPage";					
-	$.mobile.navigate(url);
-	
-}
-
 function login() {
 	
 	url="#login";					
 	$.mobile.navigate(url);
 	
 }
-function homePage() {
-	url="#menuPage";					
-	$.mobile.navigate(url);
-	
-}
-
-function pageOutlet(){
-	url="#pageOutlet";					
-	$.mobile.navigate(url);
-}
 
 function Redeem(){
+	//$('#purchOutlet').html(localStorage.outlet);
 	var redMobile=$("#redMobile").val();
-	if (redMobile.length < 13){
-		redMobile='88'+redMobile
-	}
-	//alert (redMobile)
-	
-    if (redMobile.length==13){
-		
-		//alert (apiPath+'search_mobRedeem?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&redMobile='+redMobile)
+    //alert ('AAA')
+    if (redMobile==""){
+		$("#mobError").html("Please Enter Mobile No");
+	}else{
+		alert (apiPath+'search_mobRedeem?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&redMobile='+redMobile)
 		$.ajax({
 			type:'GET',
 		    url:apiPath+'search_mobRedeem?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&redMobile='+redMobile,
@@ -90,7 +85,6 @@ function Redeem(){
 	
 				if (resultStr[0]=='SUCCESS'){
 				    
-
 					var Mobile=resultStr[1];
 					var mem_name=resultStr[2];
 					var mem_point=resultStr[3];
@@ -99,29 +93,22 @@ function Redeem(){
 					localStorage.memPoint=mem_point
 					var memInfoRed=localStorage.memInfo
 					var memRedMob=memInfoRed.split('-')[0];
-					localStorage.memRedMob=memRedMob
 					var memRedName=memInfoRed.split('-')[1];
-					localStorage.memRedName=memRedName
 					//alert (memRedName)
-	
 					
-					
-				    giftdctStr=localStorage.giftdctStr
-			        giftdctStrList=giftdctStr.split('<rdrd>')
-			        var giftShow=''
-			
-			        var submitRedeem=''
-			 			
-					for (i=0; i<giftdctStrList.length-1; i++){	
-					var qtyName="qtyName_"+i.toString()
-					var gNameID="gNameID_"+i.toString()
-
-				   
-				    giftShow=giftShow+' <table width="100%" border="0" cellpadding="0" cellspacing="0" ><tr ><td width="50px" > <input type="number" value="" id="'+qtyName+'" name="'+qtyName+'" style="width:50px;" ><input type="hidden" id="'+gNameID+'"   name="'+gNameID+'"  value="'+giftdctStrList[i]+'"></td><td width="100px"> &nbsp;&nbsp;'+giftdctStrList[i].split('|')[2]+'</td> <td > '+giftdctStrList[i].split('|')[0]+'</td></tr></table>'
-										 }
-					 
-						
+					var giftdctStr=localStorage.giftdctStr
+					giftdctStrList=giftdctStr.split('<rdrd>')
+					var giftShow=''
+					for (i=0; i<giftdctStrList.length-1; i++){
+								/*if (i/2){
+								giftShow=giftShow+' <table width="100%" border="0" cellpadding="0" cellspacing="0" style="background-color:#AAE3FF" ><tr ><td width="100px"> &nbsp;&nbsp;'+giftdctStrList[i].split('|')[2]+'</td> <td > '+giftdctStrList[i].split('|')[0]+'</td></tr></table>'
 								
+								
+								}
+								else*/
+			       giftShow=giftShow+' <table width="100%" border="0" cellpadding="0" cellspacing="0" ><tr ><td width="30px"  height:05px"> <input type="text" value="" id="" name="" style="width:30px; height:05px" ></td><td width="100px"> &nbsp;&nbsp;'+giftdctStrList[i].split('|')[2]+'</td> <td > '+giftdctStrList[i].split('|')[0]+'</td></tr></table>'
+									//alert (outletStringList[i])
+								}
 					var giftShowRed=giftShow
 					localStorage.giftShowRed=giftShowRed
 					
@@ -130,11 +117,11 @@ function Redeem(){
 					
 					$("#redMobile").val(Mobile);
 					//$("#prMem").html(localStorage.memInfo);
-					$("#prRedMem").html(localStorage.outlet);
-					$("#prRedMemName").html(mem_name+'|'+Mobile);
-					$("#prRedPoint").html(mem_point);
+					$("#prRedMem").html(memRedMob);
+					$("#prRedMemName").html(memRedName);
+					$("#prRedPoint").html(localStorage.memPoint);
 					
-					$("#gSError").html('');
+					
 					url="#redeemShow";					
     	            $.mobile.navigate(url);					
 				}
@@ -145,100 +132,24 @@ function Redeem(){
 			 }
 		});
 		
-		
-	}else{
-		$("#mobError").html("Please Enter Mobile No");
 	}	
 	
 }
 
-
-
-
-
 function giftSave(){
-			var memMb=localStorage.memRedMob;
-			var memNM=localStorage.memRedName
-			var memPoint=localStorage.memPoint;
-		
-			//var memPoint=localStorage.memPoint;
-			var outletShow=localStorage.outlet
-			var outletNameId=outletShow.split('|');
-			var outletId=outletNameId[0];
-			var outletName=outletNameId[1];
-			
-			var memPoint= $("#prRedPoint").html()
-			
-			 giftdctStr=localStorage.giftdctStr
-	         giftdctStrList=giftdctStr.split('<rdrd>')
-	 
-	 
-			var giftShow=''
-			var submitRedeem=''		
-			var giftPointC=0				 
-			for (i=0; i<giftdctStrList.length-1; i++){	
-			
-					var qtyName="qtyName_"+i.toString()
-					var gNameID="gNameID_"+i.toString()
-					
-					var qtyNameValue=$("#"+qtyName).val()
-					if (parseInt(qtyNameValue)>0)	{
-					giftStrShow = 	giftdctStrList[i]				
-									strList=giftStrShow.split('|')	
-									var	giftId = strList[0]		
-									var	giftName = strList[1]
-									var	giftPoint = strList[2]
-									giftPointC=giftPointC+parseInt(giftPoint)
-									submitRedeem=submitRedeem+giftId+'<fdfd>'+giftName+'<fdfd>'+giftPoint+'<fdfd>'+qtyNameValue+'<rdrd>'
-							
-						
-					 }//if
-			
-	       localStorage.submitRedeem=submitRedeem
-		   
-			}
-		   		
-	     //alert (localStorage.submitRedeem)
-		 //alert(apiPath+'redeemComplete?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+outletId+'&outletName='+outletName+'&submitRedeem='+encodeURIComponent(submitRedeem)+'&memPoint='+localStorage.memPoint+'&memNM='+memNM+'&memMb='+memMb)
-		if (giftPointC <= parseInt(memPoint) & parseInt(giftPointC)>0){
-			 $.ajax({
-				type:'POST',
-				url:apiPath+'redeemComplete?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+outletId+'&outletName='+outletName+'&submitRedeem='+encodeURIComponent(submitRedeem)+'&memPoint='+localStorage.memPoint+'&memNM='+memNM+'&memMb='+memMb,
-			
-				success: function(result) {
-					//alert(result)
-					//alert ('hi')	
-					if (result!='Failed'){
-					//$("#visit_success").html("Submitted Successfully");
-					
-					$("#button_show").html(' ');
-					$("#saveButton").show();	
-					url="#submitPage";					
-			  		$.mobile.navigate(url);
-					}
-				
-				}      
-			 
-			  });
-			 	
-		}
-		else{
-			
-			$("#gSError").text("Point should be greater than Gift Point");
-			
-		}
-			
+	
+	//$('#otltName').html(localStorage.outlet);
+//	url="#menuPage";					
+//	$.mobile.navigate(url);	
+
 	}	
 	
 	
 	
 function menuSearch(){
 	$('#otltName').html(localStorage.outlet);
-	
-	
 	url="#menuPage";					
 	$.mobile.navigate(url);	
-	location.reload();
 	}	
 	
 function shppingTrip(){
@@ -250,14 +161,10 @@ function shppingTrip(){
 function memberSelect(){
 	$('#purchOutlet').html(localStorage.outlet);
 	var mMobile=$("#mMobile").val();
-	if (mMobile.length < 13){
-		mMobile='88'+mMobile
-	}
-	
-   // alert (mMobile)
-    if (mMobile.length==13){
-		
-	
+    //alert ('AAA')
+    if (mMobile==""){
+		$("#mobError").html("Please Enter MObile No");
+	}else{
 		//alert (apiPath+'search_mob?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&mMobile='+mMobile)
 		$.ajax({
 			type:'GET',
@@ -293,176 +200,65 @@ function memberSelect(){
 			 }
 		});
 		
-		}else{
-			$("#mobError").html("Please Enter Mobile No");
 	}
 	
 	}		
-function productShowPage (){
-	url="#ProductListShow";					
-	$.mobile.navigate(url);	
-}
+	
 	
 function product(){
 	$('#prodctPage').html(localStorage.outlet)
 	url="#ProductList";					
 	$.mobile.navigate(url);	
-	}
+	}	
 	
-		
-function productQueNew(i){
+function productQue(){
 	$('#prodctQList').html(localStorage.outlet)
 	$("#prMSave").html(localStorage.memInfo);
 	$("#prSPoint").html(localStorage.memPoint);
-	
-	var qName="qName_"+i.toString()
-	var pNameID="pNameID_"+i.toString()
-	var qNameValue=$("#"+qName).val()
-	var pNameIDValue=$("#"+pNameID).val()
-	//alert (pNameIDValue)
-	var submitPurchaseget=localStorage.submitPurchase
-	
-	
-	if (parseInt(qNameValue)>0)	{
-		var qtyName=qName
-		var pdNameID=pNameID
-
-		var strShow=pNameIDValue
-		//alert (strShow)			
-		strList=strShow.split('|')	
-				
-		var	prdctName = strList[0]
-		var	prdctID = strList[1]
-		var	category = strList[2]
-		var	rate = strList[3]
-		var	point = strList[4]
-	
+	//alert ('hi')
+	prodctStr=localStorage.prodctStr
+	prodctListStr=prodctStr.split('<rdrd>')
+	//alert (localStorage.prodctStr)
+	var prdctShow='<table>'
+	var submitPurchase=''				 
+	for (i=0; i<prodctListStr.length-1; i++){
+		 var qName="qName_"+i.toString()
+		 var pNameID="pNameID_"+i.toString()
+		 
+		 var qNameValue=$("#"+qName).val()
 		
-		var addProduct=prdctName+'<fdfd>'+prdctID+'<fdfd>'+category+'<fdfd>'+rate+'<fdfd>'+qNameValue+'<fdfd>'+point+'<rdrd>'
-		
-		if (submitPurchaseget.indexOf(prdctID+'<fdfd>') !=-1){
-			submitPurchaseList=submitPurchaseget.split('<rdrd>')
-			for (i=0; i<submitPurchaseList.length-1; i++){
-				strShow = 	submitPurchaseList[i]				
-				strList=strShow.split('<fdfd>')			
-				var	prdctIDS = strList[1]
-				if (prdctID==prdctIDS){
-					submitPurchase=submitPurchaseget.replace(strShow,addProduct)
-				}
-			}
-		}
-		
-		else{
-			submitPurchase=submitPurchaseget+addProduct
-			}
-		
-		//submitPurchase=submitPurchaseget+prdctName+'<fdfd>'+prdctID+'<fdfd>'+category+'<fdfd>'+rate+'<fdfd>'+qNameValue+'<fdfd>'+point+'<rdrd>'
-		
-		}
-		
-	else {
-		var qtyName=qName
-		var pdNameID=pNameID
-		var strShow=pNameIDValue		
-		qNameValue=0		
-		strList=strShow.split('|')			
-		var	prdctName = strList[0]
-		var	prdctID = strList[1]
-		var	category = strList[2]
-		var	rate = strList[3]
-		var	point = strList[4]
-		
-		var pShow=prdctName+'|'+rate+'|'+ category
-		var addProduct=prdctName+'<fdfd>'+prdctID+'<fdfd>'+category+'<fdfd>'+rate+'<fdfd>'+qNameValue+'<fdfd>'+point+'<rdrd>'
-		
-	
-		if (submitPurchaseget.indexOf(prdctID+'<fdfd>') !=-1){
-			submitPurchaseList=submitPurchaseget.split('<rdrd>')
-			for (i=0; i<submitPurchaseList.length-1; i++){
-				strShow = 	submitPurchaseList[i]				
-				strList=strShow.split('<fdfd>')			
-				var	prdctIDS = strList[1]
-				if (prdctID==prdctIDS){
-					submitPurchase=submitPurchaseget.replace(strShow)
-				}
-				
-			}
-			
-		}
-	}
-		
-		localStorage.submitPurchase=submitPurchase
-		
-	
-}
-function productQue(){
-	
-	var prdctShow=''
-	
-	var submitPurchaseG=localStorage.submitPurchase
-	var submitPurchase=submitPurchaseG.replace('undefined<rdrd>','')
-	
-	submitPurchaseList=submitPurchase.split('<rdrd>')
-	
-	for (i=0; i<submitPurchaseList.length-1; i++){
-		
-		strShow = 	submitPurchaseList[i]	
-		//alert (strShow)		
-		if 	(strShow.length > 0){
-			strList=strShow.split('<fdfd>')			
-			var	prdctName = strList[0]
-			var	prdctID = strList[1]
-			var	category = strList[2]
-			var	rate = strList[3]
-			var point= strList[5]
-			var qNameValue= strList[4]
-			var pShow=prdctName+'|'+rate+'|'+ category+'|'+ point
 			if (parseInt(qNameValue)>0)	{
+				var qtyName=qName
+				var pdNameID=pNameID
+	
+				//alert (qNameValue)
+				strShow = 	prodctListStr[i]				
+				strList=strShow.split('|')			
+				var	prdctName = strList[0]
+				var	prdctID = strList[1]
+				var	category = strList[2]
+				var	rate = strList[3]
 			
-			prdctShow=prdctShow+'<tr> <td width="50px" style="background-color:#FFEAF4" align="center">'+qNameValue+'</td><td style="background-color:#CEF">'+pShow+'</td></tr>'
-			}
-		}
+				var pShow=prdctName+'|'+rate+'|'+ category
+				submitPurchase=submitPurchase+prdctName+'<fdfd>'+prdctID+'<fdfd>'+category+'<fdfd>'+rate+'<fdfd>'+qNameValue+'<rdrd>'
+				//alert (submitPurchase)
+				prdctShow=prdctShow+'<tr> <td width="50px" style="background-color:#FFEAF4" align="center">'+qNameValue+'</td><td style="background-color:#CEF">'+pShow+'</td></tr>' 
+				//alert(prdctShow)
+				}
+	    }
+		prdctShow=prdctShow+'</table>'
+		
+		localStorage.submitPurchase=submitPurchase						 
+						 
 		localStorage.prdctShowCart=prdctShow
-
+		//alert (localStorage.prdctShowCart)
 		$("#item_Que_combo_id").empty()
 		$("#item_Que_combo_id").append(localStorage.prdctShowCart);
 		
-
-		
-		
-	}
-	if (localStorage.prdctShowCart!=''){
+		//$('#outletMenu').html(localStorage.outlet)
 		url="#ProductQueList";					
 		$.mobile.navigate(url);	
-	}
-}
-function memHistory(){
-	var outletShow=localStorage.outlet
-	var outletIDN=outletShow.split('|');
-	var IdOutlet=outletIDN[0];
-	var memShow=localStorage.memInfo
-	var memMob=memShow.split('-')[0]
-	//alert (apiPath+'memHistory?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+IdOutlet+'&memMob='+memMob)
-	
-	$.ajax({
-		type:'POST',
-		url:apiPath+'memHistory?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+IdOutlet+'&memMob='+memMob,
-	
-        success: function(result) {
-			resultStr=result.split('<SYNCDATA>');	
-			if (resultStr[0]=='FAILED'){
-				$("#memHis").html(resultStr[1]);
-				
-			}
-			if (resultStr[0]=='SUCCESS'){	
-				$("#memHis").html(resultStr[1]);
-				//alert (resultStr[1])
-				
-			}//if      
-		}//success
-	  });//ajax
-}
-
+	}	
 	
 	
 function productQueRedeem(){
@@ -485,7 +281,7 @@ function productQueRedeem(){
 					for (i=0; i<memStrList.length-1; i++){	
 						memMob=memStrList[i].split('<fd>')[0]
 						memName=memStrList[i].split('<fd>')[1]
-						outletShow=outletShow+'<li class="ui-btn ui-shadow ui-corner-all " style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin; alignment-adjust:before-edge" onClick="checkRadioVal('+i+');RedeemGet('+i+')"><input onClick="RedeemGet('+i+')"  id="radioMem_'+i+'" type="radio" name="radio_mem"  value="'+memName+'|'+memMob+'" >'+memName+'|'+memMob+'</li>'
+						outletShow=outletShow+'<table width="100%"><tr><td width="20%"><input onClick="RedeemGet('+i+')"  id="radioMem_'+i+'" type="radio" name="radio_mem"  value="'+memName+'|'+memMob+'" >'+memName+'|'+memMob+'</td></tr></table>'
 
 					}
 					localStorage.queMem=outletShow
@@ -499,42 +295,13 @@ function productQueRedeem(){
 					
 			 }
 		});
-	$("#redMobile").val('');
-	$( "#redMobile" ).prop( "disabled", false );
-	$( "#queMem" ).prop( "disabled", false );
 	
 	url="#ProductQueRedList";					
 	$.mobile.navigate(url);	
 	
 	
 }
-function checkRadioVal(i){
-	var radioMemGet="#radioMem_"+i
-	$(radioMemGet).attr('checked', true) 
-	
-	//$( "#"+radioMemGet ).prop( "checked", true );
-}
-function clearText(){
-	$( "#redMobile" ).prop( "disabled", false );
-	$("#queMem").html(localStorage.queMem);
-	$("#redMobile").val('');
-}
-function checkRadio(){
-	var cText=$("#redMobile").val()
-	
-	if (cText.length > 0){
-		
-		$('#queMem').find('input, textarea, button, select').attr('disabled','disabled');
-
-	}
-	else{
-		$("#queMem").html(localStorage.queMem);
-		//$('#queMem').find('*').prop('disabled',false);
-		//$( "#queMem" ).prop( "disabled", true );
-	}
-}
 function purchaseDataSave(){
-	 
 	 var memInfo=localStorage.memInfo;
 	 var memNameMob=memInfo.split('-');
 	 var memMobile=memNameMob[0];
@@ -547,8 +314,7 @@ function purchaseDataSave(){
 	 var outletId=outletNameId[0];
      var outletName=outletNameId[1];
 	 var submitStrPurchase=localStorage.submitPurchase
-	
-	 submitStrPurchase=submitStrPurchase.replace('undefined<rdrd>','') 
+	  
 	 //alert(apiPath+'purchase_submit?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+outletId+'&outletName='+outletName+'&submitStrPurchase='+encodeURIComponent(submitStrPurchase)+'&memPoint='+localStorage.memPoint+'&memName='+memName+'&memMobile='+memMobile)
 
 	$.ajax({
@@ -558,27 +324,16 @@ function purchaseDataSave(){
         success: function(result2) {
 			//alert(result2)
 			//alert ('hi')	
-			if (result2!='Failed'){
-			//$("#visit_success").html("</br></br>Successfully added to cart");
-			localStorage.radioMem=memName+'|'+memMobile	
-			var radioMem=localStorage.radioMem
-			var radioMemMobile=radioMem.split('|')[1]
-			//alert ('Test')
-			$("#redMobile").val(radioMemMobile);
-			
-			$("#button_show").html(' <a data-role="button"    onClick="PurchaseDone()" >Purchase & CheckOut</a>');
-			
-			localStorage.submitPurchase=''
-			localStorage.prdctShowCart=''
-			$("#orderBtn").show();	
-			url="#submitPage";					
-			$.mobile.navigate(url);		
+			if (result2!=''){
+			$(".errorChk").text("Submitted Successfully");
+			$("#orderBtn").show();		
 			}
 		}      
  
 	  });
 	  
-	
+	url="#submitPage";					
+	$.mobile.navigate(url);	
 	}	
 	
 	
@@ -587,11 +342,6 @@ function RedeemGet(i){
 	var radioMemGet="#radioMem_"+i
 	var radioMem=$(radioMemGet).val();
 	localStorage.radioMem=radioMem	
-	var radioMemMobile=radioMem.split('|')[1]
-	$("#redMobile").val(radioMemMobile);
-	$("#redMobile").attr("disabled", "disabled"); 
-	
-	
 	}	
 function PurchaseDone(){	
 	var outletShow=localStorage.outlet
@@ -600,7 +350,6 @@ function PurchaseDone(){
 	var memShow=localStorage.radioMem
 	var memMob=memShow.split('|')[1]
 	//alert (apiPath+'search_purchase?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+IdOutlet+'&memMob='+memMob)
-	
 	$.ajax({
 		type:'POST',
 		url:apiPath+'search_purchase?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+IdOutlet+'&memMob='+memMob,
@@ -613,10 +362,6 @@ function PurchaseDone(){
 			}
 			if (resultStr[0]=='SUCCESS'){	
 				var prStr=resultStr[1]
-				var Mobile=resultStr[2]
-				var name=resultStr[3]
-				var point_valueS=resultStr[4]
-				//alert (point_value)
 				prList=prStr.split('<rd>')
 				var prdctShow='<table>'
 				var pStr=''
@@ -645,25 +390,12 @@ function PurchaseDone(){
 			localStorage.pFinal=prdctShow
 			
 			localStorage.pStr=pStr
-			
 			$("#purchaseShow").html(localStorage.pFinal);
-			//alert (point_valueS)
-			
-			$("#prRedMemP").html(outletShow);
-			$("#prRedMemNameP").html(name+'|'+Mobile);
-			$("#prRedPointP").html(point_valueS);
-			$("#prRedMemPS").html(outletShow);
-			$("#prRedMemNamePS").html(name+'|'+Mobile);
-			$("#prRedPointPS").html(point_valueS);
+			//$("#purchaseFinalShow").html(localStorage.pFinalStr);
+
 		}//if      
 		}//success
 	  });//ajax
-	//alert (point_valueS)  
-	
-	//alert (point_valueS)
-	//$("#prRedMemNameP").html(name+'|'+Mobile);
-	//$("#prRedMemNameP").html(point_value);
-	  
 	url="#RedeemList";					
 	$.mobile.navigate(url);	
 	}	
@@ -674,8 +406,7 @@ function ConfirmPage(){
 	prList=prStr.split('<rd>')
 	var prdctShow='<table>'
 	var pStr=''
-	var TotalProductPoint=0
-	
+	 
 	for (i=0; i<prList.length-1; i++){
 		 prSingle=prList[i]
 		 var pID		=prSingle.split('<fd>')[0]
@@ -686,41 +417,29 @@ function ConfirmPage(){
 		 var category	  =prSingle.split('<fd>')[5]
 		 var qQty="qQty_"+i
 		 var pShow=pName+'|'+product_rate+'|'+ category
-		
+		 
 		 var qty=$("#"+qQty).val()
-		 //alert (qty)
 		 if (parseInt(qty)>0){
 			 //alert (qty)
 			 prdctShow=prdctShow+'<tr><td style="background-color:#CEF">'+pShow+'</td> <td width="50px" style="background-color:#FFEAF4" align="center">'+qty+'</td></tr>' 
 			 pStr=pStr+pID+'<fd>'+pName+'<fd>'+qty+'<fd>'+product_point+'<fd>'+product_rate+'<fd>'+category+'<rd>'
-			 TotalProductPoint=TotalProductPoint+(parseInt(product_qty)*parseInt(product_point))
 		 }
 		
 		// pFinalStr=pFinalStr+'<tr><td style="background-color:#CEF">'+pShow+'</td> <td width="50px" style="background-color:#FFEAF4" align="center">'+product_qty+''+'</td></tr>' 	
 	}//for
 	prdctShow=prdctShow+'</table>'
-	//alert (TotalProductPoint)
-	localStorage.TotalProductPoint=TotalProductPoint
 	localStorage.pStrFinal=prdctShow
 	localStorage.pStr=pStr
 	
-	$("#TotalProductPoint").html('Purchase Point:   '+localStorage.TotalProductPoint);
 	$("#purchaseFinalShow").html(localStorage.pStrFinal);
-	$("#errorChk").html('');
-	$("#savedGiftError").html('');
-	$("#payCombTextDiv").hide();
-	
+	//alert (localStorage.pStr)
 	url="#ConfirmPageSave";					
 	$.mobile.navigate(url);	
 	}
-function setTextPay(){
-	var payMode=$("#payComb").val();
-	if (payMode=='BKash'){$("#payCombTextDiv").show();}else{$("#payCombTextDiv").hide();}
-	
-}
+
 
 function finalPurchaseSave(){
-	 
+	// alert ('hi')
 	 var memberAllInfo=localStorage.radioMem
      var memberName=memberAllInfo.split('|')[0]
 	 var memmobileNo=memberAllInfo.split('|')[1]
@@ -730,82 +449,30 @@ function finalPurchaseSave(){
 	 var outletId=outletNameId[0];
      var outletName=outletNameId[1];
 	 var finalData=localStorage.pStr
-	 var payComb=$("#payComb").val()
-	 var BKashNo=$("#BKashNo").val()
-	 var prPhotoName=$("#prPhotoName").val()
-	 var prPhotoPath=$("#prPhoto").val()
 ////	  
-	//alert(apiPath+'purchaseComplete?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+outletId+'&outletName='+outletName+'&finalData='+encodeURIComponent(finalData)+'&memberName='+memberName+'&memmobileNo='+memmobileNo+'&payComb='+payComb+'&BKashNo='+BKashNo+'&prPhotoName='+prPhotoName)
+	//alert(apiPath+'purchaseComplete?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+outletId+'&outletName='+outletName+'&finalData='+encodeURIComponent(finalData)+'&memberName='+memberName+'&memmobileNo='+memmobileNo)
 	
 	$.ajax({
 		type:'POST',
-		url:apiPath+'purchaseComplete?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+outletId+'&outletName='+outletName+'&finalData='+encodeURIComponent(finalData)+'&memberName='+memberName+'&memmobileNo='+memmobileNo+'&payComb='+payComb+'&BKashNo='+BKashNo+'&prPhotoName='+prPhotoName,
+		url:apiPath+'purchaseComplete?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+outletId+'&outletName='+outletName+'&finalData='+encodeURIComponent(finalData)+'&memberName='+memberName+'&memmobileNo='+memmobileNo,
 	
 		success: function(result2) {
-	
-			if (result2=='Success'){
-				//$("#visit_success").html("</br></br>Successfully added to cart");
-				//$("#visit_success").html("Submitted Successfully");
-				 //alert (result2)
-				 //alert (prPhotoPath+' | '+prPhotoName)
-				 upload_image(prPhotoPath,prPhotoName);
-				
-				
-				  
-				 $("#BKashNo").val('')
-				 $("#prPhotoName").val('')
-				 $("#prPhoto").val('')
-				 $("#myImage").html('')
-				 
-				localStorage.radioMem=memberName+'|'+memmobileNo	
-				var radioMem=localStorage.radioMem
-				var radioMemMobile=radioMem.split('|')[1]
-				//alert ('Test')
-				$("#redMobile").val(radioMemMobile);
-				 
-				
-				$("#button_show").html('<a data-role="button"   onClick="Redeem()">Redeem</a>');
-				
-				
-				$("#saveButton").show();
-				url="#submitPage";					
-				$.mobile.navigate(url);	
-				//location.reload();		
+			//alert(result2)
+			//alert ('hi')	
+			if (result2!=''){
+			$(".errorChk").text("Submitted Successfully");
+			$("#saveButton").show();		
 			}
 		}      
 	
 	  });
 	  
-	
+	url="#submitPage";					
+	$.mobile.navigate(url);	
 	}	
 
 
-function upload_image(imageURI, imageName) {
-   // alert (localStorage.photo_submit_url)
-   //alert (imageURI+' |  '+imageName)
-	var options = new FileUploadOptions();
-    options.fileKey="upload";
-    options.fileName=imageName;
-    options.mimeType="image/jpeg";
 	
-    var params = {};
-    params.value1 = "test";
-    params.value2 = "param";
-	
-    options.params = params;
-	options.chunkedMode = false;
-	
-    var ft = new FileTransfer();
-     ft.upload(imageURI, encodeURI(apipath_image),winProfile,failProfile,options);
-	 
-}
-
-function winProfile(r) {
-}
-
-function failProfile(error) {
-	//$("#error_prescription_submit").text('Memory Error. Please take new picture and Submit');
-}	
 //function finalPurchaseSave(){
 //	url="#submitPage";					
 //	$.mobile.navigate(url);	
@@ -815,9 +482,11 @@ function login_user() {
 	     
 	     var cm_id=$("#cm_id").val();
 	     var cm_pass=$("#cm_pass").val();
+		// alert (cm_id)
 	     if (cm_id=="" || cm_id==undefined || cm_pass=="" || cm_pass==undefined){
 			 $(".errorMsg").html("Required ID  and password");	
-				
+
+			 
 		 }else{
 			
 			$("#login_image").show();
@@ -825,18 +494,12 @@ function login_user() {
 			localStorage.cid='UNILEVER';
 			localStorage.cm_id=cm_id;
 			localStorage.cm_pass=cm_pass;
-			//localStorage.synced='NO'
+			localStorage.synced='NO'
 			
 			if(localStorage.sync_code==undefined || localStorage.sync_code==""){
 					localStorage.sync_code=0
-					
 				}
-				
-			//	 	
-//    	    if(localStorage.cm_pass!=cm_id || localStorage.cm_pass!=cm_pass){
-//					
-//		            $(".errorMsg").html("Wrong UserId/Name and password combination");	
-//				}
+			
 	       // alert (apiPath+'check_user?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code)
 			
 			$.ajax({
@@ -856,27 +519,6 @@ function login_user() {
 								
 							}
 							if (resultArray[0]=='SUCCESS'){
-								
-								
-								localStorage.memInfo=''
-								localStorage.memPoint=''
-								localStorage.memRedMob=''
-								localStorage.memRedName=''
-								localStorage.giftShowRed=''
-								localStorage.submitRedeem=''
-								localStorage.memInfo=''
-								localStorage.memPoint=''
-								localStorage.submitPurchase=''
-								localStorage.prdctShowCart=''
-								localStorage.queMem=''
-								localStorage.radioMem=''
-								localStorage.pFinal=''
-								localStorage.pStr=''
-								localStorage.TotalProductPoint=''
-								localStorage.pStrFinal=''
-								localStorage.pStr=''
-								
-								
 								localStorage.sync_code=resultArray[1];
 								localStorage.outletString=resultArray[2];
 								localStorage.prodctStr=resultArray[3];
@@ -885,13 +527,10 @@ function login_user() {
 								localStorage.giftdctStr=resultArray[5];
 								localStorage.catdctStr=resultArray[6];
 								
-								
-								localStorage.sync='Yes';
-								
 								var catListStrStr=localStorage.catdctStr.split('<rdrd>');
 								var catList='';
 								catList=catList+"<option value=ALL>ALL</option>"
-						        for (i=0;i<catListStrStr.length-1;i++){	
+						        for (i=0;i<catListStrStr.length;i++){	
 								catList=catList+"<option value="+encodeURIComponent(catListStrStr[i])+">"+catListStrStr[i]+"</option>"; 
 								
 							    }
@@ -899,10 +538,6 @@ function login_user() {
 								localStorage.catList= catList
 								//alert (localStorage.catList)
 								var rpt_rep_ob1=$("#catgoryList");
-								rpt_rep_ob1.empty();	 
-								rpt_rep_ob1.append(catList);
-								
-								var rpt_rep_ob1=$("#catgoryListShow_S");
 								rpt_rep_ob1.empty();	 
 								rpt_rep_ob1.append(catList);
 						
@@ -921,12 +556,12 @@ function login_user() {
 							
          						outletString=localStorage.outletString
 								outletStringList=outletString.split('<rdrd>')
-								var outletShow='<ul>'
+								var outletShow=''
 								for (i=0; i<outletStringList.length-1; i++){
-			outletShow=outletShow+'<li class="ui-btn ui-shadow ui-corner-all " style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin"  onClick="setOutlet(\'' + outletStringList[i] + '\')"><td > '+outletStringList[i]+'</li>'
+			outletShow=outletShow+'<table width="100%"><tr onClick="setOutlet(\'' + outletStringList[i] + '\')"><td > '+outletStringList[i]+'</td></tr><tr style=" background-color:#000; height:1px"><td></td></tr></table>'
 									//alert (outletStringList[i])
 								}
-								outletShow=outletShow+'</ul>'
+								outletShow=outletShow
 								localStorage.outletShow=outletShow
 								
 								$("#outletShow").html(localStorage.outletShow)
@@ -953,57 +588,35 @@ function login_user() {
 								 prodctStr=localStorage.prodctStr
 								 prodctListStr=prodctStr.split('<rdrd>');
 								 var prdctShow=''
-								 var prdctShowList=''
+								 
 								 for (i=0; i<prodctListStr.length-1; i++){
 									 var qName="qName_"+i.toString()
 									 var pNameID="pNameID_"+i.toString()
 									 
 									 pShowList=prodctListStr[i].split('|')
 									 var pShow=pShowList[0]+'|'+pShowList[3]+'|'+pShowList[2]
-					prdctShow=prdctShow+'<li class="ui-btn ui-shadow " style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin"><table><tr><td>   <input onKeyUp="productQueNew('+i+')" type="number" id="'+qName+'"   name="'+qName+'" style="width:50px"><input type="hidden" id="'+pNameID+'"   name="'+pNameID+'"  value="'+prodctListStr[i]+'"></td><td>'+pShow+'</td></tr></table></li>'    
-									 
-									 
-									 
-									 prdctShowList=prdctShowList+'<li class="ui-btn ui-shadow " style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin"><table><tr><td>'+pShow+'</td></tr></table></li>'                              
+									 prdctShow=prdctShow+'<table><tr><td> <input type="number" id="'+qName+'"   name="'+qName+'" style="width:50px"><input type="hidden" id="'+pNameID+'"   name="'+pNameID+'"  value="'+prodctListStr[i]+'"></td><td>'+pShow+'</td></tr></table>'                          
 									// alert (prdctShow)
 								    }
 								  
 								 
 								     
 								     localStorage.prdctShow=prdctShow
-									 localStorage.prdctShowList=prdctShowList
-									 
-								     //$("#prdctShow").html(localStorage.prdctShow)
-								   //  $("#item_combo_id").empty()
-								    // $("#item_combo_id").append(localStorage.prdctShow);
-									
-									var item_combo_id_ob=$('#item_combo_id');
-									item_combo_id_ob.empty()
-									item_combo_id_ob.append(prdctShow);
-									
-									var item_combo_id_ob_S=$('#item_combo_id_S');
-									item_combo_id_ob_S.empty()
-									item_combo_id_ob_S.append(prdctShowList);
-									
-									
-									
-									
-									//item_combo_id_ob.listview("refresh");		
+								     $("#prdctShow").html(localStorage.prdctShow)
+								     $("#item_combo_id").empty()
+								     $("#item_combo_id").append(localStorage.prdctShow);
 								     //alert (localStorage.prdctShow)
-									 
 						
 								$("#loginButton").show();
 								$("#login_image").hide();	  
 								url="#pageOutlet";					
-								$.mobile.navigate(url);	
-								item_combo_id_ob.listview("refresh");							
+								$.mobile.navigate(url);							
 							   }		
 							
 							
 						}
 				      },
 				  error: function(result) {
-					 alert('Network error has occurred please try again!');
 					
 				  }
 			  });//end ajax
@@ -1017,25 +630,8 @@ function login_user() {
 //		
 function setOutlet(outlet){
 	localStorage.outlet=outlet
-	
-	
-	localStorage.memInfo=''
-	localStorage.memPoint=''
-	localStorage.memRedMob=''
-	localStorage.memRedName=''
-	localStorage.submitRedeem=''
-	localStorage.memInfo	=''
-	localStorage.memPoint	=''
-	localStorage.submitPurchase=''
-	localStorage.prdctShowCart=''
-	localStorage.queMem	=''
-	localStorage.radioMem =''
-	localStorage.pFinal=''
-	localStorage.pStr=''
-	localStorage.TotalProductPoint=''
-	localStorage.pStrFinal=''
 	menuSearch()
-	location.reload();
+	
 }
 
 function selcetCat(){
@@ -1050,21 +646,13 @@ function selcetCat(){
 	 var qName="qName_"+i.toString()
 	 var pNameID="pNameID_"+i.toString()
 	 var cat = prodctListStr[i].split('|')[2]
-	 pShowList=prodctListStr[i].split('|')
-	 var pShow=pShowList[0]+'|'+pShowList[3]+'|'+pShowList[2]
 	 //alert (cat)
 	 if (catValue=="ALL"){
-	 	//prdctShow=prdctShow+'<table><tr><td> <input onKeyUp="productQueNew('+i+')" type="number" id="'+qName+'"   name="'+qName+'" style="width:50px"><input type="hidden" id="'+pNameID+'"   name="'+pNameID+'"  value="'+prodctListStr[i]+'"></td><td>'+prodctListStr[i]+'</td></tr></table>' 
-		prdctShow=prdctShow+'<li class="ui-btn ui-shadow " style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin"><table><tr><td>   <input onKeyUp="productQueNew('+i+')" type="number" id="'+qName+'"   name="'+qName+'" style="width:50px"><input type="hidden" id="'+pNameID+'"   name="'+pNameID+'"  value="'+prodctListStr[i]+'"></td><td>'+pShow+'</td></tr></table></li>'    
-									 
-									 
-		
-		  
+	 	prdctShow=prdctShow+'<table><tr><td> <input type="number" id="'+qName+'"   name="'+qName+'" style="width:50px"><input type="hidden" id="'+pNameID+'"   name="'+pNameID+'"  value="'+prodctListStr[i]+'"></td><td>'+prodctListStr[i]+'</td></tr></table>'   
 	 }
 	 else{
 		 if (cat==catValue){
-		 	//prdctShow=prdctShow+'<table><tr><td> <input onKeyUp="productQueNew('+i+')" type="number" id="'+qName+'"   name="'+qName+'" style="width:50px"><input type="hidden" id="'+pNameID+'"   name="'+pNameID+'"  value="'+prodctListStr[i]+'"></td><td>'+prodctListStr[i]+'</td></tr></table>'
-			prdctShow=prdctShow+'<li class="ui-btn ui-shadow " style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin"><table><tr><td>   <input onKeyUp="productQueNew('+i+')" type="number" id="'+qName+'"   name="'+qName+'" style="width:50px"><input type="hidden" id="'+pNameID+'"   name="'+pNameID+'"  value="'+prodctListStr[i]+'"></td><td>'+pShow+'</td></tr></table></li>'    
+		 	prdctShow=prdctShow+'<table><tr><td> <input type="number" id="'+qName+'"   name="'+qName+'" style="width:50px"><input type="hidden" id="'+pNameID+'"   name="'+pNameID+'"  value="'+prodctListStr[i]+'"></td><td>'+prodctListStr[i]+'</td></tr></table>'   
 		 }
 	 }
 	// alert (prdctShow)
@@ -1073,75 +661,142 @@ function selcetCat(){
 	//alert (localStorage.prdctShow)
 	 
 	 localStorage.prdctShow=prdctShow
-	 var item_combo_id_ob=$('#item_combo_id');
-									
-	item_combo_id_ob.empty()
-	item_combo_id_ob.append(prdctShow);
-	item_combo_id_ob.listview("refresh");
-	 
-	// $("#prdctShow").html(localStorage.prdctShow)
-//	 $("#item_combo_id").empty()
-//	 $("#item_combo_id").append(localStorage.prdctShow);
+	 $("#prdctShow").html(localStorage.prdctShow)
+	 $("#item_combo_id").empty()
+	 $("#item_combo_id").append(localStorage.prdctShow);
 	
 
 }
 
 
-function selcetCat_S(){
-	var catValue=$("#catgoryListShow_S").val();
-	
-	//alert (localStorage.prdctShow)
-	prodctStr=localStorage.prodctStr
-	prodctListStr=prodctStr.split('<rdrd>');
-	var prdctShow=''
-	//alert (localStorage.prodctStr)
-	for (i=0; i<prodctListStr.length-1; i++){
-	 var qName="qName_"+i.toString()
-	 var pNameID="pNameID_"+i.toString()
-	 var cat = prodctListStr[i].split('|')[2]
-	 pShowList=prodctListStr[i].split('|')
-	 var pShow=pShowList[0]+'|'+pShowList[3]+'|'+pShowList[2]
-	 //alert (cat)
-	 if (catValue=="ALL"){
-	 	 
-		prdctShow=prdctShow+'<li class="ui-btn ui-shadow " style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin"><table><tr><td>'+pShow+'</td></tr></table></li>'                                
-									 
-									 
-		
-		  
-	 }
-	 else{
-		 if (cat==catValue){
-		 	//prdctShow=prdctShow+'<table><tr><td> <input onKeyUp="productQueNew('+i+')" type="number" id="'+qName+'"   name="'+qName+'" style="width:50px"><input type="hidden" id="'+pNameID+'"   name="'+pNameID+'"  value="'+prodctListStr[i]+'"></td><td>'+prodctListStr[i]+'</td></tr></table>'
-			prdctShow=prdctShow+'<li class="ui-btn ui-shadow " style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin"><table><tr><td>'+pShow+'</td></tr></table></li>'                              
-		 }
-	 }
-	// alert (prdctShow)
-	}
-	//alert (localStorage.prodctStr)
-	//alert (localStorage.prdctShow)
-	 
-	
-	 var item_combo_id_ob=$('#item_combo_id_S');
-									
-	item_combo_id_ob.empty()
-	item_combo_id_ob.append(prdctShow);
-	item_combo_id_ob.listview("refresh");
-	 
-	// $("#prdctShow").html(localStorage.prdctShow)
-//	 $("#item_combo_id").empty()
-//	 $("#item_combo_id").append(localStorage.prdctShow);
-	
-
-}
-
-
-
-
-
-
-
-
+//function getOrder(){
+//	  
+//     prodctStr=localStorage.prodctStr
+//	 
+//	// alert(prodctStr)
+//	 prodctListStr=prodctStr.split('<rdrd>')
+//	 
+//	 
+//	 var prdctShow=''
+//	 var submitPurchase=''							 
+//	 for (i=0; i<prodctListStr.length-1; i++){
+//		
+//	 var qName="qName_"+i.toString()
+//	 var pNameID="pNameID_"+i.toString()
+//	 
+//	 var qNameValue=$("#"+qName).val()
+//	 var memStr=localStorage.my_nam_mob
+//		//alert(memStr)
+//	
+//	 if (parseInt(qNameValue)>0)	{
+//		 	var qtyName=qName
+//	        var pdNameID=pNameID
+//
+//				//alert (qNameValue)
+//			  	strShow = 	prodctListStr[i]				
+//				strList=strShow.split('|')			
+//				var	prdctName = strList[0]
+//				var	prdctId = strList[1]
+//				var	rate = strList[2]
+//		
+//			
+//		        submitPurchase=submitPurchase+prdctName+'<fdfd>'+prdctId+'<fdfd>'+rate+'<fdfd>'+qNameValue+'<rdrd>'
+//		 
+//				
+//			 
+//		
+//		
+//	    prdctShow=prdctShow+'<table><tr><td>'+qNameValue+'--'+prodctListStr[i]+'</td></tr></table>' 
+//		//alert(prdctShow)
+//	 }
+//	 
+//	
+//	 
+//	 }
+//								  
+//		 localStorage.submitPurchase=submitPurchase						 
+//		 //alert (localStorage.submitPurchase)					     
+//		 localStorage.prdctShowCart=prdctShow
+//		//alert (localStorage.prdctShowCart)
+//		 $("#item_combo_id_Cart").empty()
+//		 $("#item_combo_id_Cart").append(localStorage.prdctShowCart);
+//
+//	
+//	
+//    $('#orderOutlet').html(localStorage.outlet); 
+//	$("#mMobileOrder").html(localStorage.my_nam_mob)  
+//	url="#orderShow";					
+//	$.mobile.navigate(url);
+//}
+//
+//
+//
+//
+//function purchaseDataSave(){
+//	
+//	 //$('#nam_mob').html(n_m);
+//	 var memStrListView=localStorage.my_nam_mob
+//	 //alert (localStorage.my_nam_mob)
+//	 var memNameId=memStrListView.split(',');
+//	 var memMo = memNameId[0]
+//	 var memNa = memNameId[1]
+//	 
+//	 var outletShow=localStorage.outlet
+//	 var outletNameId=outletShow.split('|');
+//	 var outletId=outletNameId[0];
+//     var outletName=outletNameId[1];
+//	 var submitStrPurchase=localStorage.submitPurchase
+//	//encode
+////	  
+//	 alert(apiPath+'purchase_submit?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&memMo='+memMo+'&memNa='+memNa+'&outletId='+outletId+'&outletName='+outletName+'&submitStrPurchase='+encodeURIComponent(submitStrPurchase))
+//	  
+//	  
+//	  $.ajax({
+//		type:'POST',
+//		url:apiPath+'purchase_submit?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&memMo='+memMo+'&memNa='+memNa+'&outletId='+outletId+'&outletName='+outletName+'&submitStrPurchase='+encodeURIComponent(submitStrPurchase),
+//	
+//        success: function(result2) {
+//			alert(result2)
+//			//alert ('hi')	
+//			if (result2!=''){
+//			$(".errorChk").text("Submitted Successfully");
+//			$("#orderBtn").show();		
+//			}
+//	
+//
+//
+//	
+//		}      
+//
+//			 
+//			  
+//	  });
+//	  
+//}
+//window.onload = init;
+//
+//function init() {
+//   // Bind "onsubmit" event handler to the "submit" button
+//   document.getElementById("formTest").onsubmit = validateForm;
+//   // Bind "onclick" event handler to "reset" button
+//   document.getElementById("btnReset").onclick = clearForm;
+//   // Set initial focus
+//   document.getElementById("name").focus();
+//}
+//
+//function validateForm(theForm) {
+//   with(theForm) {
+//      // return false would prevent default submission
+//      return (isNotEmpty(name, "Please enter your name!", elmNameError)
+//          // && isNumeric(txtZipcode, "Please enter a 5-digit zip code!", elmZipcodeError)
+//           //&& isLengthMinMax(txtZipcode, 5, 5, "Please enter a 5-digit zip code!", elmZipcodeError)
+//		   && isNumeric(mobile, "Please enter a valid phone number!", elmPhoneError)
+//          // && isSelected(mobile, 11, 11, "Please enter a 10-digit mobile number!", elmMobileError)
+//		   && isSelected(ageRange, "Please make a selection!", elmAgeError)
+//        
+//      );
+//   }
+//}
 
 //=======clear form=============
 
@@ -1178,7 +833,7 @@ function member_save(){
 	  }else{
 
 	  
-	 // alert(apiPath+'dataSave?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&name='+name+'&genderComb='+genderComb+'&birthDayG='+birthDayG+'&birthMonthG='+birthMonthG+'&address='+address+'&mobile='+mobile+'&reg_date='+reg_date+'&reg_by_cm='+reg_by_cm+'&otltName='+otltName+'&ageRange='+ageRange+'&thana='+thana+'&district='+district)
+	  alert(apiPath+'dataSave?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&name='+name+'&genderComb='+genderComb+'&birthDayG='+birthDayG+'&birthMonthG='+birthMonthG+'&address='+address+'&mobile='+mobile+'&reg_date='+reg_date+'&reg_by_cm='+reg_by_cm+'&otltName='+otltName+'&ageRange='+ageRange+'&thana='+thana+'&district='+district)
 	  
 	  
 	  $.ajax({
@@ -1188,24 +843,13 @@ function member_save(){
         success: function(result1) {
 			
 			if (result1!=''){
-				
-			localStorage.memInfo=mobile+'-'+name
-			localStorage.memPoint=0
-			//alert ('11')
-			
-			$("#prMem").html(localStorage.memInfo);
-			$("#prPoint").html(localStorage.memPoint);	
-				
-				
 			$(".errorChk").text("Submitted Successfully");
-			
 			$("#memButton").show();		
 			}
           
 		}      
 	  
 	  });
-	 product()
 	  }
 	  
 }
@@ -2604,11 +2248,484 @@ function reloadSubmitPage() {
 			$.mobile.navigate(url);
 			$(url).trigger('create');
 }
-
+//=====================Outlet Exception start=====================
+function setCat_data() { 
+	//Get Category Value
+	var CategoryStr=''
+	//Hair Care
+	var HairCare_image_path1=$("#HairCare_image_div_hidden1").val(); 
+	var HairCare_image_name1=$("#HairCare_image_name_hidden1").val();
+	var HairCare_height1=$("#HairCare_height1").val();
+	var HairCare_width1=$("#HairCare_width1").val();
+	
+	var HairCare_image_path2=$("#HairCare_image_div_hidden2").val(); 
+	var HairCare_image_name2=$("#HairCare_image_name_hidden2").val();
+	var HairCare_height2=$("#HairCare_height2").val();
+	var HairCare_width2=$("#HairCare_width2").val();
+	
+	var HairCare_image_path3=$("#HairCare_image_div_hidden3").val(); 
+	var HairCare_image_name3=$("#HairCare_image_name_hidden3").val();
+	var HairCare_height3=$("#HairCare_height3").val();
+	var HairCare_width3=$("#HairCare_width3").val();
+	
+	var HairCare_image_path4=$("#HairCare_image_div_hidden4").val(); 
+	var HairCare_image_name4=$("#HairCare_image_name_hidden4").val();
+	var HairCare_height4=$("#HairCare_height4").val();
+	var HairCare_width4=$("#HairCare_width4").val();
+	
+	var HairCareStr=HairCare_image_path1+'fdfd'+HairCare_image_name1+'fdfd'+HairCare_height1+'fdfd'+HairCare_width1+'rdrd'
+HairCareStr=HairCareStr+HairCare_image_path2+'fdfd'+HairCare_image_name2+'fdfd'+HairCare_height2+'fdfd'+HairCare_width2+'rdrd'
+HairCareStr=HairCareStr+HairCare_image_path3+'fdfd'+HairCare_image_name3+'fdfd'+HairCare_height3+'fdfd'+HairCare_width3+'rdrd'
+HairCareStr=HairCareStr+HairCare_image_path4+'fdfd'+HairCare_image_name4+'fdfd'+HairCare_height4+'fdfd'+HairCare_width4+'rdrd'
+	
+	
+	CategoryStr='<HairCare>'+HairCareStr+'</HairCare>'                      
+	
+	//SkinCare
+	var SkinCare_image_path1=$("#SkinCare_image_div_hidden1").val(); 
+	var SkinCare_image_name1=$("#SkinCare_image_name_hidden1").val();
+	var SkinCare_height1=$("#SkinCare_height1").val();
+	var SkinCare_width1=$("#SkinCare_width1").val();
+	
+	var SkinCare_image_path2=$("#SkinCare_image_div_hidden2").val(); 
+	var SkinCare_image_name2=$("#SkinCare_image_name_hidden2").val();
+	var SkinCare_height2=$("#SkinCare_height2").val();
+	var SkinCare_width2=$("#SkinCare_width2").val();
+	
+	var SkinCare_image_path3=$("#SkinCare_image_div_hidden3").val(); 
+	var SkinCare_image_name3=$("#SkinCare_image_name_hidden3").val();
+	var SkinCare_height3=$("#SkinCare_height3").val();
+	var SkinCare_width3=$("#SkinCare_width3").val();
+	
+	var SkinCareStr=SkinCare_image_path1+'fdfd'+SkinCare_image_name1+'fdfd'+SkinCare_height1+'fdfd'+SkinCare_width1+'rdrd'
+	SkinCareStr=SkinCareStr+SkinCare_image_path2+'fdfd'+SkinCare_image_name2+'fdfd'+SkinCare_height2+'fdfd'+SkinCare_width2+'rdrd'
+	SkinCareStr=SkinCareStr+SkinCare_image_path3+'fdfd'+SkinCare_image_name3+'fdfd'+SkinCare_height3+'fdfd'+SkinCare_width3+'rdrd'
+	
+	CategoryStr=CategoryStr+'<SkinCare>'+SkinCareStr+'</SkinCare>'
+	
+	//Oral
+	var Oral_image_path1=$("#Oral_image_div_hidden1").val(); 
+	var Oral_image_name1=$("#Oral_image_name_hidden1").val();
+	var Oral_height1=$("#Oral_height1").val();
+	var Oral_width1=$("#Oral_width1").val();
+	
+	var Oral_image_path2=$("#Oral_image_div_hidden2").val(); 
+	var Oral_image_name2=$("#Oral_image_name_hidden2").val();
+	var Oral_height2=$("#Oral_height2").val();
+	var Oral_width2=$("#Oral_width2").val();
+	
+	var OralStr=Oral_image_path1+'fdfd'+Oral_image_name1+'fdfd'+Oral_height1+'fdfd'+Oral_width1+'rdrd'
+	OralStr=	OralStr+Oral_image_path2+'fdfd'+Oral_image_name2+'fdfd'+Oral_height2+'fdfd'+Oral_width2+'rdrd'
+	CategoryStr=CategoryStr+'<Oral>'+OralStr+'</Oral>'
+	
+	//SkinCleansing
+	var SkinCleansing_image_path1=$("#SkinCleansing_image_div_hidden1").val(); 
+	var SkinCleansing_image_name1=$("#SkinCleansing_image_name_hidden1").val();
+	var SkinCleansing_height1=$("#SkinCleansing_height1").val();
+	var SkinCleansing_width1=$("#SkinCleansing_width1").val();
+	
+	var SkinCleansing_image_path2=$("#SkinCleansing_image_div_hidden2").val(); 
+	var SkinCleansing_image_name2=$("#SkinCleansing_image_name_hidden2").val();
+	var SkinCleansing_height2=$("#SkinCleansing_height2").val();
+	var SkinCleansing_width2=$("#SkinCleansing_width2").val();
+	
+	var SkinCleansingStr=SkinCleansing_image_path1+'fdfd'+SkinCleansing_image_name1+'fdfd'+SkinCleansing_height1+'fdfd'+SkinCleansing_width1+'rdrd'
+	SkinCleansingStr=	 SkinCleansingStr+SkinCleansing_image_path2+'fdfd'+SkinCleansing_image_name2+'fdfd'+SkinCleansing_height2+'fdfd'+SkinCleansing_width2+'rdrd'
+	CategoryStr=CategoryStr+'<SkinCleansing>'+SkinCleansingStr+'</SkinCleansing>'
+	
+	//Laundry
+	var Laundry_image_path1=$("#Laundry_image_div_hidden1").val(); 
+	var Laundry_image_name1=$("#Laundry_image_name_hidden1").val();
+	var Laundry_height1=$("#Laundry_height1").val();
+	var Laundry_width1=$("#Laundry_width1").val();
+	
+	var Laundry_image_path2=$("#Laundry_image_div_hidden2").val(); 
+	var Laundry_image_name2=$("#Laundry_image_name_hidden2").val();
+	var Laundry_height2=$("#Laundry_height2").val();
+	var Laundry_width2=$("#Laundry_width2").val();
+	
+	var LaundryStr=Laundry_image_path1+'fdfd'+Laundry_image_name1+'fdfd'+Laundry_height1+'fdfd'+Laundry_width1+'rdrd'
+	LaundryStr=	LaundryStr+ Laundry_image_path2+'fdfd'+Laundry_image_name2+'fdfd'+Laundry_height2+'fdfd'+Laundry_width2+'rdrd'
+	CategoryStr=CategoryStr+'<Laundry>'+LaundryStr+'</Laundry>'
+	
+	//HouseHoldcleansing
+	var HHcleansing_image_path1=$("#HHcleansing_image_div_hidden1").val(); 
+	var HHcleansing_image_name1=$("#HHcleansing_image_name_hidden1").val();
+	var HHcleansing_height1=$("#HHcleansing_height1").val();
+	var HHcleansing_width1=$("#HHcleansing_width1").val();
+	
+	var HHcleansing_image_path2=$("#HHcleansing_image_div_hidden2").val(); 
+	var HHcleansing_image_name2=$("#HHcleansing_image_name_hidden2").val();
+	var HHcleansing_height2=$("#HHcleansing_height2").val();
+	var HHcleansing_width2=$("#HHcleansing_width2").val();
+	
+	var HHcleansingStr=HHcleansing_image_path1+'fdfd'+HHcleansing_image_name1+'fdfd'+HHcleansing_height1+'fdfd'+HHcleansing_width1+'rdrd'
+	HHcleansingStr=HHcleansingStr+ HHcleansing_image_path2+'fdfd'+HHcleansing_image_name2+'fdfd'+HHcleansing_height2+'fdfd'+HHcleansing_width2+'rdrd'
+	CategoryStr=CategoryStr+'<HouseHoldcleansing>'+HHcleansingStr+'</HouseHoldcleansing>'
+	//alert ('f')
+	//Foods	
+	var Foods_image_path1=$("#Foods_image_div_hidden1").val(); 
+	var Foods_image_name1=$("#Foods_image_name_hidden1").val();
+	var Foods_height1=$("#Foods_height1").val();
+	var Foods_width1=$("#Foods_width1").val();
+	//alert ('1')
+	var Foods_image_path2=$("#Foods_image_div_hidden2").val(); 
+	var Foods_image_name2=$("#Foods_image_name_hidden2").val();
+	var Foods_height2=$("#Foods_height2").val();
+	var Foods_width2=$("#Foods_width2").val();
+	//alert ('2')	
+	var FoodsStr=Foods_image_path1+'fdfd'+Foods_image_name1+'fdfd'+Foods_height1+'fdfd'+Foods_width1+'rdrd'
+	FoodsStr=FoodsStr+ Foods_image_path2+'fdfd'+Foods_image_name2+'fdfd'+Foods_height2+'fdfd'+Foods_width2+'rdrd'
+	CategoryStr=CategoryStr+'<Foods>'+FoodsStr+'</Foods>'
+	//alert ('3')
+	
+		
+	localStorage.CategoryStr=CategoryStr
+	//alert (localStorage.CategoryStr)	
+	//alert ('4')	
+		
+		
+		//alert (len(localStorage.CategoryStr))
+		
+		
+		if (CategoryStr.length>10){
+			var url = "#fixedDisplay";
+			$.mobile.navigate(url);
+		
+		}
+//		else if (localStorage.qpdsSkip==0){
+//			var url = "#qpdsPage";
+//			$.mobile.navigate(url);
+//			
+//		}
+//		else{
+//			var url = "#npdPage";
+//			$.mobile.navigate(url);
+//		}
+		
+		
+		
+		
+		
+		
+	//	$.mobile.navigate(url);
+	//	$(url).trigger('create');
+	//}
+}
 //=====================Outlet Exception end=====================
 
 
+//=====================Select Outlet Start====================
 
+function syncOutlet() { 
+	result_string=localStorage.selected_outletinfo_all_final;
+	
+	//alert (apipath+'sync_outlet?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&synccode='+localStorage.synccode+'&outlet='+localStorage.outletNameID);
+	$.ajax({
+	 type: 'POST',
+	 url: apipath+'sync_outlet?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&synccode='+localStorage.synccode+'&outlet='+localStorage.outletNameID,
+	 success: function(result) {	
+			
+			if (result==''){
+				alert ('Sorry Network not available');
+			}
+			else{
+				var resultArray = result.split('<SYNCDATA>');			
+				if (resultArray[0]=='FAILED'){
+					$("#error_login").html('Unauthorized User');
+					
+				}
+				if (resultArray[0]=='SUCCESS'){
+					//alert (resultArray[0])
+					var result_string=resultArray[1];
+					
+			if (result_string.length > 50){
+			var npdArray = result_string.split('</npdList>');									
+			npdList = npdArray[0].replace("<npdList>","");
+			//alert (npdList)
+			
+			fdisplay = npdArray[1];
+			var fdisplayArray = result_string.split('</fdisplayList>');									
+			fdisplayList = fdisplayArray[0].replace("<fdisplayList>","");
+			//alert (fdisplayList)
+			
+			//$("#show_result").text(fdisplayList);
+			
+								
+			qpds = fdisplayArray[1];
+			var qpdsArray = qpds.split('</qpdsList>');									
+			qpdsList = qpdsArray[0].replace("<qpdsList>","");
+			
+			//==========Create NPD list
+			
+			var npdSingleArray = qpdsList.split('rdrd');	
+			var npdSingleTotal = npdSingleArray.length;
+			
+			
+			var npdStringShow=''
+			npdStringShow=npdStringShow+'<table width="100%" border="0"><tr style="color:#0329C0"> <td colspan="2" style="color:#006A6A; font-size:18px;">'+localStorage.routeIDName+'<br>'+localStorage.outletNameID+'</td></tr><tr > </table></br>'
+			//npdStringShow=npdStringShow+'<table  width="100%" border="0" cellpadding="0" cellspacing="0">'
+			//npdStringShow=npdStringShow+'<tr bgcolor="#9FCED7"  ><td></td><td>Item</td><td> QTY</td><td ></td></tr><tr height="1px" bgcolor="#CCCCCC" ><td></td><td></td><td> </td><td ></td></tr>'
+			
+			//i=6;
+//								
+			localStorage.npdTotal=npdSingleTotal
+			
+			//alert (localStorage.npdTotal)
+			
+			
+			for (var i=0; i < npdSingleTotal-1; i++){
+				npdArray = npdSingleArray[i].split('fdfd');
+				localStorage.npdArrayTotal=npdArray.length;
+				
+				itemID=npdArray[0];
+				itemName=npdArray[1];
+				minQty_npd=npdArray[2];
+				npd_image=npdArray[3];
+				
+				
+				var i_text=i.toString()
+				var ItemQtynpd='ItemQtynpd_'+i_text
+				var Itemnpd='Itemnpd_'+i_text
+				var minQty='minQty_npd_'+i_text
+				
+				var npd_image_div='npd_image_div_'+i_text
+				var npd_image_div_hidden='npd_image_div_hidden_'+i_text
+				var npd_image_name_hidden='npd_image_name_hidden_'+i_text
+				
+				
+				
+				npdStringShow=npdStringShow+'<img src="'+apipath_image+'static/uni_images/npd/'+npd_image+'" alt="NPD" />';
+				
+				//npdStringShow=npdStringShow+'<tr ><td>&nbsp;</td><td>'+itemName+
+//				'<input type="hidden" name="'+ Itemnpd +'" id="'+ Itemnpd +'" value="'+itemID+'" min="0">'+
+//				'<input type="hidden" name="'+ minQty +'" id="'+ minQty +'" value="'+minQty_npd+'" min="0">'+
+//				'</td>'+
+//				'<td width="60"><input type="number" name="'+ItemQtynpd +'" id="'+ ItemQtynpd +'" value="" min="0"></td><td width="5px">&nbsp;</td></tr>'
+//				npdStringShow=npdStringShow+'<tr height="1px" bgcolor="#CCCCCC" ><td></td><td></td><td> </td><td ></td></tr>'
+				
+				
+				
+				//====================	After
+				npdStringShow=npdStringShow+'<table width="100%" border="0"><tr>'+
+						'<td> <a data-role="button" href="#" onClick="get_pic_npd('+i_text+')" >Take Picture </a></td></tr></table>'+ 
+						'<img id="'+npd_image_div+'" height="100px" width="100px"  src="" alt="NPDPic" />'+
+						'<input type="hidden" name="'+ npd_image_div_hidden +'" id="'+ npd_image_div_hidden +'" value="" >'+
+						'<input type="hidden" name="'+ npd_image_name_hidden +'" id="'+ npd_image_name_hidden +'" value="" ><br>--------------------------------------------------------------------'
+						
+
+				
+				
+				
+			}
+			npdStringShow=npdStringShow+'</table>'
+			localStorage.npdStringShow=npdStringShow
+			$("#npd").html(localStorage.npdStringShow);
+			
+	//=====================Create Fixed Display list
+			
+			var fdisplaySlabArray = fdisplayList.split('</slab>');
+			var fdisplaySlabTotal = fdisplaySlabArray.length;
+			
+			
+			var fdisplayStringShow=''
+			var fdisplayStringShowBefore=''
+			fdisplayStringShow=fdisplayStringShow+'<table width="100%" border="0"><tr style="color:#0329C0"> <td colspan="2" style="color:#006A6A; font-size:18px;">'+localStorage.routeIDName+'<br>'+localStorage.outletNameID+'</td></tr><tr > </table></br>'
+			
+			
+			fdisplayStringShowBefore=fdisplayStringShowBefore+'<table width="100%" border="0"><tr style="color:#0329C0"> <td colspan="2" style="color:#006A6A; font-size:18px;">'+localStorage.routeIDName+'<br>'+localStorage.outletNameID+'</td></tr><tr > </table></br>'
+			
+			//alert (fdisplaySlabTotal)
+			
+			localStorage.fdisplaySlabTotal=fdisplaySlabTotal
+			
+			if (parseInt(localStorage.fdisplaySlabTotal)==1){
+				localStorage.fdSkip=1;
+			}
+			//alert (fdisplaySlabTotal)
+			for (var slab=0; slab < fdisplaySlabTotal-1; slab++){
+					
+					var fdisplaySlabList = fdisplaySlabArray[slab].replace("<slab>","");
+					var fdisplaySlab_1Array = fdisplayList.split('<slab>');
+					
+					var fdisplaySlab_image = fdisplaySlabArray[slab].split('<slab>')[0].split('<fdfd>')[1];
+					var fdisplaySlab_name = fdisplaySlabArray[slab].split('<slab>')[0].split('<fdfd>')[0];
+					
+					var slab_text=slab.toString()
+					var fdSL_image_div='fdSL_image_div_'+slab_text
+					var fdSL_image_div_hidden='fdSL_image_div_hidden_'+slab_text
+					var fdSL_image_name_hidden='fdSL_image_name_hidden_'+slab_text
+					
+					var fdSL_image='fdSL_image_'+slab_text
+					var fdSL_image_div='fdSL_image_div_'+slab_text
+					var fdSLfdisplay='fdSLfdisplay_'+slab_text
+					
+									
+					fdisplayStringShow=fdisplayStringShow+'<div id="fddiv_'+slab.toString()+'">'
+					fdisplayStringShow=fdisplayStringShow+'</br></br><table width="100%" border="0"> <tr><td style=" font-weight:bold; font-size:28px color:#006A6A; background:#FFECFF">'+fdisplaySlab_name+'</td> </tr></table>';
+					fdisplayStringShow=fdisplayStringShow+'<img height="100px" width="100%"  src="'+apipath_image+'static/uni_images/display/'+fdisplaySlab_image+'" alt="FixedDisplay" />';
+					
+					
+					
+					var fdisplaySingleArray = fdisplaySlabList.split('rdrd');	
+					var fdisplaySingleTotal = fdisplaySingleArray.length;
+					var fdisplayTotal='fdisplayTotal'+slab.toString()
+					var fdSL_total_hidden='fdSL_total_hidden_'+slab.toString()
+					var slab_1=slab.toString()+'_1'
+					//alert (slab_1)
+					localStorage.fdisplayTotal=fdisplaySingleTotal
+					
+					
+
+					fdisplayStringShow=fdisplayStringShow+'</div>'	
+					
+					
+
+					fdisplayStringShow=fdisplayStringShow+'<table width="100%" border="0"><tr>'+
+					'<input type="hidden" name="'+ fdSLfdisplay +'" id="'+ fdSLfdisplay +'" value="'+fdSLfdisplay+'" min="0">  '+
+					'<td> <a data-role="button" href="#" onClick="get_pic_fdisplay('+slab+')" >Take Picture </a></td></tr></table>'+ 
+					'<img id="'+fdSL_image_div+'" height="100px" width="100px"  src="" alt="FixedDisplay" />'+
+					'<input type="hidden" name="'+ fdSL_image_div_hidden +'" id="'+ fdSL_image_div_hidden +'" value="" >'+
+					'<input type="hidden" name="'+ fdSL_image_name_hidden +'" id="'+ fdSL_image_name_hidden +'" value="" >'+
+					'<input type="hidden" name="'+ fdSL_total_hidden +'" id="'+ fdSL_total_hidden +'" value="'+fdisplaySingleTotal+'" >'
+								
+					
+					//alert ('<a data-role="button" href="#" onClick="get_pic_fdisplay('+slab+'_1)" >Take Picture </a>')
+					fdisplayStringShow=fdisplayStringShow+'<table width="100%" border="0"><tr>'+
+					'<td> <a data-role="button" href="#" onClick="get_pic_fdisplay(\'' + slab_1 + '\')" >Take Picture </a></td></tr></table>'+ 
+					'<img id="'+fdSL_image_div+'_1" height="100px" width="100px"  src="" alt="FixedDisplay" />'+
+					'<input type="hidden" name="'+ fdSL_image_div_hidden +'_1" id="'+ fdSL_image_div_hidden +'_1" value="" >'+
+					'<input type="hidden" name="'+ fdSL_image_name_hidden +'_1" id="'+ fdSL_image_name_hidden +'_1" value="" >'+
+					'<input type="hidden" name="'+ fdSL_total_hidden +'_1" id="'+ fdSL_total_hidden +'" value="'+fdisplaySingleTotal+'_1" >'		
+							
+									
+			}
+			
+			localStorage.fdisplayStringShow=fdisplayStringShow
+			$("#fdisplay").html(localStorage.fdisplayStringShow);
+
+
+			//==========Create QPDS Display list
+		
+			var qpdsSlabArray = qpdsList.split('</scheme>');
+			var qpdsSlabTotal = qpdsSlabArray.length;
+			
+			var qpdsStringShow=''
+			qpdsStringShow=qpdsStringShow+'<table width="100%" border="0"><tr style="color:#0329C0"> <td colspan="2" style="color:#006A6A; font-size:18px;">'+localStorage.routeIDName+'<br>'+localStorage.outletNameID+'</td></tr><tr > </table></br>'
+			
+			localStorage.qpdsSlabTotal=qpdsSlabTotal
+			if (parseInt(localStorage.qpdsSlabTotal)==1){	
+				localStorage.qpdsSkip=1;	
+			}
+			
+			for (var slab=0; slab < qpdsSlabTotal-1; slab++){
+				
+				var qpdsSlab_1Array = qpdsSlabArray[slab].split('<scheme>');
+				var qpdsSlab_image = qpdsSlab_1Array[0];
+				
+				var qpdsSlabList = qpdsSlab_1Array[1].replace("<scheme>","");
+				
+				qpdsStringShow=qpdsStringShow+'<div id="qpdsdiv_'+slab.toString()+'">'
+				
+				qpdsStringShow=qpdsStringShow+'<img height="100px"  src="'+apipath_image+'static/uni_images/scheme/'+qpdsSlab_image+'" alt="QPDS" />';
+				qpdsStringShow=qpdsStringShow+'<table width="100%" border="0" cellpadding="0" cellspacing="0">'
+				
+				
+				
+				var qpdsSingleArray = qpdsSlabList.split('rdrd');	
+				var qpdsSingleTotal = qpdsSingleArray.length;
+														
+				var qpdsSL_image_div='qpdsSL_image_div_'+slab.toString()
+				var qpdsSL_image_div_hidden='qpdsSL_image_div_hidden_'+slab.toString()
+				var qpdsSL_image_name_hidden='qpdsSL_image_name_hidden_'+slab.toString()
+				
+				var qpdsSL_total_hidden='qpdsSL_total_hidden_'+slab.toString()
+				
+				var qpdsSL_f='qpdsSL_'+slab.toString()
+				
+				localStorage.qpdsTotal=qpdsSingleTotal
+
+				for (var i=0; i < qpdsSingleTotal-1; i++){
+					qpdsArray = qpdsSingleArray[i].split('fdfd');
+					scheme_qpds=qpdsArray[0]
+					itemID=qpdsArray[1];
+					itemName=qpdsArray[2];
+					qpdsSL=qpdsArray[3];
+					
+					var i_text=i.toString()
+					var slab_text=slab.toString()
+					var ItemQtyqpds='ItemQtyqpds_'+slab.toString()+'_'+i_text
+					var Itemqpds='Itemqpds_'+slab.toString()+'_'+i_text
+					var ItemFaceupqpds='ItemFaceupqpds_'+slab.toString()+'_'+i_text
+					var ItemVisibleqpds='ItemVisibleqpds_'+slab.toString()+'_'+i_text
+					var schemeqpds='schemeqpds_'+slab.toString()+'_'+i_text											
+
+
+				}
+				qpdsStringShow=qpdsStringShow+'</table>'
+				qpdsStringShow=qpdsStringShow+'</div>'
+				
+				
+				
+				//================
+				
+				qpdsStringShow=qpdsStringShow+
+						  '<table width="100%" border="0"><tr><td>'+
+						  ' <input type="hidden" name="'+ qpdsSL_f +'" id="'+ qpdsSL_f +'" value="'+qpdsSL+'" min="0">  '+
+						  ' <a data-role="button" href="#" onClick="get_pic_qpds('+slab+')" >Take Picture </a></td></tr></table>'
+				
+				
+				qpdsStringShow=qpdsStringShow+
+					'<img id="'+qpdsSL_image_div+'" height="100px" width="100px"  src="" alt="Promotion" />'+
+					'<input type="hidden" name="'+ qpdsSL_image_div_hidden +'" id="'+ qpdsSL_image_div_hidden +'" value="" >'+
+					'<input type="hidden" name="'+ qpdsSL_image_name_hidden +'" id="'+ qpdsSL_image_name_hidden +'" value="" >'+
+					'<input type="hidden" name="'+ qpdsSL_total_hidden +'" id="'+ qpdsSL_total_hidden +'" value="'+qpdsSingleTotal+'" ><br>-----------------------------------------------------------------------------'
+		
+		 
+			}
+			localStorage.qpdsStringShow=qpdsStringShow
+			$("#qpds").html(localStorage.qpdsStringShow);
+								
+			
+
+	}
+			//===============================
+					
+					}
+					
+			   }//end else
+		  },
+	  error: function(result) {
+		  
+		  $("#dataerror").html('Network timeout. Please ensure you have good network signal and working Internet.');
+		  
+		  $("#outletCancel").hide();
+		  $("#routeS_image").hide();
+		  $("#RSButton").show();
+		
+	  }
+  });//end ajax*/
+	
+	
+	
+	
+	
+	
+			
+		//	===========dynamic modal form for new marchandizing end================
+								
+			var startTime=get_date()
+			localStorage.startTime=startTime
+			
+			$("#startTime").val(localStorage.startTime);
+			
+			$("#outletButton").show();
+			$("#outletWait").hide();
+								
+	//	}
+			
+			  
+}
 //=====================Select Outlet End=========================
 
 //=====================Route Exception start=====================
@@ -2624,9 +2741,527 @@ function selectRouteException() {
 //=====================Route Exception end=====================
 
 
+//======================Submit Data Start======================
+
+function mhskus_ready_data() { 
+
+	//===============MHSKUS data==================
+	var mhskus_data=""
+	var error_flag_qty_mhskus=0;
+	for (var i=0; i < localStorage.mhskusTotal-1; i++){
+		var itemskus=$( "#Itemmskus_"+i.toString()).val();
+		var itemQtyskus=$( "#ItemQtymskus_"+i.toString()).val();
+		var minQtymskus=$( "#minQtymskus_"+i.toString()).val();
+		if (itemQtyskus.length < 1){
+			error_flag_qty_mhskus=1
+		}
+		
+		mhskus_data=mhskus_data+itemskus+'fdfd'+itemQtyskus+'fdfd'+minQtymskus+'rdrd';
+		
+	}
+	localStorage.mhskus_data_ready=mhskus_data;
+	mhskus_page_set();
+
+	localStorage.mar_distrib_data="";
+	//Local----------
+	//error_flag_qty_mhskus=0
+	//--------------------
+	if (error_flag_qty_mhskus==1 ){
+		var url = "#mhskusPage";
+		$.mobile.navigate(url);
+	}
+	else{
+		
+		var url = "#giftAckPage";
+		$.mobile.navigate(url);
+		$('#mhskus').find('input, textarea, button, select').attr('disabled','disabled');
+		$('#mhskus').addClass('disabledAnchor');	
+		localStorage.mhskus_next_flag=1;
+		
+	}
+
+	
+
+}
+
+function mhskus_page_set() { 
+	 var mhskus_array =  localStorage.mhskus_data_ready.split('rdrd');
+	 for (var i=0; i < mhskus_array.length-1; i++){
+		var mhskus_single_array = mhskus_array[i].split('fdfd');	
+		var itemQty=mhskus_single_array[1];
+		$("#ItemQtymskus_"+i.toString()).val(itemQty);
+	 }
+	 
+	 if (localStorage.mhskus_next_flag==1){
+		$('#mhskus').find('input, textarea, button, select').attr('disabled','disabled');
+	    $('#mhskus').addClass('disabledAnchor');	
+	}
+}
+
+function npd_ready_data() { 
+	//===============NPD data==================
+	var npd_data=""
+//	
+//	var error_flag_qty_npd=0;
+//	var error_image_flag_npd=0;
+//	
+	for (var i=0; i < localStorage.npdTotal-1; i++){
+		//var ItemQtynpd=$( "#ItemQtynpd_"+i.toString()).val();
+//		var Itemnpd=$( "#Itemnpd_"+i.toString()).val();
+//		var minQty=$( "#minQty_npd_"+i.toString()).val(); 
+		var npd_image_div_path=$("#npd_image_div_hidden_"+i.toString()).val(); 
+		var npd_image_name_hidden=$("#npd_image_name_hidden_"+i.toString()).val(); 
+		
+		
+		
+		npd_data=npd_data+npd_image_div_path+'fdfd'+npd_image_name_hidden+'rdrd';
+		
+		
+		
+	}
+	 localStorage.npd_data=npd_data
+	// alert (localStorage.npd_data)
+//
+////============================================
+//	
+//	npd_page_set();
+//	
+//	
+//	//Local -------------------------
+//	//error_flag_qty_npd=0
+//	//error_image_flag_npd=0
+//	
+//	//------------------------------
+//	
+//	if  ((error_flag_qty_npd==1) || (error_image_flag_npd==1)){
+//		 var url = "#npdPage";
+//		$.mobile.navigate(url);
+//	}
+//	else{
+		//alert (localStorage.outletNameID)
+		//$("#place_outlet_nameID").html(localStorage.outletNameID); 
+		$("#place_outlet_nameID1").html(localStorage.outletNameID);
+		var url = "#placePage";
+		$.mobile.navigate(url);
+	//	$('#npd').find('input, textarea, button, select').attr('disabled','disabled');
+//		$('#npd').addClass('disabledAnchor');
+//		localStorage.npd_next_flag=1;
+//	}
+
+//=====================================
+
+}
+function npd_page_set() { 
+	var npd_array =  localStorage.npd_data_ready.split('rdrd');
+	 for (var i=0; i < npd_array.length-1; i++){
+		var npd_single_array = npd_array[i].split('fdfd');	
+		var itemQty=npd_single_array[1];
+		var npd_image_div_path=npd_single_array[3];
+		var npd_image_name_hidden=npd_single_array[4];
+		
+		
+		
+		$("#npd_image_div_hidden_"+i.toString()).val(npd_image_div_path); 
+		$("#npd_image_name_hidden_"+i.toString()).val(npd_image_name_hidden); 
+		
+		$("#ItemQtynpd_"+i.toString()).val(itemQty);
+		
+		var image = document.getElementById('npd_image_div_'+i.toString());
+    	image.src = npd_image_div_path;
+	 }
+	 
+	if (localStorage.npd_next_flag==1){
+		$('#npd').find('input, textarea, button, select').attr('disabled','disabled');
+	    $('#npd').addClass('disabledAnchor');	
+	}
+	 
+}
 
 
 
+//=========================20151121=================
+//===================fdisplay before page start=====================
+function fdisplay_before_page_next() { 
+
+	var image_flag=0;
+	for (var i=0; i < localStorage.fdisplaySlabTotal-1; i++){
+	//	var fdSLfdisplay_image_path=$("#fdSL_image_div_hidden_"+i.toString()).val(); 
+		var fdSLfdisplay_image_path_before=$("#fdSL_image_div_hidden_"+i.toString()+"_before").val(); 
+		var fdSLfdisplay_image_name=$("#fdSL_image_name_hidden_"+i.toString()+"_before").val(); 
+		
+		//if (fdSLfdisplay_image_name.length<10){
+		if (fdSLfdisplay_image_path_before.length<10){
+			image_flag=1
+		}
+
+	}
+	if (image_flag==0){
+		var url = "#fixedDisplay";
+		$.mobile.navigate(url);
+		$('#fdisplayStringShowBefore').find('input, textarea, button, select').attr('disabled','disabled');
+	    $('#fdisplayStringShowBefore').addClass('disabledAnchor');	
+		localStorage.before_flag=1;
+
+	}
+	else{
+		var url = "#fdbeforePage";
+		$.mobile.navigate(url);
+	}
+
+}
+
+//====================fdisply before page end=======================
+function fdisplay_ready_data() { 
+	//===============fixeddisplay data==================
+	var fdisplay_data=""
+	
+	for (var i=0; i < localStorage.fdisplaySlabTotal-1; i++){
+		var fdSLfdisplay_image_path=$("#fdSL_image_div_hidden_"+i.toString()).val(); 
+		var fdSLfdisplay_image_name=$("#fdSL_image_name_hidden_"+i.toString()).val(); 
+		
+		
+		
+		var fdSLfdisplay_image_path1=$("#fdSL_image_div_hidden_"+i.toString()+"_1").val(); 
+		var fdSLfdisplay_image_name1=$("#fdSL_image_name_hidden_"+i.toString()+"_1").val(); 
+		
+		fdisplay_data=fdisplay_data+fdSLfdisplay_image_path+'fdfd'+fdSLfdisplay_image_name+'fdfd'+fdSLfdisplay_image_path1+'fdfd'+fdSLfdisplay_image_name1+'rdrd'
+	}
+		localStorage.fdisplay_data=fdisplay_data
+		
+		//alert (localStorage.fdisplay_data)
+		var url = "#qpdsPage";
+		$.mobile.navigate(url);
+
+
+}
+
+function fdisplay_page_set() { 
+
+if (localStorage.fdisplay_data_ready.length > 10){
+	var fdisplay_array =  localStorage.fdisplay_data_ready.split('headend');
+	var fdisplay_head=fdisplay_array[0].replace("headstart","");
+	var fdisplay_detail=fdisplay_array[1];
+	
+	
+	var fdisplay_head_array =  fdisplay_head.split('rdrd');
+	
+	for (var i=0; i < localStorage.fdisplaySlabTotal-1; i++){
+		var head_s_array=fdisplay_head_array[i].split('fdfd');
+		
+		var slabfdisplay =head_s_array[0];
+		var fdisplayTotal=head_s_array[1];
+		var fdisplayImg=head_s_array[2];
+		var fdisplayImg_path=head_s_array[3];
+		
+		var fdisplayImg_before=head_s_array[4];
+		
+		var fdisplayImg_path_before=head_s_array[5].replace("rdrd","");
+		
+		
+		$("#fdSL_image_div_hidden_"+i.toString()).val(fdisplayImg_path);
+		$("#fdSL_image_name_hidden_"+i.toString()).val(fdisplayImg);
+		
+		
+		$("#fdSL_image_div_hidden_"+i.toString()+"_before").val(fdisplayImg_path_before); 
+		$("#fdSL_image_name_hidden_"+i.toString()+"_before").val(fdisplayImg_before);
+			
+		
+		
+		var image = document.getElementById('fdSL_image_div_'+i.toString());
+    	image.src = fdisplayImg_path;
+		
+		var image_before = document.getElementById('fdSL_image_div_'+i.toString()+"_before");
+    	image_before.src = fdisplayImg_path_before;
+		
+		
+		//==============
+		
+		
+		
+		
+		
+		var fdisplay_detail_array =  fdisplay_detail.split('detaildetail');
+		
+		var fdisplay_detail_n=fdisplay_detail_array[i]
+		
+		var fdisplay_detail_s_array_1 =  fdisplay_detail_n.split('rdrd');
+		var fdTotal_detail=fdisplay_detail_s_array_1.length
+		
+				for (var d=0; d < fdTotal_detail-1; d++){
+					
+					var fdisplay_detail_s_array =  fdisplay_detail_s_array_1[d].split('fdfd');
+					
+					var ItemQtyfdisplay= fdisplay_detail_s_array[1];
+					var ItemFaceupfdisplay= fdisplay_detail_s_array[2];
+					var ItemVisiblefdisplay= fdisplay_detail_s_array[3];
+					
+					$("#ItemQtyfdisplay_"+i.toString()+"_"+d.toString()).val(ItemQtyfdisplay);
+					$("#ItemFaceupfdisplay_"+i.toString()+"_"+d.toString()).val(ItemFaceupfdisplay);
+					if (ItemVisiblefdisplay=='YES'){
+						$("#ItemVisiblefdisplay_"+i.toString()+"_"+d.toString()).attr('checked',true);
+					} //endif
+
+			
+				}//end for
+			
+	
+		
+		
+	}//endfor
+}//end if
+
+
+if (localStorage.fd_done_flag==1){
+	$('#fdisplay').find('input, textarea, button, select').attr('disabled','disabled');
+	$('#fdisplay').addClass('disabledAnchor');
+}
+if (localStorage.before_flag==1){
+	$('#fdisplayStringShowBefore').find('input, textarea, button, select').attr('disabled','disabled');
+	$('#fdisplayStringShowBefore').addClass('disabledAnchor');
+}
+}
+
+function qpds_ready_data() { 
+	//===============QPDS data==================
+	
+	var qpds_data=""
+	
+	for (var i=0; i < localStorage.qpdsSlabTotal-1; i++){
+		var qpdsSL_image_path=$("#qpdsSL_image_div_hidden_"+i.toString()).val(); 
+		var qpdsSL_image_name=$("#qpdsSL_image_name_hidden_"+i.toString()).val(); 
+		var qpdsSlab=$("#qpdsSL_"+i.toString()).val(); 
+		
+		qpds_data=qpds_data+qpdsSL_image_path+'fdfd'+qpdsSL_image_name+'fdfd'+qpdsSlab+'rdrd'
+		//alert (qpds_data)
+		}
+		localStorage.qpds_data=qpds_data
+		//alert (localStorage.qpds_data)
+		var url = "#npdPage";
+		$.mobile.navigate(url);
+
+	
+}
+
+function qpds_page_set() { 
+
+if (localStorage.qpds_data_ready.length > 10){
+	var qpds_array =  localStorage.qpds_data_ready.split('headend');
+	var qpds_head=qpds_array[0].replace("headstart","");
+	var qpds_detail=qpds_array[1];
+	
+	
+	
+	var qpds_head_array =  qpds_head.split('rdrd');
+	
+	
+	
+	for (var i=0; i < localStorage.qpdsSlabTotal-1; i++){
+		
+		var head_s_array=qpds_head_array[i].split('fdfd');
+		var slabqpds =head_s_array[0];
+		var qpdsTotal=head_s_array[1];
+		
+		var qpdsImg=head_s_array[2];
+		var qpdsImg_path=head_s_array[3];
+		
+	
+		
+		//var qpdsImg_before=head_s_array[4];
+		//var qpdsImg_path_before=head_s_array[5].replace("rdrd","");
+		
+		//qpdsImg_path='q343253456rdrd'
+		
+		$("#qpdsSL_image_name_hidden_"+i.toString()).val(qpdsImg);
+		$("#qpdsSL_image_div_hidden_"+i.toString()).val(qpdsImg_path);
+		
+		//$("#qpdsSL_image_name_hidden_"+i.toString()+"_before").val(qpdsImg_before);
+		//$("#qpdsSL_image_div_hidden_"+i.toString()+"_before").val(qpdsImg_path_before);
+		
+		
+		var image = document.getElementById('qpdsSL_image_div_'+i.toString());
+		image.src = qpdsImg_path;
+		
+		
+		
+		//if ((qpdsImg.length > 10) & (qpdsImg_path.length > 10)){
+//			$('#qpdsdiv_'+i.toString()).find('input, textarea, button, select').attr('disabled','disabled');
+//		}
+		
+		var qpds_detail_array =  qpds_detail.split('detaildetail');
+		var qpds_detail_n =  qpds_detail_array[i];
+		var qpds_detail_s_array_1=qpds_detail_n.split('rdrd');
+		var qpdsDTotal=qpds_detail_s_array_1.length
+		//alert ("nn") ;
+
+			
+			for (var d=0; d < qpdsDTotal-1; d++){
+				
+				var qpds_detail_s_array =  qpds_detail_s_array_1[d].split('fdfd');
+				
+				var ItemQtyqpds = qpds_detail_s_array[1];
+				var ItemFaceupqpds = qpds_detail_s_array[2];
+				var ItemVisibleqpds = qpds_detail_s_array[3];
+				
+				
+				
+				$("#ItemQtyqpds_"+i.toString()+"_"+d.toString()).val(ItemQtyqpds);
+				$("#ItemFaceupqpds_"+i.toString()+"_"+d.toString()).val(ItemFaceupqpds);
+				if (ItemVisibleqpds=='YES'){
+					$("#ItemVisibleqpds_"+i.toString()+"_"+d.toString()).attr('checked',true);
+				}
+
+			}
+	}
+}// End if
+
+if (localStorage.qpds_next_flag==1){
+	$('#qpds').find('input, textarea, button, select').attr('disabled','disabled');
+	$('#qpds').addClass('disabledAnchor');	
+}
+
+}
+
+
+function place_ready_data() { 
+	var place_data="";
+	var image_name1=$("#place_image_name_hidden1").val();
+	var place_image_path1=$("#place_image_div_hidden1").val();
+	
+	var image_name2=$("#place_image_name_hidden2").val();
+	var place_image_path2=$("#place_image_div_hidden2").val();
+	
+	var image_name3=$("#place_image_name_hidden3").val();
+	var place_image_path3=$("#place_image_div_hidden3").val();
+	
+	place_data=place_data+image_name1+'fdfd'+place_image_path1+'rdrd'+image_name2+'fdfd'+place_image_path2+'rdrd'+image_name3+'fdfd'+place_image_path3+'rdrd';
+	
+	localStorage.place_data=place_data
+	//alert (localStorage.place_data)	
+//	place_page_set();
+//	if ((image_name.length < 10)){
+//	//if ((place_image_path.length > 10)){
+		var url = "#submitPage";
+		$.mobile.navigate(url);
+	////	$('#place_show').find('input, textarea, button, select').attr('disabled','disabled');
+//		$('#place_show').addClass('disabledAnchor');
+//		localStorage.place_next_flag=1;
+//		
+//	}else{
+//		var url = "#placePage";
+//		$.mobile.navigate(url);
+//	}
+	//$('#outlet_info_msg').html(localStorage.outletNameID);
+	//localStorage.latlongSubmit=0;
+}
+
+function place_page_set() { 
+	
+	var place_data =  localStorage.place_data_ready.replace("rdrd","");
+	
+	var place_array =  place_data.split('fdfd');
+	
+	var image_name = place_array[0];
+	var place_image_path = place_array[1];
+	//var place_value = place_array[2];
+	var is_near_inFront_actual= place_array[2];
+	var is_beside_adjacent_actual= place_array[3];
+	var is_eyeLevel_actual= place_array[4];
+	var is_clearlyVis_noObs_actual= place_array[5];
+	
+	
+	$("#place_image_name_hidden").val(image_name);
+	$("#place_image_div_hidden").val(place_image_path);
+	
+	$("#is_near_inFront_actual").val(is_near_inFront_actual);
+	$("#is_beside_adjacent_actual").val(is_beside_adjacent_actual);
+	$("#is_eyeLevel_actual").val(is_eyeLevel_actual);
+	$("#is_clearlyVis_noObs_actual").val(is_clearlyVis_noObs_actual);
+	//$("#place_value").val(place_value);
+	
+	if (is_near_inFront_actual==1){
+		document.getElementById("is_near_inFront_actual").checked = true;
+	}
+	if (is_beside_adjacent_actual==1){
+		document.getElementById("is_beside_adjacent_actual").checked = true;
+	}
+	if (is_eyeLevel_actual==1){
+		document.getElementById("is_eyeLevel_actual").checked = true;
+	}
+	if (is_clearlyVis_noObs_actual==1){
+		document.getElementById("is_clearlyVis_noObs_actual").checked = true;
+	}
+	
+	var image = document.getElementById('place_image_div');
+	image.src = place_image_path;
+	
+	
+	if (localStorage.place_next_flag==1){
+	//	$('#place_show').find('input, textarea, button, select').attr('disabled','disabled');
+		$('#place_show').addClass('disabledAnchor');	
+	}
+	
+	localStorage.submit_count=0;
+	//getlocationand_askhelp();
+}
+
+
+//======================================
+
+function task_ready_data() { 
+	var key_data=''
+	var planKey= ($('#planKey').is(':checked') ? 1 : 0);
+	var productKey= ($('#productKey').is(':checked') ? 1 : 0);
+	var posmKey= ($('#posmKey').is(':checked') ? 1 : 0);
+	var catKey= ($('#catKey').is(':checked') ? 1 : 0);
+	
+
+	
+	key_data=key_data+planKey+'fdfd'+productKey+'fdfd'+posmKey+'fdfd'+catKey+'rdrd';
+
+	localStorage.key_data_ready=key_data
+	
+	keyTaskPage_set();
+
+	var url = "#submitPage";
+	$.mobile.navigate(url);
+}
+
+function keyTaskPage_set() { 
+	
+	var key_data =  localStorage.key_data_ready.replace("rdrd","");
+	
+	var key_array =  key_data.split('fdfd');
+
+	var planKey= key_array[0];
+	var productKey= key_array[1];
+	var posmKey= key_array[2];
+	var catKey=key_array[3];
+
+
+	
+
+	
+	//$("#planKey").val(planKey);
+	//$("#productKey").val(productKey);
+	//$("#posmKey").val(posmKey);
+	//$("#catKey").val(catKey);
+	//$("#place_value").val(place_value);
+	
+	if (planKey==1){
+		document.getElementById("planKey").checked = true;
+	}
+	if (productKey==1){
+		document.getElementById("productKey").checked = true;
+	}
+	if (posmKey==1){
+		document.getElementById("posmKey").checked = true;
+	}
+	if (catKey==1){
+		document.getElementById("catKey").checked = true;
+	}
+	
+	
+}
 
 //=========================================
 
@@ -2755,11 +3390,98 @@ function submit_data() {
  										
 										var disOutlet='<input type="radio" name="RadioOutlet" value="'+localStorage.outletNameID+'" disabled="True"></td><td width="60%">'+localStorage.outletNameID +' | '+ localStorage.outletChannel +'</td></tr></table></label>'	
 										
-
+										
+										
+										//marchandising distribution
+										//var temp="";							
+//										if(localStorage.mar_distrib_data=="undefined" || localStorage.mar_distrib_data==undefined || localStorage.mar_distrib_data==""){
+//											temp="";
+//										}else{
+//											var mar_distrib_dataList=localStorage.mar_distrib_data.split('rdrd');
+//											
+//											if(localStorage.mar_distrib_stock=="undefined" || localStorage.mar_distrib_stock==undefined || localStorage.mar_distrib_stock==""){
+//												temp="";
+//											}else{
+//												//---
+//												var mar_distrib_stock_new="";
+												
+												//var mar_distrib_stockList=localStorage.mar_distrib_stock.split('rd');										
+//												for (var j=0; j < mar_distrib_stockList.length; j++){
+//													mar_distrib_stockListSingleL=mar_distrib_stockList[j].split(',');
+//													var campSlChannel=mar_distrib_stockListSingleL[0]
+//													var campAvailableQty=mar_distrib_stockListSingleL[1]
+//													
+//													//--
+//													var availableQty=campAvailableQty;
+//													for (var k=0; k < mar_distrib_dataList.length; k++){
+//														mar_distrib_dataListSingleL=mar_distrib_dataList[k].split('fdfd');
+//														var campId2=mar_distrib_dataListSingleL[0]
+//														var givenQty2=mar_distrib_dataListSingleL[2]
+//														
+//														var campID2Channel=campId2.toString()+'_'+localStorage.outletChannel.toString()
+//														
+//														if(campSlChannel==campID2Channel){													
+//															try{
+//																availableQty=eval(campAvailableQty)-eval(givenQty2);
+//															}catch(e){			
+//																continue;
+//															}
+//															
+//															break;
+//															}
+//													}//--
+													
+													//if(mar_distrib_stock_new==""){
+//														mar_distrib_stock_new=campSlChannel+','+availableQty;
+//													}else{
+//														mar_distrib_stock_new+='rd'+campSlChannel+','+availableQty;
+//													}
+//																			
+//												}//---		
+//												
+//												localStorage.mar_distrib_stock=mar_distrib_stock_new;
+//																
+//											}
+//										}								
+//										localStorage.mar_distrib_data="";								
+										//----- marchandising end
+										
+										
+										//localStorage.dataSubmit=1;
+//										buttonCheck();
+//										
+//										
+//										localStorage.show_cancel=0;
+										//alert (check_outlet)
 										localStorage.outletString=check_outlet.replace(doneOutlet,disOutlet);
 //										
-
-										
+										//localStorage.outletString=outletStringShow
+										//$("#outletString").html(localStorage.outletString);
+//										
+//										
+//										$("#outletString").empty();
+//										$("#outletString").append(localStorage.outletString).trigger('create');
+//										
+//										
+//										
+//										$("#submit_data_check").html("Data Synced Successfully");
+//										$("#submit_data").html('');
+//										localStorage.step_flag=0;
+//										
+//										
+//										// Enable all disable div start
+//										$('#mhskus').find('input, textarea, button, select').attr('disabled',false);
+//										$('#npd').find('input, textarea, button, select').attr('disabled',false);
+//										$('#fdisplayStringShowBefore').find('input, textarea, button, select').attr('disabled',false);
+//										$('#fdisplay').find('input, textarea, button, select').attr('disabled',false);
+//										$('#qpds').find('input, textarea, button, select').attr('disabled',false);
+//										$('#gift').find('input, textarea, button, select').attr('disabled',false);
+//										$('#place_show').find('input, textarea, button, select').attr('disabled',false);
+//										$('#shop_show').find('input, textarea, button, select').attr('disabled',false);
+//										
+//										// Enable disable div end
+//										
+//										
 										upload_category();
 										cancel_outlet();
 										var url = "#outletPage";
@@ -2813,6 +3535,196 @@ function submit_data() {
 //====================================Camera==========
 
 
+
+//=============Category Self Pic=====================
+//function get_pic_HairCare(id) {
+//	var div_id="HairCare_image_div"+id;
+//	temp_image_div=div_id;
+//	//var image = document.getElementById(temp_image_div);
+//	var hidden_name="HairCare_image_name_hidden" + id ;
+//	var tempTime = $.now();
+//	HairCare_image_name=tempTime.toString()+localStorage.selectedOutlet+id.toString()+"_HairCare.jpg";
+//	$("#"+hidden_name).val(HairCare_image_name);
+//	navigator.camera.getPicture(onSuccessHairCare, onFailHairCare, { quality: 50,
+//		targetWidth: 300,
+//		destinationType: Camera.DestinationType.FILE_URI,correctOrientation: true });
+//		
+//}
+//
+//function onSuccessHairCare(imageURI) {
+//	alert ('test')
+//	var image = document.getElementById(temp_image_div);
+//    image.src = imageURI;
+//    var hidden_path=temp_image_div.replace("HairCare_image_div","HairCare_image_div_hidden");
+//	$("#"+hidden_path).val(imageURI);
+//	
+//	
+//}
+//
+//function onFailHairCare(message) {
+//	imagePathA="";
+//    alert('Failed because: ' + message);
+//}
+////=====================
+//function get_pic_SkinCare(id) {
+//	var div_id="SkinCare_image_div"+id;
+//	temp_image_div=div_id;
+//	//var image = document.getElementById(temp_image_div);
+//	var hidden_name="SkinCare_image_name_hidden" + id ;
+//	var tempTime = $.now();
+//	SkinCare_image_name=tempTime.toString()+localStorage.selectedOutlet+id.toString()+"_SkinCare.jpg";
+//	$("#"+hidden_name).val(SkinCare_image_name);
+//	navigator.camera.getPicture(onSuccessSkinCare, onFailSkinCare, { quality: 50,
+//		targetWidth: 300,
+//		destinationType: Camera.DestinationType.FILE_URI,correctOrientation: true });
+//	     //   targetHeight: 512,
+//}
+//
+//function onSuccessSkinCare(imageURI) {
+//	var image = document.getElementById(temp_image_div);
+//    image.src = imageURI;
+//    var hidden_path=temp_image_div.replace("SkinCare_image_div"+ id,"SkinCare_image_div_hidden"+ id);
+//	$("#"+hidden_path).val(imageURI);
+//}
+//
+//function onFailSkinCare(message) {
+//	imagePathA="";
+//    alert('Failed because: ' + message);
+//}
+////=====================
+//function get_pic_Oral(id) {
+//	var div_id="Oral_image_div"+id;
+//	temp_image_div=div_id;
+//	//var image = document.getElementById(temp_image_div);
+//	var hidden_name="Oral_image_name_hidden" + id ;
+//	var tempTime = $.now();
+//	Oral_image_name=tempTime.toString()+localStorage.selectedOutlet+id.toString()+"_Oral.jpg";
+//	$("#"+hidden_name).val(Oral_image_name);
+//	navigator.camera.getPicture(onSuccessOral, onFailOral, { quality: 50,
+//		targetWidth: 300,
+//		destinationType: Camera.DestinationType.FILE_URI,correctOrientation: true });
+//	     //   targetHeight: 512,
+//}
+//
+//function onSuccessOral(imageURI) {
+//	var image = document.getElementById(temp_image_div);
+//    image.src = imageURI;
+//    var hidden_path=temp_image_div.replace("Oral_image_div"+ id,"Oral_image_div_hidden"+ id);
+//	$("#"+hidden_path).val(imageURI);
+//}
+//
+//function onFailOral(message) {
+//	imagePathA="";
+//    alert('Failed because: ' + message);
+//}
+//=====================
+
+//function pic_SkinCleansing(id) {
+//	alert (id)
+//	var div_id="SkinCleansing_image_div"+id;
+//	temp_image_div=div_id;
+//	//var image = document.getElementById(temp_image_div);
+//	var hidden_name="SkinCleansing_image_name_hidden" + id ;
+//	alert (hidden_name)
+//	var tempTime = $.now();
+//	SkinCleansing_image_name=tempTime.toString()+localStorage.selectedOutlet+id.toString()+"_SkinCleansing.jpg";
+//	$("#"+hidden_name).val(SkinCleansing_image_name);
+//	navigator.camera.getPicture(onSuccessSkinCleansing, onFailSkinCleansing, { quality: 50,
+//		targetWidth: 300,
+//		destinationType: Camera.DestinationType.FILE_URI,correctOrientation: true });
+//		
+//	     //   targetHeight: 512,
+//}
+//
+//function onSuccessSkinCleansing(imageURI) {
+//	var image = document.getElementById(temp_image_div);
+//    image.src = imageURI;
+//    var hidden_path=temp_image_div.replace("SkinCleansing_image_div"+ id,"SkinCleansing_image_div_hidden"+ id);
+//	$("#"+hidden_path).val(imageURI);
+//}
+//
+//function onFailSkinCleansing(message) {
+//	imagePathA="";
+//    alert('Failed because: ' + message);
+//}
+////=====================
+//function get_pic_Laundry(id) {
+//	var div_id="Laundry_image_div"+id;
+//	temp_image_div=div_id;
+//	//var image = document.getElementById(temp_image_div);
+//	var hidden_name="Laundry_image_name_hidden" + id ;
+//	var tempTime = $.now();
+//	Laundry_image_name=tempTime.toString()+localStorage.selectedOutlet+id.toString()+"_Laundry.jpg";
+//	$("#"+hidden_name).val(Laundry_image_name);
+//	navigator.camera.getPicture(onSuccessLaundry, onFailLaundry, { quality: 50,
+//		targetWidth: 300,
+//		destinationType: Camera.DestinationType.FILE_URI,correctOrientation: true });
+//	     //   targetHeight: 512,
+//}
+//
+//function onSuccessLaundry(imageURI) {
+//	var image = document.getElementById(temp_image_div);
+//    image.src = imageURI;
+//    var hidden_path=temp_image_div.replace("Laundry_image_div"+ id,"Laundry_image_div_hidden"+ id);
+//	$("#"+hidden_path).val(imageURI);
+//}
+//
+//function onFailLaundry(message) {
+//	imagePathA="";
+//    alert('Failed because: ' + message);
+//}
+////=====================
+//function get_pic_HHcleansing(id) {
+//	var div_id="HHcleansing_image_div"+id;
+//	temp_image_div=div_id;
+//	//var image = document.getElementById(temp_image_div);
+//	var hidden_name="HHcleansing_image_name_hidden" + id ;
+//	var tempTime = $.now();
+//	HHcleansing_image_name=tempTime.toString()+localStorage.selectedOutlet+id.toString()+"_HHcleansing.jpg";
+//	$("#"+hidden_name).val(HHcleansing_image_name);
+//	navigator.camera.getPicture(onSuccessHHcleansing, onFailHHcleansing, { quality: 50,
+//		targetWidth: 300,
+//		destinationType: Camera.DestinationType.FILE_URI,correctOrientation: true });
+//	     //   targetHeight: 512,
+//}
+//
+//function onSuccessHHcleansing(imageURI) {
+//	var image = document.getElementById(temp_image_div);
+//    image.src = imageURI;
+//    var hidden_path=temp_image_div.replace("HHcleansing_image_div"+ id,"HHcleansing_image_div_hidden"+ id);
+//	$("#"+hidden_path).val(imageURI);
+//}
+//
+//function onFailHHcleansing(message) {
+//	imagePathA="";
+//    alert('Failed because: ' + message);
+//}
+////=====================
+//function get_pic_Foods(id) {
+//	var div_id="Foods_image_div"+id;
+//	temp_image_div=div_id;
+//	//var image = document.getElementById(temp_image_div);
+//	var hidden_name="Foods_image_name_hidden" + id ;
+//	var tempTime = $.now();
+//	Foods_image_name=tempTime.toString()+localStorage.selectedOutlet+id.toString()+"_Foods.jpg";
+//	$("#"+hidden_name).val(HHcleansing_image_name);
+//	navigator.camera.getPicture(onSuccessFoods, onFailFoods, { quality: 50,
+//		targetWidth: 300,
+//		destinationType: Camera.DestinationType.FILE_URI,correctOrientation: true });
+//	     //   targetHeight: 512,
+//}
+//
+//function onSuccessFoods(imageURI) {
+//	var image = document.getElementById(temp_image_div);
+//    image.src = imageURI;
+//    var hidden_path=temp_image_div.replace("Foods_image_div"+ id,"Foods_image_div_hidden"+ id);
+//	$("#"+hidden_path).val(imageURI);
+//}
+//
+//function onFailFoods(message) {
+//	imagePathA="";
+//    alert('Failed because: ' + message);
+//}
 //=================NPD Picture
 //fixed display Before
 
@@ -3002,7 +3914,159 @@ function onFailShop(message) {
 }
 
 //===================Catagory all Start====================
+function get_pic_HairCare(i) {
+	var div_id="HairCare_image_div"+i;
+	temp_image_div=div_id;
+	var tempTime = $.now();
+	HairCare_image_name=tempTime.toString()+"_"+localStorage.selectedOutlet+""+i.toString()+"_HairCare.jpg";
+	$("#HairCare_image_name_hidden"+i.toString()).val(HairCare_image_name);
+	navigator.camera.getPicture(onSuccessHairCare, onFailHairCare, { quality: 70,
+		targetWidth: 450,
+		destinationType: Camera.DestinationType.FILE_URI , correctOrientation: true });
+}
+function onSuccessHairCare(imageURI) {
+	var image = document.getElementById(temp_image_div);
+    image.src = imageURI;
+    var hidden_path=temp_image_div.replace("HairCare_image_div","HairCare_image_div_hidden");
+	//alert (imageURI)
+	//alert (hidden_path)
+	$("#"+hidden_path).val(imageURI);
+}
+function onFailHairCare(message) {
+	imagePathA="";
+    alert('Failed because: ' + message);
+}
+//=========================================
+function get_pic_SkinCare(i) {
+	var div_id="SkinCare_image_div"+i;
+	temp_image_div=div_id;
+	var tempTime = $.now();
+	SkinCare_image_name=tempTime.toString()+"_"+localStorage.selectedOutlet+""+i.toString()+"_SkinCare.jpg";
+	$("#SkinCare_image_name_hidden"+i.toString()).val(SkinCare_image_name);
+	navigator.camera.getPicture(onSuccessSkinCare, onFailSkinCare, { quality: 70,
+		targetWidth: 450,
+		destinationType: Camera.DestinationType.FILE_URI , correctOrientation: true });
+}
+function onSuccessSkinCare(imageURI) {
+	var image = document.getElementById(temp_image_div);
+    image.src = imageURI;
+    var hidden_path=temp_image_div.replace("SkinCare_image_div","SkinCare_image_div_hidden");
+	$("#"+hidden_path).val(imageURI);
+}
+function onFailSkinCare(message) {
+	imagePathA="";
+    alert('Failed because: ' + message);
+}
+//===========================================
+function get_pic_Oral(i) {
+	var div_id="Oral_image_div"+i;
+	temp_image_div=div_id;
+	var tempTime = $.now();
+	Oral_image_name=tempTime.toString()+"_"+localStorage.selectedOutlet+""+i.toString()+"_Oral.jpg";
+	$("#Oral_image_name_hidden"+i).val(Oral_image_name);
+	navigator.camera.getPicture(onSuccessOral, onFailOral, { quality: 70,
+		targetWidth: 450,
+		destinationType: Camera.DestinationType.FILE_URI , correctOrientation: true });
+}
+function onSuccessOral(imageURI) {
+	var image = document.getElementById(temp_image_div);
+    image.src = imageURI;
+    var hidden_path=temp_image_div.replace("Oral_image_div","Oral_image_div_hidden");
+	$("#"+hidden_path).val(imageURI);
+}
+function onFailOral(message) {
+	imagePathA="";
+    alert('Failed because: ' + message);
+}
 
+//===========================================
+
+
+
+
+function get_pic_SkinCleansing(i) {
+	var div_id="SkinCleansing_image_div"+i;
+	temp_image_div=div_id;
+	var tempTime = $.now();
+	SkinCleansing_image_name=tempTime.toString()+"_"+localStorage.selectedOutlet+""+i.toString()+"_SkinCleansing.jpg";
+	$("#SkinCleansing_image_name_hidden"+i.toString()).val(SkinCleansing_image_name);
+	navigator.camera.getPicture(onSuccessSkinCleansing, onFailSkinCleansing, { quality: 70,
+		targetWidth: 450,
+		destinationType: Camera.DestinationType.FILE_URI , correctOrientation: true });
+}
+function onSuccessSkinCleansing(imageURI) {
+	var image = document.getElementById(temp_image_div);
+    image.src = imageURI;
+    var hidden_path=temp_image_div.replace("SkinCleansing_image_div","SkinCleansing_image_div_hidden");
+	$("#"+hidden_path).val(imageURI);
+}
+function onFailSkinCleansing(message) {
+	imagePathA="";
+    alert('Failed because: ' + message);
+}
+//===========================================
+function get_pic_Laundry(i) {
+	var div_id="Laundry_image_div"+i;
+	temp_image_div=div_id;
+	var tempTime = $.now();
+	Laundry_image_name=tempTime.toString()+"_"+localStorage.selectedOutlet+""+i.toString()+"_Laundry.jpg";
+	$("#Laundry_image_name_hidden"+i.toString()).val(Laundry_image_name);
+	navigator.camera.getPicture(onSuccessLaundry, onFailLaundry, { quality: 70,
+		targetWidth: 450,
+		destinationType: Camera.DestinationType.FILE_URI , correctOrientation: true });
+}
+function onSuccessLaundry(imageURI) {
+	var image = document.getElementById(temp_image_div);
+    image.src = imageURI;
+    var hidden_path=temp_image_div.replace("Laundry_image_div","Laundry_image_div_hidden");
+	$("#"+hidden_path).val(imageURI);
+}
+function onFailLaundry(message) {
+	imagePathA="";
+    alert('Failed because: ' + message);
+}
+//===========================================
+function get_pic_HHcleansing(i) {
+	var div_id="HHcleansing_image_div"+i;
+	temp_image_div=div_id;
+	var tempTime = $.now();
+	HHcleansing_image_name=tempTime.toString()+"_"+localStorage.selectedOutlet+""+i.toString()+"_HHcleansing.jpg";
+	$("#HHcleansing_image_name_hidden"+i.toString()).val(HHcleansing_image_name);
+	navigator.camera.getPicture(onSuccessHHcleansing, onFailHHcleansing, { quality: 70,
+		targetWidth: 450,
+		destinationType: Camera.DestinationType.FILE_URI , correctOrientation: true });
+}
+function onSuccessHHcleansing(imageURI) {
+	var image = document.getElementById(temp_image_div);
+    image.src = imageURI;
+    var hidden_path=temp_image_div.replace("HHcleansing_image_div","HHcleansing_image_div_hidden");
+	$("#"+hidden_path).val(imageURI);
+}
+function onFailHHcleansing(message) {
+	imagePathA="";
+    alert('Failed because: ' + message);
+}
+//===========================================
+function get_pic_Foods(i) {
+	var div_id="Foods_image_div"+i;
+	temp_image_div=div_id;
+	var tempTime = $.now();
+	Foods_image_name=tempTime.toString()+"_"+localStorage.selectedOutlet+""+i.toString()+"_Foods.jpg";
+	$("#Foods_image_name_hidden"+i).val(Foods_image_name);
+	navigator.camera.getPicture(onSuccessFoods, onFailFoods, { quality: 70,
+		targetWidth: 450,
+		destinationType: Camera.DestinationType.FILE_URI , correctOrientation: true });
+}
+function onSuccessFoods(imageURI) {
+	var image = document.getElementById(temp_image_div);
+    image.src = imageURI;
+    var hidden_path=temp_image_div.replace("Foods_image_div","Foods_image_div_hidden");
+	$("#"+hidden_path).val(imageURI);
+}
+function onFailFoods(message) {
+	imagePathA="";
+    alert('Failed because: ' + message);
+}
 //===================Catagory End====================
 
 //==================upload image===============
