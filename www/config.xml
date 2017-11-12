@@ -22,7 +22,11 @@
         permission on your app, which PhoneGap requires.
     
     <preference name="permissions"                value="none"/> -->
-
+    <config-file target="AndroidManifest.xml" parent="/*" mode="merge">
+        <uses-permission android:name="android.permission.CAMERA" />
+        <uses-feature android:name="android.hardware.camera" />
+        <uses-feature android:name="android.hardware.camera.autofocus" />
+    </config-file>
 
 	<!-- <preference name="phonegap-version" value="cli-6.5.0" /> -->
 	
