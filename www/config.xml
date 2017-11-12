@@ -22,6 +22,9 @@
         permission on your app, which PhoneGap requires.
     
     <preference name="permissions"                value="none"/> -->
+	<feature name="Camera">
+    <param name="android-package" value="org.apache.cordova.CameraLauncher" />
+	</feature>
 
 	<preference name="phonegap-version" value="cli-6.5.0" /> 
 	
