@@ -759,7 +759,7 @@ function finalPurchaseSave(){
 				//$("#visit_success").html("Submitted Successfully");
 				 //alert (result2)
 				 //alert (prPhotoPath+' | '+prPhotoName)
-				// upload_image(prPhotoPath,prPhotoName);
+				 upload_image(prPhotoPath,prPhotoName);
 				
 				
 				  
