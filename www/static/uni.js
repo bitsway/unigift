@@ -455,6 +455,7 @@ function memHistory(){
 			}
 			if (resultStr[0]=='SUCCESS'){	
 				$("#memHis").html(resultStr[1]);
+				$("#memHisC").html(resultStr[1]);
 				//alert (resultStr[1])
 				
 			}//if      
@@ -478,6 +479,7 @@ function productQueRedeem(){
 				}
 				if (resultStr[0]=='SUCCESS'){
 				    var memStr=resultStr[1]
+					var memStrFinal=resultStr[2]
 					memStrList=memStr.split('<rd>')
 
 					outletShow=''
@@ -485,6 +487,16 @@ function productQueRedeem(){
 						memMob=memStrList[i].split('<fd>')[0]
 						memName=memStrList[i].split('<fd>')[1]
 						outletShow=outletShow+'<li class="ui-btn ui-shadow ui-corner-all " style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin; alignment-adjust:before-edge" onClick="checkRadioVal('+i+');RedeemGet('+i+')"><input onClick="RedeemGet('+i+')"  id="radioMem_'+i+'" type="radio" name="radio_mem"  value="'+memName+'|'+memMob+'" >'+memName+'|'+memMob+'</li>'
+
+					}
+					
+					memStrListFinal=memStrFinal.split('<rd>')
+
+					
+					for (i=0; i<memStrListFinal.length-1; i++){	
+						memMobFinal=memStrListFinal[i].split('<fd>')[0]
+						memNameFinal=memStrListFinal[i].split('<fd>')[1]
+						//outletShow=outletShow+'<li class="ui-btn ui-shadow ui-corner-all " style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin; alignment-adjust:before-edge" onClick="checkRadioVal('+i+');RedeemGet('+i+')"><input onClick="RedeemGet('+i+')"  id="radioMem_'+i+'" type="radio" name="radio_mem"  value="'+memNameFinal+'|'+memMobFinal+'" >'+memNameFinal+'|'+memMobFinal+'</li>'
 
 					}
 					localStorage.queMem=outletShow
@@ -747,7 +759,7 @@ function finalPurchaseSave(){
 				//$("#visit_success").html("Submitted Successfully");
 				 //alert (result2)
 				 //alert (prPhotoPath+' | '+prPhotoName)
-				 upload_image(prPhotoPath,prPhotoName);
+				// upload_image(prPhotoPath,prPhotoName);
 				
 				
 				  
@@ -958,7 +970,7 @@ function login_user() {
 									 var pNameID="pNameID_"+i.toString()
 									 
 									 pShowList=prodctListStr[i].split('|')
-									 var pShow=pShowList[0]+'|'+pShowList[3]+'|'+pShowList[2]
+									 var pShow=pShowList[0]+'|'+pShowList[3]
 					prdctShow=prdctShow+'<li class="ui-btn ui-shadow " style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin"><table><tr><td>   <input onKeyUp="productQueNew('+i+')" type="number" id="'+qName+'"   name="'+qName+'" style="width:50px"><input type="hidden" id="'+pNameID+'"   name="'+pNameID+'"  value="'+prodctListStr[i]+'"></td><td>'+pShow+'</td></tr></table></li>'    
 									 
 									 
@@ -1050,7 +1062,7 @@ function selcetCat(){
 	 var pNameID="pNameID_"+i.toString()
 	 var cat = prodctListStr[i].split('|')[2]
 	 pShowList=prodctListStr[i].split('|')
-	 var pShow=pShowList[0]+'|'+pShowList[3]+'|'+pShowList[2]
+	 var pShow=pShowList[0]+'|'+pShowList[3]
 	 //alert (cat)
 	 if (catValue=="ALL"){
 	 	//prdctShow=prdctShow+'<table><tr><td> <input onKeyUp="productQueNew('+i+')" type="number" id="'+qName+'"   name="'+qName+'" style="width:50px"><input type="hidden" id="'+pNameID+'"   name="'+pNameID+'"  value="'+prodctListStr[i]+'"></td><td>'+prodctListStr[i]+'</td></tr></table>' 
@@ -1099,7 +1111,7 @@ function selcetCat_S(){
 	 var pNameID="pNameID_"+i.toString()
 	 var cat = prodctListStr[i].split('|')[2]
 	 pShowList=prodctListStr[i].split('|')
-	 var pShow=pShowList[0]+'|'+pShowList[3]+'|'+pShowList[2]
+	 var pShow=pShowList[0]+'|'+pShowList[3]
 	 //alert (cat)
 	 if (catValue=="ALL"){
 	 	 

@@ -747,6 +747,11 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 <!----------------------------------------------Confirm------------------->
 
      <div data-theme="c" data-role="page" id="ConfirmPageSave" style="background-color:#EBFCFA"  >
+     
+     <div data-role="panel" id="routePaneC" data-display="overlay" style="width:60%;">
+<div id="memHisC" style="overflow:scroll; height:500px"></div>
+</div>
+     
        <div data-theme="c" data-role="header" data-position="fixed" style="background-color:#5EBBE8; color:#fff" data-add-back-btn="true" > 
        
      <a data-rel="back" style="height:18px" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left"   ><img src="back1.png"></a>
@@ -812,14 +817,14 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 
     </div>   
                 
+        <br><br><br><br><br><br><br><br>  
       <div data-theme="c" data-role="footer" data-position="fixed" style="background-color:#5EBBE8; color:#fff"  > 
-
-       
-       
-
-             
-  
+		
+        <a onClick="#" ></a>
+        <a  href="#routePaneC" onClick="memHistory()"  class="ui-btn-right" >History<br></a>
+        <br><br>
      </div>
+     <br>
  </div>
 
 
