@@ -496,6 +496,7 @@ function productQueRedeem(){
 					for (i=0; i<memStrListFinal.length-1; i++){	
 						memMobFinal=memStrListFinal[i].split('<fd>')[0]
 						memNameFinal=memStrListFinal[i].split('<fd>')[1]
+						outletShow=outletShow+'<li class="ui-btn ui-shadow ui-corner-all " style="border-bottom-style:solid; background-color:#FFFFC6;  border-color:#CBE4E4;border-bottom-width:thin; alignment-adjust:before-edge" onClick="checkRadioVal('+i+');RedeemGet('+i+')"><input onClick="checkRadioVal('+i+');RedeemGet('+i+');Redeem()"  id="radioMem_'+i+'" type="radio" name="radio_mem"  value="'+memNameFinal+'|'+memMobFinal+'" >'+memNameFinal+'|'+memMobFinal+'</li>'
 						//outletShow=outletShow+'<li class="ui-btn ui-shadow ui-corner-all " style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin; alignment-adjust:before-edge" onClick="checkRadioVal('+i+');RedeemGet('+i+')"><input onClick="RedeemGet('+i+')"  id="radioMem_'+i+'" type="radio" name="radio_mem"  value="'+memNameFinal+'|'+memMobFinal+'" >'+memNameFinal+'|'+memMobFinal+'</li>'
 
 					}
@@ -759,7 +760,7 @@ function finalPurchaseSave(){
 				//$("#visit_success").html("Submitted Successfully");
 				 //alert (result2)
 				 //alert (prPhotoPath+' | '+prPhotoName)
-				 upload_image(prPhotoPath,prPhotoName);
+				// upload_image(prPhotoPath,prPhotoName);
 				
 				
 				  
@@ -775,7 +776,7 @@ function finalPurchaseSave(){
 				$("#redMobile").val(radioMemMobile);
 				 
 				
-				$("#button_show").html('<a data-role="button"   onClick="Redeem()">Redeem</a>');
+				$("#button_show").html('<a data-role="button"   onClick="Redeem()">         Redeem          </a>');
 				
 				
 				$("#saveButton").show();
