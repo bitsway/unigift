@@ -267,6 +267,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
       
            </font>                
 				</br></br>
+                 <div id="login_error" ></div>
                  <div id="login_image" ><img height="40px" width="40px" src="loading.gif"></div>
                  <a id="loginButton" data-role="button"  onClick="login_user()" >Login</a>
                 <!--<a id="loginButton" data-role="button"  onClick="login_user()" >Login</a>	-->
@@ -507,7 +508,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
           
      <!--  </p>
        <p>&nbsp; </p>-->
-  <div id="prdctShow"  style="overflow:scroll; height:400px; width:1000px "  align="left"  >
+  <div id="prdctShow"  style="overflow:scroll; height:600px; width:1000px "  align="left"  >
   		<ul class="list" id="item_combo_id" style="background-color:#EDFEED">
         </ul>
          
@@ -565,7 +566,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
           
      <!--  </p>
        <p>&nbsp; </p>-->
-  <div id="prdctShow_S"  style="overflow:scroll; height:400px; width:1000px; "  align="left" >
+  <div id="prdctShow_S"  style="overflow:scroll; height:600px; width:1000px; "  align="left" >
          <ul class="list" id="item_combo_id_S" style="background-color:#EDFEED">
         </ul>
        <!-- <a id="memButton" data-role="button"  onClick="historyShow()" ><strong>History</strong></a>-->
@@ -609,14 +610,15 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
           <font id="item_Que_combo_id">
 
         
-          <div class="errorChk"></div> 
+           
 
          </font>
        <!-- <a id="memButton" data-role="button"  onClick="historyShow()" ><strong>History</strong></a>-->
 
     </div>   
-           
-         <a data-role="button" id="orderBtn"   onClick="purchaseDataSave()" >Proceed to Check Out</a> 
+         <div class="errorChkpurchase"></div>  
+         <div id="purchase_image" ><img height="40px" width="40px" src="loading.gif"></div>
+         <a data-role="button" id="purchaseBtn"   onClick="purchaseDataSave()" >Proceed to Check Out</a> 
          
          
               
@@ -798,7 +800,8 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
               </div>
               
               
-   
+   			<div id="errorChkpurchaseF"></div> 
+            <div id="purchaseF_image" ><img height="40px" width="40px" src="loading.gif"></div>
        
        		 <table >
               		<tr >
@@ -809,7 +812,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
           	</table>
        
        
-       <div id="errorChk"></div> 
+       
        <div class="savedGiftError"></div>  
       <br><br>
        <br><br><br><br><br><br><br><br>    
@@ -922,12 +925,16 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
         
      </div>
     
+    
+    	<div class="errorChkGift"></div>  
+         <div id="Gift_image" ><img height="40px" width="40px" src="loading.gif"></div>
+    
        		 <table   >
             
               		<tr >
                      <td width="30px" > <input name="" id="checkId" type="checkbox" value="" required></td>
                     <td > Confirm</td>
-                    <td >  <a data-role="button" id="saveButton"  onClick="giftSave()" >Submit</a></td>
+                    <td >  <a data-role="button" id="saveButtonGift"  onClick="giftSave()" >Submit</a></td>
                     </tr>   
           </table>
           

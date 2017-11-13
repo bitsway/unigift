@@ -134,6 +134,11 @@ function Redeem(){
 					$("#prRedPoint").html(mem_point);
 					
 					$("#gSError").html('');
+					
+					$("#errorChkGift").html('');
+					$("#Gift_image").hide();
+					$("#saveButtonGift").show();
+					
 					url="#redeemShow";					
     	            $.mobile.navigate(url);					
 				}
@@ -156,6 +161,9 @@ function Redeem(){
 
 
 function giftSave(){
+			$("#Gift_image").show();
+			$("#saveButtonGift").hide();
+			
 			var memMb=localStorage.memRedMob;
 			var memNM=localStorage.memRedName
 			var memPoint=localStorage.memPoint;
@@ -210,10 +218,17 @@ function giftSave(){
 					if (result!='Failed'){
 					//$("#visit_success").html("Submitted Successfully");
 					
-					$("#button_show").html(' ');
-					$("#saveButton").show();	
+					
+					$("#Gift_image").hide();
+					$("#saveButtonGift").show();
+					
 					url="#submitPage";					
 			  		$.mobile.navigate(url);
+					}
+					else{
+						$("#errorChkGift").html('Failled')
+						$("#Gift_image").hide();
+						$("#saveButtonGift").show();
 					}
 				
 				}      
@@ -431,6 +446,10 @@ function productQue(){
 		
 	}
 	if (localStorage.prdctShowCart!=''){
+		$("#purchase_image").hide()
+		$("#purchaseBtn").show()
+		
+		$("#errorChkpurchase").html('')
 		url="#ProductQueList";					
 		$.mobile.navigate(url);	
 	}
@@ -546,6 +565,9 @@ function checkRadio(){
 	}
 }
 function purchaseDataSave(){
+	 $("#purchase_image").show();
+	 $("#purchaseBtn").hide();
+	 
 	 
 	 var memInfo=localStorage.memInfo;
 	 var memNameMob=memInfo.split('-');
@@ -582,10 +604,19 @@ function purchaseDataSave(){
 			
 			localStorage.submitPurchase=''
 			localStorage.prdctShowCart=''
-			$("#orderBtn").show();	
+			
+			
+			$("#purchase_image").hide();
+	 		$("#purchaseBtn").show();	
 			url="#submitPage";					
 			$.mobile.navigate(url);		
 			}
+			else{
+				$("#errorChkpurchase").html('Sorry Network not available');
+				$("#purchase_image").hide();
+	 			$("#purchaseBtn").show();
+				
+				}
 		}      
  
 	  });
@@ -722,6 +753,11 @@ function ConfirmPage(){
 	$("#savedGiftError").html('');
 	$("#payCombTextDiv").hide();
 	
+	
+	
+	$("#purchaseF_image").hide()
+	$("#saveButton").show()	
+	$("#errorChkpurchaseF").html('')
 	url="#ConfirmPageSave";					
 	$.mobile.navigate(url);	
 	}
@@ -733,6 +769,8 @@ function setTextPay(){
 
 function finalPurchaseSave(){
 	 
+	 $("#purchaseF_image").show()
+	 $("#saveButton").hide()	
 	 var memberAllInfo=localStorage.radioMem
      var memberName=memberAllInfo.split('|')[0]
 	 var memmobileNo=memberAllInfo.split('|')[1]
@@ -776,13 +814,22 @@ function finalPurchaseSave(){
 				$("#redMobile").val(radioMemMobile);
 				 
 				
-				$("#button_show").html('<a data-role="button"   onClick="Redeem()">         Redeem          </a>');
 				
 				
+				$("#purchaseF_image").hide()
 				$("#saveButton").show();
+				
+				
 				url="#submitPage";					
 				$.mobile.navigate(url);	
 				//location.reload();		
+				$("#button_show").html('<input style="background-color:#00B0B0; height:30px; width:100%; color:#FFF; font-size:14px" type="submit"  value="         Redeem          "   onClick="Redeem()">');
+			}
+			
+			else{
+				$("#purchaseF_image").hide()
+				$("#saveButton").show()	
+				$("#errorChkpurchaseF").html('Failled')
 			}
 		}      
 	
@@ -833,7 +880,7 @@ function login_user() {
 		 }else{
 			
 			$("#login_image").show();
-			$("#loginButton").show();
+			$("#loginButton").hide();
 			localStorage.cid='UNILEVER';
 			localStorage.cm_id=cm_id;
 			localStorage.cm_pass=cm_pass;
@@ -857,14 +904,14 @@ function login_user() {
 				 success: function(result) {	
 				 		
 						if (result==''){
-							//$("#loginButton").show();
-//							$("#login_image").hide();
-							alert ('Sorry Network not available');
+							$("#login_image").hide();
+							$("#loginButton").show();
+							$("#login_error").html('Sorry Network not available');
 						}
 						else{
 							var resultArray = result.split('<SYNCDATA>');			
 							if (resultArray[0]=='FAILED'){
-								
+								$("#login_error").html('Failled');
 								
 							}
 							if (resultArray[0]=='SUCCESS'){
@@ -1015,7 +1062,9 @@ function login_user() {
 						}
 				      },
 				  error: function(result) {
-					 alert('Network error has occurred please try again!');
+					 $("#login_image").hide();
+					 $("#loginButton").show(); 
+					 $("#login_error").html('Network error has occurred please try again!');
 					
 				  }
 			  });//end ajax
