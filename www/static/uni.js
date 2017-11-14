@@ -219,6 +219,11 @@ function giftSave(){
 					//$("#visit_success").html("Submitted Successfully");
 					
 					
+					
+					
+					$("#button_show").html('<input style="background-color:#00B0B0; height:30px; width:100%; color:#FFF; font-size:14px" type="submit"  value="         Home          "   onClick="menuSearch()">');
+
+					
 					$("#Gift_image").hide();
 					$("#saveButtonGift").show();
 					
@@ -239,6 +244,8 @@ function giftSave(){
 		else{
 			
 			$("#gSError").text("Point should be greater than Gift Point");
+			$("#Gift_image").hide();
+			$("#saveButtonGift").show();
 			
 		}
 			
