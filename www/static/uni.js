@@ -789,6 +789,9 @@ function finalPurchaseSave(){
 	 var finalData=localStorage.pStr
 	 var payComb=$("#payComb").val()
 	 var BKashNo=$("#BKashNo").val()
+	 var BT_id=$("#BT_id").val()
+	 
+	 
 	 var prPhotoName=$("#prPhotoName").val()
 	 var prPhotoPath=$("#prPhoto").val()
 ////	  
@@ -796,7 +799,7 @@ function finalPurchaseSave(){
 	
 	$.ajax({
 		type:'POST',
-		url:apiPath+'purchaseComplete?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+outletId+'&outletName='+outletName+'&finalData='+encodeURIComponent(finalData)+'&memberName='+memberName+'&memmobileNo='+memmobileNo+'&payComb='+payComb+'&BKashNo='+BKashNo+'&prPhotoName='+prPhotoName,
+		url:apiPath+'purchaseComplete?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+outletId+'&outletName='+outletName+'&finalData='+encodeURIComponent(finalData)+'&memberName='+memberName+'&memmobileNo='+memmobileNo+'&payComb='+payComb+'&BKashNo='+BKashNo+'&prPhotoName='+prPhotoName+'&BT_id='+BT_id,
 	
 		success: function(result2) {
 	
