@@ -4141,7 +4141,7 @@ function bKashConfirm(){
 		url:pathHit+'bKashConfirm?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+outletId+'&outletName='+outletName+'&finalData='+encodeURIComponent(finalData)+'&memberName='+memberName+'&memmobileNo='+memmobileNo+'&payComb='+payComb+'&BKashNo='+BKashNo+'&prPhotoName='+prPhotoName+'&BT_id='+BT_id,
 	
 		success: function(result2) {
-	
+			alert (result2)
 			if (result2=='Success'){
 				trID=result2.split('<trxId>')[1].split('</trxId>')	
 				status=result2.split('<trxStatus>')[1].split('</trxStatus>')
@@ -4149,7 +4149,10 @@ function bKashConfirm(){
 				trID=BT_id
 				amount=localStorage.TotalProductPoint
 				status='0000'
-				if ((localStorage.TotalProductPoint==amount) && (trID==BT_id) && (status=='0000')){localStorage.bStatus='Yes'}
+				if ((localStorage.TotalProductPoint==amount) && (trID==BT_id) && (status=='0000')){localStorage.bStatus='Yes'
+				
+				alert ('Success')
+				}
 				
 				}
 			
