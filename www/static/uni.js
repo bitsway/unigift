@@ -3,7 +3,7 @@
 //var apipath_image = 'http://127.0.0.1:8000/moderntrade/';
 
 
-var apiPath='http://w02.yeapps.com/unigift/syncmobile_eon/'
+var apiPath='http://w02.yeapps.com/unigift/syncmobile_eon_bKash/'
 var apipath_image='http://i001.yeapps.com/image_hub/unigift/upload_image/'
 
 
@@ -4132,16 +4132,20 @@ function bKashConfirm(){
 	 
 	 var BKashNo=$("#BKashNo").val()
 	 var BT_id=$("#BT_id").val()
-	 var pathHit='https://w02.yeapps.com/unigift/syncmobile_eon/' 	 
+	 var pathHit='http://w02.yeapps.com/unigift/syncmobile_eon/' 	 
+	 
+	 var outletShow=localStorage.outlet
+	 var outletNameId=outletShow.split('|');
+	 var outletId=outletNameId[0];
 ////	  
 	//alert(apiPath+'purchaseComplete?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+outletId+'&outletName='+outletName+'&finalData='+encodeURIComponent(finalData)+'&memberName='+memberName+'&memmobileNo='+memmobileNo+'&payComb='+payComb+'&BKashNo='+BKashNo+'&prPhotoName='+prPhotoName)
-	alert (pathHit+'bKashConfirm')		
+	//alert (pathHit+'bKashConfirm')		
 	$.ajax({
 		type:'POST',
-		url:pathHit+'bKashConfirm?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+outletId+'&outletName='+outletName+'&finalData='+encodeURIComponent(finalData)+'&memberName='+memberName+'&memmobileNo='+memmobileNo+'&payComb='+payComb+'&BKashNo='+BKashNo+'&prPhotoName='+prPhotoName+'&BT_id='+BT_id,
+		url:pathHit+'httpTest?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+outletId+'&BT_id='+BT_id,
 	
 		success: function(result2) {
-			alert (result2)
+			//alert (result2)
 			if (result2=='Success'){
 				trID=result2.split('<trxId>')[1].split('</trxId>')	
 				status=result2.split('<trxStatus>')[1].split('</trxStatus>')
@@ -4149,9 +4153,9 @@ function bKashConfirm(){
 				trID=BT_id
 				amount=localStorage.TotalProductPoint
 				status='0000'
-				if ((localStorage.TotalProductPoint==amount) && (trID==BT_id) && (status=='0000')){localStorage.bStatus='Yes'
+				if ((localStorage.TotalProductPoint==amount) && (trID==BT_id)){localStorage.bStatus='Yes'
 				
-				alert ('Success')
+				$("#errorChkpurchaseF").html('Confirmed BKash Transaction')
 				}
 				
 				}
