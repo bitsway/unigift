@@ -4132,7 +4132,7 @@ function bKashConfirm(){
 	 
 	 var BKashNo=$("#BKashNo").val()
 	 var BT_id=$("#BT_id").val()
-	 var pathHit='http://w02.yeapps.com/unigift/syncmobile_eon/' 	 
+	 var pathHit='http://w02.yeapps.com/unigift/syncmobile_eon_bKash/' 	 
 	 
 	 var outletShow=localStorage.outlet
 	 var outletNameId=outletShow.split('|');
