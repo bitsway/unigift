@@ -4144,7 +4144,7 @@ function bKashConfirm(){
 	
 			if (result2=='Success'){
 				trID=result2.split('<trxId>')[1].split('</trxId>')	
-				status=result2.split('<trxId>')[1].split('</trxId>')
+				status=result2.split('<trxStatus>')[1].split('</trxStatus>')
 				amount=result2.split('<amount>')[1].split('</amount>')		
 				trID=BT_id
 				amount=localStorage.TotalProductPoint
