@@ -57,7 +57,7 @@
             }
 
         @media (min-width: 28em) {
-             Repeated from rule .ui-flipswitch above .ui-field-contain > label + .custom-size-flipswitch.ui-flipswitch {
+            .ui-field-contain > label + .custom-size-flipswitch.ui-flipswitch {
                 width: 1.875em;
             }
         }
@@ -258,13 +258,13 @@
         </div><! /header -->
         <div role="main" data-role="ui-content" style="height:90%" class="ui-corner-all">
             <div class="errorMsg"></div>
-            <font face="Arial, Helvetica, sans-serif" size="1">
-                <br>
+            <font face="Arial, Helvetica, sans-serif" size="-1">
+                </br>
                 <div align="center">
-                    <table width="500" border="0">
+                    <table width="500px" border="0">
                         <tr>
                             <td>PCC ID: </td>
-                            <td width="150px"><input type="text" width="500" name="cm_id" id="cm_id" placeholder="PCC ID" value=""></td>
+                            <td width="150px"><input type="text" width="500px" name="cm_id" id="cm_id" placeholder="PCC ID" value=""></td>
                         </tr>
                         <tr>
                             <td>PASSWORD: </td>
@@ -276,9 +276,9 @@
 
 
             </font>
-            <br><br>
+            </br></br>
             <div id="login_error"></div>
-            <div id="login_image"><img height="40" width="40" src="loading.gif"></div>
+            <div id="login_image"><img height="40px" width="40px" src="loading.gif"></div>
             <a id="loginButton" data-role="button" onClick="login_user()">Login</a>
             <!--<a id="loginButton" data-role="button"  onClick="login_user()" >Login</a>	-->
         </div>
@@ -468,7 +468,14 @@
 
         <div data-role="panel" id="routePanel" data-display="overlay" style="width:60%;">
             <div id="memHis" style="overflow:scroll; height:500px"></div>
-        </div>
+
+
+
+        </div><!-- /panel -->
+
+
+
+
 
 
         <div data-theme="c" data-role="header" data-position="fixed" style="background-color:#5EBBE8; color:#fff" data-add-back-btn="true">
@@ -511,7 +518,8 @@
 
 
 
-
+            <!--  </p>
+              <p>&nbsp; </p>-->
             <div id="prdctShow" style="overflow:scroll; height:600px; width:1000px " align="left">
                 <ul class="list" id="item_combo_id" style="background-color:#EDFEED"></ul>
 
@@ -521,7 +529,7 @@
             <br><br><br><br><br><br><br><br>
             <div data-theme="c" data-role="footer" data-position="fixed" style="background-color:#5EBBE8; color:#fff">
 
-                
+                <a onClick="#"></a>
                 <a href="#routePanel" onClick="memHistory()" class="ui-btn-right">History<br></a>
                 <br><br>
             </div>
@@ -567,8 +575,13 @@
 
 
 
+
+
+            <!--  </p>
+              <p>&nbsp; </p>-->
             <div id="prdctShow_S" style="overflow:scroll; height:600px; width:1000px; " align="left">
                 <ul class="list" id="item_combo_id_S" style="background-color:#EDFEED"></ul>
+                <!-- <a id="memButton" data-role="button"  onClick="historyShow()" ><strong>History</strong></a>-->
                 <br><br><br><br>
             </div>
             <br><br><br><br><br><br><br><br>
@@ -644,7 +657,7 @@
         <br>
         &nbsp;&nbsp;&nbsp;
 
-        <p>
+        
         <p>&nbsp; </p>
         <div id="prdctQueRedShow" style="overflow:scroll">
             <font id="item_Que_comboRed_id" style="overflow:scroll">
@@ -688,34 +701,25 @@
 
     <div data-theme="c" data-role="page" id="RedeemList" style="background-color:#EBFCFA">
         <div data-theme="c" data-role="header" data-position="fixed" style="background-color:#5EBBE8; color:#fff" data-add-back-btn="true">
-
             <a data-rel="back" style="height:18px" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left"><img src="back1.png"></a>
-
             <a id="backjpj" style="height:18px" data-role="button" data-iconpos="left" onClick="product()" class="ui-btn-right">Add to Cart</a>
             <h3>Purchase</h3>
-
-
         </div>
 
 
-        <table width="100%" border="0">
-            <tr>
-
-                <td style="color:#0060BF">  <font style="font-size:14px; color:#009D00" id="prRedMemP">  </font></td>
-                <td style="color:#0060BF"> </td>
-            </tr>
-            <tr>
-                <td style="color:#0060BF"><font style="font-size:16px; color:#009D00" id="prRedMemNameP">  </font> </td>
-                <td style="color:#0060BF"> <font style="font-size:16px; color:#A8224A" id="prRedPointP"></font></td>
-
-            </tr>
-        </table>
-
+            <table width="100%" border="0">
+                <tr>
+                    <td style="color:#0060BF">  <font style="font-size:14px; color:#009D00" id="prRedMemP">  </font></td>
+                    <td style="color:#0060BF"> </td>
+                </tr>
+                <tr>
+                    <td style="color:#0060BF"><font style="font-size:16px; color:#009D00" id="prRedMemNameP">  </font> </td>
+                    <td style="color:#0060BF"> <font style="font-size:16px; color:#A8224A" id="prRedPointP"></font></td>
+                </tr>
+            </table>
 
             <div id="prdctQueRedListShow" style="overflow:scroll">
                 <font id="item_Que_comboList_id" style="overflow:scroll">
-
-
 
                     <div id="purchaseShow" style="overflow:scroll; height:300px"></div>
 
@@ -730,8 +734,6 @@
                         </tr>
                     </table><br>
 
-
-
                     <div id="pError"></div>
                     <a data-role="button" onClick="ConfirmPage()">Next</a>
                 </font>
@@ -743,6 +745,8 @@
 
             </div>
     </div>
+
+
 
 
 
@@ -764,7 +768,6 @@
 
         </div>
         <p>
-
                 <table width="100%" border="0">
                     <tr>
 
@@ -836,6 +839,7 @@
                 <br>
                 <div data-theme="c" data-role="footer" data-position="fixed" style="background-color:#5EBBE8; color:#fff">
 
+                    <a onClick="#"></a>
                     <a href="#routePaneC" onClick="memHistory()" class="ui-btn-right">History<br></a>
                     <br><br>
                 </div>
@@ -847,34 +851,30 @@
 
     <div data-theme="c" data-role="page" id="submitPage" style="background-color:#EBFCFA">
         <div data-theme="c" data-role="header" data-position="fixed" style="background-color:#5EBBE8; color:#fff" data-add-back-btn="true">
-
-            <!--   <a data-rel="back"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left"   ><img src="back1.png"></a> -->
             <a data-rel="button" style="height:18px" onClick="submitBack()"><img src="back1.png"></a>
-            <!--  <a data-role="button"  class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left" onClick="login()" ><img src="menu.png"></a>
-               -->
-            <!-- <a id="backjpj" style="height:18px" data-role="button" data-iconpos="left" onClick="getOrder()" class="ui-btn-right">Next</a>-->
             <h3>Submitted Successfully</h3>
-
-
         </div>
 
+        
         <p>&nbsp; </p>
         <table width="100%" border="0">
             <tr>
                 <td align="center">
-                    <div id="visit_success" style="background-image:url(result_back.png); background-repeat:no-repeat; width:300px; height:200px; color:#FFF; font-size:20px;" align="center"><br><br><br>Submitted Successfully</div>
+
+                    <div id="visit_success" style="background-image:url(result_back.png); background-repeat:no-repeat; width:300px; height:200px; color:#FFF; font-size:20px;" align="center"></br></br></br>Submitted Successfully</div>
                 </td>
             </tr>
         </table>
 
-    <br><br><br><br>
 
-    <div id="button_show">   </div>
+        <br><br><br><br>
 
-    <div data-theme="c" data-role="footer" data-position="fixed" style="background-color:#5EBBE8; color:#fff">
-        
+        <div id="button_show">   </div>
+
+        <div data-theme="c" data-role="footer" data-position="fixed" style="background-color:#5EBBE8; color:#fff">     </div>
     </div>
-    </div>
+
+
     <!------------------------------------------------redeem-------------------->
     <div data-theme="c" data-role="page" id="redeemShow" style="background-color:#EBFCFA">
         <div data-theme="c" data-role="header" data-position="fixed" style="background-color:#5EBBE8; color:#fff" data-add-back-btn="true">
