@@ -794,9 +794,15 @@ function finalPurchaseSave(){
 	 
 	 var prPhotoName=$("#prPhotoName").val()
 	 var prPhotoPath=$("#prPhoto").val()
+	 
+	 var errorLog=0
+	 if ((payComb=='BKash') && (localStorage.bStatus!='Yes')){
+		 errorLog=1
+		 
+	 }
 ////	  
 	//alert(apiPath+'purchaseComplete?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+outletId+'&outletName='+outletName+'&finalData='+encodeURIComponent(finalData)+'&memberName='+memberName+'&memmobileNo='+memmobileNo+'&payComb='+payComb+'&BKashNo='+BKashNo+'&prPhotoName='+prPhotoName)
-	
+	if (errorLog==0){
 	$.ajax({
 		type:'POST',
 		url:apiPath+'purchaseComplete?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+outletId+'&outletName='+outletName+'&finalData='+encodeURIComponent(finalData)+'&memberName='+memberName+'&memmobileNo='+memmobileNo+'&payComb='+payComb+'&BKashNo='+BKashNo+'&prPhotoName='+prPhotoName+'&BT_id='+BT_id,
@@ -844,8 +850,12 @@ function finalPurchaseSave(){
 		}      
 	
 	  });
-	  
-	
+	}
+	else{
+	}
+		$("#purchaseF_image").hide()
+	 	$("#saveButton").show()
+		$("#errorChkpurchaseF").html('Please Confirm BKash transaction')
 	}	
 
 
@@ -4116,5 +4126,42 @@ function saved_image_upload(){
 	
 }
 
+//========================BKash=====================
 
+function bKashConfirm(){
+	 
+	 var BKashNo=$("#BKashNo").val()
+	 var BT_id=$("#BT_id").val()
+	 var pathHit='https://w02.yeapps.com/unigift/syncmobile_eon/' 	 
+////	  
+	//alert(apiPath+'purchaseComplete?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+outletId+'&outletName='+outletName+'&finalData='+encodeURIComponent(finalData)+'&memberName='+memberName+'&memmobileNo='+memmobileNo+'&payComb='+payComb+'&BKashNo='+BKashNo+'&prPhotoName='+prPhotoName)
+			
+	$.ajax({
+		type:'POST',
+		url:pathHit+'bKashConfirm?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+outletId+'&outletName='+outletName+'&finalData='+encodeURIComponent(finalData)+'&memberName='+memberName+'&memmobileNo='+memmobileNo+'&payComb='+payComb+'&BKashNo='+BKashNo+'&prPhotoName='+prPhotoName+'&BT_id='+BT_id,
+	
+		success: function(result2) {
+	
+			if (result2=='Success'){
+				trID=result2.split('<trxId>')[1].split('</trxId>')	
+				status=result2.split('<trxId>')[1].split('</trxId>')
+				amount=result2.split('<amount>')[1].split('</amount>')		
+				trID=BT_id
+				amount=localStorage.TotalProductPoint
+				status='0000'
+				if ((localStorage.TotalProductPoint==amount) && (trID==BT_id) && (status=='0000')){localStorage.bStatus='Yes'}
+				
+				}
+			
+			else{
+				$("#purchaseF_image").hide()
+				$("#saveButton").show()	
+				$("#errorChkpurchaseF").html('Failled')
+			}
+		}      
+	
+	  });
+	  
+	
+	}	
 	
