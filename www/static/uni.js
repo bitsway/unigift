@@ -4146,14 +4146,16 @@ function bKashConfirm(){
 	
 		success: function(result2) {
 			//alert (result2)
-			if (result2=='Success'){
+			if (result2!=''){
 				trID=result2.split('<trxId>')[1].split('</trxId>')	
 				status=result2.split('<trxStatus>')[1].split('</trxStatus>')
 				amount=result2.split('<amount>')[1].split('</amount>')		
 				trID=BT_id
 				amount=localStorage.TotalProductPoint
 				status='0000'
-				if ((localStorage.TotalProductPoint==amount) && (trID==BT_id)){localStorage.bStatus='Yes'
+				//if ((localStorage.TotalProductPoint==amount) && (trID==BT_id)){
+				if (trID==BT_id){
+				localStorage.bStatus='Yes'
 				
 				$("#errorChkpurchaseF").html('Confirmed BKash Transaction')
 				}
@@ -4163,7 +4165,7 @@ function bKashConfirm(){
 			else{
 				$("#purchaseF_image").hide()
 				$("#saveButton").show()	
-				$("#errorChkpurchaseF").html('Failled')
+				$("#errorChkpurchaseF").html(result2)
 			}
 		}      
 	
