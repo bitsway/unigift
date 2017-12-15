@@ -829,6 +829,8 @@ function finalPurchaseSave(){
 				//alert ('Test')
 				$("#redMobile").val(radioMemMobile);
 				 
+				$("#BKashNo").val('');
+				$("#BT_id").val('');
 				
 				
 				
