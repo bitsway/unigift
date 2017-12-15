@@ -855,7 +855,7 @@ function finalPurchaseSave(){
 	}
 		$("#purchaseF_image").hide()
 	 	$("#saveButton").show()
-		$("#errorChkpurchaseF").html('Please Confirm BKash transaction ID')
+		$("#errorChkpurchaseF").html('Please Confirm BKash transaction')
 	}	
 
 
@@ -4153,15 +4153,11 @@ function bKashConfirm(){
 				trID=BT_id
 				amount=localStorage.TotalProductPoint
 				status='0000'
-				if ((localStorage.TotalProductPoint==amount) && (trID==BT_id)){
-				//if (trID==BT_id){
-					localStorage.bStatus='Yes'
-					
-					$("#errorChkpurchaseF").html('Confirmed BKash Transaction')
-				}
-				else{
-					localStorage.bStatus='No'
-					$("#errorChkpurchaseF").html('Please Confirmed BKash Transaction ID')
+				//if ((localStorage.TotalProductPoint==amount) && (trID==BT_id)){
+				if (trID==BT_id){
+				localStorage.bStatus='Yes'
+				
+				$("#errorChkpurchaseF").html('Confirmed BKash Transaction')
 				}
 				
 				}
@@ -4169,8 +4165,7 @@ function bKashConfirm(){
 			else{
 				$("#purchaseF_image").hide()
 				$("#saveButton").show()	
-				localStorage.bStatus='No'
-				$("#errorChkpurchaseF").html('Please Confirmed BKash Transaction ID')
+				$("#errorChkpurchaseF").html(result2)
 			}
 		}      
 	
