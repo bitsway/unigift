@@ -812,6 +812,7 @@ function finalPurchaseSave(){
 	 var prPhotoPath=$("#prPhoto").val()
 	 
 	 var errorLog=0
+	 
 	 if ((payComb=='BKash') && (localStorage.bStatus!='Yes')){
 		 errorLog=1
 		 
@@ -870,10 +871,11 @@ function finalPurchaseSave(){
 	  });
 	}
 	else{
-	}
+	
 		$("#purchaseF_image").hide()
 	 	$("#saveButton").show()
 		$("#errorChkpurchaseF").html('Please Confirm BKash transaction ID')
+	}
 	}	
 
 
@@ -934,7 +936,7 @@ function login_user() {
 //					
 //		            $(".errorMsg").html("Wrong UserId/Name and password combination");	
 //				}
-	       // alert (apiPath+'check_user?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code)
+	        alert (apiPath+'check_user?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code)
 			
 			$.ajax({
 				 type: 'POST',
