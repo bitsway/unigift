@@ -3,7 +3,7 @@
 //var apipath_image = 'http://127.0.0.1:8000/moderntrade/';
 
 
-var apiPath='http://w02.yeapps.com/unigift/syncmobile_eon_bKash/'
+var apiPath='http://w02.yeapps.com/unigift/syncmobile_eon_bKashNew/'
 var apipath_image='http://i001.yeapps.com/image_hub/unigift/upload_image/'
 
 
@@ -4134,7 +4134,7 @@ function bKashConfirm(){
 	 
 	 var BKashNo=$("#BKashNo").val()
 	 var BT_id=$("#BT_id").val()
-	 var pathHit='http://w02.yeapps.com/unigift/syncmobile_eon_bKash/' 	 
+	 var pathHit='http://w02.yeapps.com/unigift/syncmobile_eon_bKashNew/' 	 
 	 
 	 var outletShow=localStorage.outlet
 	 var outletNameId=outletShow.split('|');
@@ -4152,8 +4152,8 @@ function bKashConfirm(){
 				trID=result2.split('<trxId>')[1].split('</trxId>')	
 				status=result2.split('<trxStatus>')[1].split('</trxStatus>')
 				amount=result2.split('<amount>')[1].split('</amount>')		
-				trID=BT_id
-				amount=localStorage.TotalProductPoint
+				//trID=BT_id
+				//amount=localStorage.TotalProductPoint
 				status='0000'
 				if ((localStorage.TotalProductPoint==amount) && (trID==BT_id)){
 				//if (trID==BT_id){
