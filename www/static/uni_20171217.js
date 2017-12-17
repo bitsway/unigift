@@ -1,10 +1,10 @@
 
-var apiPath='http://127.0.0.1:8000/unigift/syncmobile_eon_bKash/';
-var apipath_image = 'http://127.0.0.1:8000/moderntrade/';
+//var apiPath='http://127.0.0.1:8000/unigift/syncmobile_eon/';
+//var apipath_image = 'http://127.0.0.1:8000/moderntrade/';
 
 
-//var apiPath='http://w02.yeapps.com/unigift/syncmobile_eon_bKashNew/'
-//var apipath_image='http://i001.yeapps.com/image_hub/unigift/upload_image/'
+var apiPath='http://w02.yeapps.com/unigift/syncmobile_eon_bKashNew/'
+var apipath_image='http://i001.yeapps.com/image_hub/unigift/upload_image/'
 
 
 function get_pic_HairCare(i) {
@@ -512,24 +512,18 @@ function productQueRedeem(){
 					for (i=0; i<memStrList.length-1; i++){	
 						memMob=memStrList[i].split('<fd>')[0]
 						memName=memStrList[i].split('<fd>')[1]
-						// outletShow=outletShow+'<li class="ui-btn ui-shadow ui-corner-all " style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin; alignment-adjust:before-edge" onClick="checkRadioVal('+i+');RedeemGet('+i+')"><input onClick="RedeemGet('+i+')"  id="radioMem_'+i+'" type="radio" name="radio_mem"  value="'+memName+'|'+memMob+'" >'+memName+'|'+memMob+'</li>'
-						//alert (i)
-						outletShow=outletShow+'<li class="ui-btn ui-shadow ui-corner-all " style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin; alignment-adjust:before-edge" onClick="checkRadioVal('+i+')"><input onClick="checkRadioVal('+i+')"  id="radioMem_'+i+'" type="radio" name="radio_mem"  value="'+memName+'|'+memMob+'" >'+memName+'|'+memMob+'</li>'
+						outletShow=outletShow+'<li class="ui-btn ui-shadow ui-corner-all " style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin; alignment-adjust:before-edge" onClick="checkRadioVal('+i+');RedeemGet('+i+')"><input onClick="RedeemGet('+i+')"  id="radioMem_'+i+'" type="radio" name="radio_mem"  value="'+memName+'|'+memMob+'" >'+memName+'|'+memMob+'</li>'
 
 					}
 					
 					memStrListFinal=memStrFinal.split('<rd>')
 
 					
-					//alert (memStrListFinal.length)
-					for (j=0; j<memStrListFinal.length-1; j++){	
-						
-						i=i+1
-						memMobFinal=memStrListFinal[j].split('<fd>')[0]
-						memNameFinal=memStrListFinal[j].split('<fd>')[1]
-						outletShow=outletShow+'<li class="ui-btn ui-shadow ui-corner-all " style="border-bottom-style:solid; background-color:#FFFFC6;  border-color:#CBE4E4;border-bottom-width:thin; alignment-adjust:before-edge" onClick="checkRadioVal('+i+')"><input onClick="checkRadioVal('+i+');Redeem()"  id="radioMem_'+i+'" type="radio" name="radio_mem"  value="'+memNameFinal+'|'+memMobFinal+'" >'+memNameFinal+'|'+memMobFinal+'</li>'
-						// outletShow=outletShow+'<li class="ui-btn ui-shadow ui-corner-all " style="border-bottom-style:solid; background-color:#FFFFC6;  border-color:#CBE4E4;border-bottom-width:thin; alignment-adjust:before-edge" onClick="checkRadioVal('+i+');RedeemGet('+i+')"><input onClick="checkRadioVal('+i+');RedeemGet('+i+');Redeem()"  id="radioMem_'+i+'" type="radio" name="radio_mem"  value="'+memNameFinal+'|'+memMobFinal+'" >'+memNameFinal+'|'+memMobFinal+'</li>'
-						
+					for (i=0; i<memStrListFinal.length-1; i++){	
+						memMobFinal=memStrListFinal[i].split('<fd>')[0]
+						memNameFinal=memStrListFinal[i].split('<fd>')[1]
+						outletShow=outletShow+'<li class="ui-btn ui-shadow ui-corner-all " style="border-bottom-style:solid; background-color:#FFFFC6;  border-color:#CBE4E4;border-bottom-width:thin; alignment-adjust:before-edge" onClick="checkRadioVal('+i+');RedeemGet('+i+')"><input onClick="checkRadioVal('+i+');RedeemGet('+i+');Redeem()"  id="radioMem_'+i+'" type="radio" name="radio_mem"  value="'+memNameFinal+'|'+memMobFinal+'" >'+memNameFinal+'|'+memMobFinal+'</li>'
+						//outletShow=outletShow+'<li class="ui-btn ui-shadow ui-corner-all " style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin; alignment-adjust:before-edge" onClick="checkRadioVal('+i+');RedeemGet('+i+')"><input onClick="RedeemGet('+i+')"  id="radioMem_'+i+'" type="radio" name="radio_mem"  value="'+memNameFinal+'|'+memMobFinal+'" >'+memNameFinal+'|'+memMobFinal+'</li>'
 
 					}
 					localStorage.queMem=outletShow
@@ -553,18 +547,8 @@ function productQueRedeem(){
 	
 }
 function checkRadioVal(i){
-	//alert (i)
 	var radioMemGet="#radioMem_"+i
 	$(radioMemGet).attr('checked', true) 
-	//alert (radioMemGet)
-	// var radioMemGet="#radioMem_"+i
-	var radioMem=$(radioMemGet).val();
-	localStorage.radioMem=radioMem	
-	var radioMemMobile=radioMem.split('|')[1]
-	$("#redMobile").val(radioMemMobile);
-	$("#redMobile").attr("disabled", "disabled"); 
-	
-	
 	
 	//$( "#"+radioMemGet ).prop( "checked", true );
 }
@@ -649,16 +633,16 @@ function purchaseDataSave(){
 	
 	
 
-// function RedeemGet(i){	
-	// var radioMemGet="#radioMem_"+i
-	// var radioMem=$(radioMemGet).val();
-	// localStorage.radioMem=radioMem	
-	// var radioMemMobile=radioMem.split('|')[1]
-	// $("#redMobile").val(radioMemMobile);
-	// $("#redMobile").attr("disabled", "disabled"); 
-// 	
-// 	
-	// }	
+function RedeemGet(i){	
+	var radioMemGet="#radioMem_"+i
+	var radioMem=$(radioMemGet).val();
+	localStorage.radioMem=radioMem	
+	var radioMemMobile=radioMem.split('|')[1]
+	$("#redMobile").val(radioMemMobile);
+	$("#redMobile").attr("disabled", "disabled"); 
+	
+	
+	}	
 function PurchaseDone(){	
 	var outletShow=localStorage.outlet
 	var outletIDN=outletShow.split('|');
@@ -934,7 +918,7 @@ function login_user() {
 //					
 //		            $(".errorMsg").html("Wrong UserId/Name and password combination");	
 //				}
-	        alert (apiPath+'check_user?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code)
+	       // alert (apiPath+'check_user?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code)
 			
 			$.ajax({
 				 type: 'POST',
@@ -4168,8 +4152,8 @@ function bKashConfirm(){
 				trID=result2.split('<trxId>')[1].split('</trxId>')	
 				status=result2.split('<trxStatus>')[1].split('</trxStatus>')
 				amount=result2.split('<amount>')[1].split('</amount>')		
-				trID=BT_id
-				amount=localStorage.TotalProductPoint
+				//trID=BT_id
+				//amount=localStorage.TotalProductPoint
 				status='0000'
 				if ((localStorage.TotalProductPoint==amount) && (trID==BT_id)){
 				//if (trID==BT_id){

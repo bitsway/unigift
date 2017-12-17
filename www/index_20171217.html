@@ -652,7 +652,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
      
   			Please select from Que
                
-            <div id="queMem"  style="overflow: scroll; height: 300px"></div>
+            <div id="queMem"></div>
 
    		 <table width="80%" border="0">
           <tr>
@@ -750,35 +750,42 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 
      <div data-theme="c" data-role="page" id="ConfirmPageSave" style="background-color:#EBFCFA"  >
      
-	 <div data-role="panel" id="routePaneC" data-display="overlay" style="width:60%;">	 	
-		   <div data-theme="c" data-role="header" data-position="fixed" style="background-color:#5EBBE8; overflow:scroll; color:#fff" data-add-back-btn="true; " > 		   
-		 		<a data-rel="back" style="height:18px" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left"   ><img src="back1.png"></a>
-		        <h3>Submit</h3>
-		
-		  </div>     
-	  </div>
-       <p>
+     <div data-role="panel" id="routePaneC" data-display="overlay" style="width:60%;">
+<div id="memHisC" style="overflow:scroll; height:500px"></div>
+</div>
+     
+       <div data-theme="c" data-role="header" data-position="fixed" style="background-color:#5EBBE8; overflow:scroll; color:#fff" data-add-back-btn="true; " > 
        
-     <table width="100%" border="0">
-            <tr>
-             <td style="color:#0060BF">  <font style="font-size:14px; color:#009D00" id="prRedMemPS">  </font></td>
-              <td style="color:#0060BF"> </td>
-           </tr>
-           <tr>
-              <td style="color:#0060BF"><font style="font-size:16px; color:#009D00" id="prRedMemNamePS">  </font> </td>
-              <td style="color:#0060BF"> <font style="font-size:16px; color:#A8224A" id="prRedPointPS"></font></td>
-               
-           </tr>
-      </table> 
- 	
- 	
- 	 <div id="prdctQueConShow" style="overflow:scroll">     
-  			  <div id="purchaseFinalShow" ></div>
-  			  <br>
-              <!-- <div id="purchaseFinalShow1" style="overflow:scroll; height:250px">TEST</div> -->
-              
+     <a data-rel="back" style="height:18px" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left"   ><img src="back1.png"></a>
+     
+       
+            <h3>Submit</h3>
+
+           
+  </div>
+       <p>
+       <!--<table width="100%" border="0">-->
+         <table width="100%" border="0">
+                <tr>
+        
+                 <td style="color:#0060BF">  <font style="font-size:14px; color:#009D00" id="prRedMemPS">  </font></td>
+                  <td style="color:#0060BF"> </td>
+               </tr>
+               <tr>
+                  <td style="color:#0060BF"><font style="font-size:16px; color:#009D00" id="prRedMemNamePS">  </font> </td>
+                  <td style="color:#0060BF"> <font style="font-size:16px; color:#A8224A" id="prRedPointPS"></font></td>
+                   
+               </tr>
+             </table> 
+  <div id="prdctQueConShow" style="overflow:scroll">
+         
+     
+  			
+              <div id="purchaseFinalShow" style="overflow:scroll; height:250px"></div>
               <div id="TotalProductPoint" style="color:#960522; font-size:18px"></div>
 			  
+              
+              
               <label for="payComb" style="color:#0060BF" >Payment Mode</label>
              <select id="payComb" name="payComb" onChange="setTextPay()" >
                 <option value="Cash" style="color:#000;">Cash</option>
@@ -820,8 +827,6 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
     </div>   
                 
         <br><br><br><br><br><br><br><br>  
-        
-        
       <div data-theme="c" data-role="footer" data-position="fixed" style="background-color:#5EBBE8; color:#fff"  > 
 		
         <!--<a  ></a>-->
@@ -829,9 +834,6 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
         <br><br>
      </div>
      <br>
-     
-     
-     
  </div>
 
 
