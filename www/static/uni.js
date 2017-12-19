@@ -4167,7 +4167,7 @@ function bKashConfirm(){
 ////	  
 	//alert(apiPath+'purchaseComplete?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+outletId+'&outletName='+outletName+'&finalData='+encodeURIComponent(finalData)+'&memberName='+memberName+'&memmobileNo='+memmobileNo+'&payComb='+payComb+'&BKashNo='+BKashNo+'&prPhotoName='+prPhotoName)
 	//alert (pathHit+'bKashConfirm')	
-	alert ('test')	
+	//alert ('test')	
 	$.ajax({
 		type:'POST',
 		url:pathHit+'httpTest?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+outletId+'&BT_id='+BT_id,
@@ -4177,9 +4177,11 @@ function bKashConfirm(){
 			if (result2!=''){
 				trID=result2.split('<trxId>')[1].split('</trxId>')	
 				status=result2.split('<trxStatus>')[1].split('</trxStatus>')
-				amount=result2.split('<amount>')[1].split('</amount>')	
-				alert (trID)
-				alert (amount)	
+				if (result2.indexOf('<amount>')=-1){amount=0}
+				else{amount=result2.split('<amount>')[1].split('</amount>')}
+					
+				//alert (trID)
+				//alert (amount)	
 				//trID=BT_id
 				//amount=localStorage.TotalProductPoint
 				status='0000'
