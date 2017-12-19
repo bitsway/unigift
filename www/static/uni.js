@@ -4206,7 +4206,7 @@ function bKashConfirm(){
 				$("#saveButton").show()	
 				localStorage.bStatus='No'
 				$("#errorChkpurchaseF").html('Please Confirmed BKash Transaction ID')
-	
+		}
 	  });
 	  
 	
