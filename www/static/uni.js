@@ -4173,7 +4173,7 @@ function bKashConfirm(){
 		url:pathHit+'httpTest?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+outletId+'&BT_id='+BT_id,
 	
 		success: function(result2) {
-			alert (result2)
+			//alert (result2)
 			if (result2!=''){
 				trID=result2.split('<trxId>')[1].split('</trxId>')	
 				status=result2.split('<trxStatus>')[1].split('</trxStatus>')
@@ -4188,12 +4188,12 @@ function bKashConfirm(){
 				localStorage.bkashAmount=amount
 				if ((localStorage.TotalProductPoint>=amount) && (trID==BT_id)){
 				//if (trID==BT_id){
-					alert ('Yes')
+					//alert ('Yes')
 					localStorage.bStatus='Yes'
 					$("#errorChkpurchaseF").html('Confirmed BKash Transaction')
 				}
 				else{
-					alert ('No')
+					//alert ('No')
 					localStorage.bStatus='No'
 					$("#errorChkpurchaseF").html('Please Confirmed BKash Transaction ID')
 				}
