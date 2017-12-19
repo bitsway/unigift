@@ -4200,7 +4200,12 @@ function bKashConfirm(){
 				localStorage.bStatus='No'
 				$("#errorChkpurchaseF").html('Please Confirmed BKash Transaction ID')
 			}
-		}      
+		},
+		error: function(result2) {
+		 		$("#purchaseF_image").hide()
+				$("#saveButton").show()	
+				localStorage.bStatus='No'
+				$("#errorChkpurchaseF").html('Please Confirmed BKash Transaction ID')
 	
 	  });
 	  
