@@ -3,7 +3,7 @@
 //var apipath_image = 'http://127.0.0.1:8000/moderntrade/';
 
 
-var apiPath='http://w02.yeapps.com/unigift/syncmobile_eon_bKashNew/'
+var apiPath='http://w02.yeapps.com/unigift/syncmobile_eon_bKashNew_amount/'
 var apipath_image='http://i001.yeapps.com/image_hub/unigift/upload_image/'
 
 
@@ -812,17 +812,24 @@ function finalPurchaseSave(){
 	 var prPhotoPath=$("#prPhoto").val()
 	 
 	 var errorLog=0
+	 var bkashAmount=0
 	 
 	 if ((payComb=='BKash') && (localStorage.bStatus!='Yes')){
+	 	 
 		 errorLog=1
 		 
 	 }
+	 if (payComb=='BKash'){
+	 	 
+		 bkashAmount=localStorage.bkashAmount
+		 
+	 } 
 ////	  
 	//alert(apiPath+'purchaseComplete?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+outletId+'&outletName='+outletName+'&finalData='+encodeURIComponent(finalData)+'&memberName='+memberName+'&memmobileNo='+memmobileNo+'&payComb='+payComb+'&BKashNo='+BKashNo+'&prPhotoName='+prPhotoName)
 	if (errorLog==0){
 	$.ajax({
 		type:'POST',
-		url:apiPath+'purchaseComplete?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+outletId+'&outletName='+outletName+'&finalData='+encodeURIComponent(finalData)+'&memberName='+memberName+'&memmobileNo='+memmobileNo+'&payComb='+payComb+'&BKashNo='+BKashNo+'&prPhotoName='+prPhotoName+'&BT_id='+BT_id,
+		url:apiPath+'purchaseComplete?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+outletId+'&outletName='+outletName+'&finalData='+encodeURIComponent(finalData)+'&memberName='+memberName+'&memmobileNo='+memmobileNo+'&payComb='+payComb+'&BKashNo='+BKashNo+'&prPhotoName='+prPhotoName+'&BT_id='+BT_id+'&bkashAmount='+bkashAmount,
 	
 		success: function(result2) {
 	
@@ -4152,7 +4159,7 @@ function bKashConfirm(){
 	 
 	 var BKashNo=$("#BKashNo").val()
 	 var BT_id=$("#BT_id").val()
-	 var pathHit='http://w02.yeapps.com/unigift/syncmobile_eon_bKashNew/' 	 
+	 var pathHit='http://w02.yeapps.com/unigift/syncmobile_eon_bKashNew_amount/' 	 
 	 
 	 var outletShow=localStorage.outlet
 	 var outletNameId=outletShow.split('|');
@@ -4170,10 +4177,11 @@ function bKashConfirm(){
 				trID=result2.split('<trxId>')[1].split('</trxId>')	
 				status=result2.split('<trxStatus>')[1].split('</trxStatus>')
 				amount=result2.split('<amount>')[1].split('</amount>')		
-				trID=BT_id
-				amount=localStorage.TotalProductPoint
+				//trID=BT_id
+				//amount=localStorage.TotalProductPoint
 				status='0000'
-				if ((localStorage.TotalProductPoint==amount) && (trID==BT_id)){
+				localStorage.bkashAmount=amount
+				if ((localStorage.TotalProductPoint>=amount) && (trID==BT_id)){
 				//if (trID==BT_id){
 					localStorage.bStatus='Yes'
 					
