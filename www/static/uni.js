@@ -4180,6 +4180,8 @@ function bKashConfirm(){
 				//trID=BT_id
 				//amount=localStorage.TotalProductPoint
 				status='0000'
+				alert (trID)
+				alert (amount)
 				localStorage.bkashAmount=amount
 				if ((localStorage.TotalProductPoint>=amount) && (trID==BT_id)){
 				//if (trID==BT_id){
