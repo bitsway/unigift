@@ -4188,11 +4188,12 @@ function bKashConfirm(){
 				localStorage.bkashAmount=amount
 				if ((localStorage.TotalProductPoint>=amount) && (trID==BT_id)){
 				//if (trID==BT_id){
+					alert ('Yes')
 					localStorage.bStatus='Yes'
-					
 					$("#errorChkpurchaseF").html('Confirmed BKash Transaction')
 				}
 				else{
+					alert ('No')
 					localStorage.bStatus='No'
 					$("#errorChkpurchaseF").html('Please Confirmed BKash Transaction ID')
 				}
