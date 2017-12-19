@@ -4176,12 +4176,12 @@ function bKashConfirm(){
 			if (result2!=''){
 				trID=result2.split('<trxId>')[1].split('</trxId>')	
 				status=result2.split('<trxStatus>')[1].split('</trxStatus>')
-				amount=result2.split('<amount>')[1].split('</amount>')		
+				amount=result2.split('<amount>')[1].split('</amount>')	
+				alert (trID)
+				alert (amount)	
 				//trID=BT_id
 				//amount=localStorage.TotalProductPoint
 				status='0000'
-				alert (trID)
-				alert (amount)
 				localStorage.bkashAmount=amount
 				if ((localStorage.TotalProductPoint>=amount) && (trID==BT_id)){
 				//if (trID==BT_id){
@@ -4204,6 +4204,7 @@ function bKashConfirm(){
 			}
 		},
 		error: function(result2) {
+				alert ('test')
 		 		$("#purchaseF_image").hide()
 				$("#saveButton").show()	
 				localStorage.bStatus='No'
