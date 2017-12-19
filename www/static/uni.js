@@ -4166,7 +4166,8 @@ function bKashConfirm(){
 	 var outletId=outletNameId[0];
 ////	  
 	//alert(apiPath+'purchaseComplete?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+outletId+'&outletName='+outletName+'&finalData='+encodeURIComponent(finalData)+'&memberName='+memberName+'&memmobileNo='+memmobileNo+'&payComb='+payComb+'&BKashNo='+BKashNo+'&prPhotoName='+prPhotoName)
-	//alert (pathHit+'bKashConfirm')		
+	//alert (pathHit+'bKashConfirm')	
+	alert ('test')	
 	$.ajax({
 		type:'POST',
 		url:pathHit+'httpTest?cid='+localStorage.cid+'&cm_id='+localStorage.cm_id+'&cm_pass='+localStorage.cm_pass+'&sync_code='+localStorage.sync_code+'&outletId='+outletId+'&BT_id='+BT_id,
