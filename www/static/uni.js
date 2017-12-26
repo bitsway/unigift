@@ -4179,12 +4179,12 @@ function bKashConfirm(){
 				status=result2.split('<trxStatus>')[1].split('</trxStatus>')
 				if (result2.indexOf('<amount>')==-1){amount=0}
 				else{amount=result2.split('<amount>')[1].split('</amount>')}
-					
+				alert (trID)	
 				//alert (trID)
 				//alert (amount)	
 				//trID=BT_id
 				//amount=localStorage.TotalProductPoint
-				alert (trID)
+				
 				status='0000'
 				localStorage.bkashAmount=amount
 				if  (trID==BT_id){
