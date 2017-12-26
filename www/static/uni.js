@@ -4175,10 +4175,10 @@ function bKashConfirm(){
 		success: function(result2) {
 			//alert (result2)
 			if (result2!=''){
-				trID=(result2.split('<trxId>')[1]).split('</trxId>')	
-				status=result2.split('<trxStatus>')[1].split('</trxStatus>')
+				trID=(result2.split('<trxId>')[1]).split('</trxId>')[0]
+				status=result2.split('<trxStatus>')[1].split('</trxStatus>')[0]
 				if (result2.indexOf('<amount>')==-1){amount=0}
-				else{amount=result2.split('<amount>')[1].split('</amount>')}
+				else{amount=result2.split('<amount>')[1].split('</amount>')[0]}
 				//alert (trID)	
 				//alert (trID)
 				//alert (amount)	
@@ -4187,9 +4187,9 @@ function bKashConfirm(){
 				
 				status='0000'
 				localStorage.bkashAmount=amount
-				alert (trID+'    '+BT_id)
+				//alert (trID+'    '+BT_id)
 				if  (trID==BT_id.toUpperCase()){
-					alert ('test')
+					//alert ('test')
 				//if (trID==BT_id){
 					//alert ('Yes')
 					localStorage.bStatus='Yes'
