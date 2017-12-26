@@ -4198,7 +4198,7 @@ function bKashConfirm(){
 				else{
 					//alert ('No')
 					localStorage.bStatus='No'
-					$("#errorChkpurchaseF").html('Please Confirmed BKash Transaction ID')
+					$("#errorChkpurchaseF").html('Please Confirm BKash Transaction ID')
 				}
 				
 				}
@@ -4207,7 +4207,7 @@ function bKashConfirm(){
 				$("#purchaseF_image").hide()
 				$("#saveButton").show()	
 				localStorage.bStatus='No'
-				$("#errorChkpurchaseF").html('Please Confirmed BKash Transaction ID')
+				$("#errorChkpurchaseF").html('Please Confirm BKash Transaction ID')
 			}
 		},
 		error: function(result2) {
@@ -4215,7 +4215,7 @@ function bKashConfirm(){
 		 		$("#purchaseF_image").hide()
 				$("#saveButton").show()	
 				localStorage.bStatus='No'
-				$("#errorChkpurchaseF").html('Please Confirmed BKash Transaction ID')
+				$("#errorChkpurchaseF").html('Please Confirm BKash Transaction ID')
 		}
 	  });
 	  
