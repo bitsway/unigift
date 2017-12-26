@@ -4189,7 +4189,7 @@ function bKashConfirm(){
 				localStorage.bkashAmount=amount
 				alert (trID+'    '+BT_id)
 				if  (trID==BT_id){
-					
+					alert ('test')
 				//if (trID==BT_id){
 					//alert ('Yes')
 					localStorage.bStatus='Yes'
