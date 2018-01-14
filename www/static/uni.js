@@ -1,12 +1,13 @@
 
 //var apiPath='http://127.0.0.1:8000/unigift/syncmobile_eon_bKashNew_amount/';
 
-var apiPath='http://127.0.0.1:8000/unigift/syncmobile_eon_bKashNew_amount_stock/';
-var apipath_image = 'http://127.0.0.1:8000/moderntrade/';
+//var apiPath='http://127.0.0.1:8000/unigift/syncmobile_eon_bKashNew_amount_stock/';
+//var apipath_image = 'http://127.0.0.1:8000/moderntrade/';
 
 
-//var apiPath='http://w02.yeapps.com/unigift/syncmobile_eon_bKashNew_amount/'
-//var apipath_image='http://i001.yeapps.com/image_hub/unigift/upload_image/'
+
+var apiPath='http://w02.yeapps.com/unigift/syncmobile_eon_bKashNew_amount_stock/'
+var apipath_image='http://i001.yeapps.com/image_hub/unigift/upload_image/'
 
 
 function get_pic_HairCare(i) {
