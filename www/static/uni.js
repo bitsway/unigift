@@ -1932,7 +1932,7 @@ function selcetCat_stock(){
 		  //alert('bb')
 		 if (cat==catValue){
 		 	//prdctShow=prdctShow+'<table><tr><td> <input onKeyUp="productQueNew('+i+')" type="number" id="'+qName+'"   name="'+qName+'" style="width:50px"><input type="hidden" id="'+pNameID+'"   name="'+pNameID+'"  value="'+prodctListStr[i]+'"></td><td>'+prodctListStr[i]+'</td></tr></table>'
-			prdctShowStock=prdctShowStock+'<li class="ui-btn ui-shadow " style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin"><table><tr><td>'+pShow+'</td> <td><input onKeyUp="productStockQueNew('+i+')" type="number" id="'+sQName+'"   name="'+sQName+'" style="width:50px"><input type="hidden" id="'+pNameID+'"   name="'+pNameID+'"  value="'+prodctListStr[i]+'"></td></tr></table></li>'    
+			prdctShowStock=prdctShowStock+'<li class="ui-btn ui-shadow " style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin"><table><tr><td>'+pShow+'</td> <td width="50px"><input onKeyUp="productStockQueNew('+i+')" type="number" id="'+sQName+'"   name="'+sQName+'" style="width:50px"><input type="hidden" id="'+pNameID+'"   name="'+pNameID+'"  value="'+prodctListStr[i]+'"></td></tr></table></li>'    
 		 }
 	 }
 	 //alert (prdctShowStock)
