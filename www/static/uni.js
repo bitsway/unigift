@@ -1674,7 +1674,7 @@ function login_user() {
 							
 					<!------------ Product Stock -18/12/17--------> 
 													 
-					 prdctShowStock=prdctShowStock+'<li class="ui-btn ui-shadow " style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin"><table><tr><td>'+pShow+'</td> <td><input onKeyUp="productStockQueNew('+i+')" type="number" id="'+sQName+'"   name="'+sQName+'" style="width:50px"><input type="hidden" id="'+pNameID+'"   name="'+pNameID+'"  value="'+prodctListStr[i]+'"></td></tr></table></li>'
+					 prdctShowStock=prdctShowStock+'<li class="ui-btn ui-shadow " style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin"><table width="500px"><tr><td align="left" >'+pShow+'</td> <td align="left" width="50px"><input onKeyUp="productStockQueNew('+i+')" type="number" id="'+sQName+'"   name="'+sQName+'" style="width:50px"><input type="hidden" id="'+pNameID+'"   name="'+pNameID+'"  value="'+prodctListStr[i]+'"></td></tr></table></li>'
 								
 									<!--<td> <input type="number" style="width:50px"></td> -->
 					 <!------------ Product Stock -18/12/17-------->
@@ -1922,7 +1922,7 @@ function selcetCat_stock(){
 	 if (catValue=="ALL"){
 		// alert('aa')
 	 	//prdctShow=prdctShow+'<table><tr><td> <input onKeyUp="productQueNew('+i+')" type="number" id="'+qName+'"   name="'+qName+'" style="width:50px"><input type="hidden" id="'+pNameID+'"   name="'+pNameID+'"  value="'+prodctListStr[i]+'"></td><td>'+prodctListStr[i]+'</td></tr></table>' 
-		prdctShowStock=prdctShowStock+'<li class="ui-btn ui-shadow " style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin"><table><tr><td>'+pShow+'</td> <td><input onKeyUp="productStockQueNew('+i+')" type="number" id="'+sQName+'"   name="'+sQName+'" style="width:50px"><input type="hidden" id="'+pNameID+'"   name="'+pNameID+'"  value="'+prodctListStr[i]+'"></td></tr></table></li>'    
+		prdctShowStock=prdctShowStock+'<li class="ui-btn ui-shadow " style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin"><table width="500px"><tr><td>'+pShow+'</td> <td width="50px"><input onKeyUp="productStockQueNew('+i+')" type="number" id="'+sQName+'"   name="'+sQName+'" style="width:50px"><input type="hidden" id="'+pNameID+'"   name="'+pNameID+'"  value="'+prodctListStr[i]+'"></td></tr></table></li>'    
 									 
 		<!--<td><input  type="number"  style="width:50px"></td>	-->						 
 		
