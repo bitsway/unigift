@@ -237,7 +237,7 @@ function giftSave(){
 			  		$.mobile.navigate(url);
 					}
 					else{
-						$("#errorChkGift").html('Failed')
+						$("#errorChkGift").html('Failled')
 						$("#Gift_image").hide();
 						$("#saveButtonGift").show();
 					}
@@ -1404,7 +1404,7 @@ function finalPurchaseSave(){
 			else{
 				$("#purchaseF_image").hide()
 				$("#saveButton").show()	
-				$("#errorChkpurchaseF").html('Failed')
+				$("#errorChkpurchaseF").html('Failled')
 			}
 		}      
 	
@@ -1476,7 +1476,7 @@ function login_user() {
 			localStorage.cm_id=cm_id;
 			localStorage.cm_pass=cm_pass;
 			//localStorage.synced='NO'
-			//$(".errorMsg").html("Login in progress. Please wait...");
+			
 
 			
 			if(localStorage.sync_code==undefined || localStorage.sync_code==""){
@@ -1504,9 +1504,8 @@ function login_user() {
 						else{
 							var resultArray = result.split('<SYNCDATA>');			
 							if (resultArray[0]=='FAILED'){
-								$("#login_error").html('Failed');
-								$("#login_image").hide();
-								$("#loginButton").show();
+								$("#login_error").html('Failled');
+								
 							}
 							if (resultArray[0]=='SUCCESS'){
 								
@@ -1745,7 +1744,7 @@ function login_user() {
 									//item_combo_id_ob.listview("refresh");		
 								     //alert (localStorage.prdctShow)
 									 
-								//$(".errorMsg").html("Login Successful");
+						
 								$("#loginButton").show();
 								$("#login_image").hide();	  
 								url="#pageOutlet";					
@@ -1923,7 +1922,7 @@ function selcetCat_stock(){
 	 if (catValue=="ALL"){
 		// alert('aa')
 	 	//prdctShow=prdctShow+'<table><tr><td> <input onKeyUp="productQueNew('+i+')" type="number" id="'+qName+'"   name="'+qName+'" style="width:50px"><input type="hidden" id="'+pNameID+'"   name="'+pNameID+'"  value="'+prodctListStr[i]+'"></td><td>'+prodctListStr[i]+'</td></tr></table>' 
-		prdctShowStock=prdctShowStock+'<li class="ui-btn ui-shadow " style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin"><table width="500px"><tr><td align="left">'+pShow+'</td> <td align="left" width="50px"><input onKeyUp="productStockQueNew('+i+')" type="number" id="'+sQName+'"   name="'+sQName+'" style="width:50px"><input type="hidden" id="'+pNameID+'"   name="'+pNameID+'"  value="'+prodctListStr[i]+'"></td></tr></table></li>'    
+		prdctShowStock=prdctShowStock+'<li class="ui-btn ui-shadow " style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin"><table width="500px"><tr><td>'+pShow+'</td> <td width="50px"><input onKeyUp="productStockQueNew('+i+')" type="number" id="'+sQName+'"   name="'+sQName+'" style="width:50px"><input type="hidden" id="'+pNameID+'"   name="'+pNameID+'"  value="'+prodctListStr[i]+'"></td></tr></table></li>'    
 									 
 		<!--<td><input  type="number"  style="width:50px"></td>	-->						 
 		
@@ -1933,7 +1932,7 @@ function selcetCat_stock(){
 		  //alert('bb')
 		 if (cat==catValue){
 		 	//prdctShow=prdctShow+'<table><tr><td> <input onKeyUp="productQueNew('+i+')" type="number" id="'+qName+'"   name="'+qName+'" style="width:50px"><input type="hidden" id="'+pNameID+'"   name="'+pNameID+'"  value="'+prodctListStr[i]+'"></td><td>'+prodctListStr[i]+'</td></tr></table>'
-			prdctShowStock=prdctShowStock+'<li class="ui-btn ui-shadow " style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin"><table width="500px"><tr><td align="left">'+pShow+'</td> <td align="left" width="50px"><input onKeyUp="productStockQueNew('+i+')" type="number" id="'+sQName+'"   name="'+sQName+'" style="width:50px"><input type="hidden" id="'+pNameID+'"   name="'+pNameID+'"  value="'+prodctListStr[i]+'"></td></tr></table></li>'    
+			prdctShowStock=prdctShowStock+'<li class="ui-btn ui-shadow " style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin"><table><tr><td>'+pShow+'</td> <td width="50px"><input onKeyUp="productStockQueNew('+i+')" type="number" id="'+sQName+'"   name="'+sQName+'" style="width:50px"><input type="hidden" id="'+pNameID+'"   name="'+pNameID+'"  value="'+prodctListStr[i]+'"></td></tr></table></li>'    
 		 }
 	 }
 	 //alert (prdctShowStock)
